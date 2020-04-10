@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="woo-product-db" />
+        <module name="woo-login-service" />
+        <module name="woo-matching-service" />
+        <module name="woo-store-db" />
+        <module name="woo-csv-service" />
+        <module name="wp-content-server" />
+        <module name="woo-product-client" />
+        <module name="woo-auth-service" />
+        <module name="woo-admin-service" />
+        <module name="woo-discovery-service" />
+        <module name="woo-config-service" />
+        <module name="woo-product-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="woo-admin-service" options="-parameters" />
+      <module name="woo-auth-service" options="-parameters" />
+      <module name="woo-config-service" options="-parameters" />
+      <module name="woo-csv-service" options="-parameters" />
+      <module name="woo-discovery-service" options="-parameters" />
+      <module name="woo-login-service" options="-parameters" />
+      <module name="woo-matching-service" options="-parameters" />
+      <module name="woo-product-client" options="-parameters" />
+      <module name="woo-product-db" options="-parameters" />
+      <module name="woo-product-service" options="-parameters" />
+      <module name="woo-store-db" options="-parameters" />
+      <module name="wp-content-server" options="-parameters" />
+    </option>
+  </component>
+</project>
