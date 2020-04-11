@@ -12,7 +12,7 @@
     <artifactId>woo-csv-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>woo-csv-service</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Spring Boot project to convert csv to json, yaml to json, json to csv, json to yaml</description>
 
     <dependencies>
 

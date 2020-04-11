@@ -23,6 +23,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="fooda" options="-parameters" />
       <module name="woo-admin-service" options="-parameters" />
       <module name="woo-auth-service" options="-parameters" />
       <module name="woo-config-service" options="-parameters" />
