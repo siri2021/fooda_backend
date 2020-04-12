@@ -36,45 +36,42 @@ public class SearchView extends Div {
     @PostConstruct
     public void init() {
 
+        setClassName("container-fluid");
+
         TextField searchTextField = new TextField();
         searchTextField.setWidth("75%");
 
-        setClassName("container-fluid");
-
-
         Button searchBtn = new Button("Search", clickEvent -> {
-            Arrays.stream(service.apiMatch(searchTextField.getValue())).forEach(wooStore -> {
+            Arrays.stream(service.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
 
-                Arrays.stream(wooStore.getMatchedProducts()).forEach(wooProduct -> {
+                Div productCard = new Div();
+                productCard.setClassName("card");
 
-                    Div productCard = new Div();
-                    productCard.setClassName("card");
-
-                    Div productImgCard = new Div();
-                    productImgCard.setClassName("card-image waves-effect waves-block waves-light");
-                    Image productImage = new Image(wooProduct.getImages().get(0).getSrc(), wooProduct.getImages().get(0).getAlt());
-                    productImage.setClassName("activator");
-                    productImage.addClickListener(click -> {
-                        final String notificationMsg = wooProduct.getName() + " is added.";
-                        new Notification(notificationMsg, 2000).open();
-                    });
-                    productImgCard.add(productImage);
-
-                    Div productContentCard = new Div();
-                    productContentCard.setClassName("card-content");
-                    Span productContentSpan = new Span();
-                    productContentSpan.setClassName("card-title activator grey-text text-darken-4");
-                    productContentSpan.setText(wooProduct.getName());
-                    Paragraph productContentP = new Paragraph();
-                    productContentP.setText(wooProduct.getDescription());
-                    productContentCard.add(productContentSpan, productContentP);
-
-                    productCard.add(productImgCard, productContentCard);
-                    add(productCard);
+                Div productImgCard = new Div();
+                productImgCard.setClassName("card-image waves-effect waves-block waves-light");
+                Image productImage = new Image(wooProduct.getImages().get(0).getSrc(), wooProduct.getImages().get(0).getAlt());
+                productImage.setClassName("activator");
+                productImage.addClickListener(click -> {
+                    final String notificationMsg = wooProduct.getName() + " is added.";
+                    new Notification(notificationMsg, 2000).open();
                 });
+                productImgCard.add(productImage);
 
+                Div productContentCard = new Div();
+                productContentCard.setClassName("card-content");
+                Span productContentSpan = new Span();
+                productContentSpan.setClassName("card-title activator grey-text text-darken-4");
+                productContentSpan.setText(wooProduct.getName());
+                Paragraph productContentP = new Paragraph();
+                productContentP.setText(wooProduct.getDescription());
+                productContentCard.add(productContentSpan, productContentP);
+
+                productCard.add(productImgCard, productContentCard);
+                add(productCard);
             });
+
         });
+
         searchBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         searchBtn.addClickShortcut(Key.ENTER);
         searchBtn.setWidth("24%");

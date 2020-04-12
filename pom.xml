@@ -126,8 +126,6 @@
 
     </dependencies>
 
-
-
     <modules>
         <module>woo-auth-service</module>
         <module>woo-config-service</module>
@@ -136,8 +134,6 @@
         <module>woo-matching-service</module>
         <module>woo-product-client</module>
         <module>woo-product-service</module>
-        <module>woo-store-db</module>
-
     </modules>
 
 </project>

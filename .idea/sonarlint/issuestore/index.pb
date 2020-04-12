@@ -617,8 +617,6 @@ f
 6woo-product-client/frontend/styles/materialize.min.css,c\7\c703f0bb9a8d98f27b16e0b9406236faed849d1b
 Y
 )woo-product-client/frontend/styles/README,6\d\6d231c7dc145c1a12b3d36835885efa74556c453
-l
-<woo-product-client/src/main/resources/application.properties,c\5\c57ef39a7e9c333fe18c61b179ce31b6a3131005
 `
 0woo-product-client/src/main/resources/banner.txt,3\4\3474a1a4a1edb20cd176ab4c321bb266c60cda16
 q

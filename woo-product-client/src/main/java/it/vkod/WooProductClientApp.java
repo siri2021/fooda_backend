@@ -3,15 +3,14 @@ package it.vkod;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-/**
- * The entry point of the Spring Boot application.
- */
 @SpringBootApplication
-public class App extends SpringBootServletInitializer {
+@EnableEurekaClient
+public class WooProductClientApp extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(WooProductClientApp.class, args);
     }
 
 }

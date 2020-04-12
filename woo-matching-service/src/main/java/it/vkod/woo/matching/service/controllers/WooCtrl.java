@@ -1,8 +1,6 @@
 package it.vkod.woo.matching.service.controllers;
 
-import com.netflix.discovery.shared.Applications;
-import it.vkod.woo.matching.service.models.WooStore;
-import it.vkod.woo.matching.service.models.pojo.WooProduct;
+import it.vkod.woo.matching.service.models.WooProduct;
 import it.vkod.woo.matching.service.services.WooService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,30 +37,4 @@ public class WooCtrl {
         });
         return wooProducts;
     }
-
-
-//    @Cacheable("/match")
-//    @GetMapping("{keyword}")
-//    public WooStore[] apiMatch(@PathVariable("keyword") final String keyword) {
-//        final WooStore[] wooStoreCollection = wooService.apiGetActiveStores();
-//        Arrays.stream(wooStoreCollection).forEach(store -> {
-//            final String url = "http://localhost:" + store.getPort() + "/wc/search/" + keyword;
-//            final WooProduct[] matchedProducts = wooService.apiSearch(url);
-//            store.setMatchedProducts(matchedProducts);
-//        });
-//        return wooStoreCollection;
-//    }
-
-//    @Cacheable(value = "/all")
-//    @GetMapping("")
-//    public WooStore[] apiGetAll() {
-//        final WooStore[] wooStoreCollection = wooService.apiGetActiveStores();
-//        Arrays.stream(wooStoreCollection).forEach(store -> {
-//            final String url = "http://localhost:" + store.getPort() + "/wc/page/1";
-//            final WooProduct[] allProductByPage = wooService.apiSearch(url);
-//            store.setMatchedProducts(allProductByPage);
-//        });
-//        return wooStoreCollection;
-//    }
-
 }

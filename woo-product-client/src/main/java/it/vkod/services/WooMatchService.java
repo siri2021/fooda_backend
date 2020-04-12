@@ -1,6 +1,9 @@
 package it.vkod.services;
 
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 import it.vkod.models.WooStore;
+import it.vkod.models.response.WooProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,18 +16,15 @@ public class WooMatchService {
     @Autowired
     private RestTemplate rest;
 
-    @Value("${matching.service.all}")
-    private String matchingServiceAllUrl;
+    @Autowired
+    private EurekaClient discoveryClient;
 
-    @Value("${matching.service.search}")
-    private String matchingServiceSearchUrl;
-
-    public WooStore[] apiMatch(@PathVariable("keyword") final String keyword) {
-        return rest.getForObject(matchingServiceSearchUrl.replace("{keyword}", keyword), WooStore[].class);
+    private String getMatchingServiceUrl() {
+        InstanceInfo instance = discoveryClient.getNextServerFromEureka("woo-matching-service", false);
+        return instance.getHomePageUrl();
     }
 
-    public WooStore[] apiGetAll() {
-        return rest.getForObject(matchingServiceAllUrl, WooStore[].class);
+    public WooProduct[] apiGetMatchFromAllStores(final String keyword) {
+        return rest.getForObject(getMatchingServiceUrl() + "api/match/" + keyword, WooProduct[].class);
     }
-
 }

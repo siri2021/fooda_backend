@@ -1,4 +1,4 @@
-package it.vkod.woo.matching.service.models.pojo;
+package it.vkod.woo.matching.service.models;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;

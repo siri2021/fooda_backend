@@ -1,8 +1,8 @@
-package it.vkod.woo.matching.service.models.pojo;
+package it.vkod.woo.matching.service.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CategoriesItem{
+public class TagsItem{
 
 	@JsonProperty("name")
 	private String name;
@@ -40,7 +40,7 @@ public class CategoriesItem{
 	@Override
  	public String toString(){
 		return 
-			"CategoriesItem{" + 
+			"TagsItem{" + 
 			"name = '" + name + '\'' + 
 			",id = '" + id + '\'' + 
 			",slug = '" + slug + '\'' + 
