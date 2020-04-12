@@ -1,5 +1,5 @@
+it\vkod\woo\csv\WooCsvServiceApp.class
 it\vkod\woo\csv\definitions\ConvertableMediaTypes.class
-it\vkod\woo\csv\App.class
 it\vkod\woo\csv\models\Product$Data.class
 it\vkod\woo\csv\models\ListParam.class
 it\vkod\woo\csv\utils\CsvConverter.class

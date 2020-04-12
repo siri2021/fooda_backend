@@ -129,18 +129,14 @@
 
 
     <modules>
-        <module>woo-admin-service</module>
         <module>woo-auth-service</module>
         <module>woo-config-service</module>
         <module>woo-csv-service</module>
         <module>woo-discovery-service</module>
-        <module>woo-login-service</module>
         <module>woo-matching-service</module>
         <module>woo-product-client</module>
-        <module>woo-product-db</module>
         <module>woo-product-service</module>
         <module>woo-store-db</module>
-        <module>wp-content-server</module>
 
     </modules>
 

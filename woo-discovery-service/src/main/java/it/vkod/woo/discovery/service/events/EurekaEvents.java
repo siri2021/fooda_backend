@@ -13,39 +13,18 @@ public class EurekaEvents {
 
         final String appName = eurekaInstanceCanceledEvent.getAppName();
         final String serverId = eurekaInstanceCanceledEvent.getServerId();
-
         System.out.println("Eureka Instance is cancelled. Application: " + appName + ", ServerId: " + serverId);
     }
 
     @EventListener
     public void listen(EurekaInstanceRegisteredEvent eurekaInstanceRegisteredEvent) {
         InstanceInfo instanceInfo = eurekaInstanceRegisteredEvent.getInstanceInfo();
-        if (
-                instanceInfo.getAppName().toLowerCase().contains("woo-product")
-                        && instanceInfo.getStatus() == InstanceInfo.InstanceStatus.UP
-                        && !eurekaInstanceRegisteredEvent.isReplication()
+        if (instanceInfo.getAppName().toLowerCase().contains("woo-product")
+                && instanceInfo.getStatus() == InstanceInfo.InstanceStatus.UP
+                && !eurekaInstanceRegisteredEvent.isReplication()
         ) {
-            System.out.println("New instance of " + instanceInfo.getAppName() + " is registered!");
-        } else {
-            System.out.println(instanceInfo.getAppName() + " is not necessary to be registered.. Thus, skipped.");
+            System.out.println("Product Service " + instanceInfo.getAppName() + " is online!");
         }
 
-    }
-
-    @EventListener
-    public void listen(EurekaInstanceRenewedEvent eurekaInstanceRenewedEvent) {
-        final String appName = eurekaInstanceRenewedEvent.getAppName();
-        final String serverId = eurekaInstanceRenewedEvent.getServerId();
-        System.out.println("Eureka Instance is renewed. Application: " + appName + ", ServerId: " + serverId);
-    }
-
-    @EventListener
-    public void listen(EurekaRegistryAvailableEvent eurekaRegistryAvailableEvent) {
-    System.out.println("EurekaRegistryAvailableEvent");
-    }
-
-    @EventListener
-    public void listen(EurekaServerStartedEvent eurekaServerStartedEvent) {
-    System.out.println("EurekaServerStartedEvent");
     }
 }

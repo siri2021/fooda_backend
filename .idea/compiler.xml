@@ -6,20 +6,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="woo-product-db" />
-        <module name="woo-login-service" />
         <module name="woo-matching-service" />
         <module name="woo-store-db" />
         <module name="woo-csv-service" />
-        <module name="wp-content-server" />
         <module name="woo-product-client" />
         <module name="woo-auth-service" />
-        <module name="woo-admin-service" />
         <module name="woo-discovery-service" />
         <module name="woo-config-service" />
         <module name="woo-product-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="woo-admin-service" target="11" />
+      <module name="woo-login-service" target="11" />
+      <module name="woo-product-db" target="11" />
+      <module name="wp-content-server" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
