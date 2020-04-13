@@ -1,0 +1,9 @@
+
+`	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112H"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+¤
+java:S1130%"Remove the declaration of thrown exception 'org.springframework.http.converter.HttpMessageNotReadableException' which is a runtime exception.(ºÔ×ú
+N
+java:S1874."3Remove this use of "newInstance"; it is deprecated.(Ûï’ùÿÿÿÿ
+©
+java:S11309"Remove the declaration of thrown exception 'org.springframework.http.converter.HttpMessageNotWritableException' which is a runtime exception.(Íº‹äşÿÿÿÿ

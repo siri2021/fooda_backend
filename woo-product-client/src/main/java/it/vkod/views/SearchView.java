@@ -2,17 +2,19 @@ package it.vkod.views;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import it.vkod.payloads.productResponse.WooProduct;
 import it.vkod.services.WooMatchServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,51 +35,86 @@ public class SearchView extends Div {
 
     public final static String ROUTE = "search";
 
+    /**
+     * <div class="row">
+     *     <div class="col s12 m6">
+     *       <div class="card">
+     *         <div class="card-image">
+     *           <img src="images/sample-1.jpg">
+     *           <span class="card-title">Card Title</span>
+     *           <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+     *         </div>
+     *         <div class="card-content">
+     *           <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+     *         </div>
+     *       </div>
+     *     </div>
+     *   </div>
+     */
+
     @PostConstruct
     public void init() {
 
         setClassName("container-fluid");
 
+        Div searchDiv = new Div();
+        searchDiv.setClassName("card-panel blue");
+        searchDiv.getStyle().set("margin", "0").set("padding", "0").set("height", "32px");
+
         TextField searchTextField = new TextField();
-        searchTextField.setWidth("75%");
+        searchTextField.setClassName("white-text");
+        searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", "32px");
 
         Button searchBtn = new Button("Search", clickEvent -> {
             Arrays.stream(service.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
-
                 Div productCard = new Div();
                 productCard.setClassName("card");
-
-                Div productImgCard = new Div();
-                productImgCard.setClassName("card-image waves-effect waves-block waves-light");
-                Image productImage = new Image(wooProduct.getImages().get(0).getSrc(), wooProduct.getImages().get(0).getAlt());
-                productImage.setClassName("activator");
-                productImage.addClickListener(click -> {
-                    final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() +  " is added.";
-                    new Notification(notificationMsg, 2000).open();
-                });
-                productImgCard.add(productImage);
-
-                Div productContentCard = new Div();
-                productContentCard.setClassName("card-content");
-                Span productContentSpan = new Span();
-                productContentSpan.setClassName("card-title activator grey-text text-darken-4");
-                productContentSpan.setText(wooProduct.getName());
-                Paragraph productContentP = new Paragraph();
-                productContentP.setText(wooProduct.getDescription());
-                productContentCard.add(productContentSpan, productContentP);
-
+                Div productImgCard = createProductImageDiv(wooProduct);
+                Div productContentCard = createProductContentDiv(wooProduct);
                 productCard.add(productImgCard, productContentCard);
                 add(productCard);
             });
 
         });
 
-        searchBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         searchBtn.addClickShortcut(Key.ENTER);
-        searchBtn.setWidth("24%");
+        searchBtn.setClassName("white-text");
+        searchBtn.getStyle().set("margin", "0").set("padding", "0").set("height", "32px");
+        searchDiv.add(searchTextField, searchBtn);
 
-        add(searchBtn, searchTextField);
+        add(searchDiv);
 
+    }
+
+    private Div createProductContentDiv(WooProduct wooProduct) {
+        Div productContentCard = new Div();
+        productContentCard.setClassName("card-content");
+        Paragraph productContentP = new Paragraph();
+        //match HTML tags
+        String strRegEx = "<[^>]*>";
+        productContentP.setText(wooProduct.getDescription().replaceAll(strRegEx, ""));
+        productContentP.setSizeFull();
+        productContentCard.add(productContentP);
+        return productContentCard;
+    }
+
+    private Div createProductImageDiv(WooProduct wooProduct) {
+        Div productImgCard = new Div();
+        productImgCard.setClassName("card-image");
+        Image productImage = new Image(wooProduct.getImages().get(0).getSrc(), wooProduct.getImages().get(0).getAlt());
+        Span cardTitleSpan = new Span();
+        cardTitleSpan.setClassName("card-title");
+        cardTitleSpan.setText(wooProduct.getName());
+        final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
+        addButtonIcon.setSize("32px");
+        Button addButton = new Button(addButtonIcon);
+        addButton.setClassName("btn-floating halfway-fab waves-effect waves-light red");
+        addButton.addClickListener(click -> {
+            final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() + " is added.";
+            new Notification(notificationMsg, 2000).open();
+        });
+        productImgCard.add(productImage, cardTitleSpan, addButton);
+        return productImgCard;
     }
 
 }
