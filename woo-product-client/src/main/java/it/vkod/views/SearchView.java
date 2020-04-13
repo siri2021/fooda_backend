@@ -13,7 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.services.WooMatchService;
+import it.vkod.services.WooMatchServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +29,7 @@ import static it.vkod.views.SearchView.ROUTE;
 public class SearchView extends Div {
 
     @Autowired
-    private WooMatchService service;
+    private WooMatchServiceClient service;
 
     public final static String ROUTE = "search";
 
@@ -52,7 +52,7 @@ public class SearchView extends Div {
                 Image productImage = new Image(wooProduct.getImages().get(0).getSrc(), wooProduct.getImages().get(0).getAlt());
                 productImage.setClassName("activator");
                 productImage.addClickListener(click -> {
-                    final String notificationMsg = wooProduct.getName() + " is added.";
+                    final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() +  " is added.";
                     new Notification(notificationMsg, 2000).open();
                 });
                 productImgCard.add(productImage);

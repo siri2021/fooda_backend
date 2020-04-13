@@ -6,8 +6,8 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.models.payload.LoginRequest;
-import it.vkod.services.WooUserService;
+import it.vkod.payloads.authRequest.LoginRequest;
+import it.vkod.services.WooUserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +20,7 @@ import static it.vkod.views.LoginView.ROUTE;
 public class LoginView extends Div {
 
     @Autowired
-    private WooUserService service;
+    private WooUserServiceClient service;
 
     public final static String ROUTE = "";
 

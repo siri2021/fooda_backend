@@ -2,31 +2,31 @@ package it.vkod.woo.product.service.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
-public interface ProductCtrl<T> {
+public interface ProductCtrl<RES, REQ> {
 
     @GetMapping("page/{page}")
-    public T[] apiGetProductsAll(@PathVariable("page") final int page);
+    public RES[] apiGetProductsAll(@PathVariable("page") final int page);
 
     @GetMapping("search/{search}")
-    public T[] apiGetProductsSearch(@PathVariable("search") final String search);
+    public RES[] apiGetProductsSearch(@PathVariable("search") final String search);
 
     @GetMapping("search/price/{min}/{max}")
-    public T[] apiGetProductsSearch(@PathVariable("min") final double min, @PathVariable("max") final double max);
+    public RES[] apiGetProductsSearch(@PathVariable("min") final double min, @PathVariable("max") final double max);
 
     @GetMapping("{id}")
-    public T apiGetProductOne(@PathVariable("id") final long id);
+    public RES apiGetProductOne(@PathVariable("id") final long id);
 
     @PostMapping("all")
-    public void apiPostProductAll(@RequestBody T[] products);
+    public void apiPostProductAll(@RequestBody REQ[] products);
 
     @PostMapping
-    public void apiPostProductOne(@RequestBody T product);
+    public void apiPostProductOne(@RequestBody REQ product);
 
     @PutMapping("all")
-    public void apiPutProductAll(@RequestBody T[] products);
+    public void apiPutProductAll(@RequestBody REQ[] products);
 
     @PutMapping("{id}")
-    public void apiPutProductOne(@PathVariable("id") final long id, @RequestBody T product);
+    public void apiPutProductOne(@PathVariable("id") final long id, @RequestBody REQ product);
 
     @DeleteMapping("all")
     public void apiDeleteProductAll(@RequestBody long... ids);

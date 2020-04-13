@@ -93,8 +93,6 @@ J
 woo-login-service/mvnw.cmd,3\8\380e5590150065c5ccf1358170ce1d58c48a756a
 I
 woo-login-service/pom.xml,d\4\d4d332539fe18081dfdbde33cfa0433c96637763
-j
-:woo-auth-service/src/main/resources/application.properties,2\8\28be602920aca0769763c71c718cb1bfa3802277
 \
 ,woo-auth-service/src/main/resources/data.sql,a\1\a15ddbb7de5efb2e68b28644ed60351568255ca9
 ‚
