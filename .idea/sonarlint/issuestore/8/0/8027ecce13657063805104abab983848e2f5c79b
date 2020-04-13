@@ -1,0 +1,28 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÉÓ³¡8¥°©—.
+H
+java:S1948Ò",Make "attributes" transient or serializable.(ˆÍÃøÿÿÿÿ
+J
+java:S1948±"3Make "defaultAttributes" transient or serializable.(•Ìä
+G
+java:S1948œ"+Make "downloads" transient or serializable.(Ù¨§ÿÿÿÿÿ
+F
+java:S1948<"0Make "dateOnSaleFrom" transient or serializable.(ÉäšË
+E
+java:S1948Ã"/Make "stockQuantity" transient or serializable.(×¾
+G
+java:S1948"1Make "groupedProducts" transient or serializable.(ºÏÆì
+J
+java:S1948“"3Make "dateOnSaleFromGmt" transient or serializable.(‚ÆŞƒ
+H
+java:S1948¢",Make "variations" transient or serializable.(»êƒÜşÿÿÿÿ
+A
+java:S1948"+Make "upsellIds" transient or serializable.(øë÷ê
+@
+java:S19480"*Make "metaData" transient or serializable.(ŒÒã£
+I
+java:S1948]".Make "dateOnSaleTo" transient or serializable.(Ş¾ÔÜÿÿÿÿÿ
+D
+java:S1948~".Make "crossSellIds" transient or serializable.(Ú¹µÚ
+M
+java:S1948"1Make "dateOnSaleToGmt" transient or serializable.(šÖ³¥øÿÿÿÿ

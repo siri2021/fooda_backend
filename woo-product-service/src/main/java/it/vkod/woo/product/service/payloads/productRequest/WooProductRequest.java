@@ -13,7 +13,7 @@ public class WooProductRequest {
     private int id;
 
     @JsonProperty("regular_price")
-    private String regularPrice;
+    private double regularPrice;
 
     @JsonProperty("short_description")
     private String shortDescription;
@@ -49,11 +49,11 @@ public class WooProductRequest {
         this.id = id;
     }
 
-    public void setRegularPrice(String regularPrice) {
+    public void setRegularPrice(double regularPrice) {
         this.regularPrice = regularPrice;
     }
 
-    public String getRegularPrice() {
+    public double getRegularPrice() {
         return regularPrice;
     }
 

@@ -36,6 +36,7 @@ public class SearchView extends Div {
     public final static String ROUTE = "search";
 
     /**
+     * Based on Materialize css ..
      * <div class="row">
      *     <div class="col s12 m6">
      *       <div class="card">
@@ -63,7 +64,7 @@ public class SearchView extends Div {
 
         TextField searchTextField = new TextField();
         searchTextField.setClassName("white-text");
-        searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", "32px");
+        searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", "32px").set("width", "75%");
 
         Button searchBtn = new Button("Search", clickEvent -> {
             Arrays.stream(service.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
@@ -79,7 +80,7 @@ public class SearchView extends Div {
 
         searchBtn.addClickShortcut(Key.ENTER);
         searchBtn.setClassName("white-text");
-        searchBtn.getStyle().set("margin", "0").set("padding", "0").set("height", "32px");
+        searchBtn.getStyle().set("margin", "0").set("padding", "0").set("height", "32px").set("width", "25%");
         searchDiv.add(searchTextField, searchBtn);
 
         add(searchDiv);
@@ -91,8 +92,8 @@ public class SearchView extends Div {
         productContentCard.setClassName("card-content");
         Paragraph productContentP = new Paragraph();
         //match HTML tags
-        String strRegEx = "<[^>]*>";
-        productContentP.setText(wooProduct.getDescription().replaceAll(strRegEx, ""));
+        final String htmlElementsRegex = "<[^>]*>";
+        productContentP.setText(wooProduct.getDescription().replaceAll(htmlElementsRegex, ""));
         productContentP.setSizeFull();
         productContentCard.add(productContentP);
         return productContentCard;

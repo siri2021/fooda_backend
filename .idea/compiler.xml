@@ -6,13 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="woo-matching-service" />
+        <module name="woo-basket-service" />
+        <module name="woo-product-service" />
         <module name="woo-csv-service" />
+        <module name="woo-discovery-service" />
         <module name="woo-product-client" />
         <module name="woo-auth-service" />
-        <module name="woo-discovery-service" />
         <module name="woo-config-service" />
-        <module name="woo-product-service" />
+        <module name="woo-matching-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +29,7 @@
       <module name="fooda" options="-parameters" />
       <module name="woo-admin-service" options="-parameters" />
       <module name="woo-auth-service" options="-parameters" />
+      <module name="woo-basket-service" options="-parameters" />
       <module name="woo-config-service" options="-parameters" />
       <module name="woo-csv-service" options="-parameters" />
       <module name="woo-discovery-service" options="-parameters" />

@@ -1,6 +1,7 @@
 package it.vkod.woo.auth.service.model;
 
 import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 
 @Entity

@@ -134,6 +134,7 @@
         <module>woo-matching-service</module>
         <module>woo-product-client</module>
         <module>woo-product-service</module>
+        <module>woo-basket-service</module>
     </modules>
 
 </project>

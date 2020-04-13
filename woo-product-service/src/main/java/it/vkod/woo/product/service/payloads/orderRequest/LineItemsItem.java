@@ -13,6 +13,18 @@ public class LineItemsItem{
 	@JsonProperty("product_id")
 	private int productId;
 
+	public LineItemsItem() {
+	}
+
+	public LineItemsItem(int productId) {
+		this.productId = productId;
+	}
+
+	public LineItemsItem(int quantity, int productId) {
+		this(productId);
+		this.quantity = quantity;
+	}
+
 	public void setQuantity(int quantity){
 		this.quantity = quantity;
 	}

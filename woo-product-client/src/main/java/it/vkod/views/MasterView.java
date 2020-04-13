@@ -20,28 +20,28 @@ public class MasterView extends AppLayout {
     public void init() {
 
         final Icon searchIcon = VaadinIcon.SEARCH.create();
-        searchIcon.setSize("32px");
+        searchIcon.setSize("28px");
         final Tab searchTab = new Tab(new Button(searchIcon, click -> {
             UI.getCurrent().navigate("search");
         }));
         searchTab.setId("searchTab");
 
         final Icon cartIcon = VaadinIcon.CART.create();
-        cartIcon.setSize("32px");
+        cartIcon.setSize("28px");
         final Tab cartTab = new Tab(new Button(cartIcon, click -> {
             UI.getCurrent().navigate("cart");
         }));
         cartTab.setId("cartTab");
 
         final Icon addressIcon = VaadinIcon.HOME.create();
-        addressIcon.setSize("32px");
+        addressIcon.setSize("28px");
         final Tab addressTab = new Tab(new Button(addressIcon, click -> {
             UI.getCurrent().navigate("address");
         }));
         addressTab.setId("addressTab");
 
         final Icon paymentIcon = VaadinIcon.MONEY.create();
-        paymentIcon.setSize("32px");
+        paymentIcon.setSize("28px");
         final Tab paymentTab = new Tab(new Button(paymentIcon, click -> {
             UI.getCurrent().navigate("payment");
         }));

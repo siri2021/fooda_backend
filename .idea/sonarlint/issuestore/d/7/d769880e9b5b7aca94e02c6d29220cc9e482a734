@@ -1,9 +1,7 @@
 
-D
-java:S1948 ")Make "service" transient or serializable.(Ğ¾ıÿÿÿÿ
-B
-java:S1602.",Remove useless curly braces around statement(÷Ëü¡
 `
-java:S1124""EReorder the modifiers to comply with the Java Language Specification.(š–®ñÿÿÿÿÿ
-G
-java:S1602-",Remove useless curly braces around statement(¦ò¢´ÿÿÿÿÿ
+java:S1124$"EReorder the modifiers to comply with the Java Language Specification.(š–®ñÿÿÿÿÿ
+F
+java:S1948"")Make "service" transient or serializable.(Õì±8Şá—.
+N
+java:S1602E",Remove useless curly braces around statement(¦ò¢´ÿÿÿÿÿ8™õè—.

@@ -9,6 +9,9 @@ public class WooOrderRequest {
     @JsonProperty("store_id")
     private long storeId;
 
+    @JsonProperty("id")
+    private int id;
+
     @JsonProperty("shipping_lines")
     private List<ShippingLinesItem> shippingLines;
 
@@ -29,6 +32,14 @@ public class WooOrderRequest {
 
     @JsonProperty("billing")
     private Billing billing;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public long getStoreId() {
         return storeId;
@@ -99,7 +110,8 @@ public class WooOrderRequest {
         return
                 "WooOrderRequest{" +
                         "store_id = '" + storeId + '\'' +
-                        "shipping_lines = '" + shippingLines + '\'' +
+                        ",order_id = '" + id + '\'' +
+                        ",shipping_lines = '" + shippingLines + '\'' +
                         ",set_paid = '" + setPaid + '\'' +
                         ",shipping = '" + shipping + '\'' +
                         ",payment_method_title = '" + paymentMethodTitle + '\'' +

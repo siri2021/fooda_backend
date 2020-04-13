@@ -487,7 +487,7 @@ public class WooOrderResponse {
         return
                 "WooOrder{" +
                         "store_id = '" + storeId + '\'' +
-                        "discount_total = '" + discountTotal + '\'' +
+                        ",discount_total = '" + discountTotal + '\'' +
                         ",order_key = '" + orderKey + '\'' +
                         ",prices_include_tax = '" + pricesIncludeTax + '\'' +
                         ",_links = '" + links + '\'' +
