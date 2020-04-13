@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/basket/products")
 public class ProductController {
 
     private ProductService productService;

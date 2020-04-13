@@ -14,7 +14,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import it.vkod.payloads.basketRequest.BasketProduct;
 import it.vkod.payloads.productResponse.WooProduct;
+import it.vkod.services.WooBasketServiceClient;
 import it.vkod.services.WooMatchServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,7 +33,10 @@ import static it.vkod.views.SearchView.ROUTE;
 public class SearchView extends Div {
 
     @Autowired
-    private WooMatchServiceClient service;
+    private WooMatchServiceClient matchServiceClient;
+
+    @Autowired
+    private WooBasketServiceClient basketServiceClient;
 
     public final static String ROUTE = "search";
 
@@ -67,7 +72,7 @@ public class SearchView extends Div {
         searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", "32px").set("width", "75%");
 
         Button searchBtn = new Button("Search", clickEvent -> {
-            Arrays.stream(service.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
+            Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
                 Div productCard = new Div();
                 productCard.setClassName("card");
                 Div productImgCard = createProductImageDiv(wooProduct);
@@ -111,6 +116,7 @@ public class SearchView extends Div {
         Button addButton = new Button(addButtonIcon);
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light red");
         addButton.addClickListener(click -> {
+            basketServiceClient.apiPostCachedBasketProducts(new BasketProduct(wooProduct.getStoreId(), (long) wooProduct.getId(), wooProduct.getName(), wooProduct.getPrice(), wooProduct.getImages().get(0).getSrc()));
             final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() + " is added.";
             new Notification(notificationMsg, 2000).open();
         });

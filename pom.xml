@@ -132,8 +132,8 @@
         <module>woo-csv-service</module>
         <module>woo-discovery-service</module>
         <module>woo-matching-service</module>
-        <module>woo-product-client</module>
-        <module>woo-product-service</module>
+        <module>woo-basketProduct-client</module>
+        <module>woo-basketProduct-service</module>
         <module>woo-basket-service</module>
     </modules>
 

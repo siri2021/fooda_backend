@@ -42,7 +42,7 @@ public class WooProduct implements Serializable {
     private String externalUrl;
 
     @JsonProperty("price")
-    private String price;
+    private Double price;
 
     @JsonProperty("meta_data")
     private List<Object> metaData;
@@ -292,11 +292,11 @@ public class WooProduct implements Serializable {
         return externalUrl;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 

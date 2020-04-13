@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>it.vkod</groupId>
-    <artifactId>woo-product-client</artifactId>
-    <name>woo-product-client</name>
+    <artifactId>woo-basketProduct-client</artifactId>
+    <name>woo-basketProduct-client</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
