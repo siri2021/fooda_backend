@@ -9,6 +9,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WooProduct implements Serializable {
 
+    @JsonProperty("store_id")
+    private long storeId;
+
     @JsonProperty("upsell_ids")
     private List<Object> upsellIds;
 
@@ -206,6 +209,14 @@ public class WooProduct implements Serializable {
 
     @JsonProperty("dimensions")
     private Dimensions dimensions;
+
+    public long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(long storeId) {
+        this.storeId = storeId;
+    }
 
     public void setUpsellIds(List<Object> upsellIds) {
         this.upsellIds = upsellIds;
