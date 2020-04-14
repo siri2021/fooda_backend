@@ -1,7 +1,9 @@
 
-`
-java:S1124$"EReorder the modifiers to comply with the Java Language Specification.(š–®ñÿÿÿÿÿ
-F
-java:S1948"")Make "service" transient or serializable.(Õì±8Şá—.
+Q
+java:S1948$"4Make "matchServiceClient" transient or serializable.(Ÿ“ÈŒ8úÊÄÃ—.
+W
+java:S1948'"5Make "basketServiceClient" transient or serializable.(‹éœøûÿÿÿÿ8úÊÄÃ—.
+g
+java:S1124)"EReorder the modifiers to comply with the Java Language Specification.(š–®ñÿÿÿÿÿ8úÊÄÃ—.
 N
-java:S1602E",Remove useless curly braces around statement(¦ò¢´ÿÿÿÿÿ8™õè—.
+java:S1602J",Remove useless curly braces around statement(¦ò¢´ÿÿÿÿÿ8úÊÄÃ—.

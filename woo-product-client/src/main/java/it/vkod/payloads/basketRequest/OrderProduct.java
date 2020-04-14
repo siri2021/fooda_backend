@@ -1,13 +1,17 @@
 package it.vkod.payloads.basketRequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 
 
-public class OrderProduct {
+public class OrderProduct implements Serializable {
 
     @JsonIgnore
     private OrderProductPK pk;
 
+    @JsonProperty
     private Integer quantity;
 
     public OrderProduct() {

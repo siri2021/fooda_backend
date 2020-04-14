@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="woo-basket-service" />
         <module name="woo-product-service" />
         <module name="woo-csv-service" />
         <module name="woo-discovery-service" />
         <module name="woo-product-client" />
         <module name="woo-auth-service" />
         <module name="woo-config-service" />
+        <module name="woo-basket-service" />
         <module name="woo-matching-service" />
       </profile>
     </annotationProcessing>

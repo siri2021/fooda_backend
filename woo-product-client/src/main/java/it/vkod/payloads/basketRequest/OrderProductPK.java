@@ -1,6 +1,7 @@
 package it.vkod.payloads.basketRequest;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.io.Serializable;
@@ -10,8 +11,10 @@ public class OrderProductPK implements Serializable {
 
     private static final long serialVersionUID = 476151177562655457L;
 
+    @JsonProperty
     private Order order;
 
+    @JsonProperty
     private BasketProduct basketProduct;
 
     public Order getOrder() {

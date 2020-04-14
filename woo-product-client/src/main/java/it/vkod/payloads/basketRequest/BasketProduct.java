@@ -1,20 +1,29 @@
 package it.vkod.payloads.basketRequest;
 
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BasketProduct {
+import java.io.Serializable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class BasketProduct implements Serializable {
+
+    @JsonProperty
     private Long storeId;
 
+    @JsonProperty
     private Long id;
 
+    @JsonProperty
     private String name;
 
+    @JsonProperty
     private Double price;
 
+    @JsonProperty
     private String pictureUrl;
 
-    public BasketProduct(Long storeId, Long id, @NotNull(message = "Product name is required.") String name, Double price, String pictureUrl) {
+    public BasketProduct(Long storeId, Long id, String name, Double price, String pictureUrl) {
         this.storeId = storeId;
         this.id = id;
         this.name = name;

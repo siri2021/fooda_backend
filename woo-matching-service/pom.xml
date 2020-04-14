@@ -11,8 +11,8 @@
     <artifactId>woo-matching-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>woo-matching-service</name>
-    <description>Spring Boot application for providing matching using food names, tags, and all other properties..
-    </description>
+    <description>Spring Boot application for providing matching using food names, tags, and all other properties..</description>
+    <packaging>jar</packaging>
 
     <dependencies>
 
