@@ -2,6 +2,7 @@ package it.vkod.services;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+import it.vkod.payloads.basketRequest.BasketOrder;
 import it.vkod.payloads.basketRequest.BasketProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,9 @@ public class WooBasketServiceClient {
 
     public void apiPostCachedBasketProducts(final BasketProduct basketProduct) {
         rest.postForObject(getBasketServiceUrl() + "api/basket/products", basketProduct, BasketProduct.class);
+    }
+
+    public void apiPostCachedBasketOrder(final BasketOrder basketOrder) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/orders", basketOrder, BasketOrder.class);
     }
 }

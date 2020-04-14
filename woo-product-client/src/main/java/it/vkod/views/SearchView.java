@@ -63,15 +63,18 @@ public class SearchView extends Div {
 
         setClassName("container-fluid");
 
+        removeAll();
+
         Div searchDiv = new Div();
         searchDiv.setClassName("card-panel blue");
-        searchDiv.getStyle().set("margin", "0").set("padding", "0").set("height", "32px");
+        searchDiv.getStyle().set("margin", "0").set("padding", "0").set("height", "48px");
 
         TextField searchTextField = new TextField();
         searchTextField.setClassName("white-text");
-        searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", "32px").set("width", "75%");
+        searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", "48px").set("width", "75%");
 
         Button searchBtn = new Button("Search", clickEvent -> {
+
             Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
                 Div productCard = new Div();
                 productCard.setClassName("card");
@@ -85,7 +88,7 @@ public class SearchView extends Div {
 
         searchBtn.addClickShortcut(Key.ENTER);
         searchBtn.setClassName("white-text");
-        searchBtn.getStyle().set("margin", "0").set("padding", "0").set("height", "32px").set("width", "25%");
+        searchBtn.getStyle().set("margin", "0").set("padding", "0").set("height", "48px").set("width", "25%");
         searchDiv.add(searchTextField, searchBtn);
 
         add(searchDiv);
@@ -99,7 +102,7 @@ public class SearchView extends Div {
         //match HTML tags
         final String htmlElementsRegex = "<[^>]*>";
         productContentP.setText(wooProduct.getDescription().replaceAll(htmlElementsRegex, ""));
-        productContentP.setSizeFull();
+        productContentP.getStyle().set("font-weight", "bold").set("font-size", "11pt");
         productContentCard.add(productContentP);
         return productContentCard;
     }

@@ -21,6 +21,7 @@ public class MasterView extends AppLayout {
 
         final Icon searchIcon = VaadinIcon.SEARCH.create();
         searchIcon.setSize("28px");
+        searchIcon.getStyle().set("background-color", "white");
         final Tab searchTab = new Tab(new Button(searchIcon, click -> {
             UI.getCurrent().navigate("search");
         }));
@@ -28,6 +29,7 @@ public class MasterView extends AppLayout {
 
         final Icon cartIcon = VaadinIcon.CART.create();
         cartIcon.setSize("28px");
+        cartIcon.getStyle().set("background-color", "white");
         final Tab cartTab = new Tab(new Button(cartIcon, click -> {
             UI.getCurrent().navigate("cart");
         }));
@@ -35,6 +37,7 @@ public class MasterView extends AppLayout {
 
         final Icon addressIcon = VaadinIcon.HOME.create();
         addressIcon.setSize("28px");
+        addressIcon.getStyle().set("background-color", "white");
         final Tab addressTab = new Tab(new Button(addressIcon, click -> {
             UI.getCurrent().navigate("address");
         }));
@@ -42,6 +45,7 @@ public class MasterView extends AppLayout {
 
         final Icon paymentIcon = VaadinIcon.MONEY.create();
         paymentIcon.setSize("28px");
+        paymentIcon.getStyle().set("background-color", "white");
         final Tab paymentTab = new Tab(new Button(paymentIcon, click -> {
             UI.getCurrent().navigate("payment");
         }));
@@ -55,6 +59,7 @@ public class MasterView extends AppLayout {
         );
 
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
+        tabs.getStyle().set("background-color", "white");
         tabs.setSizeFull();
 
         addToNavbar(true, tabs);

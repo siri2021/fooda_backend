@@ -1,5 +1,7 @@
 package it.vkod.woo.basket.service.model;
 
+import com.google.common.base.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -10,7 +12,6 @@ public class Product {
     private Long storeId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Product name is required.")
@@ -70,6 +71,21 @@ public class Product {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equal(storeId, product.storeId) &&
+                Objects.equal(id, product.id) &&
+                Objects.equal(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(storeId, id, name);
     }
 
     @Override

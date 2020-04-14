@@ -4,4 +4,7 @@ import it.vkod.woo.basket.service.model.Product;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
+
+    boolean existsByIdAndStoreId(final long id, final long storeId);
+
 }
