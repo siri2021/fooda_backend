@@ -3,6 +3,7 @@ package it.vkod.woo.auth.service.payload;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
+
     @NotBlank
     private String usernameOrEmail;
 

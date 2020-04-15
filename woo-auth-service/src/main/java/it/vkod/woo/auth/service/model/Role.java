@@ -1,28 +1,18 @@
 package it.vkod.woo.auth.service.model;
 
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @NaturalId
-    @Column(length = 60)
-    private RoleName name;
-
-    public Role() {
-
-    }
-
-    public Role(RoleName name) {
-        this.name = name;
-    }
+    @Column
+    private String name;
 
     public Long getId() {
         return id;
@@ -32,11 +22,11 @@ public class Role {
         this.id = id;
     }
 
-    public RoleName getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(RoleName name) {
+    public void setName(String name) {
         this.name = name;
     }
 

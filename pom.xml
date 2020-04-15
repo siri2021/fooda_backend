@@ -91,13 +91,6 @@
             <version>2.8.0</version>
         </dependency>
 
-        <!--JSON WEB TOKEN-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-
         <!--DEVTOOLS-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -135,6 +128,7 @@
         <module>woo-product-client</module>
         <module>woo-product-service</module>
         <module>woo-basket-service</module>
+        <module>woo-website-generator-client</module>
     </modules>
 
 </project>

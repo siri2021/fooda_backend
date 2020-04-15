@@ -15,7 +15,6 @@
     <description>Spring Boot project to convert csv to json, yaml to json, json to csv, json to yaml</description>
     <packaging>jar</packaging>
 
-
     <dependencies>
 
         <dependency>

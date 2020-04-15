@@ -6,14 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="woo-product-service" />
+        <module name="woo-website-generator-client" />
+        <module name="woo-basket-service" />
         <module name="woo-csv-service" />
         <module name="woo-discovery-service" />
         <module name="woo-product-client" />
         <module name="woo-auth-service" />
-        <module name="woo-config-service" />
-        <module name="woo-basket-service" />
         <module name="woo-matching-service" />
+        <module name="woo-config-service" />
+        <module name="woo-product-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -39,6 +40,7 @@
       <module name="woo-product-db" options="-parameters" />
       <module name="woo-product-service" options="-parameters" />
       <module name="woo-store-db" options="-parameters" />
+      <module name="woo-website-generator-client" options="-parameters" />
       <module name="wp-content-server" options="-parameters" />
     </option>
   </component>
