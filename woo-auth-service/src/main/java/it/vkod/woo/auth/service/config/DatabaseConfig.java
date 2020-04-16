@@ -13,9 +13,9 @@ public class DatabaseConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUsername("root");
-        dataSource.setPassword("");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUsername("webuser");
+        dataSource.setPassword("password");
         dataSource.setUrl("jdbc:mysql://localhost:3306/woo_auth_db?createDatabaseIfNotExist=true");
 
         return dataSource;
