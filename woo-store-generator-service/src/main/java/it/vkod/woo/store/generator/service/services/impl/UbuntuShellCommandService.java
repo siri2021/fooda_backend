@@ -12,17 +12,19 @@ public class UbuntuShellCommandService implements ShellCommandService {
 
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            Faker faker =  new Faker();
-            String name = faker.company().name().replaceAll("[^a-zA-Z0-9]", "");;
-
-            builder.append("wp core download --path=" + name + "\n" +
-                    "cd /var/www/html/" + name + "\n" +
-                    "wp config create --dbname=" + name + "_db --dbuser=webuser --dbpass=password\n" +
-                    "wp db create\n" +
-                    "wp core install --url=http://localhost/" + name + " --title=\"" + name + "\" --admin_user=" + name + " --admin_password=store001 --admin_email=yilmaz.brievenbus@gmail.com\n" +
-                    "wp plugin update --all\n" +
-                    "wp plugin install user-switching woocommerce woocommerce-admin --activate\n" +
-                    "wp theme install storefront --activate\n");
+            Faker faker = new Faker();
+            String name = faker.company().name().replaceAll("[^a-zA-Z0-9]", "");
+            builder
+                    .append("#### Store ").append(name).append(" is generated.").append("\n")
+                    .append("wp core download --path=").append(name).append("\n")
+                    .append("cd /var/www/html/").append(name).append("\n")
+                    .append("wp config create --dbname=").append(name).append("_db --dbuser=webuser --dbpass=password").append("\n")
+                    .append("wp db create").append("\n")
+                    .append("wp core install --url=http://localhost/").append(name).append(" --title=\"").append(name).append("\" --admin_user=").append("webuser").append(" --admin_password=").append("password").append(" --admin_email=webuser@localhost.wp").append("\n")
+                    .append("wp plugin update --all").append("\n")
+                    .append("wp plugin install user-switching woocommerce woocommerce-admin --activate").append("\n")
+                    .append("wp theme install storefront --activate").append("\n")
+                    .append("cd ..").append("\n");
 
         }
 
