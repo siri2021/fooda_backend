@@ -5,4 +5,6 @@ public interface ShellCommandService {
     String generateDummyStoreCode(final int count);
 
     String generateWpCliInstallationCode();
+
+    String generateDummyProductsScript(final int count);
 }

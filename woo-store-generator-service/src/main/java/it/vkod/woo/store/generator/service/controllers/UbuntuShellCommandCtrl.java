@@ -13,21 +13,43 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-@RequestMapping("api/dummy/stores")
+@RequestMapping("api/generate/")
 @RestController
 public class UbuntuShellCommandCtrl {
 
     @Autowired
     private UbuntuShellCommandService service;
 
-    @GetMapping("{numberOfStores}")
-    public byte[] getShellScripts(@PathVariable("numberOfStores") final int numberOfStores) throws IOException {
-        FileOutputStream out = new FileOutputStream(new File("./wp-dummy-stores.sh"));
-        IOUtils.write(service.generateDummyStoreCode(numberOfStores), out);
+    @GetMapping("preinstall")
+    public byte[] apiGetPreInstallScripts() throws IOException {
+        FileOutputStream out = new FileOutputStream(new File("./pre.sh"));
+        IOUtils.write(service.generateWpCliInstallationCode(), out);
         out.flush();
         out.close();
 
-        FileInputStream in = new FileInputStream("./wp-dummy-stores.sh");
+        FileInputStream in = new FileInputStream("./pre.sh");
+        return IOUtils.toByteArray(in);
+    }
+
+    @GetMapping("stores/{count}")
+    public byte[] apiGetStoreScripts(@PathVariable("count") final int count) throws IOException {
+        FileOutputStream out = new FileOutputStream(new File("./stores.sh"));
+        IOUtils.write(service.generateDummyStoreCode(count), out);
+        out.flush();
+        out.close();
+
+        FileInputStream in = new FileInputStream("./stores.sh");
+        return IOUtils.toByteArray(in);
+    }
+
+    @GetMapping("products/{count}")
+    public byte[] apiGetProductScripts(@PathVariable("count") final int count) throws IOException {
+        FileOutputStream out = new FileOutputStream(new File("./products.sh"));
+        IOUtils.write(service.generateDummyProductsScript(count), out);
+        out.flush();
+        out.close();
+
+        FileInputStream in = new FileInputStream("./products.sh");
         return IOUtils.toByteArray(in);
     }
 
