@@ -125,7 +125,6 @@ public class SearchView extends Div {
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
         addButton.addClickListener(click -> {
             basketServiceClient.apiPostBasketProduct( Basket.builder().userId(USER_ID).storeId(wooProduct.getStoreId()).productId(wooProduct.getId()).quantity(1).build());
-            // basketServiceClient.apiPostCachedBasketProducts(new BasketProduct(wooProduct.getStoreId(), (long) wooProduct.getId(), wooProduct.getName(), wooProduct.getPrice(), wooProduct.getImages().get(0).getSrc()));
             final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() + " is added.";
             new Notification(notificationMsg, 2000).open();
         });

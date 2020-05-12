@@ -1,10 +1,7 @@
 package it.vkod.woo.basket.service.payloads;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,12 +13,15 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @JsonAutoDetect
 public class Basket implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
+    @Getter
+    @Setter
     private UUID basketId;
 
     @Getter

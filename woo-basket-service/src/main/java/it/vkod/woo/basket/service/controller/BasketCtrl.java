@@ -4,6 +4,8 @@ import it.vkod.woo.basket.service.payloads.Basket;
 import it.vkod.woo.basket.service.repositories.BasketRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -20,11 +22,17 @@ public class BasketCtrl {
 
     @PostMapping
     public void addProduct(@NotNull @RequestBody final Basket basket) {
-        repo.saveAndFlush(basket);
+        if (repo.existsByUserIdAndStoreIdAndProductId(basket.getUserId(), basket.getStoreId(), basket.getProductId())) {
+            final Basket existingBasket = repo.findByUserIdAndStoreIdAndProductId(basket.getUserId(), basket.getStoreId(), basket.getProductId());
+            existingBasket.setQuantity(existingBasket.getQuantity() + 1);
+            repo.save(existingBasket);
+        } else {
+            repo.save(basket);
+        }
     }
 
     @DeleteMapping
-    public void deleteProduct(@NotNull @RequestBody final Basket basket){
+    public void deleteProduct(@NotNull @RequestBody final Basket basket) {
         repo.delete(basket);
     }
 
