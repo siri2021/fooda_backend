@@ -14,7 +14,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basketRequest.BasketProduct;
+import it.vkod.woo.product.client.payloads.Basket;
 import it.vkod.woo.product.client.payloads.productResponse.WooProduct;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import it.vkod.woo.product.client.services.WooMatchServiceClient;
@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.UUID;
 
 import static it.vkod.woo.product.client.views.SearchView.ROUTE;
 
@@ -37,6 +38,8 @@ public class SearchView extends Div {
 
     @Autowired
     private WooBasketServiceClient basketServiceClient;
+
+    private final UUID USER_ID = UUID.randomUUID();
 
     public final static String ROUTE = "search";
 
@@ -121,7 +124,8 @@ public class SearchView extends Div {
         Button addButton = new Button(addButtonIcon);
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
         addButton.addClickListener(click -> {
-            basketServiceClient.apiPostCachedBasketProducts(new BasketProduct(wooProduct.getStoreId(), (long) wooProduct.getId(), wooProduct.getName(), wooProduct.getPrice(), wooProduct.getImages().get(0).getSrc()));
+            basketServiceClient.apiPostBasketProduct( Basket.builder().userId(USER_ID).storeId(wooProduct.getStoreId()).productId(wooProduct.getId()).quantity(1).build());
+            // basketServiceClient.apiPostCachedBasketProducts(new BasketProduct(wooProduct.getStoreId(), (long) wooProduct.getId(), wooProduct.getName(), wooProduct.getPrice(), wooProduct.getImages().get(0).getSrc()));
             final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() + " is added.";
             new Notification(notificationMsg, 2000).open();
         });

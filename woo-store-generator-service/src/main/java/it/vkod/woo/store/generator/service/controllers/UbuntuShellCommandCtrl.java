@@ -1,6 +1,6 @@
 package it.vkod.woo.store.generator.service.controllers;
 
-import it.vkod.woo.store.generator.service.services.impl.UbuntuShellCommandService;
+import it.vkod.woo.store.generator.service.services.impl.UbuntuDummyStoreProcessorService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +18,12 @@ import java.io.IOException;
 public class UbuntuShellCommandCtrl {
 
     @Autowired
-    private UbuntuShellCommandService service;
+    private UbuntuDummyStoreProcessorService service;
 
     @GetMapping("preinstall")
     public byte[] apiGetPreInstallScripts() throws IOException {
         FileOutputStream out = new FileOutputStream(new File("./pre.sh"));
-        IOUtils.write(service.generateWpCliInstallationCode(), out);
+        IOUtils.write(service.generatePreInstall(), out);
         out.flush();
         out.close();
 
@@ -34,7 +34,7 @@ public class UbuntuShellCommandCtrl {
     @GetMapping("stores/{count}")
     public byte[] apiGetStoreScripts(@PathVariable("count") final int count) throws IOException {
         FileOutputStream out = new FileOutputStream(new File("./stores.sh"));
-        IOUtils.write(service.generateDummyStoreCode(count), out);
+        IOUtils.write(service.generateStore(count), out);
         out.flush();
         out.close();
 
@@ -45,7 +45,7 @@ public class UbuntuShellCommandCtrl {
     @GetMapping("products/{count}")
     public byte[] apiGetProductScripts(@PathVariable("count") final int count) throws IOException {
         FileOutputStream out = new FileOutputStream(new File("./products.sh"));
-        IOUtils.write(service.generateDummyProductsScript(count), out);
+        IOUtils.write(service.generateStoreProducts(count), out);
         out.flush();
         out.close();
 

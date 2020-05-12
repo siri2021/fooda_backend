@@ -16,6 +16,19 @@
 
     <dependencies>
 
+        <!--        CORE MODULES -->
+        <dependency>
+            <groupId>it.vkod</groupId>
+            <artifactId>woo-core-payloads</artifactId>
+            <version>version-1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>

@@ -1,4 +1,7 @@
 
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(é€Í¢şÿÿÿÿ8Ô‚§˜.
-s
-java:S3457"Q%n should be used in place of \n to produce the platform-specific line separator.(é€Í¢şÿÿÿÿ8Ô‚§˜.
+O
+java:S1874%"-Remove this use of "write"; it is deprecated.(±Ö°‡ıÿÿÿÿ8Õİ‹Ã˜.
+J
+java:S1874"-Remove this use of "write"; it is deprecated.(ÉæÉè8Ç¥ñÁ˜.
+J
+java:S18740"-Remove this use of "write"; it is deprecated.(ó”Öç8»ÏÉÅ˜.
