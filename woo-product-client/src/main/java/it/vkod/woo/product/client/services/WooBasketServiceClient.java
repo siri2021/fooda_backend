@@ -2,15 +2,16 @@ package it.vkod.woo.product.client.services;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
-import it.vkod.woo.product.client.payloads.Basket;
-import it.vkod.woo.product.client.payloads.basketRequest.BasketOrder;
-import it.vkod.woo.product.client.payloads.basketRequest.BasketProduct;
+import it.vkod.woo.product.client.payloads.basketRequest.Basket;
+import it.vkod.woo.product.client.payloads.user.Contact;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Set;
+import java.util.Arrays;
 
+@Slf4j
 @Service
 public class WooBasketServiceClient {
 
@@ -25,23 +26,35 @@ public class WooBasketServiceClient {
         return instance.getHomePageUrl();
     }
 
-    public Set<Basket> apiGetBasketProducts(){
-        return rest.getForObject(getBasketServiceUrl() + "api/basket/", Set.class);
+    public Basket[] apiGetBasketProducts(final long userId) {
+        return rest.getForObject(getBasketServiceUrl() + "api/basket/products/select/" + userId, Basket[].class);
     }
 
-    public void apiPostBasketProduct(final Basket basket) {
-        rest.postForObject(getBasketServiceUrl() + "api/basket/", basket, Basket.class);
+    public double apiGetBasketTotalPrice(final long userId) {
+        final Basket[] basket = apiGetBasketProducts(userId);
+        return Arrays.stream(basket)
+                .mapToDouble(b -> b.getQuantity() * b.getPrice())
+                .sum();
     }
 
-    public BasketProduct[] apiGetCachedBasketProducts() {
-        return rest.getForObject(getBasketServiceUrl() + "api/basket/products", BasketProduct[].class);
+    public void apiIncreaseBasketProductQuantity(final Basket basket) {
+        rest.put(getBasketServiceUrl() + "api/basket/products/increase/", basket);
     }
 
-    public void apiPostCachedBasketProducts(final BasketProduct basketProduct) {
-        rest.postForObject(getBasketServiceUrl() + "api/basket/products", basketProduct, BasketProduct.class);
+    public void apiDecreaseBasketProductQuantity(final Basket basket) {
+        rest.put(getBasketServiceUrl() + "api/basket/products/decrease/", basket);
     }
 
-    public void apiPostCachedBasketOrder(final BasketOrder basketOrder) {
-        rest.postForObject(getBasketServiceUrl() + "api/basket/orders", basketOrder, BasketOrder.class);
+    public void apiAddBasketProduct(final Basket basket) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/products/insert/", basket, Basket.class);
     }
+
+    public Contact[] apiGetBasketContacts(final long userId) {
+        return rest.getForObject(getBasketServiceUrl() + "api/basket/contacts/select/" + userId, Contact[].class);
+    }
+
+    public void apiAddBasketContact(final Contact contact) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/contacts/insert/", contact, Contact.class);
+    }
+
 }

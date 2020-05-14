@@ -1,8 +1,10 @@
 package it.vkod.woo.product.client.views;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -10,7 +12,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basketRequest.BasketProduct;
+import it.vkod.woo.product.client.payloads.basketRequest.Basket;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import it.vkod.woo.product.client.services.WooMatchServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,30 +37,32 @@ public class CartView extends Div {
     private final String BG_COLOR = "#FF5733";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "48px";
+    private long USER_ID;
 
     @PostConstruct
     public void init() {
-
         setClassName("container-fluid");
+        getBasketByUserId();
+    }
 
-        Div completeOrderDiv = new Div();
-        completeOrderDiv.setClassName("card-panel");
-        completeOrderDiv.getStyle().set("margin", "0").set("padding", "0").set("background-color", BG_COLOR);
-        Button completeOrderButton = new Button("Complete Order", clickEvent -> {
-            new Notification("Order is now completed!", 2000).open();
-            // TODO order will be created by a rest call to woo-basket-service ..
+    private void getBasketByUserId() {
+        Dialog dialog = new Dialog();
+        Input input = new Input();
+        dialog.add(input);
+        dialog.open();
+        input.getElement().callJsFunction("focus");
+        input.addValueChangeListener(event -> {
+            if (event.getValue().contains("#")) {
+                USER_ID = Long.parseLong(input.getValue().replace("#", ""));
+                dialog.close();
+                getBasketByUserId(USER_ID);
+            }
         });
-        completeOrderButton.setClassName("white-text");
-        completeOrderButton.getStyle().set("margin", "0").set("padding", "0").set("height", BUTTON_HEIGHT).set("width", "100%");
-        completeOrderDiv.add(completeOrderButton);
-        add(completeOrderDiv);
+    }
 
-        final BasketProduct[] basketProducts = basketServiceClient.apiGetCachedBasketProducts();
-
-//        final BasketOrder basketOrder = new BasketOrder();
-
-
-        Arrays.stream(basketProducts).forEach(basketProduct -> {
+    private void getBasketByUserId(final long userId) {
+        final Basket[] basket = basketServiceClient.apiGetBasketProducts(userId);
+        Arrays.stream(basket).forEach(basketProduct -> {
             Div productCard = new Div();
             productCard.setClassName("card horizontal");
             Div productImgCard = createBasketImageDiv(basketProduct);
@@ -66,7 +70,6 @@ public class CartView extends Div {
             productCard.add(productImgCard, productInfoCard);
             add(productCard);
         });
-
     }
 
     /**
@@ -88,7 +91,7 @@ public class CartView extends Div {
      *    </div>
      *  </div>
      */
-    private Div createBasketInfoDiv(BasketProduct basketProduct) {
+    private Div createBasketInfoDiv(Basket basket) {
 
         Div basketInfoDiv = new Div();
         basketInfoDiv.setClassName("card-stacked");
@@ -96,7 +99,7 @@ public class CartView extends Div {
         Div basketContentDiv = new Div();
         basketContentDiv.setClassName("card-content");
         Paragraph cardTitleSpan = new Paragraph();
-        cardTitleSpan.setText(basketProduct.getName() + " x " + "1");
+        cardTitleSpan.setText(basket.getName() + " x " + basket.getQuantity());
         basketContentDiv.add(cardTitleSpan);
 
         Div basketActionsDiv = new Div();
@@ -104,14 +107,14 @@ public class CartView extends Div {
         final Icon removeButtonIcon = VaadinIcon.MINUS_CIRCLE_O.create();
         Button removeButton = new Button(removeButtonIcon);
         removeButton.addClickListener(removeClick -> {
+            basketServiceClient.apiDecreaseBasketProductQuantity(basket);
             new Notification("Product is decreased!", 2000).open();
-            // TODO order will be created by a rest call to woo-basket-service ..
         });
         final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
         Button addButton = new Button(addButtonIcon);
         addButton.addClickListener(addClick -> {
+            basketServiceClient.apiIncreaseBasketProductQuantity(basket);
             new Notification("Product is increased!", 2000).open();
-            // TODO order will be created by a rest call to woo-basket-service ..
         });
         basketActionsDiv.add(removeButton, addButton);
 
@@ -138,12 +141,12 @@ public class CartView extends Div {
      *    </div>
      *  </div>
      */
-    private Div createBasketImageDiv(BasketProduct basketProduct) {
+    private Div createBasketImageDiv(Basket basket) {
 
         Div productImgCard = new Div();
         productImgCard.setClassName("card-image");
 
-        Image productImage = new Image(basketProduct.getPictureUrl(), basketProduct.getName());
+        Image productImage = new Image(basket.getImageUrl(), basket.getName());
         productImgCard.add(productImage);
 
         return productImgCard;

@@ -1,20 +1,16 @@
 package it.vkod.woo.product.client.views;
 
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.Basket;
+import it.vkod.woo.product.client.payloads.basketRequest.Basket;
 import it.vkod.woo.product.client.payloads.productResponse.WooProduct;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import it.vkod.woo.product.client.services.WooMatchServiceClient;
@@ -22,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
-import java.util.UUID;
 
 import static it.vkod.woo.product.client.views.SearchView.ROUTE;
 
@@ -39,13 +34,13 @@ public class SearchView extends Div {
     @Autowired
     private WooBasketServiceClient basketServiceClient;
 
-    private final UUID USER_ID = UUID.randomUUID();
-
     public final static String ROUTE = "search";
 
     private final String BG_COLOR = "#FF5733"; // RGB 255, 87, 51
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "48px";
+
+    private final long USER_ID = UniqueID.get();
 
     /**
      * Based on Materialize css ..
@@ -67,37 +62,33 @@ public class SearchView extends Div {
 
     @PostConstruct
     public void init() {
-
         setClassName("container-fluid");
+        getSearchText();
+    }
 
-        Div searchDiv = new Div();
-        searchDiv.setClassName("card-panel");
-        searchDiv.getStyle().set("margin", "0").set("padding", "0").set("background-color", BG_COLOR);
-
-        TextField searchTextField = new TextField();
-        searchTextField.setClassName("white-text");
-        searchTextField.getStyle().set("margin", "0").set("padding", "0").set("height", BUTTON_HEIGHT).set("width", "75%").set("background-color", BG_COLOR);
-
-        Button searchBtn = new Button("Search", clickEvent -> {
-
-            Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(searchTextField.getValue())).forEach(wooProduct -> {
-                Div productCard = new Div();
-                productCard.setClassName("card");
-                Div productImgCard = createProductImageDiv(wooProduct);
-                Div productContentCard = createProductContentDiv(wooProduct);
-                productCard.add(productImgCard, productContentCard);
-                add(productCard);
-            });
-
+    private void searchProducts(final String search) {
+        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search.replace("#", ""))).forEach(wooProduct -> {
+            Div productCard = new Div();
+            productCard.setClassName("card");
+            Div productImgCard = createProductImageDiv(wooProduct);
+            Div productContentCard = createProductContentDiv(wooProduct);
+            productCard.add(productImgCard, productContentCard);
+            add(productCard);
         });
+    }
 
-        searchBtn.addClickShortcut(Key.ENTER);
-        searchBtn.setClassName("white-text");
-        searchBtn.getStyle().set("margin", "0").set("padding", "0").set("height", BUTTON_HEIGHT).set("width", "25%").set("background-color", BG_COLOR);
-        searchDiv.add(searchTextField, searchBtn);
-
-        add(searchDiv);
-
+    private void getSearchText() {
+        Dialog dialog = new Dialog();
+        Input input = new Input();
+        dialog.add(input);
+        dialog.open();
+        input.getElement().callJsFunction("focus");
+        input.addValueChangeListener(event -> {
+            if (event.getValue().contains("#")) {
+                dialog.close();
+                searchProducts(input.getValue());
+            }
+        });
     }
 
     private Div createProductContentDiv(WooProduct wooProduct) {
@@ -124,8 +115,8 @@ public class SearchView extends Div {
         Button addButton = new Button(addButtonIcon);
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
         addButton.addClickListener(click -> {
-            basketServiceClient.apiPostBasketProduct( Basket.builder().userId(USER_ID).storeId(wooProduct.getStoreId()).productId(wooProduct.getId()).quantity(1).build());
-            final String notificationMsg = wooProduct.getName() + " from " + wooProduct.getStoreId() + " is added.";
+            basketServiceClient.apiAddBasketProduct(Basket.builder().userId(USER_ID).storeId(wooProduct.getStoreId()).productId(wooProduct.getId()).name(wooProduct.getName()).price(wooProduct.getPrice()).quantity(1).imageUrl(wooProduct.getImages().get(0).getSrc()).build());
+            final String notificationMsg = wooProduct.getName() + " added.";
             new Notification(notificationMsg, 2000).open();
         });
         productImgCard.add(productImage, cardTitleSpan, addButton);

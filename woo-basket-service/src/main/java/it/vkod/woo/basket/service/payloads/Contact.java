@@ -1,28 +1,32 @@
 package it.vkod.woo.basket.service.payloads;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @JsonAutoDetect
-public class Basket implements Serializable {
+@Builder(toBuilder = true)
+@EqualsAndHashCode
+public class Contact implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
     @Getter
     @Setter
-    private UUID basketId;
+    private UUID contactId;
 
     @Getter
     @Setter
@@ -30,25 +34,30 @@ public class Basket implements Serializable {
 
     @Getter
     @Setter
-    private long storeId;
+    private String firstName;
 
     @Getter
     @Setter
-    private long productId;
+    private String lastName;
 
     @Getter
     @Setter
-    private String name;
+    private String email;
 
     @Getter
     @Setter
-    private double price;
+    private String phone;
 
     @Getter
     @Setter
-    private int quantity;
+    private String address;
 
     @Getter
     @Setter
-    private String imageUrl;
+    private String postcode;
+
+    @Getter
+    @Setter
+    private boolean doNotCall;
+
 }

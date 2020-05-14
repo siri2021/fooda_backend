@@ -1,4 +1,4 @@
-package it.vkod.woo.product.client.payloads;
+package it.vkod.woo.product.client.payloads.basketRequest;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
@@ -18,7 +18,7 @@ public class Basket implements Serializable {
 
     @Getter
     @Setter
-    private UUID userId;
+    private long userId;
 
     @Getter
     @Setter
@@ -30,5 +30,17 @@ public class Basket implements Serializable {
 
     @Getter
     @Setter
+    private String name;
+
+    @Getter
+    @Setter
+    private double price;
+
+    @Getter
+    @Setter
     private int quantity;
+
+    @Getter
+    @Setter
+    private String imageUrl;
 }

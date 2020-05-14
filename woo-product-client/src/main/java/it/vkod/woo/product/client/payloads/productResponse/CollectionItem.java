@@ -1,25 +1,17 @@
 package it.vkod.woo.product.client.payloads.productResponse;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CollectionItem{
 
-	@JsonProperty("href")
+	@Getter
+	@Setter
 	private String href;
-
-	public void setHref(String href){
-		this.href = href;
-	}
-
-	public String getHref(){
-		return href;
-	}
-
-	@Override
- 	public String toString(){
-		return 
-			"CollectionItem{" + 
-			"href = '" + href + '\'' + 
-			"}";
-		}
 }
