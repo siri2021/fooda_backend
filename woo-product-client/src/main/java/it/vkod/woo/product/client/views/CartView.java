@@ -2,10 +2,7 @@ package it.vkod.woo.product.client.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Input;
-import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -28,24 +25,22 @@ import static it.vkod.woo.product.client.views.CartView.ROUTE;
 public class CartView extends Div {
 
     @Autowired
-    private WooMatchServiceClient matchServiceClient;
-
-    @Autowired
     private WooBasketServiceClient basketServiceClient;
 
     public final static String ROUTE = "cart";
     private final String BG_COLOR = "#FF5733";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "48px";
+    private final String BUTTON_WIDTH = "32px";
     private long USER_ID;
 
     @PostConstruct
     public void init() {
         setClassName("container-fluid");
-        getBasketByUserId();
+        setUserIdFromInput();
     }
 
-    private void getBasketByUserId() {
+    private void setUserIdFromInput() {
         Dialog dialog = new Dialog();
         Input input = new Input();
         dialog.add(input);
@@ -53,8 +48,8 @@ public class CartView extends Div {
         input.getElement().callJsFunction("focus");
         input.addValueChangeListener(event -> {
             if (event.getValue().contains("#")) {
-                USER_ID = Long.parseLong(input.getValue().replace("#", ""));
                 dialog.close();
+                USER_ID = Long.parseLong(input.getValue().replace("#", ""));
                 getBasketByUserId(USER_ID);
             }
         });
@@ -98,20 +93,24 @@ public class CartView extends Div {
 
         Div basketContentDiv = new Div();
         basketContentDiv.setClassName("card-content");
-        Paragraph cardTitleSpan = new Paragraph();
-        cardTitleSpan.setText(basket.getName() + " x " + basket.getQuantity());
-        basketContentDiv.add(cardTitleSpan);
+        Header cartInfoHeader = new Header();
+        cartInfoHeader.setText(basket.getName() + " x " + basket.getQuantity());
+        Label priceLabel = new Label();
+        priceLabel.setText("€" + basket.getPrice() * basket.getQuantity());
+        basketContentDiv.add(cartInfoHeader, priceLabel);
 
         Div basketActionsDiv = new Div();
         basketActionsDiv.setClassName("card-action");
         final Icon removeButtonIcon = VaadinIcon.MINUS_CIRCLE_O.create();
         Button removeButton = new Button(removeButtonIcon);
+        removeButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", BUTTON_WIDTH);
         removeButton.addClickListener(removeClick -> {
             basketServiceClient.apiDecreaseBasketProductQuantity(basket);
             new Notification("Product is decreased!", 2000).open();
         });
         final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
         Button addButton = new Button(addButtonIcon);
+        addButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", BUTTON_WIDTH);
         addButton.addClickListener(addClick -> {
             basketServiceClient.apiIncreaseBasketProductQuantity(basket);
             new Notification("Product is increased!", 2000).open();

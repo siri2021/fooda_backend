@@ -3,7 +3,7 @@ package it.vkod.woo.product.client.services;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import it.vkod.woo.product.client.payloads.basketRequest.Basket;
-import it.vkod.woo.product.client.payloads.user.Contact;
+import it.vkod.woo.product.client.payloads.basketRequest.Contact;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

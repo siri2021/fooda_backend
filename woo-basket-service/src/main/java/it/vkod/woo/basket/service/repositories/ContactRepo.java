@@ -11,5 +11,7 @@ import java.util.UUID;
 public interface ContactRepo extends JpaRepository<Contact, UUID> {
     List<Contact> findAllByUserId(final long userId);
     boolean existsByUserIdAndAddressAndPostcode(final long userId, final String address, final String postcode);
+    boolean existsByFirstNameAndLastNameAndUserIdAndAddressAndPostcode(final String firstName, final String lastName, final long userId, final String address, final String postcode);
     Contact findByUserIdAndAddressAndPostcode(final long userId, final String address, final String postcode);
+    Contact findByFirstNameAndLastNameAndUserIdAndAddressAndPostcode(final String firstName, final String lastName, final long userId, final String address, final String postcode);
 }

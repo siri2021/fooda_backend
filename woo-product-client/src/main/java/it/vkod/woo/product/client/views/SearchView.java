@@ -66,17 +66,6 @@ public class SearchView extends Div {
         getSearchText();
     }
 
-    private void searchProducts(final String search) {
-        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search.replace("#", ""))).forEach(wooProduct -> {
-            Div productCard = new Div();
-            productCard.setClassName("card");
-            Div productImgCard = createProductImageDiv(wooProduct);
-            Div productContentCard = createProductContentDiv(wooProduct);
-            productCard.add(productImgCard, productContentCard);
-            add(productCard);
-        });
-    }
-
     private void getSearchText() {
         Dialog dialog = new Dialog();
         Input input = new Input();
@@ -88,6 +77,17 @@ public class SearchView extends Div {
                 dialog.close();
                 searchProducts(input.getValue());
             }
+        });
+    }
+
+    private void searchProducts(final String search) {
+        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search.replace("#", ""))).forEach(wooProduct -> {
+            Div productCard = new Div();
+            productCard.setClassName("card");
+            Div productImgCard = createProductImageDiv(wooProduct);
+            Div productContentCard = createProductContentDiv(wooProduct);
+            productCard.add(productImgCard, productContentCard);
+            add(productCard);
         });
     }
 

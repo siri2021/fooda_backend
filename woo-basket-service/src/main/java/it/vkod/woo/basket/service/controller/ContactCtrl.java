@@ -19,8 +19,11 @@ public class ContactCtrl {
 
     @PostMapping("insert")
     public void apiPostInsertBasketContact(@NotNull @RequestBody final Contact contact) {
-        if (repo.existsByUserIdAndAddressAndPostcode(contact.getUserId(), contact.getAddress(), contact.getPostcode())) {
+        if (repo.existsByFirstNameAndLastNameAndUserIdAndAddressAndPostcode(contact.getFirstName(), contact.getLastName(),
+                contact.getUserId(), contact.getAddress(), contact.getPostcode())) {
+
             apiPutUpdateBasketContact(contact);
+
         } else {
             repo.save(contact);
         }
@@ -28,7 +31,8 @@ public class ContactCtrl {
 
     @PutMapping("update")
     public void apiPutUpdateBasketContact(@NotNull @RequestBody Contact contact) {
-        contact = repo.findByUserIdAndAddressAndPostcode(contact.getUserId(), contact.getAddress(), contact.getPostcode());
+        contact = repo.findByFirstNameAndLastNameAndUserIdAndAddressAndPostcode(contact.getFirstName(), contact.getLastName(),
+                contact.getUserId(), contact.getAddress(), contact.getPostcode());
         repo.save(contact);
     }
 

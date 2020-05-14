@@ -1,16 +1,13 @@
 package it.vkod.woo.basket.service.payloads;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +16,7 @@ import java.util.UUID;
 @JsonAutoDetect
 @Builder(toBuilder = true)
 @EqualsAndHashCode
+@ToString
 public class Contact implements Serializable {
 
     @Id
@@ -55,6 +53,22 @@ public class Contact implements Serializable {
     @Getter
     @Setter
     private String postcode;
+
+    @Getter
+    @Setter
+    private String municipality;
+
+    @Getter
+    @Setter
+    private String city;
+
+    @Getter
+    @Setter
+    private String region;
+
+    @Getter
+    @Setter
+    private String country;
 
     @Getter
     @Setter
