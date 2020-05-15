@@ -16,6 +16,7 @@ public class MasterView extends AppLayout {
 
     private final String BG_COLOR = "#FF5733";
     private final String TEXT_COLOR = "white";
+    private final String ICON_SIZE = "28px";
 
     Tabs tabs;
 
@@ -23,7 +24,7 @@ public class MasterView extends AppLayout {
     public void init() {
 
         final Icon searchIcon = VaadinIcon.SEARCH.create();
-        searchIcon.setSize("28px");
+        searchIcon.setSize(ICON_SIZE);
         searchIcon.setColor(TEXT_COLOR);
         searchIcon.getStyle().set("background-color", BG_COLOR);
         final Tab searchTab = new Tab(new Button(searchIcon, click -> {
@@ -32,7 +33,7 @@ public class MasterView extends AppLayout {
         searchTab.setId("searchTab");
 
         final Icon cartIcon = VaadinIcon.CART.create();
-        cartIcon.setSize("28px");
+        cartIcon.setSize(ICON_SIZE);
         cartIcon.setColor(TEXT_COLOR);
         cartIcon.getStyle().set("background-color", BG_COLOR);
         final Tab cartTab = new Tab(new Button(cartIcon, click -> {
@@ -41,7 +42,7 @@ public class MasterView extends AppLayout {
         cartTab.setId("cartTab");
 
         final Icon addressIcon = VaadinIcon.HOME.create();
-        addressIcon.setSize("28px");
+        addressIcon.setSize(ICON_SIZE);
         addressIcon.setColor(TEXT_COLOR);
         addressIcon.getStyle().set("background-color", BG_COLOR);
         final Tab addressTab = new Tab(new Button(addressIcon, click -> {
@@ -49,8 +50,8 @@ public class MasterView extends AppLayout {
         }));
         addressTab.setId("addressTab");
 
-        final Icon paymentIcon = VaadinIcon.MONEY.create();
-        paymentIcon.setSize("28px");
+        final Icon paymentIcon = VaadinIcon.WALLET.create();
+        paymentIcon.setSize(ICON_SIZE);
         paymentIcon.setColor(TEXT_COLOR);
         paymentIcon.getStyle().set("background-color", BG_COLOR);
         final Tab paymentTab = new Tab(new Button(paymentIcon, click -> {

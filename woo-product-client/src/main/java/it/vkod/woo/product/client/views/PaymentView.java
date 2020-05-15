@@ -14,7 +14,6 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import it.vkod.woo.product.client.payloads.basketRequest.Basket;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
-import it.vkod.woo.product.client.services.WooMatchServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +21,7 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import static it.vkod.woo.product.client.views.PaymentView.ROUTE;
@@ -37,8 +37,8 @@ public class PaymentView extends Div {
     public final static String ROUTE = "payment";
     private final String BG_COLOR = "#FF5733";
     private final String TEXT_COLOR = "white";
-    private final String BUTTON_HEIGHT = "48px";
-    private final String BUTTON_WIDTH = "32px";
+    private final String BUTTON_HEIGHT = "38px";
+    private final String ICON_SIZE = "28px";
     private long USER_ID;
 
     @PostConstruct
@@ -80,34 +80,53 @@ public class PaymentView extends Div {
 
         Div basketInfoDiv = new Div();
         basketInfoDiv.setClassName("card-stacked");
+        AtomicReference<Double> subTotal = new AtomicReference<>((double) 0);
 
         baskets.forEach(basket -> {
             Div basketContentDiv = new Div();
             basketContentDiv.setClassName("card-content");
             Header cartInfoHeader = new Header();
+            cartInfoHeader.getStyle().set("font-size", "12pt");
             cartInfoHeader.setText(basket.getName() + " x " + basket.getQuantity());
             Label priceLabel = new Label();
-            priceLabel.setText("€" + basket.getPrice() * basket.getQuantity());
+            priceLabel.getStyle().set("font-size", "12pt");
+            final double price = basket.getPrice() * basket.getQuantity();
+            priceLabel.setText("€" + price);
+            subTotal.updateAndGet(v -> v + price);
             basketContentDiv.add(cartInfoHeader, priceLabel);
             basketInfoDiv.add(basketContentDiv);
         });
 
+        final Icon confirmPaymentMethodButtonIcon = VaadinIcon.CREDIT_CARD.create();
+        confirmPaymentMethodButtonIcon.setSize(ICON_SIZE);
+        Button confirmPaymentMethodButton = new Button("Confirm Delivery with €" + subTotal, confirmPaymentMethodButtonIcon);
+        confirmPaymentMethodButton.getStyle().set("background", "#2E8B57").set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "90%");
+        confirmPaymentMethodButton.addClickListener(addClick -> {
+            new Notification("Payment Method is confirmed!", 2000).open();
+        });
+        confirmPaymentMethodButton.setEnabled(false);
+
         Div basketActionsDiv = new Div();
         basketActionsDiv.setClassName("card-action");
         final Icon cashOnDeliveryButtonIcon = VaadinIcon.CASH.create();
-        Button cashOnDeliveryButton = new Button(cashOnDeliveryButtonIcon);
-        cashOnDeliveryButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", BUTTON_WIDTH);
+        cashOnDeliveryButtonIcon.setSize(ICON_SIZE);
+        Button cashOnDeliveryButton = new Button("Cash", cashOnDeliveryButtonIcon);
+        cashOnDeliveryButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "42%");
         cashOnDeliveryButton.addClickListener(removeClick -> {
+            confirmPaymentMethodButton.setEnabled(true);
             new Notification("Cash on delivery is selected!", 2000).open();
         });
         final Icon creditCardOnDeliveryButtonIcon = VaadinIcon.CREDIT_CARD.create();
-        Button creditCardOnDeliveryButton = new Button(creditCardOnDeliveryButtonIcon);
-        creditCardOnDeliveryButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", BUTTON_WIDTH);
+        creditCardOnDeliveryButtonIcon.setSize(ICON_SIZE);
+        Button creditCardOnDeliveryButton = new Button("Credit card", creditCardOnDeliveryButtonIcon);
+        creditCardOnDeliveryButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "42%");
         creditCardOnDeliveryButton.addClickListener(addClick -> {
+            confirmPaymentMethodButton.setEnabled(true);
             new Notification("Credit card on delivery is selected!", 2000).open();
         });
-        basketActionsDiv.add(cashOnDeliveryButton, creditCardOnDeliveryButton);
 
+
+        basketActionsDiv.add(cashOnDeliveryButton, creditCardOnDeliveryButton, confirmPaymentMethodButton);
         basketInfoDiv.add(basketActionsDiv);
         return basketInfoDiv;
     }
