@@ -723,8 +723,6 @@ hwoo-store-generator-service/src/main/java/it/vkod/woo/store/generator/service/p
 Zwoo-product-client/src/main/java/it/vkod/woo/product/client/config/RestTemplateConfig.java,6/2/62a757dfd8fdb93d05162270f29b5836499fc169
 i
 9woo-product-service/src/main/resources/active_stores.json,c/7/c7d00f297dc93ed87cdecc3dae079ed64c7e8ae3
-m
-=woo-product-service/src/main/resources/application.properties,e/5/e584e1a71baafbd2a55b7e9b1bdab4b8346ceede
 b
 2woo-product-service/src/main/resources/stores.json,7/f/7f13e0ddd36a35fb214ced6882ac51e808103f64
 …
