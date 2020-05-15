@@ -9,6 +9,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@ToString
+@EqualsAndHashCode
 @JsonAutoDetect
 public class Basket implements Serializable {
 

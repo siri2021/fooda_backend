@@ -1,0 +1,388 @@
+{ 
+	"stores": [
+		{
+			"name": "DickensLockmanandSmith",
+			"auth_url": "http://localhost/DickensLockmanandSmith/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_13496da2f92275988acfe9d4b14e8061ed1b3b72",
+			"secret": "cs_8d0b1b4703d6dd703a11cdcbe1c1511e72f4e031"
+		},
+		{
+			"name": "FarrellGerhold",
+			"auth_url": "http://localhost/FarrellGerhold/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_f00b0f97a86e34503515ae43991ab097873b003c",
+			"secret": "cs_fcc37bf02eb4e7af125fddf8d597177afd93579d"
+		},
+		{
+			"name": "GoldnerGutkowskiandMcKenzie",
+			"auth_url": "http://localhost/GoldnerGutkowskiandMcKenzie/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_b91807d3ccb1fdeb5bf2d86714725f9ac05d28d2",
+			"secret": "cs_50c7e54726fefbc5e1b2bc93317dc3e76f7dfe79"
+		},
+		{
+			"name": "GreenfelderRitchieandKeebler",
+			"auth_url": "http://localhost/GreenfelderRitchieandKeebler/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_be9a11c6bfad762600ef5f6725d13f967d99eade",
+			"secret": "cs_8c9b649d5bb705f30d861349af95c5a4a202c8b3"
+		},
+		{
+			"name": "HalvorsonHauck",
+			"auth_url": "http://localhost/HalvorsonHauck/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_aa307dab2f596f0985e6c0b6f5c0125dccd4e221",
+			"secret": "cs_43765419fe817a63407c3c435630f80d52f84929"
+		},
+		{
+			"name": "KrisLarkinandSanford",
+			"auth_url": "http://localhost/KrisLarkinandSanford/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_ac3eabe20483753917d63cbf25048241b7d70f94",
+			"secret": "cs_fccfca4118b2297eaa5198217711f5574f113c69"
+		},
+		{
+			"name": "LebsackInc",
+			"auth_url": "http://localhost/LebsackInc/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_daf45e278e2fe28fc57dc8ffaa9f6b7b870f8e2a",
+			"secret": "cs_02a47dad8f73078bdf5475d786c44b0de0a40f41"
+		},
+		{
+			"name": "MillerPadbergandFisher",
+			"auth_url": "http://localhost/MillerPadbergandFisher/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_f2dc04350d5932cb8ed5ba36a7d34c1387ac9e8c",
+			"secret": "cs_f9f0829f8902a98867a89721d0e64ff812a67312"
+		},
+		{
+			"name": "OsinskiPadberg",
+			"auth_url": "http://localhost/OsinskiPadberg/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_cb7d9583bfe137694ed9cb2115e6fb7fe933d521",
+			"secret": "cs_9ef8d52d2c27a40ea3b3489f73eb488f03e59aeb"
+		},
+		{
+			"name": "FerrySchuppeandHand",
+			"auth_url": "http://localhost/FerrySchuppeandHand/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_817a0bfaf19a42366eb4ccffc7182704adb01d38",
+			"secret": "cs_36e2a20d2e706641b2381c21d86df938c445a3ce"
+		},
+		{
+			"name": "RyanMedhurstandEmard",
+			"auth_url": "http://localhost/RyanMedhurstandEmard/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_f5662d33df3c35c57943b19689ef9fb4c229c1f3",
+			"secret": "cs_a9a4bfed420498f94f03e29cafddafd1494b59d8"
+		},
+		{
+			"name": "ThompsonMcGlynnandJohns",
+			"auth_url": "http://localhost/ThompsonMcGlynnandJohns/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_c498caafbc629b11f5f2de1964377068bad3c196",
+			"secret": "cs_70cec901fbe14126a6ff9a48916bb3510e4d5497"
+		},
+		{
+			"name": "DooleyWhiteandRunte",
+			"auth_url": "http://localhost/DooleyWhiteandRunte/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_1627a32f582dbba4bc7239bb2703aa4658f6faf7",
+			"secret": "cs_7e065b4330530d78330eb729d1d9f7f28ac04277"
+		},
+		{
+			"name": "MorissetteConnellyandMarquardt",
+			"auth_url": "http://localhost/MorissetteConnellyandMarquardt/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_98e579760d934988c79d441d634f9e271cb2e457",
+			"secret": "cs_6ac3902d036535bdd5d7ef9bb68d2a1a4dc7baf8"
+		},
+		{
+			"name": "TerryKirlin",
+			"auth_url": "http://localhost/TerryKirlin/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_d0142e6190db5e848c3753184445901fa552137d",
+			"secret": "ck_d0142e6190db5e848c3753184445901fa552137d"
+		},
+		{
+			"name": "SchadenBoehmandAbernathy",
+			"auth_url": "http://localhost/TerryKirlin/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_a342adcb4a1f023368331715343a0d243fd1b12c",
+			"secret": "cs_8c32e43ff5247a36247678789da17f22b8b5ec4d"
+		},
+		{
+			"name": "UptonInc",
+			"auth_url": "http://localhost/UptonInc/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_8e233c07d0bd5419de63433f1dd72e46f37e2697",
+			"secret": "cs_d6154093be9aadef733f62fa4f3d48611d2ee72c"
+		},
+		{
+			"name": "NicolasWehner",
+			"auth_url": "http://localhost/NicolasWehner/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_3310f62098cfa117655a61f3d5f5339fb81a08c7",
+			"secret": "cs_817b7308c0c3dd282bdea1100549efbc4e6efd89"
+		},
+		{
+			"name": "HahnSkilesandTurner",
+			"auth_url": "http://localhost/HahnSkilesandTurner/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_e74782ef10815803555406ffe70ea6393686dd1c",
+			"secret": "cs_16e22c447b0b692544b393b611e4107834b61c22"
+		},
+		{
+			"name": "LangworthChristiansen",
+			"auth_url": "http://localhost/LangworthChristiansen/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_e2f46eb9a769092a24f5ec1f85c19272eb701b2d",
+			"secret": "cs_884a35ded90e78e398eaf74b5f15c471979cdb2f"
+		},
+		{
+			"name": "HilllMarquardt",
+			"auth_url": "http://localhost/HilllMarquardt/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_357673eb3f78e48b38ee222818b17714d199615e",
+			"secret": "cs_b9010ef3a7db3221312cf29605e2a6ef3c05eaa9"
+		},
+		{
+			"name": "WuckertSchillerandKoepp",
+			"auth_url": "http://localhost/WuckertSchillerandKoepp/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_ec5411add5a0810c465681765496869d1016a81a",
+			"secret": "cs_2cca417d6b97e59aa78b0ccb7db70b086e28f875"
+		},
+		{
+			"name": "BoscoLLC",
+			"auth_url": "http://localhost/BoscoLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_79037be0f41d159345972f45aa24688f19419806",
+			"secret": "cs_14c6aadf3785b8bdf8040dde3bd3706fd1b8c8ad"
+		},
+		{
+			"name": "ThompsonWintheiser",
+			"auth_url": "http://localhost/ThompsonWintheiser/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_260795be5e51454085caf80e71e1c642483d994d",
+			"secret": "cs_7cbef4b22e1e97cbb5b05b454c6823b5d84baed4"
+		},
+		{
+			"name": "SwiftGroup",
+			"auth_url": "http://localhost/SwiftGroup/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_107ec5e79fe327beb900cbf8a2460e3b38a9a60d",
+			"secret": "cs_60463b71dcd247cbdb5df8d21ecb9fbf8b4f1f20"
+		},
+		{
+			"name": "BashirianLeschandMorissette",
+			"auth_url": "http://localhost/BashirianLeschandMorissette/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_f9119a7e1e739f7ab8cec7796fa464af3c77276d",
+			"secret": "cs_bb69a31703413f27d65a50c356ff9c41d9b64258"
+		},
+		{
+			"name": "ReichertDickiandAdams",
+			"auth_url": "http://localhost/ReichertDickiandAdams/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_5b4808edea03abdd55c6c5aec9e076f7137061b5",
+			"secret": "cs_f3c2affa52a66bf0389ed33feb966a875d7d8895"
+		},
+		{
+			"name": "FeeneyLueilwitz",
+			"auth_url": "http://localhost/FeeneyLueilwitz/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_e558ca36a0e4a3d5487c7d7400a1c119843b53ba",
+			"secret": "cs_9bdc22119bed35d5526d826b500d73b70a606d0b"
+		},
+		{
+			"name": "RitchieLLC",
+			"auth_url": "http://localhost/RitchieLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_c66dcd05a2f18b2b147921edd931ac4a72316838",
+			"secret": "cs_aeea0eea11f73c747ece1323df5e4203e94c3527"
+		},
+		{
+			"name": "VonLoweandJohnson",
+			"auth_url": "http://localhost/VonLoweandJohnson/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_808d777429a92e95ad102c22eb997fb9f461e682",
+			"secret": "cs_d1b3a229ace9872814cd611d3a2d15e41f8fd2e1"
+		},
+		{
+			"name": "ErdmanLLC",
+			"auth_url": "http://localhost/ErdmanLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_9312a9dd048a7695cb638706e86b8677d99b2379",
+			"secret": "cs_8069149aba31e660299c8da0b13828c8d29a04f0"
+		},
+		{
+			"name": "JacobsonMante",
+			"auth_url": "http://localhost/JacobsonMante/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_345d8a6fdd18add687c9bb61d5d94aed85471627",
+			"secret": "cs_e844c0968110e69c9a105da28fdb0c87e6bbda91"
+		},
+		{
+			"name": "WunschHayes",
+			"auth_url": "http://localhost/WunschHayes/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_a1bc3077edfc559dfe83130d9f8ca906bb5924f9",
+			"secret": "cs_8b57ba29208db93aaf659d4bc75a1034bf768de7"
+		},
+		{
+			"name": "KihnGroup",
+			"auth_url": "http://localhost/KihnGroup/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_e0713959e66760eb68a0a9800db5c50e42eef017",
+			"secret": "cs_1a5e875c807dbedc94efde25200a6bb0f7422c1a"
+		},
+		{
+			"name": "BednarInc",
+			"auth_url": "http://localhost/BednarInc/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_560ff151e0401c6db18451825ed178b5230bebf1",
+			"secret": "cs_bd6379e5d5643bbbc128ac9420d3d5a38d6e69c8"
+		},
+		{
+			"name": "McLaughlinandSons",
+			"auth_url": "http://localhost/McLaughlinandSons/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_3f3aa336f06be465db6c0db241a9aa856c0b734f",
+			"secret": "cs_720f791d1fb45dca029551ef1b5de0d56b1f214a"
+		},
+		{
+			"name": "OndrickaHintz",
+			"auth_url": "http://localhost/OndrickaHintz/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_1e24bf0741f59e5dc6e3ba32c0e56e87c160bae0",
+			"secret": "cs_d3f09b6e38c0c309b6c6b823d1d9fc998bea7623"
+		},
+		{
+			"name": "PacochaHuel",
+			"auth_url": "http://localhost/PacochaHuel/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_5c012da43fc376317ea5622c872d3439e5a86599",
+			"secret": "cs_446a95268f49dae4a39815d0bb7385f03241b440"
+		},
+		{
+			"name": "KleinandSons",
+			"auth_url": "http://localhost/KleinandSons/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_9abdc53e246e562e95b81e15958057272e66ceb6",
+			"secret": "cs_b355a9d093578ab0c985ae4617f390a8423fe3b3"
+		},
+		{
+			"name": "BergePredovic",
+			"auth_url": "http://localhost/BergePredovic/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_c41e8845b011c7e59a5c1b1de02bb732dc1d2a51",
+			"secret": "cs_2bb3712c44fb1e741722e53a4322fe464da1d26c"
+		},
+		{
+			"name": "BeierOConnell",
+			"auth_url": "http://localhost/BeierOConnell/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_07146d04a2885434039bdb2af30f48b1d0e9c755",
+			"secret": "cs_73d222e2bb414f9821c0c3a486d3fec9b1cc97f4"
+		},
+		{
+			"name": "HermanRosenbaumandNolan",
+			"auth_url": "http://localhost/HermanRosenbaumandNolan/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_84af77e6e0196e1a4764876bc3c08b4cac6122f4",
+			"secret": "cs_98cc7af5401c4e8ab213a19e66909a9bddbcea51"
+		},
+		{
+			"name": "BernhardLLC",
+			"auth_url": "http://localhost/BernhardLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_9a1099a7b2a9bf0a71385fa007607b884d873741",
+			"secret": "cs_3692ef0b2174c1c4415c679f5b063946b066327a"
+		},
+		{
+			"name": "SchmittReilly",
+			"auth_url": "http://localhost/SchmittReilly/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_f0da5fdde123fde071a5f5af413b821933e6810c",
+			"secret": "cs_3e42bda686b0a1434ab06fe7627612daec364018"
+		},
+		{
+			"name": "OrnTreutelandMcGlynn",
+			"auth_url": "http://localhost/OrnTreutelandMcGlynn/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_aa01c4c4698eff6741aa38d74ebe5c1b961013bd",
+			"secret": "cs_c0337b9b5b6566365c367ef391769f3d4b0169c2"
+		},
+		{
+			"name": "KuphalBradtke",
+			"auth_url": "http://localhost/KuphalBradtke/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_ac64e74acd86bd8d7c61bbdb4faf70a4e51c2644",
+			"secret": "cs_9e80b242d153591e3e520a6568dc2c115a1a1395"
+		},
+		{
+			"name": "NicolasandSons",
+			"auth_url": "http://localhost/NicolasandSons/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_cac0c610b07ba8e7432fb2d97dd3cf7354b0125a",
+			"secret": "cs_29fd5c9d4a05b794b965c97ace5c15debda89ff5"
+		},
+		{
+			"name": "SengerGroup",
+			"auth_url": "http://localhost/SengerGroup/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_04ee24a3e2b346f9070a2bc1f522c1fd4cc951de",
+			"secret": "cs_2819e3742b4fcd20a627a410e8a1df2487967731"
+		},
+		{
+			"name": "SteuberSkilesandKunde",
+			"auth_url": "http://localhost/SteuberSkilesandKunde/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_dea659304decd26a76c4eeb5892ddda649bf0a5c",
+			"secret": "cs_399be8b989eb19272c8767ef85f69a03b5b747b9"
+		},
+		{
+			"name": "TrantowGroup",
+			"auth_url": "http://localhost/TrantowGroup/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_566973e45f64f5fa2ecf120bf65382e2e7f04ade",
+			"secret": "cs_a8c4801323778b1b033090d244ab7fc4ef728e73"
+		},
+		{
+			"name": "StarkEmmerichandHammes",
+			"auth_url": "http://localhost/StarkEmmerichandHammes/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_3e39834de2a6ea4e2a69ca61d84bf3eb104b4fc1",
+			"secret": "cs_e2565d95dc5222f91aef8c6ab2503df0299b66dc"
+		},
+		{
+			"name": "FritschKuvalis",
+			"auth_url": "http://localhost/FritschKuvalis/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_9792f3e248f897e69d01d737fd094ebd88606f40",
+			"secret": "cs_9b6ece17f8678daf62a6a3eedccf1d4d7122fc2f"
+		},
+		{
+			"name": "SchultzKing",
+			"auth_url": "http://localhost/SchultzKing/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_2613485d6af7e6b69fb26f9179b100fe7952dd72",
+			"secret": "cs_d902afe42f39d6b66301f31388b2fe8b0eecd75a"
+		},
+		{
+			"name": "PaucekLLC",
+			"auth_url": "http://localhost/PaucekLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_e170a30decaedc8d60005b85357cf518baac3368",
+			"secret": "cs_8519c4fb8a58c6527f71d22994e15973f0b7962a"
+		},
+		{
+			"name": "WiegandNicolasandCremin",
+			"auth_url": "http://localhost/WiegandNicolasandCremin/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_50db82f122cc6ed1a1fef82943efd72b31b19c60",
+			"secret": "cs_db585d5b60d183d9cd7c87df66cf0cfc71189aa3"
+		},
+		{
+			"name": "HoweKulas",
+			"auth_url": "http://localhost/HoweKulas/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_7ce1209dd34279947126f1aa688ade1145f3740e",
+			"secret": "cs_af958077c5d69689be9e3c963866f062b530016c"
+		},
+		{
+			"name": "TillmanEmmerich",
+			"auth_url": "http://localhost/TillmanEmmerich/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_f5c3fdc724177d45d23bc2c5356991aa5b2d4036",
+			"secret": "cs_932bab055a5c76719e346b2fef8ab24209243b80"
+		},
+		{
+			"name": "LoweWittingandDaniel",
+			"auth_url": "http://localhost/LoweWittingandDaniel/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_e5823e2a5ca316c4f72ae52953db3b88e8230d35",
+			"secret": "cs_5038d0420a725c810ed21100b65905231646ddc9"
+		},
+		{
+			"name": "ZboncakLLC",
+			"auth_url": "http://localhost/ZboncakLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_bdf94b5bded478741e8f6b1d912d3d7da631b3c1",
+			"secret": "cs_a0d372c791ef731bad024d4e9cb2b557642dce56"
+		},
+		{
+			"name": "HamillShields",
+			"auth_url": "http://localhost/HamillShields/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_1c050568a4fb95fe667f414d68554ffaa6fb8369",
+			"secret": "cs_c07220f8e8aec9ec5ace5514876fed1f17bfd0c8"
+		},
+		{
+			"name": "LarsonWalker",
+			"auth_url": "http://localhost/LarsonWalker/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_0f4dccf92cfb3ba5cae41c041059e7ee46ebe204",
+			"secret": "cs_d4553097777c9869c4f5251f2d084cddeffec5ff"
+		},
+		{
+			"name": "KilbackBernhard",
+			"auth_url": "http://localhost/KilbackBernhard/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_b789d01903ebe8e205c72d817ae4b777695232b7",
+			"secret": "cs_062748790f83ad0eda23efe1a60df89488f05326"
+		},
+		{
+			"name": "WeberLLC",
+			"auth_url": "http://localhost/WeberLLC/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_42981917bf460def8043c0fdae25985d92ba65d1",
+			"secret": "cs_38c57f336759c7356af754626d4364171521856f"
+		},
+		{
+			"name": "YundtandSons",
+			"auth_url": "http://localhost/YundtandSons/wp-admin/admin.php?page=wc-settings&tab=advanced&section=keys&create-key=1",
+			"key": "ck_497f407d8c46153e872fcc228ae226d3cec987c4",
+			"secret": "cs_b68bc6002e5e140709d9d17b0757fd711ca00856"
+		}
+	]
+}

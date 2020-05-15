@@ -37,7 +37,7 @@ public class MasterView extends AppLayout {
         cartIcon.setColor(TEXT_COLOR);
         cartIcon.getStyle().set("background-color", BG_COLOR);
         final Tab cartTab = new Tab(new Button(cartIcon, click -> {
-            UI.getCurrent().navigate("cart");
+            UI.getCurrent().navigate("basket");
         }));
         cartTab.setId("cartTab");
 
@@ -46,7 +46,7 @@ public class MasterView extends AppLayout {
         addressIcon.setColor(TEXT_COLOR);
         addressIcon.getStyle().set("background-color", BG_COLOR);
         final Tab addressTab = new Tab(new Button(addressIcon, click -> {
-            UI.getCurrent().navigate("address");
+            UI.getCurrent().navigate("contact");
         }));
         addressTab.setId("addressTab");
 

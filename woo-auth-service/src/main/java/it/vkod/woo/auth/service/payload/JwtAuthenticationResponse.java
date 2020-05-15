@@ -1,27 +1,24 @@
 package it.vkod.woo.auth.service.payload;
 
-public class JwtAuthenticationResponse {
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
 
-    private String accessToken;
-    private String tokenType = "Bearer";
+@JsonAutoDetect
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+public class JwtAuthenticationResponse {
 
     public JwtAuthenticationResponse(String accessToken) {
         this.accessToken = accessToken;
     }
 
-    public String getAccessToken() {
-        return accessToken;
-    }
+    @Getter
+    @Setter
+    private String accessToken;
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getTokenType() {
-        return tokenType;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
-    }
+    @Getter
+    @Setter
+    private String tokenType = "Bearer";
 }

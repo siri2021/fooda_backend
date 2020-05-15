@@ -115,6 +115,7 @@ public class SearchView extends Div {
         Button addButton = new Button(addButtonIcon);
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
         addButton.addClickListener(click -> {
+            System.out.println("productId -> " + wooProduct.getId() + " storeId -> " + wooProduct.getStoreId());
             basketServiceClient.apiAddBasketProduct(Basket.builder().userId(USER_ID).storeId(wooProduct.getStoreId()).productId(wooProduct.getId()).name(wooProduct.getName()).price(wooProduct.getPrice()).quantity(1).imageUrl(wooProduct.getImages().get(0).getSrc()).build());
             final String notificationMsg = wooProduct.getName() + " added.";
             new Notification(notificationMsg, 2000).open();

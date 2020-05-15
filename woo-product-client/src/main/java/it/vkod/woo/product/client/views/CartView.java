@@ -27,7 +27,7 @@ public class CartView extends Div {
     @Autowired
     private WooBasketServiceClient basketServiceClient;
 
-    public final static String ROUTE = "cart";
+    public final static String ROUTE = "basket";
     private final String BG_COLOR = "#FF5733";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "48px";
@@ -46,8 +46,8 @@ public class CartView extends Div {
         dialog.add(input);
         dialog.open();
         input.getElement().callJsFunction("focus");
-        input.addValueChangeListener(event -> {
-            if (event.getValue().contains("#")) {
+        input.addValueChangeListener(valueChange -> {
+            if (valueChange.getValue().contains("#")) {
                 dialog.close();
                 USER_ID = Long.parseLong(input.getValue().replace("#", ""));
                 getBasketByUserId(USER_ID);
@@ -144,6 +144,7 @@ public class CartView extends Div {
 
         Div productImgCard = new Div();
         productImgCard.setClassName("card-image");
+        productImgCard.getStyle().set("height", "60px");
 
         Image productImage = new Image(basket.getImageUrl(), basket.getName());
         productImgCard.add(productImage);

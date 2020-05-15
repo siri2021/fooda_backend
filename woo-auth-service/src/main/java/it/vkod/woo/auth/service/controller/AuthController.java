@@ -7,8 +7,8 @@ import it.vkod.woo.auth.service.payload.ApiResponse;
 import it.vkod.woo.auth.service.payload.JwtAuthenticationResponse;
 import it.vkod.woo.auth.service.payload.LoginRequest;
 import it.vkod.woo.auth.service.payload.SignUpRequest;
-import it.vkod.woo.auth.service.repository.RoleRepository;
-import it.vkod.woo.auth.service.repository.UserRepository;
+import it.vkod.woo.auth.service.repository.RoleRepo;
+import it.vkod.woo.auth.service.repository.UserRepo;
 import it.vkod.woo.auth.service.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,10 +36,10 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    UserRepo userRepo;
 
     @Autowired
-    RoleRepository roleRepository;
+    RoleRepo roleRepo;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -62,27 +62,26 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepo.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userRepo.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword());
+        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName("user").orElseThrow(() -> new AppException("User Role not set."));
+        Role userRole = roleRepo.findByName("user").orElseThrow(() -> new AppException("User Role not set."));
 
         user.setRoles(Collections.singleton(userRole));
 
-        User result = userRepository.save(user);
+        User result = userRepo.save(user);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")

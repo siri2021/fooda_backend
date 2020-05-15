@@ -2,25 +2,27 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="woo-store-generator-service" />
-        <module name="woo-product-client" />
-        <module name="woo-basket-service" />
-        <module name="woo-core-payloads" />
         <module name="woo-matching-service" />
-        <module name="woo-discovery-service" />
-        <module name="woo-store-generator-client" />
-        <module name="woo-auth-service" />
+        <module name="woo-basket-service" />
         <module name="woo-csv-service" />
+        <module name="woo-discovery-service" />
+        <module name="woo-product-client" />
+        <module name="woo-auth-service" />
+        <module name="woo-store-generator-client" />
         <module name="woo-config-service" />
+        <module name="woo-order-service" />
         <module name="woo-product-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="woo-admin-service" target="11" />
+      <module name="woo-core-payloads" target="11" />
       <module name="woo-login-service" target="11" />
       <module name="woo-product-db" target="11" />
       <module name="woo-store-db" target="11" />
@@ -39,6 +41,7 @@
       <module name="woo-discovery-service" options="-parameters" />
       <module name="woo-login-service" options="-parameters" />
       <module name="woo-matching-service" options="-parameters" />
+      <module name="woo-order-service" options="-parameters" />
       <module name="woo-product-client" options="-parameters" />
       <module name="woo-product-db" options="-parameters" />
       <module name="woo-product-service" options="-parameters" />

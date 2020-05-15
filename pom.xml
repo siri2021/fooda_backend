@@ -145,10 +145,10 @@
         <module>woo-matching-service</module>
         <module>woo-product-client</module>
         <module>woo-product-service</module>
+        <module>woo-order-service</module>
         <module>woo-basket-service</module>
         <module>woo-store-generator-service</module>
         <module>woo-store-generator-client</module>
-        <module>woo-core-payloads</module>
     </modules>
 
 </project>

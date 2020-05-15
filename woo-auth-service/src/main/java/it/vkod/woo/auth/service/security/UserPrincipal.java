@@ -1,7 +1,12 @@
 package it.vkod.woo.auth.service.security;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import it.vkod.woo.auth.service.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,29 +16,32 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@JsonAutoDetect
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserPrincipal implements UserDetails {
+
+    @Getter
+    @Setter
     private Long id;
 
+    @Getter
+    @Setter
     private String name;
 
+    @Setter
     private String username;
 
     @JsonIgnore
+    @Getter
+    @Setter
     private String email;
 
     @JsonIgnore
+    @Setter
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
-
-    public UserPrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-    }
 
     public static UserPrincipal create(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
@@ -50,17 +58,6 @@ public class UserPrincipal implements UserDetails {
         );
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public String getUsername() {

@@ -2,7 +2,7 @@ package it.vkod.woo.auth.service.security;
 
 import it.vkod.woo.auth.service.exception.ResourceNotFoundException;
 import it.vkod.woo.auth.service.model.User;
-import it.vkod.woo.auth.service.repository.UserRepository;
+import it.vkod.woo.auth.service.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,25 +14,24 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepo userRepo;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String usernameOrEmail)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         // Let people login with either username or email
-        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+        User user = userRepo.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email : " + usernameOrEmail)
-        );
+                );
 
         return UserPrincipal.create(user);
     }
 
     @Transactional
     public UserDetails loadUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("User", "id", id)
+        User user = userRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("User", "id", id)
         );
 
         return UserPrincipal.create(user);

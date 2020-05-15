@@ -1,49 +1,23 @@
 package it.vkod.woo.matching.service.payloads.productResponse;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class CategoriesItem{
+@NoArgsConstructor
+@JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CategoriesItem {
+    @Getter
+    @Setter
+    private String name;
+    @Getter
+    @Setter
+    private int id;
+    @Getter
+    @Setter
+    private String slug;
 
-	@JsonProperty("name")
-	private String name;
-
-	@JsonProperty("id")
-	private int id;
-
-	@JsonProperty("slug")
-	private String slug;
-
-	public void setName(String name){
-		this.name = name;
-	}
-
-	public String getName(){
-		return name;
-	}
-
-	public void setId(int id){
-		this.id = id;
-	}
-
-	public int getId(){
-		return id;
-	}
-
-	public void setSlug(String slug){
-		this.slug = slug;
-	}
-
-	public String getSlug(){
-		return slug;
-	}
-
-	@Override
- 	public String toString(){
-		return 
-			"CategoriesItem{" + 
-			"name = '" + name + '\'' + 
-			",id = '" + id + '\'' + 
-			",slug = '" + slug + '\'' + 
-			"}";
-		}
 }

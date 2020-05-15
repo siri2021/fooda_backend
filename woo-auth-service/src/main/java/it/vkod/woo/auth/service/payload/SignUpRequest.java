@@ -1,55 +1,34 @@
 package it.vkod.woo.auth.service.payload;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
+
 import javax.validation.constraints.*;
 
+@JsonAutoDetect
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class SignUpRequest {
 
     @NotBlank
     @Size(min = 2, max = 255)
+    @Getter @Setter
     private String name;
 
     @NotBlank
     @Size(min = 3, max = 32)
+    @Getter @Setter
     private String username;
 
     @NotBlank
     @Size(max = 255)
     @Email
+    @Getter @Setter
     private String email;
 
     @NotBlank
     @Size(min = 8, max = 32)
+    @Getter @Setter
     private String password;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

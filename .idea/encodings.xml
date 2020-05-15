@@ -4,10 +4,10 @@
     <file url="file://$PROJECT_DIR$/woo-auth-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-basket-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-config-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-core-payloads/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-csv-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-matching-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/woo-order-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-product-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-product-client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/woo-product-service/src/main/java" charset="UTF-8" />
