@@ -7,10 +7,14 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.spring.annotation.UIScope;
 
 import javax.annotation.PostConstruct;
 
+@PWA(name = "Fooda",
+        shortName = "Fooda",
+        iconPath = "img/icons/logo-1024x1024.png")
 @UIScope
 public class MasterView extends AppLayout {
 

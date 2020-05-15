@@ -12,6 +12,7 @@
         <module name="woo-basket-service" />
         <module name="woo-csv-service" />
         <module name="woo-discovery-service" />
+        <module name="woo-store-service" />
         <module name="woo-product-client" />
         <module name="woo-auth-service" />
         <module name="woo-store-generator-client" />
@@ -48,6 +49,7 @@
       <module name="woo-store-db" options="-parameters" />
       <module name="woo-store-generator-client" options="-parameters" />
       <module name="woo-store-generator-service" options="-parameters" />
+      <module name="woo-store-service" options="-parameters" />
       <module name="wp-content-server" options="-parameters" />
     </option>
   </component>

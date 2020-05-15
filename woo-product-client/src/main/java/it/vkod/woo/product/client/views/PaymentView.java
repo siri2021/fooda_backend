@@ -12,12 +12,12 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basketRequest.Basket;
+import it.vkod.woo.product.client.payloads.basket.request.Basket;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -99,9 +99,12 @@ public class PaymentView extends Div {
 
         final Icon confirmPaymentMethodButtonIcon = VaadinIcon.CREDIT_CARD.create();
         confirmPaymentMethodButtonIcon.setSize(ICON_SIZE);
-        Button confirmPaymentMethodButton = new Button("Confirm Delivery with €" + subTotal, confirmPaymentMethodButtonIcon);
+        Button confirmPaymentMethodButton = new Button("Confirm Delivery with €" + new DecimalFormat("##.##").format(subTotal), confirmPaymentMethodButtonIcon);
         confirmPaymentMethodButton.getStyle().set("background", "#2E8B57").set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "90%");
         confirmPaymentMethodButton.addClickListener(addClick -> {
+            baskets.forEach(basket -> {
+
+            });
             new Notification("Payment Method is confirmed!", 2000).open();
         });
         confirmPaymentMethodButton.setEnabled(false);

@@ -21,7 +21,7 @@ import com.vaadin.flow.function.SerializablePredicate;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basketRequest.Contact;
+import it.vkod.woo.product.client.payloads.basket.request.Contact;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 

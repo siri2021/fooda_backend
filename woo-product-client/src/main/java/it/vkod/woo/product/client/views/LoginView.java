@@ -6,7 +6,7 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.authRequest.LoginRequest;
+import it.vkod.woo.product.client.payloads.auth.request.LoginRequest;
 import it.vkod.woo.product.client.services.WooUserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 

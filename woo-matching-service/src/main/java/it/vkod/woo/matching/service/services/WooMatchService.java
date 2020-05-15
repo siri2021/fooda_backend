@@ -2,7 +2,7 @@ package it.vkod.woo.matching.service.services;
 
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Applications;
-import it.vkod.woo.matching.service.payloads.productResponse.WooProduct;
+import it.vkod.woo.matching.service.payloads.product.response.WooProduct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +38,13 @@ public class WooMatchService {
     // TODO still have issues with Circuit breakers, possibly timeout settings..
 //    @HystrixCommand(fallbackMethod = "apiSearchFallback")
     public WooProduct[] apiSearch(final String url) {
-        LOGGER.info("Searching products from " + url);
+        LOGGER.info(String.format("Searching products from %s", url));
         return rest.getForObject(url, WooProduct[].class);
     }
 
     // a fallback method to be called if failure happened
     public WooProduct[] apiSearchFallback(final String url) {
-        LOGGER.info("Woo product service is down.. !" + url);
+        LOGGER.info(String.format("Woo product service is down.. ! %s", url));
         return new WooProduct[]{};
     }
 

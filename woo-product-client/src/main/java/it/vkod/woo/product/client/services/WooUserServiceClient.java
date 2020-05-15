@@ -2,10 +2,10 @@ package it.vkod.woo.product.client.services;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
-import it.vkod.woo.product.client.payloads.authResponse.ApiResponse;
-import it.vkod.woo.product.client.payloads.authResponse.JwtAuthResponse;
-import it.vkod.woo.product.client.payloads.authRequest.LoginRequest;
-import it.vkod.woo.product.client.payloads.authRequest.SignUpRequest;
+import it.vkod.woo.product.client.payloads.auth.response.ApiResponse;
+import it.vkod.woo.product.client.payloads.auth.response.JwtAuthResponse;
+import it.vkod.woo.product.client.payloads.auth.request.LoginRequest;
+import it.vkod.woo.product.client.payloads.auth.request.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

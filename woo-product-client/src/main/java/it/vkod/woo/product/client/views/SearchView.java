@@ -10,8 +10,8 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basketRequest.Basket;
-import it.vkod.woo.product.client.payloads.productResponse.WooProduct;
+import it.vkod.woo.product.client.payloads.basket.request.Basket;
+import it.vkod.woo.product.client.payloads.product.response.WooProductResponse;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import it.vkod.woo.product.client.services.WooMatchServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,43 +81,43 @@ public class SearchView extends Div {
     }
 
     private void searchProducts(final String search) {
-        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search.replace("#", ""))).forEach(wooProduct -> {
+        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search.replace("#", ""))).forEach(wooProductResponse -> {
             Div productCard = new Div();
             productCard.setClassName("card");
-            Div productImgCard = createProductImageDiv(wooProduct);
-            Div productContentCard = createProductContentDiv(wooProduct);
+            Div productImgCard = createProductImageDiv(wooProductResponse);
+            Div productContentCard = createProductContentDiv(wooProductResponse);
             productCard.add(productImgCard, productContentCard);
             add(productCard);
         });
     }
 
-    private Div createProductContentDiv(WooProduct wooProduct) {
+    private Div createProductContentDiv(WooProductResponse wooProductResponse) {
         Div productContentCard = new Div();
         productContentCard.setClassName("card-content");
         Paragraph productContentP = new Paragraph();
         //match HTML tags
         final String htmlElementsRegex = "<[^>]*>";
-        productContentP.setText(wooProduct.getDescription().replaceAll(htmlElementsRegex, ""));
+        productContentP.setText(wooProductResponse.getDescription().replaceAll(htmlElementsRegex, ""));
         productContentP.getStyle().set("font-weight", "bold").set("font-size", "11pt");
         productContentCard.add(productContentP);
         return productContentCard;
     }
 
-    private Div createProductImageDiv(WooProduct wooProduct) {
+    private Div createProductImageDiv(WooProductResponse wooProductResponse) {
         Div productImgCard = new Div();
         productImgCard.setClassName("card-image");
-        Image productImage = new Image(wooProduct.getImages().get(0).getSrc(), wooProduct.getImages().get(0).getAlt());
+        Image productImage = new Image(wooProductResponse.getImages().get(0).getSrc(), wooProductResponse.getImages().get(0).getAlt());
         Span cardTitleSpan = new Span();
         cardTitleSpan.setClassName("card-title");
-        cardTitleSpan.setText(wooProduct.getName());
+        cardTitleSpan.setText(wooProductResponse.getName());
         final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
         addButtonIcon.setSize("32px");
         Button addButton = new Button(addButtonIcon);
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
         addButton.addClickListener(click -> {
-            System.out.println("productId -> " + wooProduct.getId() + " storeId -> " + wooProduct.getStoreId());
-            basketServiceClient.apiAddBasketProduct(Basket.builder().userId(USER_ID).storeId(wooProduct.getStoreId()).productId(wooProduct.getId()).name(wooProduct.getName()).price(wooProduct.getPrice()).quantity(1).imageUrl(wooProduct.getImages().get(0).getSrc()).build());
-            final String notificationMsg = wooProduct.getName() + " added.";
+            System.out.println("productId -> " + wooProductResponse.getId() + " storeId -> " + wooProductResponse.getStoreId());
+            basketServiceClient.apiAddBasketProduct(Basket.builder().userId(USER_ID).storeId(wooProductResponse.getStoreId()).productId(wooProductResponse.getId()).name(wooProductResponse.getName()).price(wooProductResponse.getPrice()).quantity(1).imageUrl(wooProductResponse.getImages().get(0).getSrc()).build());
+            final String notificationMsg = wooProductResponse.getName() + " added.";
             new Notification(notificationMsg, 2000).open();
         });
         productImgCard.add(productImage, cardTitleSpan, addButton);

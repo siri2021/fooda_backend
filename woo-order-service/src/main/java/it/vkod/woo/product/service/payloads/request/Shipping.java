@@ -28,9 +28,6 @@ public class Shipping {
     private String lastName;
     @Getter
     @Setter
-    private String company;
-    @Getter
-    @Setter
     private String state;
     @Getter
     @Setter

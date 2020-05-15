@@ -1,6 +1,6 @@
 package it.vkod.woo.matching.service.controllers;
 
-import it.vkod.woo.matching.service.payloads.productResponse.WooProduct;
+import it.vkod.woo.matching.service.payloads.product.response.WooProduct;
 import it.vkod.woo.matching.service.services.WooMatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
