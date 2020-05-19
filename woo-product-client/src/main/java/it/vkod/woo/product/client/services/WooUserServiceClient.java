@@ -26,9 +26,9 @@ public class WooUserServiceClient {
         return instance.getHomePageUrl();
     }
 
-    public boolean login(final LoginRequest loginRequest) {
+    public String login(final LoginRequest loginRequest) {
         final JwtAuthResponse response = rest.postForObject(getAuthServiceUrl() + "/api/auth/signin", loginRequest, JwtAuthResponse.class);
-        return !Objects.requireNonNull(response).getAccessToken().isBlank();
+        return Objects.requireNonNull(response).getAccessToken();
     }
 
     public boolean register(SignUpRequest signUpRequest) {

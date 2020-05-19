@@ -19,6 +19,9 @@ public class WooProduct implements Serializable {
     private long storeId;
     @Getter
     @Setter
+    private String restUrl;
+    @Getter
+    @Setter
     private List<Object> upsellIds;
     @Getter
     @Setter

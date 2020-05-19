@@ -1,40 +1,22 @@
 package it.vkod.woo.product.client.payloads.auth.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-
+@JsonAutoDetect
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class LoginRequest {
 
-    @NotBlank
-    @JsonProperty
+    @NonNull
+    @Getter
+    @Setter
     private String usernameOrEmail;
 
-    @NotBlank
-    @JsonProperty
+    @NonNull
+    @Getter
+    @Setter
     private String password;
-
-    public LoginRequest() {
-    }
-
-    public LoginRequest(@NotBlank String usernameOrEmail, @NotBlank String password) {
-        this.usernameOrEmail = usernameOrEmail;
-        this.password = password;
-    }
-
-    public String getUsernameOrEmail() {
-        return usernameOrEmail;
-    }
-
-    public void setUsernameOrEmail(String usernameOrEmail) {
-        this.usernameOrEmail = usernameOrEmail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

@@ -26,7 +26,7 @@ public class Payment {
 
     @Getter
     @Setter
-    private long userId;
+    private String userId;
 
     @Getter
     @Setter

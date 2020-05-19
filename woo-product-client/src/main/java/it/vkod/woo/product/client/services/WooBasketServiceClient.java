@@ -2,8 +2,9 @@ package it.vkod.woo.product.client.services;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
-import it.vkod.woo.product.client.payloads.basket.request.Basket;
-import it.vkod.woo.product.client.payloads.basket.request.Contact;
+import it.vkod.woo.product.client.payloads.basket.request.BasketBilling;
+import it.vkod.woo.product.client.payloads.basket.request.BasketProduct;
+import it.vkod.woo.product.client.payloads.basket.request.BasketShipping;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,35 +27,43 @@ public class WooBasketServiceClient {
         return instance.getHomePageUrl();
     }
 
-    public Basket[] apiGetBasketProducts(final long userId) {
-        return rest.getForObject(getBasketServiceUrl() + "api/basket/products/select/" + userId, Basket[].class);
+    public BasketProduct[] apiGetBasketProducts(final String userId) {
+        return rest.getForObject(getBasketServiceUrl() + "api/basket/products/select/" + userId, BasketProduct[].class);
     }
 
-    public double apiGetBasketTotalPrice(final long userId) {
-        final Basket[] basket = apiGetBasketProducts(userId);
-        return Arrays.stream(basket)
+    public double apiGetBasketTotalPrice(final String userId) {
+        final BasketProduct[] basketProduct = apiGetBasketProducts(userId);
+        return Arrays.stream(basketProduct)
                 .mapToDouble(b -> b.getQuantity() * b.getPrice())
                 .sum();
     }
 
-    public void apiIncreaseBasketProductQuantity(final Basket basket) {
-        rest.put(getBasketServiceUrl() + "api/basket/products/increase/", basket);
+    public void apiIncreaseBasketProductQuantity(final BasketProduct basketProduct) {
+        rest.put(getBasketServiceUrl() + "api/basket/products/increase/", basketProduct);
     }
 
-    public void apiDecreaseBasketProductQuantity(final Basket basket) {
-        rest.put(getBasketServiceUrl() + "api/basket/products/decrease/", basket);
+    public void apiDecreaseBasketProductQuantity(final BasketProduct basketProduct) {
+        rest.put(getBasketServiceUrl() + "api/basket/products/decrease/", basketProduct);
     }
 
-    public void apiAddBasketProduct(final Basket basket) {
-        rest.postForObject(getBasketServiceUrl() + "api/basket/products/insert/", basket, Basket.class);
+    public void apiAddBasketProduct(final BasketProduct basketProduct) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/products/insert/", basketProduct, BasketProduct.class);
     }
 
-    public Contact[] apiGetBasketContacts(final long userId) {
-        return rest.getForObject(getBasketServiceUrl() + "api/basket/contacts/select/" + userId, Contact[].class);
+    public void apiAddBasketShipping(final BasketShipping basketShipping) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/shipping/insert/", basketShipping, BasketShipping.class);
     }
 
-    public void apiAddBasketContact(final Contact contact) {
-        rest.postForObject(getBasketServiceUrl() + "api/basket/contacts/insert/", contact, Contact.class);
+    public BasketShipping[] apiGetBasketShipping(final String userId) {
+        return rest.getForObject(getBasketServiceUrl() + "api/basket/shipping/select/" + userId, BasketShipping[].class);
+    }
+
+    public void apiAddBasketBilling(final BasketBilling basketBilling) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/billing/insert/", basketBilling, BasketBilling.class);
+    }
+
+    public BasketBilling[] apiGetBasketBilling(final String userId) {
+        return rest.getForObject(getBasketServiceUrl() + "api/basket/billing/select/" + userId, BasketBilling[].class);
     }
 
 }

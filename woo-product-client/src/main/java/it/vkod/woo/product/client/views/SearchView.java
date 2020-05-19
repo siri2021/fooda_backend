@@ -1,22 +1,30 @@
 package it.vkod.woo.product.client.views;
 
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basket.request.Basket;
-import it.vkod.woo.product.client.payloads.product.response.WooProductResponse;
+import it.vkod.woo.product.client.payloads.basket.request.BasketProduct;
+import it.vkod.woo.product.client.payloads.product.response.ProductResponse;
 import it.vkod.woo.product.client.services.WooBasketServiceClient;
 import it.vkod.woo.product.client.services.WooMatchServiceClient;
+import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
 import java.util.Arrays;
 
 import static it.vkod.woo.product.client.views.SearchView.ROUTE;
@@ -34,13 +42,12 @@ public class SearchView extends Div {
     @Autowired
     private WooBasketServiceClient basketServiceClient;
 
-    public final static String ROUTE = "search";
+    private static final String TOKEN_COOKIE = "token";
+    public static final String ROUTE = "search";
 
     private final String BG_COLOR = "#FF5733"; // RGB 255, 87, 51
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "48px";
-
-    private final long USER_ID = UniqueID.get();
 
     /**
      * Based on Materialize css ..
@@ -67,61 +74,81 @@ public class SearchView extends Div {
     }
 
     private void getSearchText() {
-        Dialog dialog = new Dialog();
-        Input input = new Input();
-        dialog.add(input);
-        dialog.open();
-        input.getElement().callJsFunction("focus");
-        input.addValueChangeListener(event -> {
-            if (event.getValue().contains("#")) {
-                dialog.close();
-                searchProducts(input.getValue());
-            }
-        });
+
+        Div searchDiv = new Div();
+        searchDiv.setClassName("card");
+        searchDiv.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR);
+
+        TextField searchTextField = new TextField();
+        searchTextField.getStyle().set("margin-left", "5px").set("margin-right", "5px").set("background", BG_COLOR).set("color", TEXT_COLOR).set("width", "90%").set("align", "center");
+        searchTextField.setValueChangeMode(ValueChangeMode.EAGER);
+        searchTextField.getElement().callJsFunction("focus");
+        Button searchButton = new Button("Search");
+        searchButton.addClickShortcut(Key.ENTER);
+        searchButton.getStyle().set("margin-left", "5px").set("margin-right", "5px").set("background", BG_COLOR).set("color", TEXT_COLOR).set("width", "90%");
+        searchButton.addClickListener(click -> searchProducts(searchTextField.getValue().toLowerCase()));
+
+        searchDiv.add(searchTextField, searchButton);
+        add(searchDiv);
     }
 
     private void searchProducts(final String search) {
-        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search.replace("#", ""))).forEach(wooProductResponse -> {
+        Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(search)).forEach(productResponse -> {
             Div productCard = new Div();
             productCard.setClassName("card");
-            Div productImgCard = createProductImageDiv(wooProductResponse);
-            Div productContentCard = createProductContentDiv(wooProductResponse);
+            Div productImgCard = createProductImageDiv(productResponse);
+            Div productContentCard = createProductContentDiv(productResponse);
             productCard.add(productImgCard, productContentCard);
             add(productCard);
         });
     }
 
-    private Div createProductContentDiv(WooProductResponse wooProductResponse) {
+    private Div createProductContentDiv(ProductResponse productResponse) {
         Div productContentCard = new Div();
         productContentCard.setClassName("card-content");
         Paragraph productContentP = new Paragraph();
         //match HTML tags
         final String htmlElementsRegex = "<[^>]*>";
-        productContentP.setText(wooProductResponse.getDescription().replaceAll(htmlElementsRegex, ""));
+        productContentP.setText(productResponse.getDescription().replaceAll(htmlElementsRegex, ""));
         productContentP.getStyle().set("font-weight", "bold").set("font-size", "11pt");
         productContentCard.add(productContentP);
         return productContentCard;
     }
 
-    private Div createProductImageDiv(WooProductResponse wooProductResponse) {
+    private Div createProductImageDiv(ProductResponse productResponse) {
         Div productImgCard = new Div();
         productImgCard.setClassName("card-image");
-        Image productImage = new Image(wooProductResponse.getImages().get(0).getSrc(), wooProductResponse.getImages().get(0).getAlt());
+        Image productImage = new Image(productResponse.getImages().get(0).getSrc(), productResponse.getImages().get(0).getAlt());
+        productImage.getStyle().set("height", "50%");
         Span cardTitleSpan = new Span();
         cardTitleSpan.setClassName("card-title");
-        cardTitleSpan.setText(wooProductResponse.getName());
+        cardTitleSpan.setText(productResponse.getName());
         final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
         addButtonIcon.setSize("32px");
         Button addButton = new Button(addButtonIcon);
         addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
         addButton.addClickListener(click -> {
-            System.out.println("productId -> " + wooProductResponse.getId() + " storeId -> " + wooProductResponse.getStoreId());
-            basketServiceClient.apiAddBasketProduct(Basket.builder().userId(USER_ID).storeId(wooProductResponse.getStoreId()).productId(wooProductResponse.getId()).name(wooProductResponse.getName()).price(wooProductResponse.getPrice()).quantity(1).imageUrl(wooProductResponse.getImages().get(0).getSrc()).build());
-            final String notificationMsg = wooProductResponse.getName() + " added.";
+            basketServiceClient.apiAddBasketProduct(BasketProduct.builder()
+                    .userId(getTokenCookie().getValue())
+                    .storeId(productResponse.getStoreId())
+                    .restUrl(productResponse.getRestUrl())
+                    .productId(productResponse.getId())
+                    .name(productResponse.getName())
+                    .price(Precision.round(productResponse.getPrice(), 2))
+                    .quantity(1)
+                    .imageUrl(productResponse.getImages().get(0).getSrc())
+                    .build());
+
+            final String notificationMsg = productResponse.getName() + " is added.";
             new Notification(notificationMsg, 2000).open();
         });
         productImgCard.add(productImage, cardTitleSpan, addButton);
         return productImgCard;
+    }
+
+    private Cookie getTokenCookie() {
+        Cookie[] cookies = VaadinService.getCurrentRequest().getCookies();
+        return Arrays.stream(cookies).filter(cookie -> TOKEN_COOKIE.equals(cookie.getName())).findFirst().orElse(null);
     }
 
 }

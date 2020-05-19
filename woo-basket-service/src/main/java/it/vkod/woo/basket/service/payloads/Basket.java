@@ -26,11 +26,15 @@ public class Basket implements Serializable {
 
     @Getter
     @Setter
-    private long userId;
+    private String userId;
 
     @Getter
     @Setter
     private long storeId;
+
+    @Getter
+    @Setter
+    private String restUrl;
 
     @Getter
     @Setter

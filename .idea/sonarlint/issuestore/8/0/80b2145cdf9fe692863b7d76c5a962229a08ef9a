@@ -1,0 +1,37 @@
+
+H
+java:S1948©",Make "variations" transient or serializable.(»êƒÜşÿÿÿÿ
+M
+java:S1948—"1Make "dateOnSaleToGmt" transient or serializable.(šÖ³¥øÿÿÿÿ
+J
+java:S1948¸"3Make "defaultAttributes" transient or serializable.(•Ìä
+O
+java:S1948¬",Make "categories" transient or serializable.(¦ªöÿÿÿÿÿ8ÚŞÈ¡.
+J
+java:S1948š"3Make "dateOnSaleFromGmt" transient or serializable.(‚ÆŞƒ
+H
+java:S1948Ù",Make "attributes" transient or serializable.(ˆÍÃøÿÿÿÿ
+G
+java:S1948""1Make "groupedProducts" transient or serializable.(ºÏÆì
+I
+java:S1948d".Make "dateOnSaleTo" transient or serializable.(Ş¾ÔÜÿÿÿÿÿ
+G
+java:S1948£"+Make "downloads" transient or serializable.(Ù¨§ÿÿÿÿÿ
+E
+java:S1948L"(Make "images" transient or serializable.(óÊŸ„8ÚŞÈ¡.
+@
+java:S19487"*Make "metaData" transient or serializable.(ŒÒã£
+E
+java:S1948…".Make "crossSellIds" transient or serializable.(Ú¹µÚ
+A
+java:S1948"+Make "upsellIds" transient or serializable.(øë÷ê
+I
+java:S1948%"'Make "links" transient or serializable.(Ñ Üûıÿÿÿÿ8ÚŞÈ¡.
+F
+java:S1948C"0Make "dateOnSaleFrom" transient or serializable.(ÉäšË
+C
+java:S1948a"&Make "tags" transient or serializable.(ÛÜÃ‡8ÚŞÈ¡.
+E
+java:S1948Ê"/Make "stockQuantity" transient or serializable.(×¾
+O
+java:S1948Ü",Make "dimensions" transient or serializable.(§×Œıÿÿÿÿ8ÚŞÈ¡.

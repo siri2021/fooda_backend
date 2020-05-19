@@ -28,13 +28,13 @@ public class PaymentCtrl {
     }
 
     @DeleteMapping("delete/{user_id}")
-    public void apiClearBasketPayments(@PathVariable("user_id") final long userId) {
+    public void apiClearBasketPayments(@PathVariable("user_id") final String userId) {
         final Payment[] payments = apiGetPayments(userId);
         Arrays.stream(payments).forEach(this::apiDeleteBasketPayment);
     }
 
     @GetMapping("select/{user_id}")
-    public Payment[] apiGetPayments(@PathVariable("user_id") final long userId) {
+    public Payment[] apiGetPayments(@PathVariable("user_id") final String userId) {
         return repo.findAllByUserId(userId).toArray(Payment[]::new);
     }
 }

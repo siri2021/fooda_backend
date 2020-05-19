@@ -1,0 +1,23 @@
+
+<
+java:S1170*"!Make this final field static too.(ž€˜€ÿÿÿÿÿ
+R
+java:S1068("0Remove this unused "TOKEN_COOKIE" private field.(’ð¶Ñúÿÿÿÿ8¸çÁ¤¢.
+o	java:S116*"URename this field "TEXT_COLOR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ž€˜€ÿÿÿÿÿ
+<
+java:S1170+"!Make this final field static too.(‚Âûøúÿÿÿÿ
+C
+java:S1068,"-Remove this unused "ICON_SIZE" private field.(±ÆÂì
+`
+java:S1124'"EReorder the modifiers to comply with the Java Language Specification.(úÜë©ÿÿÿÿÿ
+r	java:S116+"XRename this field "BUTTON_HEIGHT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚Âûøúÿÿÿÿ
+7
+java:S1170,"!Make this final field static too.(±ÆÂì
+m	java:S116)"SRename this field "BG_COLOR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åÅ³óÿÿÿÿÿ
+L
+java:S1068+"1Remove this unused "BUTTON_HEIGHT" private field.(‚Âûøúÿÿÿÿ
+i	java:S116,"TRename this field "ICON_SIZE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ÆÂì
+I
+java:S1948%"3Make "userServiceClient" transient or serializable.(ØõÏÐ
+<
+java:S1170)"!Make this final field static too.(åÅ³óÿÿÿÿÿ

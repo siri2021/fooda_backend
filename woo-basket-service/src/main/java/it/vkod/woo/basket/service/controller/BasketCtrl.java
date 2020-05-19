@@ -50,13 +50,13 @@ public class BasketCtrl {
     }
 
     @DeleteMapping("clear/{user_id}")
-    public void apiClearBasketProducts(@PathVariable("user_id") final long userId) {
+    public void apiClearBasketProducts(@PathVariable("user_id") final String userId) {
         final Basket[] basket = apiGetBasketProducts(userId);
         Arrays.stream(basket).forEach(this::apiDeleteBasketProduct);
     }
 
     @GetMapping("select/{user_id}")
-    public Basket[] apiGetBasketProducts(@PathVariable("user_id") final long userId) {
+    public Basket[] apiGetBasketProducts(@PathVariable("user_id") final String userId) {
         return repo.findAllByUserId(userId).toArray(Basket[]::new);
     }
 }
