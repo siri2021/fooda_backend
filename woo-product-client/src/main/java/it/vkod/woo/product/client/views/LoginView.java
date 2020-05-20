@@ -16,8 +16,8 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.auth.request.LoginRequest;
-import it.vkod.woo.product.client.services.WooUserServiceClient;
+import it.vkod.woo.product.client.pojo.auth.request.LoginRequest;
+import it.vkod.woo.product.client.clients.WooUserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;

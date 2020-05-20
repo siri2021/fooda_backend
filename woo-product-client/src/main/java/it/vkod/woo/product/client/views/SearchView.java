@@ -16,10 +16,10 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basket.request.BasketProduct;
-import it.vkod.woo.product.client.payloads.product.response.ProductResponse;
-import it.vkod.woo.product.client.services.WooBasketServiceClient;
-import it.vkod.woo.product.client.services.WooMatchServiceClient;
+import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
+import it.vkod.woo.product.client.pojo.product.res.ProductResponse;
+import it.vkod.woo.product.client.clients.WooBasketServiceClient;
+import it.vkod.woo.product.client.clients.WooMatchServiceClient;
 import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
 

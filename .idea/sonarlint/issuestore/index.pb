@@ -77,8 +77,6 @@ E
 woo-auth-service/mvnw,b\2\b21e558bec400d530e91c98f4e095bcf33f30454
 I
 woo-auth-service/mvnw.cmd,f\1\f14ec2b669bd5f31920565521ff26ff4e7ddce44
-l
-<woo-config-service/src/main/resources/application.properties,2\f\2fa45126eb8acaf8f2fac22cc934077b5c0ab310
 `
 0woo-config-service/src/main/resources/banner.txt,6\d\6d426c34b0aefba6ffc5d45580631597f54d001d
 ‡
@@ -683,10 +681,6 @@ qwoo-store-generator-service/src/main/java/it/vkod/woo/store/generator/service/s
 hwoo-store-generator-service/src/main/java/it/vkod/woo/store/generator/service/payloads/StoreRequest.java,6/0/60d0e9dd1728b360d8e22f8f422e197ab8896eff
 Š
 Zwoo-product-client/src/main/java/it/vkod/woo/product/client/config/RestTemplateConfig.java,6/2/62a757dfd8fdb93d05162270f29b5836499fc169
-i
-9woo-product-service/src/main/resources/active_stores.json,c/7/c7d00f297dc93ed87cdecc3dae079ed64c7e8ae3
-b
-2woo-product-service/src/main/resources/stores.json,7/f/7f13e0ddd36a35fb214ced6882ac51e808103f64
 …
 Uwoo-basket-service/src/main/java/it/vkod/woo/basket/service/config/SwaggerConfig.java,5/8/58127472c02cef0a9c04fb156ffeedd6ff72e496
 Ž
@@ -727,8 +721,6 @@ L
 woo-order-service/.gitignore,2/3/23bb66e1018d4c6d42e9ba6f7fb57fdf9d0ec51d
 g
 7woo-order-service/src/main/resources/active_stores.json,a/c/acf8d2a6bffd501f477e52f3cf7efa116cabba13
-k
-;woo-order-service/src/main/resources/application.properties,0/d/0dfde5d7b24ff39c72b30593fdf53c1c496a5d24
 _
 /woo-order-service/src/main/resources/banner.txt,f/7/f70ad9ad8e84a7fe6759a255527d00462c61bc2d
 g
@@ -749,8 +741,6 @@ Pwoo-auth-service/src/main/java/it/vkod/woo/auth/service/repository/UserRepo.jav
 `woo-auth-service/src/main/java/it/vkod/woo/auth/service/config/SpringSecurityAuditAwareImpl.java,8/9/89554a5e269bceb602e942e8cef145bd45b7b806
 “
 cwoo-product-client/src/main/java/it/vkod/woo/product/client/payloads/auth/response/ApiResponse.java,d/7/d7bbf5d4aaa3f6ade3cb973ba224281f1b3f86ad
-j
-:woo-auth-service/src/main/resources/application.properties,2/8/28be602920aca0769763c71c718cb1bfa3802277
 
 mwoo-matching-service/src/main/java/it/vkod/woo/matching/service/payloads/product/response/CategoriesItem.java,0/c/0c55b67cebfcb5957b2b643e7bef55d0679f69eb
 ™
@@ -795,8 +785,6 @@ iwoo-matching-service/src/main/java/it/vkod/woo/matching/service/payloads/produc
 run.sh,3/2/324fcb49f1cf313ebdd7cbda6a71b73727ddd94d
 ƒ
 Swoo-product-client/src/main/java/it/vkod/woo/product/client/views/RegisterView.java,5/b/5b21afa9e675b8736a52f9fb06a8f3ca4a075152
-m
-=woo-product-service/src/main/resources/application.properties,e/5/e584e1a71baafbd2a55b7e9b1bdab4b8346ceede
 –
 fwoo-product-client/src/main/java/it/vkod/woo/product/client/payloads/basket/request/BasketBilling.java,3/8/38043c91a1b9eecafa8c662681b3adc5ab345325
 –

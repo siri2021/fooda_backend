@@ -13,8 +13,8 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.payloads.basket.request.BasketProduct;
-import it.vkod.woo.product.client.services.WooBasketServiceClient;
+import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
+import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
