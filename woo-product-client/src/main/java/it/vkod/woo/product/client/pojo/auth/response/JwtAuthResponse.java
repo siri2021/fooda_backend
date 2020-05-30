@@ -1,36 +1,19 @@
 package it.vkod.woo.product.client.pojo.auth.response;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
+@JsonAutoDetect
 @JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class JwtAuthResponse {
 
-    @JsonProperty
+    @Getter
+    @Setter
     private String accessToken;
-    @JsonProperty
+    @Getter
+    @Setter
     private String tokenType = "Bearer";
-
-    public JwtAuthResponse() {
-    }
-
-    public JwtAuthResponse(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getTokenType() {
-        return tokenType;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
-    }
 }

@@ -27,7 +27,7 @@ public class WooMatchSrv {
         List<String> urls = new ArrayList<>();
         final Applications applications = discoveryClient.getApplications();
         applications.getRegisteredApplications().forEach(application -> {
-            if (application.getName().equals("WOO-PRODUCT-SERVICE")) {
+            if (application.getName().contains("WOO-PRODUCT-SERVICE")) {
                 application.getInstances().forEach(instanceInfo -> urls.add(instanceInfo.getHomePageUrl()));
             }
         });
