@@ -169,7 +169,7 @@ public class PaymentView extends Div {
 
         System.out.println(orderRequest);
 
-        orderServiceClient.apiAddOrder(orderRequest);
+        orderServiceClient.apiAddOrder(orderRequest, storeId);
 
         new Notification("Order is added", 4000).open();
     }

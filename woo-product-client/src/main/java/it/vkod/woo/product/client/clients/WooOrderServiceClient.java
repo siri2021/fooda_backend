@@ -18,17 +18,18 @@ public class WooOrderServiceClient {
     @Autowired
     private EurekaClient discoveryClient;
 
-    private String getOrderServiceUrl() {
-        InstanceInfo instance = discoveryClient.getNextServerFromEureka("woo-order-service", false);
+    private String getOrderServiceUrl(final long storeId) {
+        InstanceInfo instance = discoveryClient.getNextServerFromEureka("woo-order-service-" + storeId, false);
         return instance.getHomePageUrl();
     }
 
-    public OrderRequest[] apiGetOrders(final int page) {
-        return rest.getForObject(getOrderServiceUrl() + "api/orders/" + page, OrderRequest[].class);
+    public OrderRequest[] apiGetOrders(final int page, final long storeId) {
+        return rest.getForObject(getOrderServiceUrl(storeId) + "api/orders/" + page, OrderRequest[].class);
     }
 
-    public void apiAddOrder(final OrderRequest orderRequest) {
-        rest.postForObject(getOrderServiceUrl() + "api/orders/", orderRequest, OrderRequest.class);
+    public void apiAddOrder(final OrderRequest orderRequest, final long storeId) {
+        System.out.println(orderRequest);
+        rest.postForObject(getOrderServiceUrl(storeId) + "api/orders/", orderRequest, OrderRequest.class);
     }
 
 }
