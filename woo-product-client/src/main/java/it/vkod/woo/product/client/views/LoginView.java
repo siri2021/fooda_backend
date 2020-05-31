@@ -48,7 +48,6 @@ public class LoginView extends Div {
 
     @PostConstruct
     public void init() {
-
         setClassName("container-fluid");
 
         Div loginFormDiv = new Div();

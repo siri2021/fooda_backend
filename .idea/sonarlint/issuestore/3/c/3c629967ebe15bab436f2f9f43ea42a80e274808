@@ -1,0 +1,7 @@
+
+p	java:S116"TRename this field "last_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šø´¯8³ÛÒÖ¦.
+q	java:S116#"URename this field "first_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è•Ûì8á„ÓÖ¦.
+p	java:S116"TRename this field "address_2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ë¹ 8›¯ÒÖ¦.
+g
+java:S1128"JRemove this unused import 'com.fasterxml.jackson.annotation.JsonProperty'.(ËÃ§Ï8£¢ÑÖ¦.
+p	java:S116"TRename this field "address_1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Éð­Ö8†ïÑÖ¦.

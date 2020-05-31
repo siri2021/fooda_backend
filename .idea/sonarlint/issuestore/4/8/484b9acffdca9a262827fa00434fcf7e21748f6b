@@ -1,0 +1,13 @@
+
+k
+java:S11923"IDefine a constant instead of duplicating this literal "per_page" 3 times.(ºùÊøÿÿÿÿ8¸†ñ½¦.
+j
+java:S1128"HRemove this unused import 'org.springframework.web.client.RestTemplate'.(Îö¼Şûÿÿÿÿ8Ÿ¾Ñ½¦.
+l
+java:S1128"ORemove this unused import 'org.springframework.web.bind.annotation.GetMapping'.(‡¡‰Ø8ßéÆ¾¦.
+N
+java:S1128"1Remove this unused import 'com.google.gson.Gson'.(–§8â¨½¾¦.
+d
+java:S11924"GDefine a constant instead of duplicating this literal "offset" 3 times.(—ª¿8¸†ñ½¦.
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8ïÁ¾¦.

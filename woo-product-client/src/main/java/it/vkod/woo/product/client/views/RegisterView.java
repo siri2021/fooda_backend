@@ -45,7 +45,6 @@ public class RegisterView extends Div {
 
     @PostConstruct
     public void init() {
-
         setClassName("container-fluid");
 
         Div registerFormDiv = new Div();

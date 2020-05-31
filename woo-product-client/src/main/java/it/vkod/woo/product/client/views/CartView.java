@@ -1,5 +1,6 @@
 package it.vkod.woo.product.client.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
@@ -138,7 +139,7 @@ public class CartView extends Div {
         productImgCard.getStyle().set("height", "60px");
 
         Image productImage = new Image(basketProduct.getImageUrl(), basketProduct.getName());
-        productImage.getStyle().set("height", "25%");
+        productImage.getStyle().set("width", "200px").set("height", "120px");
         productImgCard.add(productImage);
 
         return productImgCard;

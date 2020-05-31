@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 
 @PWA(name = "Fooda",
         shortName = "Fooda",
-        iconPath = "img/icons/logo-1024x1024.png")
+        iconPath = "woo-product-client/src/main/webapp/icons/logo-1024x1024.png")
 @UIScope
 public class MasterView extends AppLayout {
 
@@ -34,6 +34,7 @@ public class MasterView extends AppLayout {
         final Tab searchTab = new Tab(new Button(searchIcon, click -> {
             UI.getCurrent().navigate("search");
         }));
+        searchTab.setSelected(false);
         searchTab.setId("searchTab");
 
         final Icon cartIcon = VaadinIcon.CART.create();
@@ -43,6 +44,7 @@ public class MasterView extends AppLayout {
         final Tab cartTab = new Tab(new Button(cartIcon, click -> {
             UI.getCurrent().navigate("basket");
         }));
+        cartTab.setSelected(false);
         cartTab.setId("cartTab");
 
         final Icon addressIcon = VaadinIcon.HOME.create();
@@ -52,6 +54,7 @@ public class MasterView extends AppLayout {
         final Tab addressTab = new Tab(new Button(addressIcon, click -> {
             UI.getCurrent().navigate("contact");
         }));
+        addressTab.setSelected(false);
         addressTab.setId("addressTab");
 
         final Icon paymentIcon = VaadinIcon.WALLET.create();
@@ -61,6 +64,7 @@ public class MasterView extends AppLayout {
         final Tab paymentTab = new Tab(new Button(paymentIcon, click -> {
             UI.getCurrent().navigate("payment");
         }));
+        paymentTab.setSelected(false);
         paymentTab.setId("paymentTab");
 
         tabs = new Tabs(
@@ -69,6 +73,8 @@ public class MasterView extends AppLayout {
                 addressTab,
                 paymentTab
         );
+
+        tabs.setAutoselect(true);
 
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
         tabs.getStyle().set("background-color", BG_COLOR).set("color", TEXT_COLOR);
