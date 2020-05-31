@@ -15,20 +15,14 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import it.vkod.woo.product.client.pojo.basket.req.BasketBilling;
 import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
-import it.vkod.woo.product.client.pojo.order.req.OrderBilling;
-import it.vkod.woo.product.client.pojo.order.req.OrderLineItemsItem;
-import it.vkod.woo.product.client.pojo.order.req.OrderRequest;
-import it.vkod.woo.product.client.pojo.order.req.OrderShipping;
+import it.vkod.woo.product.client.pojo.order.req.*;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import it.vkod.woo.product.client.clients.WooOrderServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -145,6 +139,7 @@ public class PaymentView extends Div {
         });
 
         OrderRequest orderRequest = OrderRequest.builder()
+                .shippingLines(Collections.singletonList(OrderShippingLinesItem.builder().methodId("free_shipping").methodTitle("").build()))
                 .billing(OrderBilling.builder()
                         .firstName(billing.getFirstName())
                         .lastName(billing.getLastName())
