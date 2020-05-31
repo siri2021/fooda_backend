@@ -1,6 +1,7 @@
 package it.vkod.woo.order.service.payloads.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.List;
@@ -13,28 +14,29 @@ public class WooOrderResponse {
 
     @Getter
     @Setter
-    private long storeId;
+    @JsonIgnore
+    private long store_id;
     @Getter
     @Setter
-    private String discountTotal;
+    private String discount_total;
     @Getter
     @Setter
-    private String orderKey;
+    private String order_key;
     @Getter
     @Setter
-    private boolean pricesIncludeTax;
+    private boolean prices_include_tax;
     @Getter
     @Setter
     private Links links;
     @Getter
     @Setter
-    private String customerNote;
+    private String customer_note;
     @Getter
     @Setter
-    private List<LineItemsItem> lineItems;
+    private List<LineItemsItem> line_items;
     @Getter
     @Setter
-    private List<Object> couponLines;
+    private List<Object> coupon_lines;
     @Getter
     @Setter
     private Billing billing;
@@ -52,25 +54,25 @@ public class WooOrderResponse {
     private Shipping shipping;
     @Getter
     @Setter
-    private String datePaidGmt;
+    private String date_paid_gmt;
     @Getter
     @Setter
-    private List<TaxLinesItem> taxLines;
+    private List<TaxLinesItem> tax_lines;
     @Getter
     @Setter
-    private String datePaid;
+    private String date_paid;
     @Getter
     @Setter
-    private String customerUserAgent;
+    private String customer_user_agent;
     @Getter
     @Setter
-    private String paymentMethodTitle;
+    private String payment_method_title;
     @Getter
     @Setter
-    private List<MetaDataItem> metaData;
+    private List<MetaDataItem> meta_data;
     @Getter
     @Setter
-    private Object dateCompleted;
+    private Object date_completed;
     @Getter
     @Setter
     private String currency;
@@ -79,64 +81,64 @@ public class WooOrderResponse {
     private int id;
     @Getter
     @Setter
-    private Object dateCompletedGmt;
+    private Object date_completed_gmt;
     @Getter
     @Setter
-    private String paymentMethod;
+    private String payment_method;
     @Getter
     @Setter
-    private String shippingTax;
+    private String shipping_tax;
     @Getter
     @Setter
-    private String transactionId;
+    private String transaction_id;
     @Getter
     @Setter
-    private String dateModifiedGmt;
+    private String date_modified_gmt;
     @Getter
     @Setter
-    private String cartHash;
+    private String cart_hash;
     @Getter
     @Setter
-    private String shippingTotal;
+    private String shipping_total;
     @Getter
     @Setter
-    private String cartTax;
+    private String cart_tax;
     @Getter
     @Setter
-    private String createdVia;
+    private String created_via;
     @Getter
     @Setter
-    private String dateCreated;
+    private String date_created;
     @Getter
     @Setter
-    private String dateCreatedGmt;
+    private String date_created_gmt;
     @Getter
     @Setter
-    private String discountTax;
+    private String discount_tax;
     @Getter
     @Setter
-    private String totalTax;
+    private String total_tax;
     @Getter
     @Setter
     private String version;
     @Getter
     @Setter
-    private String customerIpAddress;
+    private String customer_ip_address;
     @Getter
     @Setter
-    private List<ShippingLinesItem> shippingLines;
+    private List<ShippingLinesItem> shipping_lines;
     @Getter
     @Setter
-    private String dateModified;
+    private String date_modified;
     @Getter
     @Setter
-    private int parentId;
+    private int parent_id;
     @Getter
     @Setter
-    private List<Object> feeLines;
+    private List<Object> fee_lines;
     @Getter
     @Setter
-    private int customerId;
+    private int customer_id;
     @Getter
     @Setter
     private String status;

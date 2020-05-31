@@ -15,30 +15,23 @@ import java.util.List;
 public class OrderRequest {
     @Getter
     @Setter
-    @JsonProperty("shipping_lines")
-    private List<OrderShippingLinesItem> shippingLines;
+    private List<OrderShippingLinesItem> shipping_lines;
     @Getter
     @Setter
-    @JsonProperty("set_paid")
-    private boolean setPaid;
+    private boolean set_paid;
     @Getter
     @Setter
-    @JsonProperty("shipping")
     private OrderShipping shipping;
     @Getter
     @Setter
-    @JsonProperty("payment_method_title")
-    private String paymentMethodTitle;
+    private String payment_method_title;
     @Getter
     @Setter
-    @JsonProperty("line_items")
-    private List<OrderLineItemsItem> lineItems;
+    private List<OrderLineItemsItem> line_items;
     @Getter
     @Setter
-    @JsonProperty("payment_method")
-    private String paymentMethod;
+    private String payment_method;
     @Getter
     @Setter
-    @JsonProperty("billing")
     private OrderBilling billing;
 }

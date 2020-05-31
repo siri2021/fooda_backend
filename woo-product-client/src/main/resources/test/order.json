@@ -1,0 +1,46 @@
+{
+  "shipping_lines": [
+    {
+      "total": "0",
+      "method_id": "free_shipping",
+      "method_title": ""
+    }
+  ],
+  "set_paid": false,
+  "shipping": {
+    "country": "Belgium",
+    "city": "zele",
+    "address_1": "langestraat",
+    "address_2": "82 bus 2",
+    "postcode": "9240",
+    "last_name": "mustafa",
+    "state": "zele",
+    "first_name": "yilmaz"
+  },
+  "payment_method_title": "Cash on delivery",
+  "line_items": [
+    {
+      "quantity": 2,
+      "variation_id": 0,
+      "product_id": 7758
+    },
+    {
+      "quantity": 1,
+      "variation_id": 0,
+      "product_id": 7740
+    }
+  ],
+  "payment_method": "cod",
+  "billing": {
+    "country": "Belgium",
+    "city": "zele",
+    "phone": "+32467711709",
+    "address_1": "langestraat",
+    "address_2": "82 bus 2",
+    "postcode": "9240",
+    "last_name": "mustafa",
+    "state": "zele",
+    "first_name": "yilmaz",
+    "email": "yilmaz@mail.be"
+  }
+}

@@ -1,6 +1,7 @@
 package it.vkod.woo.order.service.payloads.req;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,8 +14,8 @@ public class LineItemsItem {
     private int quantity;
     @Getter
     @Setter
-    private int variationId;
+    private int variation_id;
     @Getter
     @Setter
-    private int productId;
+    private int product_id;
 }

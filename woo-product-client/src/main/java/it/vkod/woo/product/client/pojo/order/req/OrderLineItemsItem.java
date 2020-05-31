@@ -11,14 +11,11 @@ import lombok.*;
 public class OrderLineItemsItem {
     @Getter
     @Setter
-    @JsonProperty("quantity")
     private int quantity;
     @Getter
     @Setter
-    @JsonProperty("variation_id")
-    private int variationId;
+    private int variation_id;
     @Getter
     @Setter
-    @JsonProperty("product_id")
-    private int productId;
+    private int product_id;
 }

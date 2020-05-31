@@ -12,14 +12,11 @@ import lombok.*;
 public class OrderShippingLinesItem {
     @Getter
     @Setter
-    @JsonProperty("total")
     private int total;
     @Getter
     @Setter
-    @JsonProperty("method_id")
-    private String methodId;
+    private String method_id;
     @Getter
     @Setter
-    @JsonProperty("method_title")
-    private String methodTitle;
+    private String method_title;
 }

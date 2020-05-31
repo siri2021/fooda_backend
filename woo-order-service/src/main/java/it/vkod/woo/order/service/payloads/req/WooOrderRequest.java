@@ -1,7 +1,6 @@
 package it.vkod.woo.order.service.payloads.req;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.List;
@@ -13,30 +12,23 @@ import java.util.List;
 public class WooOrderRequest {
     @Getter
     @Setter
-    @JsonProperty("shipping_lines")
-    private List<ShippingLinesItem> shippingLines;
+    private List<ShippingLinesItem> shipping_lines;
     @Getter
     @Setter
-    @JsonProperty("set_paid")
-    private boolean setPaid;
+    private boolean set_paid;
     @Getter
     @Setter
-    @JsonProperty("shipping")
     private Shipping shipping;
     @Getter
     @Setter
-    @JsonProperty("payment_method_title")
-    private String paymentMethodTitle;
+    private String payment_method_title;
     @Getter
     @Setter
-    @JsonProperty("line_items")
-    private List<LineItemsItem> lineItems;
+    private List<LineItemsItem> line_items;
     @Getter
     @Setter
-    @JsonProperty("payment_method")
-    private String paymentMethod;
+    private String payment_method;
     @Getter
     @Setter
-    @JsonProperty("billing")
     private Billing billing;
 }

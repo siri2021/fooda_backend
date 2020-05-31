@@ -1,5 +1,6 @@
 package it.vkod.woo.product.client.views;
 
+import com.google.gson.Gson;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
@@ -18,6 +19,7 @@ import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
 import it.vkod.woo.product.client.pojo.order.req.*;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import it.vkod.woo.product.client.clients.WooOrderServiceClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 
 import static it.vkod.woo.product.client.views.PaymentView.ROUTE;
 
+@Slf4j
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
@@ -134,35 +137,46 @@ public class PaymentView extends Div {
         basketProducts.forEach(basketProduct -> {
             products.add(
                     OrderLineItemsItem.builder()
-                            .productId((int) basketProduct.getProductId())
+                            .product_id((int) basketProduct.getProductId())
                             .quantity(basketProduct.getQuantity()).build());
         });
 
         OrderRequest orderRequest = OrderRequest.builder()
-                .shippingLines(Collections.singletonList(OrderShippingLinesItem.builder().methodId("free_shipping").methodTitle("").build()))
+                .shipping_lines(Collections.singletonList(OrderShippingLinesItem.builder()
+                        .method_id("free_shipping")
+                        .method_title("")
+                        .total(0)
+                        .build()))
                 .billing(OrderBilling.builder()
-                        .firstName(billing.getFirstName())
-                        .lastName(billing.getLastName())
+                        .first_name(billing.getFirstName())
+                        .last_name(billing.getLastName())
                         .email(billing.getEmail())
                         .phone(billing.getPhone())
-                        .address1(billing.getAddress())
+                        .address_1(billing.getAddress())
+                        .address_2(" ")
                         .postcode(billing.getPostcode())
                         .city(billing.getMunicipality())
+                        .state(billing.getMunicipality())
+                        .country("Belgium")
                         .build())
                 .shipping(OrderShipping.builder()
-                        .firstName(shipping.getFirstName())
-                        .lastName(shipping.getLastName())
-                        .address1(shipping.getAddress())
+                        .first_name(shipping.getFirstName())
+                        .last_name(shipping.getLastName())
+                        .address_1(shipping.getAddress())
+                        .address_2(" ")
                         .postcode(shipping.getPostcode())
                         .city(shipping.getMunicipality())
+                        .state(billing.getMunicipality())
+                        .country("Belgium")
                         .build())
-                .lineItems(products)
-                .paymentMethod("cod")
-                .paymentMethodTitle("Cash on delivery")
-                .setPaid(false)
+                .line_items(products)
+                .payment_method("cod")
+                .payment_method_title("Cash on delivery")
+                .set_paid(false)
                 .build();
 
-        System.out.println(orderRequest);
+        Gson gson = new Gson();
+        log.info(gson.toJson(orderRequest));
 
         orderServiceClient.apiAddOrder(orderRequest, storeId);
 

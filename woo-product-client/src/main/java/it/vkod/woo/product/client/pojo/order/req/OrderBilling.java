@@ -11,42 +11,32 @@ import lombok.*;
 public class OrderBilling {
     @Getter
     @Setter
-    @JsonProperty("country")
     private String country;
     @Getter
     @Setter
-    @JsonProperty("city")
     private String city;
     @Getter
     @Setter
-    @JsonProperty("phone")
     private String phone;
     @Getter
     @Setter
-    @JsonProperty("address_1")
-    private String address1;
+    private String address_1;
     @Getter
     @Setter
-    @JsonProperty("address_2")
-    private String address2;
+    private String address_2;
     @Getter
     @Setter
-    @JsonProperty("postcode")
     private String postcode;
     @Getter
     @Setter
-    @JsonProperty("last_name")
-    private String lastName;
+    private String last_name;
     @Getter
     @Setter
-    @JsonProperty("state")
     private String state;
     @Getter
     @Setter
-    @JsonProperty("first_name")
-    private String firstName;
+    private String first_name;
     @Getter
     @Setter
-    @JsonProperty("email")
     private String email;
 }
