@@ -12,6 +12,7 @@ import lombok.*;
 public class OrderShippingLinesItem {
     @Getter
     @Setter
+    @JsonProperty("total")
     private int total;
     @Getter
     @Setter
