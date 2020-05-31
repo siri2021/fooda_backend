@@ -1,5 +1,6 @@
 package it.vkod.woo.order.service.ctrl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -10,6 +11,7 @@ import it.vkod.woo.order.service.payloads.res.WooOrderResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,9 +59,9 @@ public class WooOrderCtrl implements OrderCtrl<WooOrderResponse, WooOrderRequest
     public void apiPostOrderOne(WooOrderRequest order) {
         final Map<String, Object> orderMap = mapper.convertValue(order, new TypeReference<Map<String, Object>>() {
         });
-        final Map createdOrder = woo.create(EndpointBaseType.ORDERS.getValue(), orderMap);
-        Gson gson = new Gson();
-        log.info(gson.toJson(mapper.convertValue(createdOrder, WooOrderResponse.class)));
+        @SuppressWarnings("unchecked")    // we'll throw an exception from service to simulate a failure
+        final Map<String, Object> createdOrder = woo.create(EndpointBaseType.ORDERS.getValue(), orderMap);
+        log.info(createdOrder.toString());
     }
 
     @Override

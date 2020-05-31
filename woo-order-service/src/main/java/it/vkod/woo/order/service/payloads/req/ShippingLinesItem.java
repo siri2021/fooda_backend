@@ -2,16 +2,16 @@ package it.vkod.woo.order.service.payloads.req;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @JsonAutoDetect
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class ShippingLinesItem {
     @Getter
     @Setter
-    private int total;
+    private String total;
     @Getter
     @Setter
     private String method_id;

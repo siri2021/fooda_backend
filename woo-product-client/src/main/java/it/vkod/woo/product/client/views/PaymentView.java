@@ -145,7 +145,7 @@ public class PaymentView extends Div {
                 .shipping_lines(Collections.singletonList(OrderShippingLinesItem.builder()
                         .method_id("free_shipping")
                         .method_title("")
-                        .total(0)
+                        .total("0")
                         .build()))
                 .billing(OrderBilling.builder()
                         .first_name(billing.getFirstName())
@@ -179,7 +179,6 @@ public class PaymentView extends Div {
         log.info(gson.toJson(orderRequest));
 
         orderServiceClient.apiAddOrder(orderRequest, storeId);
-
         new Notification("Order is added", 4000).open();
     }
 

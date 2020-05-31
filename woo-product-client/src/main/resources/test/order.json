@@ -10,8 +10,8 @@
   "shipping": {
     "country": "Belgium",
     "city": "zele",
-    "address_1": "langestraat",
-    "address_2": "82 bus 2",
+    "address_1": "langestraat 82/2",
+    "address_2": " ",
     "postcode": "9240",
     "last_name": "mustafa",
     "state": "zele",
@@ -22,12 +22,12 @@
     {
       "quantity": 2,
       "variation_id": 0,
-      "product_id": 7758
+      "product_id": 11894
     },
     {
       "quantity": 1,
       "variation_id": 0,
-      "product_id": 7740
+      "product_id": 11600
     }
   ],
   "payment_method": "cod",
@@ -35,8 +35,8 @@
     "country": "Belgium",
     "city": "zele",
     "phone": "+32467711709",
-    "address_1": "langestraat",
-    "address_2": "82 bus 2",
+    "address_1": "langestraat 82/2",
+    "address_2": " ",
     "postcode": "9240",
     "last_name": "mustafa",
     "state": "zele",

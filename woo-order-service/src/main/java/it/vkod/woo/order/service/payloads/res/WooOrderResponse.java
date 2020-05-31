@@ -2,11 +2,13 @@ package it.vkod.woo.order.service.payloads.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.List;
 
 @JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

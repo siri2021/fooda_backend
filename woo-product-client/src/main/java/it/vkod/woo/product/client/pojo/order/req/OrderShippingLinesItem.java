@@ -12,7 +12,7 @@ import lombok.*;
 public class OrderShippingLinesItem {
     @Getter
     @Setter
-    private int total;
+    private String total;
     @Getter
     @Setter
     private String method_id;
