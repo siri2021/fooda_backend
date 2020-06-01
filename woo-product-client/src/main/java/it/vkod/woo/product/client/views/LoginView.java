@@ -18,6 +18,7 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import it.vkod.woo.product.client.pojo.auth.request.LoginRequest;
 import it.vkod.woo.product.client.clients.WooUserServiceClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 import static it.vkod.woo.product.client.views.LoginView.ROUTE;
 import static java.lang.System.*;
 
+@Slf4j
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
@@ -41,10 +43,8 @@ public class LoginView extends Div {
 
     public final static String ROUTE = "";
     private static final String TOKEN_COOKIE = "token";
-    private final String BG_COLOR = "#FF5733";
+    private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
-    private final String BUTTON_HEIGHT = "38px";
-    private final String ICON_SIZE = "28px";
 
     @PostConstruct
     public void init() {
@@ -52,10 +52,15 @@ public class LoginView extends Div {
 
         Div loginFormDiv = new Div();
         loginFormDiv.setClassName("card");
-        loginFormDiv.getStyle().set("margin-left", "5px").set("margin-right", "5px").set("margin-top", "60%");
+        loginFormDiv.getStyle()
+                .set("margin-left", "5px")
+                .set("margin-right", "5px")
+                .set("margin-top", "60%");
 
         FormLayout loginLayout = new FormLayout();
-        loginLayout.getStyle().set("margin-left", "5px").set("margin-right", "5px");
+        loginLayout.getStyle()
+                .set("margin-left", "5px")
+                .set("margin-right", "5px");
         Binder<LoginRequest> binder = new Binder<>();
 
         // The object that will be edited
@@ -63,10 +68,16 @@ public class LoginView extends Div {
 
         // Create the fields
         TextField username = new TextField();
-        username.getStyle().set("background", TEXT_COLOR).set("color", "black").set("width", "100%");
+        username.getStyle()
+                .set("background", TEXT_COLOR)
+                .set("color", "black")
+                .set("width", "100%");
         username.setValueChangeMode(ValueChangeMode.EAGER);
         TextField password = new TextField();
-        password.getStyle().set("background", TEXT_COLOR).set("color", "black").set("width", "100%");
+        password.getStyle()
+                .set("background", TEXT_COLOR)
+                .set("color", "black")
+                .set("width", "100%");
         password.setValueChangeMode(ValueChangeMode.EAGER);
 
         SerializablePredicate<String> userAndPasswordValidator = value -> !username.getValue().trim().isEmpty() || !password.getValue().trim().isEmpty();
@@ -125,21 +136,16 @@ public class LoginView extends Div {
         if (tokenCookie != null) {
             String oldToken = tokenCookie.getValue();
             tokenCookie.setValue(token);
-            out.println("Updated name in cookie from " + oldToken + " to " + token);
+            log.info("Updated name in cookie from " + oldToken + " to " + token);
         } else {
             // Create a new cookie
             tokenCookie = new Cookie(TOKEN_COOKIE, token);
             tokenCookie.setComment("Cookie for storing the name of the user");
-            out.println("Cookie for storing the name of the user");
+            log.info("Cookie for storing the name of the user");
         }
 
-        // Make cookie expire in 10 minutes
         tokenCookie.setMaxAge(600);
-
-        // Set the cookie path.
         tokenCookie.setPath(VaadinService.getCurrentRequest().getContextPath());
-
-        // Save cookie
         VaadinService.getCurrentResponse().addCookie(tokenCookie);
     }
 

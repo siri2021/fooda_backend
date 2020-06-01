@@ -46,9 +46,8 @@ public class SearchView extends Div {
     private static final String TOKEN_COOKIE = "token";
     public static final String ROUTE = "search";
 
-    private final String BG_COLOR = "#FF5733"; // RGB 255, 87, 51
+    private final String BG_COLOR = "#3333FF"; // RGB 255, 87, 51
     private final String TEXT_COLOR = "white";
-    private final String BUTTON_HEIGHT = "48px";
 
     /**
      * Based on Materialize css ..
@@ -78,15 +77,27 @@ public class SearchView extends Div {
 
         Div searchDiv = new Div();
         searchDiv.setClassName("card");
-        searchDiv.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR);
+        searchDiv.getStyle()
+                .set("background", BG_COLOR)
+                .set("color", TEXT_COLOR)
+                .set("margin-left", "0")
+                .set("margin-right", "0")
+                .set("margin-top", "10%");
 
         TextField searchTextField = new TextField();
-        searchTextField.getStyle().set("margin-left", "5px").set("margin-right", "5px").set("background", BG_COLOR).set("color", TEXT_COLOR).set("width", "90%").set("align", "center");
+        searchTextField.getStyle()
+                .set("background", BG_COLOR)
+                .set("color", TEXT_COLOR)
+                .set("width", "250px")
+                .set("align", "center");
         searchTextField.setValueChangeMode(ValueChangeMode.EAGER);
         searchTextField.getElement().callJsFunction("focus");
         Button searchButton = new Button("Search");
         searchButton.addClickShortcut(Key.ENTER);
-        searchButton.getStyle().set("margin-left", "5px").set("margin-right", "5px").set("background", BG_COLOR).set("color", TEXT_COLOR).set("width", "90%");
+        searchButton.getStyle()
+                .set("background", BG_COLOR)
+                .set("color", TEXT_COLOR)
+                .set("width", "50px");
         searchButton.addClickListener(click -> searchProducts(searchTextField.getValue().toLowerCase()));
 
         searchDiv.add(searchTextField, searchButton);
@@ -111,7 +122,9 @@ public class SearchView extends Div {
         //match HTML tags
         final String htmlElementsRegex = "<[^>]*>";
         productContentP.setText(productResponse.getDescription().replaceAll(htmlElementsRegex, ""));
-        productContentP.getStyle().set("font-weight", "bold").set("font-size", "11pt");
+        productContentP.getStyle()
+                .set("font-weight", "bold")
+                .set("font-size", "11pt");
         productContentCard.add(productContentP);
         return productContentCard;
     }
@@ -120,14 +133,22 @@ public class SearchView extends Div {
         Div productImgCard = new Div();
         productImgCard.setClassName("card-image");
         Image productImage = new Image(productResponse.getImages().get(0).getSrc(), productResponse.getImages().get(0).getAlt());
-        productImage.getStyle().set("height", "50%");
+        productImage.getStyle()
+                .set("height", "150px")
+                .set("width", "100%");
         Span cardTitleSpan = new Span();
         cardTitleSpan.setClassName("card-title");
         cardTitleSpan.setText(productResponse.getName());
         final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
-        addButtonIcon.setSize("32px");
-        Button addButton = new Button(addButtonIcon);
-        addButton.setClassName("btn-floating halfway-fab waves-effect waves-light green");
+        addButtonIcon.setSize("48px");
+        Button addButton = new Button(
+                productResponse.getSalePrice() == null ? productResponse.getPrice().toString() : productResponse.getSalePrice()
+                , addButtonIcon
+        );
+        addButton.setClassName("btn-floating halfway-fab waves-effect waves-light blue");
+        addButton.getStyle()
+                .set("height", "48px")
+                .set("width", "120px");
         addButton.addClickListener(click -> {
             basketServiceClient.apiAddBasketProduct(BasketProduct.builder()
                     .userId(getTokenCookie().getValue())
@@ -141,7 +162,7 @@ public class SearchView extends Div {
                     .build());
 
             final String notificationMsg = productResponse.getName() + " is added.";
-            new Notification(notificationMsg, 2000).open();
+            new Notification(notificationMsg, 1000).open();
         });
         productImgCard.add(productImage, cardTitleSpan, addButton);
         return productImgCard;

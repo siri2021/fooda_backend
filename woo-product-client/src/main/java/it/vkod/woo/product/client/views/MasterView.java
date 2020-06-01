@@ -18,7 +18,7 @@ import javax.annotation.PostConstruct;
 @UIScope
 public class MasterView extends AppLayout {
 
-    private final String BG_COLOR = "#FF5733";
+    private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
     private final String ICON_SIZE = "28px";
 
@@ -35,6 +35,7 @@ public class MasterView extends AppLayout {
             UI.getCurrent().navigate("search");
         }));
         searchTab.setSelected(false);
+        searchTab.getStyle().set("background-color", BG_COLOR);
         searchTab.setId("searchTab");
 
         final Icon cartIcon = VaadinIcon.CART.create();
@@ -45,6 +46,7 @@ public class MasterView extends AppLayout {
             UI.getCurrent().navigate("basket");
         }));
         cartTab.setSelected(false);
+        cartTab.getStyle().set("background-color", BG_COLOR);
         cartTab.setId("cartTab");
 
         final Icon addressIcon = VaadinIcon.HOME.create();
@@ -55,6 +57,7 @@ public class MasterView extends AppLayout {
             UI.getCurrent().navigate("contact");
         }));
         addressTab.setSelected(false);
+        addressTab.getStyle().set("background-color", BG_COLOR);
         addressTab.setId("addressTab");
 
         final Icon paymentIcon = VaadinIcon.WALLET.create();
@@ -65,6 +68,7 @@ public class MasterView extends AppLayout {
             UI.getCurrent().navigate("payment");
         }));
         paymentTab.setSelected(false);
+        paymentTab.getStyle().set("background-color", BG_COLOR);
         paymentTab.setId("paymentTab");
 
         tabs = new Tabs(

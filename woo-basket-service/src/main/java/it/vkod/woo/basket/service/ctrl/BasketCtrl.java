@@ -23,6 +23,7 @@ public class BasketCtrl {
             apiPutIncreaseBasketProductQuantity(basket);
         } else {
             repo.save(basket);
+            log.info("Product added: " + basket.toString());
         }
     }
 
@@ -31,6 +32,7 @@ public class BasketCtrl {
         final Basket existingBasket = repo.findByUserIdAndStoreIdAndProductId(basket.getUserId(), basket.getStoreId(), basket.getProductId());
         existingBasket.setQuantity(existingBasket.getQuantity() + 1);
         repo.save(existingBasket);
+        log.info("Product quantity increased: " + basket.toString());
     }
 
     @PutMapping("decrease")
@@ -41,6 +43,7 @@ public class BasketCtrl {
             repo.save(existingBasket);
         } else {
             apiDeleteBasketProduct(basket);
+            log.info("Product quantity decreased: " + basket.toString());
         }
     }
 

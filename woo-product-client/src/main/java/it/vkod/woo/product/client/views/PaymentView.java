@@ -1,7 +1,6 @@
 package it.vkod.woo.product.client.views;
 
 import com.google.gson.Gson;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
@@ -10,17 +9,16 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import it.vkod.woo.product.client.clients.WooBasketServiceClient;
+import it.vkod.woo.product.client.clients.WooOrderServiceClient;
 import it.vkod.woo.product.client.pojo.basket.req.BasketBilling;
 import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
 import it.vkod.woo.product.client.pojo.order.req.*;
-import it.vkod.woo.product.client.clients.WooBasketServiceClient;
-import it.vkod.woo.product.client.clients.WooOrderServiceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -48,7 +46,7 @@ public class PaymentView extends Div {
 
     private static final String TOKEN_COOKIE = "token";
     public final static String ROUTE = "payment";
-    private final String BG_COLOR = "#FF5733";
+    private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "38px";
     private final String ICON_SIZE = "28px";
@@ -101,6 +99,10 @@ public class PaymentView extends Div {
         confirmPaymentMethodButton.getStyle().set("background", "#2E8B57").set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "90%");
         confirmPaymentMethodButton.addClickListener(addClick -> {
             createOrderRequestWithOrderApi(storeId, basketProducts);
+
+            //TODO after creating order, whatever in the basket must be cleaned..
+            // and this requirement is applied for all tabs in the navigation menu (search, cart, contact, and payment) ..
+
             new Notification("BasketPayment Method is confirmed!", 2000).open();
         });
         confirmPaymentMethodButton.setVisible(false);

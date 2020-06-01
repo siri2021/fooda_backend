@@ -38,7 +38,7 @@ public class RegisterView extends Div {
 
     public final static String ROUTE = "register";
     private static final String TOKEN_COOKIE = "token";
-    private final String BG_COLOR = "#FF5733";
+    private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "38px";
     private final String ICON_SIZE = "28px";

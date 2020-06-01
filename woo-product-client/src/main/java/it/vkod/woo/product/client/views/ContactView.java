@@ -44,7 +44,7 @@ public class ContactView extends Div {
 
     private static final String TOKEN_COOKIE = "token";
     public final static String ROUTE = "contact";
-    private final String BG_COLOR = "#FF5733";
+    private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "48px";
 
