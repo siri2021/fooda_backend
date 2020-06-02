@@ -21,19 +21,19 @@ public class OrderResponseLineItemsItem {
     private List<OrderResponseTaxesItem> taxes;
     @Getter
     @Setter
-    private String total_tax;
+    private double total_tax;
     @Getter
     @Setter
-    private String total;
+    private double total;
     @Getter
     @Setter
     private int variation_id;
     @Getter
     @Setter
-    private String subtotal;
+    private double subtotal;
     @Getter
     @Setter
-    private int price;
+    private double price;
     @Getter
     @Setter
     private int product_id;
@@ -48,7 +48,7 @@ public class OrderResponseLineItemsItem {
     private int id;
     @Getter
     @Setter
-    private String subtotal_tax;
+    private double subtotal_tax;
     @Getter
     @Setter
     private String sku;

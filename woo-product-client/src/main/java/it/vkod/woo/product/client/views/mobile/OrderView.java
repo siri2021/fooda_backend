@@ -13,20 +13,32 @@ import it.vkod.woo.product.client.clients.WooOrderServiceClient;
 import it.vkod.woo.product.client.pojo.order.res.OrderResponse;
 import it.vkod.woo.product.client.pojo.order.res.OrderResponseLineItemsItem;
 import it.vkod.woo.product.client.pojo.order.res.OrderResponseShipping;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import org.apache.pdfbox.pdmodel.interactive.form.PDListBox;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.vandeseer.easytable.TableDrawer;
+import org.vandeseer.easytable.structure.Row;
+import org.vandeseer.easytable.structure.Table;
+import org.vandeseer.easytable.structure.cell.TextCell;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
-import java.io.File;
+import java.awt.*;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import static it.vkod.woo.product.client.views.mobile.OrderView.ROUTE;
+import static java.awt.Color.LIGHT_GRAY;
+import static java.awt.Color.WHITE;
+import static org.apache.pdfbox.pdmodel.font.PDType1Font.*;
+import static org.vandeseer.easytable.settings.HorizontalAlignment.*;
+import static org.vandeseer.easytable.settings.VerticalAlignment.TOP;
 
 @Slf4j
 @UIScope
@@ -97,33 +109,112 @@ public class OrderView extends Div {
                 .set("margin-left", "0")
                 .set("margin-right", "0")
                 .set("width", "100%");
-        searchButton.addClickListener(click -> {
-            try {
 
-                final OrderResponse order = orderServiceClient.apiGetOrderOne(ORDER_ID, 2);
-                final OrderResponseShipping shipping = order.getShipping();
+        final OrderResponse order = orderServiceClient.apiGetOrderOne(ORDER_ID, 2);
 
-                PDDocument document = PDDocument.load(new File("C:\\Users\\yilma\\IdeaProjects\\fooda\\woo-product-client\\src\\main\\resources\\test\\fooda order form.pdf"));
-                PDAcroForm form = document.getDocumentCatalog().getAcroForm();
-                PDField field = form.getField("ShippingFirstNameTextBox");
-                field.setValue(shipping.getFirst_name());
-                field = form.getField("ShippingLastNameTextBox");
-                field.setValue(shipping.getLast_name());
-                PDListBox orderDetails = (PDListBox) form.getField("OrderDetailsListBox");
-
-                for (OrderResponseLineItemsItem product : order.getLine_items()) {
-                    orderDetails.setValue(Arrays.asList(product.getName(), String.valueOf(product.getPrice()), String.valueOf(product.getQuantity()), product.getSubtotal()));
-                }
-
-                document.save("C:\\Users\\yilma\\IdeaProjects\\fooda\\woo-product-client\\src\\main\\resources\\test\\fooda order form (filled).pdf");
-                document.close();
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
-        });
+        generatePdfFromOrder(order);
 
         searchDiv.add(searchButton);
         add(searchDiv);
+    }
+
+    @SneakyThrows
+    private void generatePdfFromOrder(final OrderResponse orderResponse) {
+
+        final OrderResponseShipping shipping = orderResponse.getShipping();
+
+        FileInputStream template = new FileInputStream("C:\\Users\\yilma\\IdeaProjects\\fooda\\woo-product-client\\src\\main\\resources\\test\\template.pdf");
+        try (PDDocument document = PDDocument.load(template)) {
+            PDAcroForm form = document.getDocumentCatalog().getAcroForm();
+            PDField field = form.getField("ShippingFirstNameTextBox");
+            field.setValue(shipping.getFirst_name());
+            field = form.getField("ShippingLastNameTextBox");
+            field.setValue(shipping.getLast_name());
+
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0), PDPageContentStream.AppendMode.APPEND, true)) {
+
+                TableDrawer tableDrawer = TableDrawer.builder()
+                        .contentStream(contentStream)
+                        .startX(50f)
+                        .startY(400f)
+                        .table(productsTable(orderResponse))
+                        .build();
+
+                tableDrawer.draw();
+            }
+
+
+            document.save("C:\\Users\\yilma\\IdeaProjects\\fooda\\woo-product-client\\src\\main\\resources\\test\\order-" + ORDER_ID + ".pdf");
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    private Table productsTable(final OrderResponse orderResponse) {
+
+        final Color BLUE_DARK = new Color(76, 129, 190);
+        final Color BLUE_LIGHT_1 = new Color(186, 206, 230);
+        final Color BLUE_LIGHT_2 = new Color(218, 230, 242);
+
+        final List<OrderResponseLineItemsItem> orderedProducts = orderResponse.getLine_items();
+
+        final Table.TableBuilder tableBuilder = Table.builder()
+                .addColumnsOfWidth(200, 100, 100, 100)
+                .fontSize(8)
+                .font(HELVETICA)
+                .borderColor(WHITE);
+
+        // Add the header row ...
+        tableBuilder.addRow(Row.builder()
+                .add(TextCell.builder().text("Product").horizontalAlignment(LEFT).borderWidth(1).build())
+                .add(TextCell.builder().text("Price").borderWidth(1).build())
+                .add(TextCell.builder().text("Quantity").borderWidth(1).build())
+                .add(TextCell.builder().text("Subtotal").borderWidth(1).build())
+                .backgroundColor(BLUE_DARK)
+                .textColor(WHITE)
+                .font(HELVETICA_BOLD)
+                .fontSize(9)
+                .horizontalAlignment(CENTER)
+                .build());
+
+        // ... and some data rows
+        double grandTotal = 0;
+        for (int i = 0; i < orderedProducts.size(); i++) {
+            final double total = orderedProducts.get(i).getPrice() * orderedProducts.get(i).getQuantity();
+            grandTotal += total;
+
+            tableBuilder.addRow(Row.builder()
+                    .add(TextCell.builder().text(orderedProducts.get(i).getName()).horizontalAlignment(LEFT).borderWidth(1).build())
+                    .add(TextCell.builder().text(orderedProducts.get(i).getPrice() + " €").borderWidth(1).build())
+                    .add(TextCell.builder().text(String.valueOf(orderedProducts.get(i).getQuantity())).borderWidth(1).build())
+                    .add(TextCell.builder().text(total + " €").borderWidth(1).build())
+                    .backgroundColor(i % 2 == 0 ? BLUE_LIGHT_1 : BLUE_LIGHT_2)
+                    .horizontalAlignment(RIGHT)
+                    .build());
+        }
+
+        // Add a final row
+        tableBuilder.addRow(Row.builder()
+                .add(TextCell.builder().text("Please DO NOT hesitate to contact us if you recognize any wrong information. " +
+                        "To contact us for your requests, please email to tickets@fooda.be ")
+                        .colSpan(3)
+                        .lineSpacing(1f)
+                        .borderWidthTop(1)
+                        .textColor(WHITE)
+                        .backgroundColor(BLUE_DARK)
+                        .fontSize(6)
+                        .font(HELVETICA_OBLIQUE)
+                        .borderWidth(1)
+                        .build())
+                .add(TextCell.builder().text(grandTotal + " €").backgroundColor(LIGHT_GRAY)
+                        .font(HELVETICA_BOLD_OBLIQUE)
+                        .verticalAlignment(TOP)
+                        .borderWidth(1)
+                        .build())
+                .horizontalAlignment(RIGHT)
+                .build());
+
+        return tableBuilder.build();
     }
 
     private Cookie getTokenCookie() {
