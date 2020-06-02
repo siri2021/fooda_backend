@@ -1,11 +1,13 @@
 package it.vkod.woo.order.service.payloads.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class Shipping {
     @Getter
@@ -16,16 +18,16 @@ public class Shipping {
     private String city;
     @Getter
     @Setter
-    private String address1;
+    private String address_1;
     @Getter
     @Setter
-    private String address2;
+    private String address_2;
     @Getter
     @Setter
     private String postcode;
     @Getter
     @Setter
-    private String lastName;
+    private String last_name;
     @Getter
     @Setter
     private String company;
@@ -34,5 +36,5 @@ public class Shipping {
     private String state;
     @Getter
     @Setter
-    private String firstName;
+    private String first_name;
 }

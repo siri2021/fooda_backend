@@ -1,7 +1,6 @@
-package it.vkod.woo.order.service.payloads.res;
+package it.vkod.woo.product.client.pojo.order.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +8,8 @@ import lombok.Setter;
 import java.util.List;
 
 @JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class ShippingLinesItem {
+public class OrderResponseShippingLinesItem {
     @Getter
     @Setter
     private String total;

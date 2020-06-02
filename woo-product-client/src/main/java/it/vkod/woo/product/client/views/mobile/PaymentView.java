@@ -1,14 +1,19 @@
-package it.vkod.woo.product.client.views;
+package it.vkod.woo.product.client.views.mobile;
 
 import com.google.gson.Gson;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.progressbar.ProgressBar;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -24,11 +29,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import static it.vkod.woo.product.client.views.PaymentView.ROUTE;
+import static it.vkod.woo.product.client.views.mobile.PaymentView.ROUTE;
 
 @Slf4j
 @UIScope
@@ -53,82 +59,64 @@ public class PaymentView extends Div {
 
     @PostConstruct
     public void init() {
+        if (getTokenCookie() == null)
+            UI.getCurrent().navigate("");
+
         setClassName("container-fluid");
+
+        ProgressBar progressBar = new ProgressBar(0, 100, 100);
+        add(progressBar);
+
         getBasketByUserId();
     }
 
     private void getBasketByUserId() {
-
         final Map<Long, List<BasketProduct>> groupedBaskets = Arrays
                 .stream(basketServiceClient.apiGetBasketProducts(getTokenCookie().getValue()))
                 .collect(Collectors.groupingBy(BasketProduct::getStoreId));
-
-        groupedBaskets.forEach((storeId, baskets) -> {
-            Div productCard = new Div();
-            productCard.setClassName("card horizontal");
-            final Div basketInfoDiv = createBasketInfoDiv(storeId, baskets);
-            productCard.add(basketInfoDiv);
-            add(productCard);
-        });
+        groupedBaskets.forEach((storeId, baskets) -> add(createBasketInfoDiv(storeId, baskets)));
     }
 
     private Div createBasketInfoDiv(final long storeId, List<BasketProduct> basketProducts) {
 
         Div basketInfoDiv = new Div();
-        basketInfoDiv.setClassName("card-stacked");
+        basketInfoDiv.setClassName("card");
         AtomicReference<Double> subTotal = new AtomicReference<>((double) 0);
 
         basketProducts.forEach(basketProduct -> {
-            Div basketContentDiv = new Div();
-            basketContentDiv.setClassName("card-content");
-            Header cartInfoHeader = new Header();
-            cartInfoHeader.getStyle().set("font-size", "12pt");
-            cartInfoHeader.setText(basketProduct.getName() + " x " + basketProduct.getQuantity());
-            Label priceLabel = new Label();
-            priceLabel.getStyle().set("font-size", "12pt");
             final double price = basketProduct.getPrice() * basketProduct.getQuantity();
-            priceLabel.setText("€" + price);
             subTotal.updateAndGet(v -> v + price);
-            basketContentDiv.add(cartInfoHeader, priceLabel);
-            basketInfoDiv.add(basketContentDiv);
         });
+
+        Grid<BasketProduct> grid = new Grid<>();
+        grid.setItems(basketProducts);
+        grid.addColumn(BasketProduct::getName).setHeader("Product").setWidth("180px");
+        grid.addColumn(BasketProduct::getQuantity).setHeader("Quantity").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
+        grid.addColumn(BasketProduct::getPrice).setHeader("Price").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
+        grid.addColumn(basketProduct -> new DecimalFormat("##.##").format(basketProduct.getPrice() * basketProduct.getQuantity()) + "€").setHeader("Subtotal").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
+        grid.recalculateColumnWidths();
+        grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS, GridVariant.LUMO_ROW_STRIPES);
 
         final Icon confirmPaymentMethodButtonIcon = VaadinIcon.CREDIT_CARD.create();
         confirmPaymentMethodButtonIcon.setSize(ICON_SIZE);
-        Button confirmPaymentMethodButton = new Button("Confirm Delivery with €" + subTotal, confirmPaymentMethodButtonIcon);
-        confirmPaymentMethodButton.getStyle().set("background", "#2E8B57").set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "90%");
+        Button confirmPaymentMethodButton = new Button("Confirm Delivery with " + subTotal + "€", confirmPaymentMethodButtonIcon);
+        confirmPaymentMethodButton.getStyle()
+                .set("background", BG_COLOR)
+                .set("color", TEXT_COLOR)
+                .set("height", BUTTON_HEIGHT)
+                .set("width", "90%");
         confirmPaymentMethodButton.addClickListener(addClick -> {
             createOrderRequestWithOrderApi(storeId, basketProducts);
-
-            //TODO after creating order, whatever in the basket must be cleaned..
-            // and this requirement is applied for all tabs in the navigation menu (search, cart, contact, and payment) ..
-
-            new Notification("BasketPayment Method is confirmed!", 2000).open();
-        });
-        confirmPaymentMethodButton.setVisible(false);
-
-        Div basketActionsDiv = new Div();
-        basketActionsDiv.setClassName("card-action");
-        final Icon cashOnDeliveryButtonIcon = VaadinIcon.CASH.create();
-        cashOnDeliveryButtonIcon.setSize(ICON_SIZE);
-        Button cashOnDeliveryButton = new Button("Cash", cashOnDeliveryButtonIcon);
-        cashOnDeliveryButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "42%");
-        cashOnDeliveryButton.addClickListener(removeClick -> {
-            confirmPaymentMethodButton.setVisible(true);
-            new Notification("Cash on delivery is selected!", 2000).open();
-        });
-        final Icon creditCardOnDeliveryButtonIcon = VaadinIcon.CREDIT_CARD.create();
-        creditCardOnDeliveryButtonIcon.setSize(ICON_SIZE);
-        Button creditCardOnDeliveryButton = new Button("Credit card", creditCardOnDeliveryButtonIcon);
-        creditCardOnDeliveryButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("height", BUTTON_HEIGHT).set("width", "42%");
-        creditCardOnDeliveryButton.addClickListener(addClick -> {
-            confirmPaymentMethodButton.setVisible(true);
-            new Notification("Credit card on delivery is selected!", 2000).open();
+            basketServiceClient.apiClearBasketProducts(getTokenCookie().getValue());
         });
 
+        RadioButtonGroup<String> paymentMethodRadioGroup = new RadioButtonGroup<>();
+        paymentMethodRadioGroup.setLabel("Payment Method");
+        paymentMethodRadioGroup.setItems("Cash on delivery", "Cart on delivery", "PayPal Online");
+        paymentMethodRadioGroup.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
+        paymentMethodRadioGroup.setValue("Cash on delivery");
 
-        basketActionsDiv.add(cashOnDeliveryButton, creditCardOnDeliveryButton, confirmPaymentMethodButton);
-        basketInfoDiv.add(basketActionsDiv);
+        basketInfoDiv.add(grid, paymentMethodRadioGroup, confirmPaymentMethodButton);
         return basketInfoDiv;
     }
 
@@ -137,21 +125,21 @@ public class PaymentView extends Div {
         BasketShipping shipping = basketServiceClient.apiGetBasketShipping(getTokenCookie().getValue())[0];
         BasketBilling billing = basketServiceClient.apiGetBasketBilling(getTokenCookie().getValue())[0];
 
-        List<OrderLineItemsItem> products = new ArrayList<>();
+        List<OrderRequestLineItemsItem> products = new ArrayList<>();
         basketProducts.forEach(basketProduct -> {
             products.add(
-                    OrderLineItemsItem.builder()
+                    OrderRequestLineItemsItem.builder()
                             .product_id((int) basketProduct.getProductId())
                             .quantity(basketProduct.getQuantity()).build());
         });
 
         OrderRequest orderRequest = OrderRequest.builder()
-                .shipping_lines(Collections.singletonList(OrderShippingLinesItem.builder()
+                .shipping_lines(Collections.singletonList(OrderRequestShippingLinesItem.builder()
                         .method_id("free_shipping")
-                        .method_title("")
+                        .method_title("Free Shipping")
                         .total("0")
                         .build()))
-                .billing(OrderBilling.builder()
+                .billing(OrderRequestBilling.builder()
                         .first_name(billing.getFirstName())
                         .last_name(billing.getLastName())
                         .email(billing.getEmail())
@@ -163,7 +151,7 @@ public class PaymentView extends Div {
                         .state(billing.getMunicipality())
                         .country("Belgium")
                         .build())
-                .shipping(OrderShipping.builder()
+                .shipping(OrderRequestShipping.builder()
                         .first_name(shipping.getFirstName())
                         .last_name(shipping.getLastName())
                         .address_1(shipping.getAddress())
@@ -182,8 +170,9 @@ public class PaymentView extends Div {
         Gson gson = new Gson();
         log.info(gson.toJson(orderRequest));
 
+
         orderServiceClient.apiAddOrder(orderRequest, storeId);
-        new Notification("Order is added", 4000).open();
+        new Notification("Your order is successfully created!", 4000).open();
     }
 
     private Cookie getTokenCookie() {

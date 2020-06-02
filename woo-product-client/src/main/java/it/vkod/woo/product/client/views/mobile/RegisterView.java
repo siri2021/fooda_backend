@@ -1,4 +1,4 @@
-package it.vkod.woo.product.client.views;
+package it.vkod.woo.product.client.views.mobile;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -18,14 +18,16 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import it.vkod.woo.product.client.pojo.auth.request.SignUpRequest;
 import it.vkod.woo.product.client.clients.WooUserServiceClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static it.vkod.woo.product.client.views.RegisterView.ROUTE;
+import static it.vkod.woo.product.client.views.mobile.RegisterView.ROUTE;
 
+@Slf4j
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
@@ -37,11 +39,8 @@ public class RegisterView extends Div {
     private WooUserServiceClient userServiceClient;
 
     public final static String ROUTE = "register";
-    private static final String TOKEN_COOKIE = "token";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
-    private final String BUTTON_HEIGHT = "38px";
-    private final String ICON_SIZE = "28px";
 
     @PostConstruct
     public void init() {

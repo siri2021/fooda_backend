@@ -1,15 +1,13 @@
-package it.vkod.woo.order.service.payloads.res;
+package it.vkod.woo.product.client.pojo.order.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class TaxesItem {
+public class OrderResponseTaxesItem {
     @Getter
     @Setter
     private String total;

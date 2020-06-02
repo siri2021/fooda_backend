@@ -1,23 +1,19 @@
-package it.vkod.woo.product.client.pojo.order.req;
+package it.vkod.woo.product.client.pojo.order.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @JsonAutoDetect
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class OrderBilling {
+public class OrderResponseShipping {
     @Getter
     @Setter
     private String country;
     @Getter
     @Setter
     private String city;
-    @Getter
-    @Setter
-    private String phone;
     @Getter
     @Setter
     private String address_1;
@@ -32,11 +28,11 @@ public class OrderBilling {
     private String last_name;
     @Getter
     @Setter
+    private String company;
+    @Getter
+    @Setter
     private String state;
     @Getter
     @Setter
     private String first_name;
-    @Getter
-    @Setter
-    private String email;
 }

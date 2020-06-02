@@ -1,4 +1,4 @@
-package it.vkod.woo.product.client.views;
+package it.vkod.woo.product.client.views.mobile;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -9,9 +9,13 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.spring.annotation.UIScope;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
 
+@Slf4j
 @PWA(name = "Fooda",
         shortName = "Fooda",
         iconPath = "woo-product-client/src/main/webapp/icons/logo-1024x1024.png")

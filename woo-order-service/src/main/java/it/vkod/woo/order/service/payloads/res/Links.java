@@ -1,6 +1,7 @@
 package it.vkod.woo.order.service.payloads.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class Links {
     @Getter

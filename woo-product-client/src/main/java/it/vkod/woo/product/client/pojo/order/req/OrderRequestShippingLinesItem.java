@@ -7,15 +7,16 @@ import lombok.*;
 @JsonAutoDetect
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder(toBuilder = true)
-public class OrderLineItemsItem {
+public class OrderRequestShippingLinesItem {
     @Getter
     @Setter
-    private int quantity;
+    private String total;
     @Getter
     @Setter
-    private int variation_id;
+    private String method_id;
     @Getter
     @Setter
-    private int product_id;
+    private String method_title;
 }

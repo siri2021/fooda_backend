@@ -1,4 +1,4 @@
-package it.vkod.woo.product.client.views;
+package it.vkod.woo.product.client.views.mobile;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
@@ -11,6 +11,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
@@ -21,6 +22,7 @@ import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import it.vkod.woo.product.client.pojo.product.res.ProductResponse;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import it.vkod.woo.product.client.clients.WooMatchServiceClient;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,8 +30,9 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import java.util.Arrays;
 
-import static it.vkod.woo.product.client.views.SearchView.ROUTE;
+import static it.vkod.woo.product.client.views.mobile.SearchView.ROUTE;
 
+@Slf4j
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
@@ -69,7 +72,14 @@ public class SearchView extends Div {
 
     @PostConstruct
     public void init() {
+        if (getTokenCookie() == null)
+            UI.getCurrent().navigate("");
+
         setClassName("container-fluid");
+
+        ProgressBar progressBar = new ProgressBar(0, 100, 25);
+        add(progressBar);
+
         getSearchText();
     }
 
@@ -80,15 +90,20 @@ public class SearchView extends Div {
         searchDiv.getStyle()
                 .set("background", BG_COLOR)
                 .set("color", TEXT_COLOR)
+                .set("height", "48px")
+                .set("text-align", "center")
                 .set("margin-left", "0")
                 .set("margin-right", "0")
-                .set("margin-top", "10%");
+                .set("vertical-align", "middle")
+                .set("margin-top", "5%");
 
         TextField searchTextField = new TextField();
         searchTextField.getStyle()
                 .set("background", BG_COLOR)
                 .set("color", TEXT_COLOR)
-                .set("width", "250px")
+                .set("margin-left", "0")
+                .set("margin-right", "0")
+                .set("width", "55%")
                 .set("align", "center");
         searchTextField.setValueChangeMode(ValueChangeMode.EAGER);
         searchTextField.getElement().callJsFunction("focus");
@@ -97,7 +112,9 @@ public class SearchView extends Div {
         searchButton.getStyle()
                 .set("background", BG_COLOR)
                 .set("color", TEXT_COLOR)
-                .set("width", "50px");
+                .set("margin-left", "0")
+                .set("margin-right", "0")
+                .set("width", "35%");
         searchButton.addClickListener(click -> searchProducts(searchTextField.getValue().toLowerCase()));
 
         searchDiv.add(searchTextField, searchButton);
@@ -140,15 +157,17 @@ public class SearchView extends Div {
         cardTitleSpan.setClassName("card-title");
         cardTitleSpan.setText(productResponse.getName());
         final Icon addButtonIcon = VaadinIcon.PLUS_CIRCLE_O.create();
-        addButtonIcon.setSize("48px");
+        addButtonIcon.setSize("28px");
         Button addButton = new Button(
                 productResponse.getSalePrice() == null ? productResponse.getPrice().toString() : productResponse.getSalePrice()
                 , addButtonIcon
         );
-        addButton.setClassName("btn-floating halfway-fab waves-effect waves-light blue");
+//        addButton.setClassName("btn-floating halfway-fab waves-effect waves-light blue");
+        addButton.setClassName("btn-floating halfway-fab");
         addButton.getStyle()
                 .set("height", "48px")
-                .set("width", "120px");
+                .set("width", "120px")
+                .set("background-color", BG_COLOR);
         addButton.addClickListener(click -> {
             basketServiceClient.apiAddBasketProduct(BasketProduct.builder()
                     .userId(getTokenCookie().getValue())

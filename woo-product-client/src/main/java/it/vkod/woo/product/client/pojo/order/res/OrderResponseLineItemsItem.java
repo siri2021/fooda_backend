@@ -1,7 +1,6 @@
-package it.vkod.woo.order.service.payloads.res;
+package it.vkod.woo.product.client.pojo.order.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +8,8 @@ import lombok.Setter;
 import java.util.List;
 
 @JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class LineItemsItem {
+public class OrderResponseLineItemsItem {
     @Getter
     @Setter
     private int quantity;
@@ -20,7 +18,7 @@ public class LineItemsItem {
     private String tax_class;
     @Getter
     @Setter
-    private List<TaxesItem> taxes;
+    private List<OrderResponseTaxesItem> taxes;
     @Getter
     @Setter
     private String total_tax;

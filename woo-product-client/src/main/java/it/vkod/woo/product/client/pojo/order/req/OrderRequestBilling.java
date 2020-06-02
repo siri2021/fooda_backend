@@ -1,17 +1,14 @@
-package it.vkod.woo.order.service.payloads.res;
+package it.vkod.woo.product.client.pojo.order.req;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 @JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Billing {
+@Builder(toBuilder = true)
+public class OrderRequestBilling {
     @Getter
     @Setter
     private String country;
@@ -33,9 +30,6 @@ public class Billing {
     @Getter
     @Setter
     private String last_name;
-    @Getter
-    @Setter
-    private String company;
     @Getter
     @Setter
     private String state;

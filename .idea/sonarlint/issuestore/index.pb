@@ -501,18 +501,8 @@ P
  woo-product-client/npm-debug.log,c/8/c8d55a4044a35f810f3600c544f48c0c0224f6e0
 M
 .idea/dictionaries/yilmaz.xml,e/e/eef4e9891ae6a9813860702bdda45b3e1afa9d91
-Ç
-Rwoo-product-client/src/main/java/it/vkod/woo/product/client/views/PaymentView.java,0\b\0bd7ecb6048220c9fb24bf7e4a0e92b698b7b04f
-
-Owoo-product-client/src/main/java/it/vkod/woo/product/client/views/CartView.java,3\5\359481d78b10eb7477c2c372daaf3ab63571a50f
-Å
-Qwoo-product-client/src/main/java/it/vkod/woo/product/client/views/SearchView.java,4\c\4c5820cd7e00e2303a62aa86e2efa9ae6edeb52f
-
-Owoo-product-client/src/main/java/it/vkod/woo/product/client/views/UniqueID.java,a/b/abaa9c8f67164e799e2bce43bed14c7d924dc047
 Å
 Qwoo-product-client/src/main/java/it/vkod/woo/product/client/views/MasterView.java,e\0\e0a0f848d19f97fb0ac6914026e44a31836cba0e
-Ç
-Rwoo-product-client/src/main/java/it/vkod/woo/product/client/views/ContactView.java,0\5\0548d5f70125f25c6c543e2747bc81820ac268d0
 I
 woo-order-service/pom.xml,8/9/89080bb98f7cac3abbe8b1e08f6786f199fba3c0
 L
@@ -527,10 +517,6 @@ F
 woo-order-service/mvnw,a/5/a576c899a4fa87763b37273aaf99ab60f62e4cbc
 J
 woo-order-service/mvnw.cmd,d/d/dd1a780ac3b6f15ed905846a2a4c8d940338486d
-Ä
-Pwoo-product-client/src/main/java/it/vkod/woo/product/client/views/LoginView.java,2\6\2632dd43ec20de0a265cb5424559940e198e597d
-É
-Swoo-product-client/src/main/java/it/vkod/woo/product/client/views/RegisterView.java,5\b\5b21afa9e675b8736a52f9fb06a8f3ca4a075152
 I
 woo-store-service/pom.xml,e\5\e502ce2d3e334da0ef1341979e51b66169d7dd80
 k
@@ -703,3 +689,21 @@ H
 woo-store-client/pom.xml,4\a\4a7dcae8bb590856ac80f4ca912ce42f1623278b
 ;
 run-win.bat,6\b\6b892ceafe153b450c1dd97cebb9d71071ececa0
+m
+=woo-product-service/src/main/resources/application.properties,e\5\e584e1a71baafbd2a55b7e9b1bdab4b8346ceede
+Ä
+Pwoo-basket-service/src/main/java/it/vkod/woo/basket/service/ctrl/BasketCtrl.java,9\3\93ce6bc0e65ea19b7569fc93b2940ee61b72e805
+Ü
+Vwoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/CartView.java,a\3\a3cd61fc999f40dda7800c24e80b0d97fa88cc4f
+á
+Wwoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/LoginView.java,0\1\018b822e1e498ae5a3b7296b77ba44dc35c658bd
+â
+Ywoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/ContactView.java,0\e\0e6533382e4e4508962d1b2d0f895912ced395ce
+à
+Xwoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/MasterView.java,d\1\d1dc65e3a349b02334f7daaba14b7397698e716b
+â
+Ywoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/PaymentView.java,7\7\77b933d8c93627c04bb40d0088cbc08e6c91c6a8
+ä
+Zwoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/RegisterView.java,9\3\93fb447cf287f32c73230dad33b4d20a4088d191
+à
+Xwoo-product-client/src/main/java/it/vkod/woo/product/client/views/mobile/SearchView.java,7\a\7afb91950d93ebdca461b99f503e349c48496c40

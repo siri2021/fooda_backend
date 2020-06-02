@@ -66,4 +66,9 @@ public class WooBasketServiceClient {
         return rest.getForObject(getBasketServiceUrl() + "api/basket/billing/select/" + userId, BasketBilling[].class);
     }
 
+    public void apiClearBasketProducts(final String userId) {
+        log.info("Basket products from " + userId + " is cleared.");
+        rest.delete(getBasketServiceUrl() + "api/basket/products/clear/" + userId);
+    }
+
 }

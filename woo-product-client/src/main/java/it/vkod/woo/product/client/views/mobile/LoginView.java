@@ -1,5 +1,6 @@
-package it.vkod.woo.product.client.views;
+package it.vkod.woo.product.client.views.mobile;
 
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -27,8 +28,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static it.vkod.woo.product.client.views.LoginView.ROUTE;
-import static java.lang.System.*;
+import static it.vkod.woo.product.client.views.mobile.LoginView.ROUTE;
 
 @Slf4j
 @UIScope
@@ -68,6 +68,7 @@ public class LoginView extends Div {
 
         // Create the fields
         TextField username = new TextField();
+        username.setAutoselect(true);
         username.getStyle()
                 .set("background", TEXT_COLOR)
                 .set("color", "black")
@@ -96,6 +97,7 @@ public class LoginView extends Div {
         password.addValueChangeListener(event -> usernameOrEmailBinding.validate());
 
         Button loginButton = new Button("Login");
+        loginButton.addClickShortcut(Key.ENTER);
         loginButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("width", "55%");
         loginButton.addClickListener(event -> {
             if (binder.writeBeanIfValid(loginInfo)) {

@@ -1,7 +1,6 @@
 package it.vkod.woo.product.client.pojo.order.req;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.List;
@@ -15,23 +14,23 @@ import java.util.List;
 public class OrderRequest {
     @Getter
     @Setter
-    private List<OrderShippingLinesItem> shipping_lines;
+    private List<OrderRequestShippingLinesItem> shipping_lines;
     @Getter
     @Setter
     private boolean set_paid;
     @Getter
     @Setter
-    private OrderShipping shipping;
+    private OrderRequestShipping shipping;
     @Getter
     @Setter
     private String payment_method_title;
     @Getter
     @Setter
-    private List<OrderLineItemsItem> line_items;
+    private List<OrderRequestLineItemsItem> line_items;
     @Getter
     @Setter
     private String payment_method;
     @Getter
     @Setter
-    private OrderBilling billing;
+    private OrderRequestBilling billing;
 }

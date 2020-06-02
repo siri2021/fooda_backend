@@ -1,4 +1,4 @@
-package it.vkod.woo.product.client.views;
+package it.vkod.woo.product.client.views.mobile;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -6,7 +6,9 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BinderValidationStatus;
@@ -22,6 +24,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import it.vkod.woo.product.client.pojo.basket.req.BasketBilling;
 import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -30,8 +33,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static it.vkod.woo.product.client.views.ContactView.ROUTE;
+import static it.vkod.woo.product.client.views.mobile.ContactView.ROUTE;
 
+@Slf4j
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
@@ -46,11 +50,16 @@ public class ContactView extends Div {
     public final static String ROUTE = "contact";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
-    private final String BUTTON_HEIGHT = "48px";
 
     @PostConstruct
     public void init() {
+        if(getTokenCookie() == null)
+            UI.getCurrent().navigate("");
+
         setClassName("container-fluid");
+
+        ProgressBar progressBar = new ProgressBar(0, 100, 75);
+        add(progressBar);
 
         final BasketShipping[] shippingList = basketServiceClient.apiGetBasketShipping(getTokenCookie().getValue());
         final BasketBilling[] billingList = basketServiceClient.apiGetBasketBilling(getTokenCookie().getValue());
@@ -64,7 +73,6 @@ public class ContactView extends Div {
         if (shippingList.length > 0) {
             createShippingAddressForm(shippingList[0], true);
         }
-
     }
 
     private BasketShipping mapShippingWithBillingAddress(final BasketBilling basketBilling) {
@@ -82,7 +90,7 @@ public class ContactView extends Div {
     private void createBillingAddressForm(final BasketBilling basketBilling, final boolean autoFill) {
 
         Div addressFormDiv = new Div();
-        addressFormDiv.setText("BasketBilling address".toUpperCase());
+        addressFormDiv.setText("billing address".toUpperCase());
         addressFormDiv.setClassName("card");
         addressFormDiv.getStyle().set("margin-left", "5px").set("margin-right", "5px");
 
@@ -135,7 +143,7 @@ public class ContactView extends Div {
         Button resetButton = new Button("Reset");
         resetButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR);
 
-        Checkbox autoFillShipping = new Checkbox("Auto-fill Shipping");
+        Checkbox autoFillShipping = new Checkbox("Also send products to this address.");
         autoFillShipping.getStyle().set("background", TEXT_COLOR).set("color", "black").set("width", "100%");
 
         layoutWithBinder.addFormItem(firstName, "First name");

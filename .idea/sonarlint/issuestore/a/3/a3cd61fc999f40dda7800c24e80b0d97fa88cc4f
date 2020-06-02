@@ -1,0 +1,13 @@
+
+C
+java:S1170'"!Make this final field static too.(­ÂõÌøÿÿÿÿ8·ò’Ô—.
+v	java:S116("URename this field "TEXT_COLOR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ž€˜€ÿÿÿÿÿ8Œ³ˆú¦.
+W
+java:S1948#"5Make "basketServiceClient" transient or serializable.(‹éœøûÿÿÿÿ8°ðù”¢.
+`
+java:S1124&"EReorder the modifiers to comply with the Java Language Specification.(–¨‹—ùÿÿÿÿ
+t	java:S116'"SRename this field "BG_COLOR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÂõÌøÿÿÿÿ8·ò’Ô—.
+C
+java:S1170("!Make this final field static too.(ž€˜€ÿÿÿÿÿ8Œ³ˆú¦.
+j
+java:S2259-"MA "NullPointerException" could be thrown; "getTokenCookie()" can return null.(¯”™ç8‰„ùß¦.

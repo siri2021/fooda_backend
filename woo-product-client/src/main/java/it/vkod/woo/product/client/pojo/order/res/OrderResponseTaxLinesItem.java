@@ -1,7 +1,6 @@
-package it.vkod.woo.order.service.payloads.res;
+package it.vkod.woo.product.client.pojo.order.res;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,18 +8,17 @@ import lombok.Setter;
 import java.util.List;
 
 @JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class TaxLinesItem {
+public class OrderResponseTaxLinesItem {
     @Getter
     @Setter
-    private String taxTotal;
+    private String tax_total;
     @Getter
     @Setter
-    private int rateId;
+    private int rate_id;
     @Getter
     @Setter
-    private List<Object> metaData;
+    private List<Object> meta_data;
     @Getter
     @Setter
     private int id;
@@ -29,11 +27,11 @@ public class TaxLinesItem {
     private String label;
     @Getter
     @Setter
-    private String rateCode;
+    private String rate_code;
     @Getter
     @Setter
     private boolean compound;
     @Getter
     @Setter
-    private String shippingTaxTotal;
+    private String shipping_tax_total;
 }
