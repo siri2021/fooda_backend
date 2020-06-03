@@ -1,6 +1,5 @@
 package it.vkod.woo.product.client.views.mobile;
 
-import com.google.gson.Gson;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -24,6 +23,7 @@ import it.vkod.woo.product.client.pojo.basket.req.BasketBilling;
 import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
 import it.vkod.woo.product.client.pojo.order.req.*;
+import it.vkod.woo.product.client.pojo.order.res.OrderResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -106,8 +106,10 @@ public class PaymentView extends Div {
                 .set("height", BUTTON_HEIGHT)
                 .set("width", "90%");
         confirmPaymentMethodButton.addClickListener(addClick -> {
-            createOrderRequestWithOrderApi(storeId, basketProducts);
-            basketServiceClient.apiClearBasketProducts(getTokenCookie().getValue());
+            final OrderResponse orderResponse = createOrderRequestWithOrderApi(storeId, basketProducts);
+            log.info(orderResponse.toString());
+            confirmPaymentMethodButton.setEnabled(false);
+            //            basketServiceClient.apiClearBasketProducts(getTokenCookie().getValue());
         });
 
         RadioButtonGroup<String> paymentMethodRadioGroup = new RadioButtonGroup<>();
@@ -120,7 +122,7 @@ public class PaymentView extends Div {
         return basketInfoDiv;
     }
 
-    private void createOrderRequestWithOrderApi(final long storeId, List<BasketProduct> basketProducts) {
+    private OrderResponse createOrderRequestWithOrderApi(final long storeId, List<BasketProduct> basketProducts) {
 
         BasketShipping shipping = basketServiceClient.apiGetBasketShipping(getTokenCookie().getValue())[0];
         BasketBilling billing = basketServiceClient.apiGetBasketBilling(getTokenCookie().getValue())[0];
@@ -167,12 +169,10 @@ public class PaymentView extends Div {
                 .set_paid(false)
                 .build();
 
-        Gson gson = new Gson();
-        log.info(gson.toJson(orderRequest));
+        final OrderResponse orderResponse = orderServiceClient.apiAddOrderWithResponse(orderRequest, storeId);
+        new Notification("Your order is " + orderResponse.getId() + "  created!", 4000).open();
 
-
-        orderServiceClient.apiAddOrder(orderRequest, storeId);
-        new Notification("Your order is successfully created!", 4000).open();
+        return orderResponse;
     }
 
     private Cookie getTokenCookie() {

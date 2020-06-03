@@ -11,7 +11,7 @@ public interface OrderCtrl<RES, REQ> {
     RES apiGetOrderOne(@PathVariable("id") final long id);
 
     @PostMapping
-    void apiPostOrderOne(@RequestBody final REQ order);
+    RES apiPostOrderOne(@RequestBody final REQ order);
 
     @PutMapping("{id}")
     void apiPutOrderOne(@PathVariable("id") final long id, @RequestBody final REQ order);

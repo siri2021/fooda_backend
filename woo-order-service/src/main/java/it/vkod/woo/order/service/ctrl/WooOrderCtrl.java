@@ -53,12 +53,17 @@ public class WooOrderCtrl implements OrderCtrl<WooOrderResponse, WooOrderRequest
     }
 
     @Override
-    public void apiPostOrderOne(final WooOrderRequest order) {
+    public WooOrderResponse apiPostOrderOne(final WooOrderRequest order) {
         final Map<String, Object> orderMap = mapper.convertValue(order, new TypeReference<Map<String, Object>>() {
         });
         @SuppressWarnings("unchecked")    // we'll throw an exception from service to simulate a failure
         final Map<String, Object> createdOrder = woo.create(EndpointBaseType.ORDERS.getValue(), orderMap);
+
         log.info(createdOrder.toString());
+
+        final WooOrderResponse wooOrderResponse = mapper.convertValue(orderMap, WooOrderResponse.class);
+        wooOrderResponse.setStore_id(storeId);
+        return wooOrderResponse;
     }
 
     @Override

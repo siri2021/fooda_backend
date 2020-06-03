@@ -36,4 +36,8 @@ public class WooOrderServiceClient {
         rest.postForObject(getOrderServiceUrl(storeId) + "api/orders/", orderRequest, OrderRequest.class);
     }
 
+    public OrderResponse apiAddOrderWithResponse(final OrderRequest orderRequest, final long storeId) {
+        return rest.postForObject(getOrderServiceUrl(storeId) + "api/orders/", orderRequest, OrderResponse.class);
+    }
+
 }
