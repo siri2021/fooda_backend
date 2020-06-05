@@ -31,26 +31,24 @@ import static it.vkod.woo.product.client.views.mobile.RegisterView.ROUTE;
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
-@CssImport("./styles/materialize.min.css")
-@CssImport("./styles/custom-card.css")
+@CssImport("./styles/responsive.css")
 public class RegisterView extends Div {
 
     @Autowired
     private WooUserServiceClient userServiceClient;
 
-    public final static String ROUTE = "register";
+    public final static String ROUTE = "mobile-register";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
 
     @PostConstruct
     public void init() {
-        setClassName("container-fluid");
-
         Div registerFormDiv = new Div();
-        registerFormDiv.setClassName("card");
+        registerFormDiv.setClassName("row");
         registerFormDiv.getStyle().set("margin-left", "5px").set("margin-right", "5px").set("margin-top", "60%");
 
         FormLayout layoutWithBinder = new FormLayout();
+        layoutWithBinder.setClassName("column");
         layoutWithBinder.getStyle().set("margin-left", "5px").set("margin-right", "5px");
         Binder<SignUpRequest> binder = new Binder<>();
 

@@ -1,0 +1,6 @@
+
+y	java:S116$"]Rename this field "shipping_tax_total" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëÕÉ“8Òòö·§.
+s	java:S116"RRename this field "rate_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰éÅ„úÿÿÿÿ8£õ·§.
+o	java:S116"TRename this field "rate_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùÙíf8€ö·§.
+p	java:S116"TRename this field "meta_data" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ˆğ8¯¹õ·§.
+p	java:S116"TRename this field "tax_total" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²Òí³8Òòô·§.

@@ -1,0 +1,5 @@
+
+`
+java:S1128"JRemove this unused import 'com.fasterxml.jackson.annotation.JsonProperty'.(ËÃ§Ï
+q	java:S116"WRename this field "variation_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ëÃ„øÿÿÿÿ
+o	java:S116"URename this field "product_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Îšßûüÿÿÿÿ

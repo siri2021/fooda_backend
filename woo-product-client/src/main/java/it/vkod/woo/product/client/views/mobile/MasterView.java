@@ -3,23 +3,22 @@ package it.vkod.woo.product.client.views.mobile;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.List;
 
 @Slf4j
-@PWA(name = "Fooda",
-        shortName = "Fooda",
-        iconPath = "woo-product-client/src/main/webapp/icons/logo-1024x1024.png")
+//@PWA(name = "Fooda", shortName = "Fooda")
 @UIScope
+@SpringComponent
+@CssImport("./styles/responsive.css")
 public class MasterView extends AppLayout {
 
     private final String BG_COLOR = "#3333FF";

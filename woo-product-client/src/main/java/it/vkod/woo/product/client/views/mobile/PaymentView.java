@@ -40,8 +40,7 @@ import static it.vkod.woo.product.client.views.mobile.PaymentView.ROUTE;
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
-@CssImport("./styles/materialize.min.css")
-@CssImport("./styles/custom-card.css")
+@CssImport("./styles/responsive.css")
 public class PaymentView extends Div {
 
     @Autowired
@@ -51,7 +50,7 @@ public class PaymentView extends Div {
     private WooOrderServiceClient orderServiceClient;
 
     private static final String TOKEN_COOKIE = "token";
-    public final static String ROUTE = "payment";
+    public final static String ROUTE = "mobile-payment";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
     private final String BUTTON_HEIGHT = "38px";

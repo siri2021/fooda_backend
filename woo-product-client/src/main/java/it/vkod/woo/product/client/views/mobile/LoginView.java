@@ -7,7 +7,8 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.textfield.EmailField;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BinderValidationStatus;
 import com.vaadin.flow.data.binder.BindingValidationStatus;
@@ -17,8 +18,8 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.pojo.auth.request.LoginRequest;
 import it.vkod.woo.product.client.clients.WooUserServiceClient;
+import it.vkod.woo.product.client.pojo.auth.request.LoginRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,22 +35,19 @@ import static it.vkod.woo.product.client.views.mobile.LoginView.ROUTE;
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
-@CssImport("./styles/materialize.min.css")
-@CssImport("./styles/custom-card.css")
+@CssImport("./styles/responsive.css")
 public class LoginView extends Div {
 
     @Autowired
     private WooUserServiceClient userServiceClient;
 
-    public final static String ROUTE = "";
+    public final static String ROUTE = "mobile-login";
     private static final String TOKEN_COOKIE = "token";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
 
     @PostConstruct
     public void init() {
-        setClassName("container-fluid");
-
         Div loginFormDiv = new Div();
         loginFormDiv.setClassName("card");
         loginFormDiv.getStyle()
@@ -67,33 +65,33 @@ public class LoginView extends Div {
         LoginRequest loginInfo = new LoginRequest();
 
         // Create the fields
-        TextField username = new TextField();
-        username.setAutoselect(true);
-        username.getStyle()
+        EmailField email = new EmailField();
+        email.setAutoselect(true);
+        email.getStyle()
                 .set("background", TEXT_COLOR)
                 .set("color", "black")
                 .set("width", "100%");
-        username.setValueChangeMode(ValueChangeMode.EAGER);
-        TextField password = new TextField();
+        email.setValueChangeMode(ValueChangeMode.EAGER);
+        PasswordField password = new PasswordField();
         password.getStyle()
                 .set("background", TEXT_COLOR)
                 .set("color", "black")
                 .set("width", "100%");
         password.setValueChangeMode(ValueChangeMode.EAGER);
 
-        SerializablePredicate<String> userAndPasswordValidator = value -> !username.getValue().trim().isEmpty() || !password.getValue().trim().isEmpty();
+        SerializablePredicate<String> userAndPasswordValidator = value -> !email.getValue().trim().isEmpty() || !password.getValue().trim().isEmpty();
 
         // username/email and password have specific validators
-        Binder.Binding<LoginRequest, String> usernameOrEmailBinding = binder.forField(username)
-                .withValidator(userAndPasswordValidator, "Both username/email and password cannot be empty")
+        Binder.Binding<LoginRequest, String> usernameOrEmailBinding = binder.forField(email)
+                .withValidator(userAndPasswordValidator, "Both email and password cannot be empty")
                 .bind(LoginRequest::getUsernameOrEmail, LoginRequest::setUsernameOrEmail);
 
         Binder.Binding<LoginRequest, String> passwordBinding = binder.forField(password)
-                .withValidator(userAndPasswordValidator, "Both username/email and password cannot be empty")
+                .withValidator(userAndPasswordValidator, "Both email and password cannot be empty")
                 .bind(LoginRequest::getPassword, LoginRequest::setPassword);
 
         // Trigger cross-field validation when the other field is changed
-        username.addValueChangeListener(event -> passwordBinding.validate());
+        email.addValueChangeListener(event -> passwordBinding.validate());
         password.addValueChangeListener(event -> usernameOrEmailBinding.validate());
 
         Button loginButton = new Button("Login");
@@ -124,7 +122,7 @@ public class LoginView extends Div {
         registerButton.getStyle().set("background", BG_COLOR).set("color", TEXT_COLOR).set("width", "30%");
         registerButton.addClickListener(event -> UI.getCurrent().navigate("register"));
 
-        loginLayout.addFormItem(username, "Username/Email");
+        loginLayout.addFormItem(email, "Username/Email");
         loginLayout.addFormItem(password, "Password");
         loginFormDiv.add(loginLayout);
         loginFormDiv.add(registerButton, loginButton);

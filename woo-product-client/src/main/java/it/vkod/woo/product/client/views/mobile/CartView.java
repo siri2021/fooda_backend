@@ -1,19 +1,18 @@
 package it.vkod.woo.product.client.views.mobile;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
+import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,29 +28,20 @@ import static it.vkod.woo.product.client.views.mobile.CartView.ROUTE;
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
-@CssImport("./styles/materialize.min.css")
-@CssImport("./styles/custom-card.css")
+@CssImport("./styles/responsive.css")
 public class CartView extends Div {
 
     @Autowired
     private WooBasketServiceClient basketServiceClient;
 
     private static final String TOKEN_COOKIE = "token";
-    public final static String ROUTE = "basket";
+    public final static String ROUTE = "mobile-basket";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
     private final String DEFAULT_FONT_SIZE = "12pt";
 
     @PostConstruct
     public void init() {
-        if (getTokenCookie() == null)
-            UI.getCurrent().navigate("");
-
-        setClassName("container-fluid");
-
-        ProgressBar progressBar = new ProgressBar(0, 100, 50);
-        add(progressBar);
-
         getBasketByUserId(getTokenCookie().getValue());
     }
 

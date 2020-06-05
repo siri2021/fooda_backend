@@ -1,14 +1,11 @@
 package it.vkod.woo.product.client.views.mobile;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BinderValidationStatus;
@@ -21,9 +18,9 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import it.vkod.woo.product.client.pojo.basket.req.BasketBilling;
 import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
-import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,27 +36,19 @@ import static it.vkod.woo.product.client.views.mobile.ContactView.ROUTE;
 @UIScope
 @Route(value = ROUTE, layout = MasterView.class)
 @SpringComponent
-@CssImport("./styles/materialize.min.css")
-@CssImport("./styles/custom-card.css")
+@CssImport("./styles/responsive.css")
 public class ContactView extends Div {
 
     @Autowired
     private WooBasketServiceClient basketServiceClient;
 
     private static final String TOKEN_COOKIE = "token";
-    public final static String ROUTE = "contact";
+    public final static String ROUTE = "mobile-delivery";
     private final String BG_COLOR = "#3333FF";
     private final String TEXT_COLOR = "white";
 
     @PostConstruct
     public void init() {
-        if(getTokenCookie() == null)
-            UI.getCurrent().navigate("");
-
-        setClassName("container-fluid");
-
-        ProgressBar progressBar = new ProgressBar(0, 100, 75);
-        add(progressBar);
 
         final BasketShipping[] shippingList = basketServiceClient.apiGetBasketShipping(getTokenCookie().getValue());
         final BasketBilling[] billingList = basketServiceClient.apiGetBasketBilling(getTokenCookie().getValue());
