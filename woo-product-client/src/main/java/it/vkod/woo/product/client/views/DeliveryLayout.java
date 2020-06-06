@@ -2,9 +2,10 @@ package it.vkod.woo.product.client.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Route(value = "delivery", layout = MainAppLayout.class)
-@CssImport("./styles/responsive.css")
+@StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class DeliveryLayout extends AbstractView {
 
     private final transient WooBasketServiceClient basketServiceClient;
@@ -51,6 +52,8 @@ public class DeliveryLayout extends AbstractView {
         if (shippingList.length > 0) {
             initDeliveryAddress(shippingList[0], true);
         }
+
+        add(layoutContent);
     }
 
     private BasketShipping mapAddresses(final BasketBilling basketBilling) {
@@ -65,12 +68,41 @@ public class DeliveryLayout extends AbstractView {
                 .build();
     }
 
+    /**
+     *  <div class="row">
+     *     <div class="col s12 m6">
+     *       <div class="card blue darken-1">
+     *         <div class="card-content white-text">
+     *           <span class="card-title">Card Title</span>
+     *           <p>I am a very simple card. I am good at containing small bits of information.
+     *           I am convenient because I require little markup to use effectively.</p>
+     *         </div>
+     *         <div class="card-action">
+     *           <a href="#">This is a link</a>
+     *           <a href="#">This is a link</a>
+     *         </div>
+     *       </div>
+     *     </div>
+     *   </div>
+     * @param basketBilling Billing address can be different than delivery, up to customer's choice.
+     * @param autoFill if customer wants to delivery to the same address with billing, this is set to true
+     */
     private void initBillingAddress(final BasketBilling basketBilling, final boolean autoFill) {
 
-        Div addressFormDiv = new Div();
-        addressFormDiv.setText("billing address".toUpperCase());
-        addressFormDiv.setClassName("card");
-        addressFormDiv.getStyle().set("margin-left", "10px");
+        Div row = new Div();
+        row.setClassName("row");
+
+        Div col = new Div();
+        col.setClassName("col s12 m6");
+
+        Div card = new Div();
+        card.setClassName("card blue darken-1");
+
+        Div cardContent = new Div();
+        cardContent.setClassName("card-content");
+        Span title = new Span("Billing Address");
+        title.setClassName("card-title");
+        cardContent.add(title);
 
         FormLayout layoutWithBinder = new FormLayout();
         Binder<BasketBilling> binder = new Binder<>();
@@ -191,18 +223,33 @@ public class DeliveryLayout extends AbstractView {
             doNotCall.setValue(false);
         });
 
-        addressFormDiv.add(layoutWithBinder);
-        addressFormDiv.add(resetButton, saveButton);
+        cardContent.add(layoutWithBinder);
 
-        add(addressFormDiv);
+        Div cardActions = new Div();
+        cardActions.setClassName("card-actions");
+        cardActions.add(resetButton, saveButton);
+
+        card.add(cardContent, cardActions);
+
+        layoutContent.add(card);
     }
 
     private void initDeliveryAddress(final BasketShipping contact, final boolean autoFill) {
 
-        Div addressFormDiv = new Div();
-        addressFormDiv.setText("BasketShipping address".toUpperCase());
-        addressFormDiv.setClassName("card");
-        addressFormDiv.getStyle().set("margin-left", "10px");
+        Div row = new Div();
+        row.setClassName("row");
+
+        Div col = new Div();
+        col.setClassName("col s12 m6");
+
+        Div card = new Div();
+        card.setClassName("card");
+
+        Div cardContent = new Div();
+        cardContent.setClassName("card-content");
+        Span title = new Span("Delivery Address");
+        title.setClassName("card-title");
+        cardContent.add(title);
 
         FormLayout layoutWithBinder = new FormLayout();
         Binder<BasketShipping> binder = new Binder<>();
@@ -278,11 +325,15 @@ public class DeliveryLayout extends AbstractView {
 
         resetButton.addClickListener(event -> binder.readBean(null));
 
-        addressFormDiv.add(layoutWithBinder);
-        addressFormDiv.add(resetButton, saveButton);
+        cardContent.add(layoutWithBinder);
 
-        layoutContent.add(addressFormDiv);
-        add(layoutContent);
+        Div cardActions = new Div();
+        cardActions.setClassName("card-actions");
+        cardActions.add(resetButton, saveButton);
+
+        card.add(cardContent, cardActions);
+
+        layoutContent.add(card);
     }
 
     @Override

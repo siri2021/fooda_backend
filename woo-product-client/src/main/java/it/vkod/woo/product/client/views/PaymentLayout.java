@@ -6,6 +6,7 @@ import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -30,7 +31,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Route(value = "payment", layout = MainAppLayout.class)
-//@CssImport("./styles/responsive.css")
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class PaymentLayout extends AbstractView {
 
@@ -53,14 +53,27 @@ public class PaymentLayout extends AbstractView {
         final Map<Long, List<BasketProduct>> groupedBaskets = Arrays
                 .stream(basketServiceClient.apiGetBasketProducts(sessionId))
                 .collect(Collectors.groupingBy(BasketProduct::getStoreId));
-        groupedBaskets.forEach((storeId, baskets) -> layoutContent.add(createBasketInfoDiv(storeId, baskets)));
+        groupedBaskets.forEach(this::createBasketInfoDiv);
         add(layoutContent);
     }
 
-    private Div createBasketInfoDiv(final long storeId, List<BasketProduct> basketProducts) {
+    private void createBasketInfoDiv(final long storeId, List<BasketProduct> basketProducts) {
 
-        Div basketInfoDiv = new Div();
-        basketInfoDiv.setClassName("card");
+        Div row = new Div();
+        row.setClassName("row");
+
+        Div col = new Div();
+        col.setClassName("col s12 m6");
+
+        Div card = new Div();
+        card.setClassName("card");
+
+        Div cardContent = new Div();
+        cardContent.setClassName("card-content");
+        Span title = new Span("Billing Address");
+        title.setClassName("card-title");
+        cardContent.add(title);
+
         AtomicReference<Double> subTotal = new AtomicReference<>((double) 0);
 
         basketProducts.forEach(basketProduct -> {
@@ -72,10 +85,12 @@ public class PaymentLayout extends AbstractView {
         grid.setItems(basketProducts);
         grid.addColumn(BasketProduct::getName).setHeader("Product");
         grid.addColumn(BasketProduct::getQuantity).setHeader("Quantity").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
-        grid.addColumn(BasketProduct::getPrice).setHeader("Price").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
+        grid.addColumn(basketProduct -> new DecimalFormat("##.##").format(basketProduct.getPrice()) + "€").setHeader("Price").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
         grid.addColumn(basketProduct -> new DecimalFormat("##.##").format(basketProduct.getPrice() * basketProduct.getQuantity()) + "€").setHeader("Subtotal").setAutoWidth(true).setTextAlign(ColumnTextAlign.END);
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS, GridVariant.LUMO_ROW_STRIPES);
+        grid.getStyle().set("margin-left", "0").set("margin-right", "0");
         grid.recalculateColumnWidths();
+        grid.setWidthFull();
 
         final Icon icon = VaadinIcon.CREDIT_CARD.create();
         icon.setSize("28px");
@@ -93,8 +108,15 @@ public class PaymentLayout extends AbstractView {
         payment.addThemeVariants(RadioGroupVariant.MATERIAL_VERTICAL);
         payment.setValue("Cash");
 
-        basketInfoDiv.add(grid, payment, button);
-        return basketInfoDiv;
+        cardContent.add(grid, payment);
+
+        Div cardActions = new Div();
+        cardActions.setClassName("card-actions");
+        cardActions.add(button);
+
+        card.add(cardContent, cardActions);
+
+        layoutContent.add(card);
     }
 
     private OrderResponse createOrderRequestWithOrderApi(final long storeId, List<BasketProduct> basketProducts) {
@@ -145,7 +167,7 @@ public class PaymentLayout extends AbstractView {
                 .build();
 
         final OrderResponse orderResponse = orderServiceClient.apiAddOrderWithResponse(orderRequest, storeId);
-        new Notification("Your order is " + orderResponse.getId() + "  created!", 4000).open();
+        new Notification("Your order is created!", 3000).open();
 
         return orderResponse;
     }

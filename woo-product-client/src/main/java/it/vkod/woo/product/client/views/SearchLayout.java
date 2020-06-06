@@ -118,40 +118,6 @@ public class SearchLayout extends AbstractView {
         layoutContent.add(row);
     }
 
-    private void searchProducts(final String search) {
-
-        Div row = new Div();
-        row.setClassName("row");
-
-        Arrays
-                .stream(matchServiceClient.apiGetMatchFromAllStores(search))
-                .forEach(productResponse -> {
-                    Div column = new Div();
-                    column.setClassName("column");
-                    Div productCard = new Div();
-                    productCard.setClassName("product-div");
-                    Image image = new Image(productResponse.getImages().get(0).getSrc(), productResponse.getImages().get(0).getAlt());
-                    image.setClassName("product-img");
-                    H4 header = new H4(productResponse.getName());
-                    Paragraph price = new Paragraph((productResponse.getPrice() != null ? productResponse.getPrice() : productResponse.getRegularPrice()) + "€");
-                    price.setClassName("product-price");
-                    Paragraph description = new Paragraph();
-                    final String htmlElementsRegex = "<[^>]*>";
-                    description.setText(productResponse.getDescription().replaceAll(htmlElementsRegex, ""));
-                    Paragraph buttons = new Paragraph();
-                    Button add = new Button("Add to Basket");
-                    add.setClassName("product-button");
-                    add.addClickListener(callAddToBasket(productResponse));
-                    buttons.add(add);
-
-                    productCard.add(image, header, price, description, buttons);
-                    column.add(productCard);
-                    row.add(column);
-                });
-
-        layoutContent.add(row);
-    }
-
     @NotNull
     private ComponentEventListener<ClickEvent<Button>> callAddToBasket(ProductResponse productResponse) {
         return click -> {
