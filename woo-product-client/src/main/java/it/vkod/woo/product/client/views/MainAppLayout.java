@@ -25,13 +25,13 @@ import org.springframework.stereotype.Component;
 @UIScope // optional but useful; allows access to this instance from views, see View1.
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
     private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-    private DefaultBadgeHolder badge = new DefaultBadgeHolder(5);
+    private DefaultBadgeHolder badge = new DefaultBadgeHolder(0);
 
     public MainAppLayout() {
         notifications.addClickListener(notification -> {/* ... */});
 
         final LeftNavigationItem search = new LeftNavigationItem("Search", VaadinIcon.SEARCH.create(), SearchLayout.class);
-        final LeftNavigationItem shops = new LeftNavigationItem("Shops", VaadinIcon.SEARCH.create(), SearchLayout.class);
+        final LeftNavigationItem shops = new LeftNavigationItem("Shops", VaadinIcon.SHOP.create(), ShopsLayout.class);
         final LeftNavigationItem delivery = new LeftNavigationItem("Delivery", VaadinIcon.CAR.create(), DeliveryLayout.class);
         final LeftNavigationItem payment = new LeftNavigationItem("Payment", VaadinIcon.HOME.create(), PaymentLayout.class);
         final LeftNavigationItem basket = new LeftNavigationItem("Basket", VaadinIcon.CART.create(), BasketLayout.class);
@@ -41,7 +41,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withTitle("May the Food be with you!")
                 .withAppBar(AppBarBuilder.get().add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
-                .withAppMenu(LeftAppMenuBuilder.get().add(search, shops, delivery, payment, basket, orders)
+                .withAppMenu(LeftAppMenuBuilder.get().add(search, shops, basket, delivery, payment, orders)
                         .build())
                 .build());
     }
