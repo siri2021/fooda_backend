@@ -99,6 +99,7 @@ public class PaymentCard extends Div {
         c.setSize("28px");
         Button b = new Button("Confirm order with " + new DecimalFormat("##.##").format(subtotal) + "€", c);
         b.setWidthFull();
+        b.getStyle().set("margin-left", "10px").set("margin-right", "10px");
         b.addClickListener(confirmEvent);
 
         cardContent.add(i, t, p, b);

@@ -73,44 +73,29 @@ public class PaymentLayout extends AbstractView {
             final double price = basketProduct.getPrice() * basketProduct.getQuantity();
             subTotal.updateAndGet(v -> v + price);
         });
-//
-//        VerticalLayout orderInfo = new VerticalLayout();
-//
-//        final Grid<BasketProduct> grid = new Grid<>();
-//        grid.setSelectionMode(Grid.SelectionMode.NONE);
-//        grid.setItems(basketProducts);
-//        grid.addColumn(BasketProduct::getName).setHeader("Product").setAutoWidth(true);
-//        grid.addColumn(BasketProduct::getQuantity).setHeader("Qty").setAutoWidth(true);
-//        grid.addColumn(b -> new DecimalFormat("##.##").format(b.getPrice() * b.getQuantity()) + "€").setHeader("Subtotal").setAutoWidth(true);
-//        grid.setWidthFull();
-//        grid.recalculateColumnWidths();
-//
-//        Image logo = new Image("https://www.codespromo.be/wp-content/uploads/2017/02/Pizzahut.jpg", "logo");
-//        logo.setMaxWidth("150px");
-//
-//        ComboBox<String> payment = new ComboBox<>();
-//        payment.setItems("Cash on Delivery", "Credit Card on delivery", "Bancontact", "PayPal");
-//        payment.setLabel("Payment Method");
-//        payment.setWidthFull();
-//        payment.addValueChangeListener(valueChanged -> paymentMethod = valueChanged.getValue());
-//
-//        final Icon icon = VaadinIcon.CREDIT_CARD.create();
-//        icon.setSize("28px");
-//        Button button = new Button("Confirm order with " + new DecimalFormat("##.##").format(subTotal.get().doubleValue()) + "€", icon);
-//        button.setWidthFull();
-//        button.addClickListener(orderEvent(storeId, basketProducts));
-//        orderInfo.add(logo, grid, payment, button);
 
-
-        PaymentCard card = new PaymentCard(
+        return new PaymentCard(
                 "https://www.codespromo.be/wp-content/uploads/2017/02/Pizzahut.jpg",
-                subTotal.get().doubleValue(),
-                basketProducts,
-                Arrays.asList("Product", "Quantity", "Subtotal"),
+                subTotal.get(),
+                mapProductsWithArrayList(basketProducts),
+                true,
                 orderEvent(storeId, basketProducts)
         );
 
-        return card;
+    }
+
+    private List<String[]> mapProductsWithArrayList(List<BasketProduct> basketProducts) {
+        final List<String[]> products = new ArrayList<>();
+        products.add(new String[]{"Product", "Quantity", "Price", "Subtotal"});
+        products.addAll(basketProducts.stream()
+                .map(p -> new String[]{
+                        p.getName(),
+                        String.valueOf(p.getQuantity()),
+                        p.getPrice() + "€",
+                        p.getPrice() * p.getQuantity() + "€"
+                })
+                .collect(Collectors.toList()));
+        return products;
     }
 
     private ComponentEventListener<ClickEvent<Button>> orderEvent(long storeId, List<BasketProduct> basketProducts) {

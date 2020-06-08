@@ -38,6 +38,7 @@ public class BasketLayout extends AbstractView {
 
         setMargin(false);
         setPadding(false);
+        setSpacing(false);
         setFlexGrow(0.25, layoutContent);
         add(layoutContent);
     }
