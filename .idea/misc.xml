@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/woo-auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/woo-core-payloads/pom.xml" />
         <option value="$PROJECT_DIR$/woo-store-service/pom.xml" />
       </set>

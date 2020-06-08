@@ -30,10 +30,11 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
     public MainAppLayout() {
         notifications.addClickListener(notification -> {/* ... */});
 
+        final LeftNavigationItem home = new LeftNavigationItem("Home", VaadinIcon.HOME.create(), HomeLayout.class);
         final LeftNavigationItem search = new LeftNavigationItem("Search", VaadinIcon.SEARCH.create(), SearchLayout.class);
         final LeftNavigationItem shops = new LeftNavigationItem("Shops", VaadinIcon.SHOP.create(), ShopsLayout.class);
         final LeftNavigationItem delivery = new LeftNavigationItem("Delivery", VaadinIcon.CAR.create(), DeliveryLayout.class);
-        final LeftNavigationItem payment = new LeftNavigationItem("Payment", VaadinIcon.HOME.create(), PaymentLayout.class);
+        final LeftNavigationItem payment = new LeftNavigationItem("Payment", VaadinIcon.WALLET.create(), PaymentLayout.class);
         final LeftNavigationItem basket = new LeftNavigationItem("Basket", VaadinIcon.CART.create(), BasketLayout.class);
         badge.bind(basket.getBadge());
         final LeftNavigationItem orders = new LeftNavigationItem("Orders", VaadinIcon.TABLE.create(), OrdersLayout.class);
@@ -41,7 +42,7 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withTitle("May the Food be with you!")
                 .withAppBar(AppBarBuilder.get().add(new NotificationButton<>(VaadinIcon.BELL, notifications))
                         .build())
-                .withAppMenu(LeftAppMenuBuilder.get().add(search, shops, basket, delivery, payment, orders)
+                .withAppMenu(LeftAppMenuBuilder.get().add(home, search, shops, basket, delivery, payment, orders)
                         .build())
                 .build());
     }

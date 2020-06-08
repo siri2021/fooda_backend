@@ -1,12 +1,18 @@
 package it.vkod.woo.product.client.views;
 
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vaadin.flow.server.VaadinSession;
 
 @Route(value = "shops", layout = MainAppLayout.class)
 public class ShopsLayout extends AbstractView {
 
-    public ShopsLayout(@Autowired MainAppLayout appLayout) {
+    private final String sessionId = VaadinSession.getCurrent().getSession().getId();
+    private final transient MainAppLayout appLayout;
+
+    public ShopsLayout(final MainAppLayout appLayout) {
+        this.appLayout = appLayout;
+        Notification.show("Your session ID is " + sessionId, 2000, Notification.Position.BOTTOM_CENTER).open();
 
     }
 

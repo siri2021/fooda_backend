@@ -3,10 +3,10 @@ package it.vkod.woo.product.client.clients;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import it.vkod.woo.product.client.pojo.basket.req.BasketBilling;
+import it.vkod.woo.product.client.pojo.basket.req.BasketOrder;
 import it.vkod.woo.product.client.pojo.basket.req.BasketProduct;
 import it.vkod.woo.product.client.pojo.basket.req.BasketShipping;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,11 +16,13 @@ import java.util.Arrays;
 @Service
 public class WooBasketServiceClient {
 
-    @Autowired
-    private RestTemplate rest;
+    private final RestTemplate rest;
+    private final EurekaClient discoveryClient;
 
-    @Autowired
-    private EurekaClient discoveryClient;
+    public WooBasketServiceClient(RestTemplate rest, EurekaClient discoveryClient) {
+        this.rest = rest;
+        this.discoveryClient = discoveryClient;
+    }
 
     private String getBasketServiceUrl() {
         InstanceInfo instance = discoveryClient.getNextServerFromEureka("woo-basket-service", false);
@@ -29,6 +31,10 @@ public class WooBasketServiceClient {
 
     public BasketProduct[] apiGetBasketProducts(final String userId) {
         return rest.getForObject(getBasketServiceUrl() + "api/basket/products/select/" + userId, BasketProduct[].class);
+    }
+
+    public BasketOrder[] apiGetBasketOrders(final String userId) {
+        return rest.getForObject(getBasketServiceUrl() + "api/basket/orders/select/" + userId, BasketOrder[].class);
     }
 
     public double apiGetBasketTotalPrice(final String userId) {
@@ -48,6 +54,10 @@ public class WooBasketServiceClient {
 
     public void apiAddBasketProduct(final BasketProduct basketProduct) {
         rest.postForObject(getBasketServiceUrl() + "api/basket/products/insert/", basketProduct, BasketProduct.class);
+    }
+
+    public void apiAddBasketOrder(final BasketOrder basketOrder) {
+        rest.postForObject(getBasketServiceUrl() + "api/basket/orders/insert/", basketOrder, BasketOrder.class);
     }
 
     public void apiAddBasketShipping(final BasketShipping basketShipping) {

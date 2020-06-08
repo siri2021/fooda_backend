@@ -1,82 +1,77 @@
 package it.vkod.woo.product.client.views;
 
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
+import it.vkod.woo.product.client.clients.WooBasketServiceClient;
+import it.vkod.woo.product.client.clients.WooOrderServiceClient;
+import it.vkod.woo.product.client.pojo.order.res.OrderResponse;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Route(value = "orders", layout = MainAppLayout.class)
+@StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class OrdersLayout extends VerticalLayout {
-    private List<Person> people = new ArrayList<>();
 
-    public OrdersLayout() {
-        Random random = new Random();
-        for (int i = 0; i < 300; i++) {
-            people.add(new Person(UUID.randomUUID().toString(), random.nextInt(), i));
-        }
+    private final transient WooBasketServiceClient basketServiceClient;
+    private final transient WooOrderServiceClient orderServiceClient;
 
-        Grid<Person> grid = getGrid();
-        grid.setSelectionMode(Grid.SelectionMode.MULTI);
-        grid.setSizeFull();
+    private final String sessionId = VaadinSession.getCurrent().getSession().getId();
+    private final VerticalLayout layoutContent = new VerticalLayout();
+    private final transient List<OrderResponse> actualOrders;
 
-        HorizontalLayout gridWrapper = new HorizontalLayout(grid);
-        gridWrapper.setMargin(false);
-        gridWrapper.setPadding(false);
-        gridWrapper.setSpacing(false);
-        gridWrapper.setFlexGrow(1, grid);
-        gridWrapper.setSizeFull();
+    public OrdersLayout(final WooBasketServiceClient basketServiceClient, final WooOrderServiceClient orderServiceClient) {
 
+        this.basketServiceClient = basketServiceClient;
+        this.orderServiceClient = orderServiceClient;
 
-        add(gridWrapper);
+        this.actualOrders = mapOrders();
+
+        Notification.show("Your session ID is " + sessionId, 2000, Notification.Position.BOTTOM_CENTER).open();
+
+        createOrdersDiv();
+
+        add(layoutContent);
+
         setMargin(false);
         setPadding(false);
         setSpacing(false);
         setAlignItems(Alignment.STRETCH);
-        setFlexGrow(1, gridWrapper);
+        setFlexGrow(1, layoutContent);
         setSizeFull();
     }
 
-    private Grid<Person> getGrid() {
-        return getGrid(people.size());
+    private List<OrderResponse> mapOrders() {
+        return Arrays
+                .stream(basketServiceClient.apiGetBasketOrders(sessionId))
+                .map(basketOrder -> orderServiceClient.apiGetOrderOne((int) basketOrder.getOrderId(), basketOrder.getStoreId()))
+                .collect(Collectors.toList());
     }
 
-    private Grid<Person> getGrid(int size) {
-        Grid<Person> grid = new Grid<>();
-        grid.setItems(people.subList(0, size));
-        grid.addColumn(Person::getName).setHeader("Name 1");
-        grid.addColumn(Person::getName).setHeader("Name 2");
-        grid.addColumn(Person::getName).setHeader("Name 3");
+    private void createOrdersDiv() {
+
+        Grid<OrderResponse> grid = getGrid();
+        grid.setSelectionMode(Grid.SelectionMode.MULTI);
+        grid.setSizeFull();
+        grid.appendHeaderRow();
+        grid.appendFooterRow();
+
+        layoutContent.add(grid);
+    }
+
+    private Grid<OrderResponse> getGrid() {
+        Grid<OrderResponse> grid = new Grid<>();
+        grid.setItems(actualOrders);
+        grid.addColumn(OrderResponse::getId).setHeader("Order");
+        grid.addColumn(OrderResponse::getDate_created).setHeader("Date");
+        grid.addColumn(OrderResponse::getTotal).setHeader("Total");
+        grid.addColumn(OrderResponse::getStatus).setHeader("Status");
         return grid;
-    }
-
-
-    class Person {
-        private final String name;
-        private final int id;
-        private final int year;
-
-        public Person(String name, int year, int id) {
-            this.name = name;
-            this.year = year;
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getBirthYear() {
-            return year;
-        }
-
-        public int getID() {
-            return id;
-        }
     }
 
 }
