@@ -7,7 +7,6 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinSession;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import it.vkod.woo.product.client.clients.WooMatchServiceClient;
 import it.vkod.woo.product.client.components.ProductCard;
@@ -29,23 +28,24 @@ public class HomeLayout extends AbstractView {
 
     private final transient WooMatchServiceClient matchServiceClient;
     private final transient WooBasketServiceClient basketServiceClient;
-    private final MainAppLayout appLayout;
+    private final MainAppLayout app;
+    private static final String SESSION_BASKET_PRODUCTS = "BasketProducts";
 
-    private final String sessionId = VaadinSession.getCurrent().getSession().getId();
     private final VerticalLayout layoutContent = new VerticalLayout();
 
-    public HomeLayout(WooMatchServiceClient matchServiceClient, WooBasketServiceClient basketServiceClient, MainAppLayout appLayout) {
+    public HomeLayout(WooMatchServiceClient matchServiceClient, WooBasketServiceClient basketServiceClient, MainAppLayout app) {
         this.matchServiceClient = matchServiceClient;
         this.basketServiceClient = basketServiceClient;
-        this.appLayout = appLayout;
+        this.app = app;
 
-        Notification.show("Your session ID is " + sessionId, 2000, Notification.Position.BOTTOM_CENTER).open();
+        Notification.show("Your session ID is " + app.getSession().getId(), 2000, Notification.Position.BOTTOM_CENTER).open();
         initTopSellingProducts();
         add(layoutContent);
 
         setMargin(false);
         setPadding(false);
-        setFlexGrow(0.25, layoutContent);
+        setSpacing(false);
+        setFlexGrow(1, layoutContent);
     }
 
     private void initTopSellingProducts() {
@@ -70,8 +70,9 @@ public class HomeLayout extends AbstractView {
     @NotNull
     private ComponentEventListener<ClickEvent<Button>> callAddToBasket(ProductResponse productResponse) {
         return click -> {
-            basketServiceClient.apiAddBasketProduct(BasketProduct.builder()
-                    .userId(sessionId)
+
+            final BasketProduct productToAdd = BasketProduct.builder()
+                    .userId(app.getSession().getId())
                     .storeId(productResponse.getStoreId())
                     .restUrl(productResponse.getRestUrl())
                     .productId(productResponse.getId())
@@ -79,12 +80,27 @@ public class HomeLayout extends AbstractView {
                     .price(Precision.round(productResponse.getPrice(), 2))
                     .quantity(1)
                     .imageUrl(productResponse.getImages().get(0).getSrc())
-                    .build());
+                    .build();
+
+            addToBasket(productToAdd);
+
+//            basketServiceClient.apiAddBasketProduct(productToAdd);
 
             final String notificationMsg = productResponse.getName() + " is added.";
-            appLayout.getBadge().setCount(appLayout.getBadge().getCount() + 1);
+            app.getBadge().setCount(app.getBadge().getCount() + 1);
             Notification.show(notificationMsg, 1000, Notification.Position.BOTTOM_CENTER);
         };
+    }
+
+    private void addToBasket(BasketProduct productToAdd) {
+        final String uniqueIdForBasketProduct = SESSION_BASKET_PRODUCTS + ":" + productToAdd.getStoreId() + ":" + productToAdd.getProductId();
+        if (app.getSession().getAttribute(uniqueIdForBasketProduct) != null) {
+            ((BasketProduct) app.getSession()
+                    .getAttribute(uniqueIdForBasketProduct))
+                    .setQuantity(((BasketProduct) app.getSession().getAttribute(uniqueIdForBasketProduct)).getQuantity() + 1);
+        } else {
+            app.getSession().setAttribute(uniqueIdForBasketProduct, productToAdd);
+        }
     }
 
 

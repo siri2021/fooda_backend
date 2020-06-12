@@ -8,6 +8,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.WrappedSession;
 import it.vkod.woo.product.client.clients.WooBasketServiceClient;
 import it.vkod.woo.product.client.components.BillingCard;
 import it.vkod.woo.product.client.components.DeliveryCard;
@@ -23,71 +24,31 @@ public class DeliveryLayout extends AbstractView {
     private final transient WooBasketServiceClient basketServiceClient;
     private final MainAppLayout appLayout;
     private final VerticalLayout layoutContent = new VerticalLayout();
-    private final String sessionId = VaadinSession.getCurrent().getSession().getId();
+    final WrappedSession session = VaadinSession.getCurrent().getSession();
 
     public DeliveryLayout(final WooBasketServiceClient basketServiceClient, final MainAppLayout appLayout) {
         this.basketServiceClient = basketServiceClient;
         this.appLayout = appLayout;
 
-        final BasketBilling[] billing = basketServiceClient.apiGetBasketBilling(sessionId);
-        final BasketShipping[] delivery = basketServiceClient.apiGetBasketShipping(sessionId);
+//        final BasketBilling[] billing = basketServiceClient.apiGetBasketBilling(session.getId());
+//        final BasketShipping[] delivery = basketServiceClient.apiGetBasketShipping(session.getId());
 
-        BillingCard billingCard;
-        DeliveryCard deliveryCard;
-
-//        if (billing != null && delivery != null) {
-//            billingCard = new BillingCard(
-//                    sessionId,
-//                    billing[0].getFirstName(),
-//                    billing[0].getLastName(),
-//                    billing[0].getEmail(),
-//                    billing[0].getPhone(),
-//                    billing[0].getAddress(),
-//                    billing[0].getPostcode(),
-//                    billing[0].getMunicipality(),
-//                    billing[0].isDoNotCall()
-//            );
-//
-//            deliveryCard = new DeliveryCard(
-//                    sessionId,
-//                    delivery[0].getFirstName(),
-//                    delivery[0].getLastName(),
-//                    delivery[0].getAddress(),
-//                    delivery[0].getPostcode(),
-//                    delivery[0].getMunicipality()
-//            );
-//        } else {
-//            billingCard = new BillingCard();
-//            deliveryCard = new DeliveryCard();
-//        }
-
-        billingCard = new BillingCard();
-        deliveryCard = new DeliveryCard();
+        BillingCard billingCard = new BillingCard(null);
+        DeliveryCard deliveryCard = new DeliveryCard(null);
 
         layoutContent.add(billingCard);
         layoutContent.add(deliveryCard);
 
         Button save = new Button("Save");
-        save.addClickListener(saveEvent(
-                BasketBilling.builder()
-                        .firstName(billingCard.getFirstName())
-                        .lastName(billingCard.getLastName())
-                        .phone(billingCard.getPhone())
-                        .email(billingCard.getEmail())
-                        .address(billingCard.getAddress())
-                        .postcode(billingCard.getPostcode())
-                        .municipality(billingCard.getMunicipality())
-                        .build(),
-                BasketShipping.builder()
-                        .firstName(deliveryCard.getFirstName())
-                        .lastName(deliveryCard.getLastName())
-                        .address(deliveryCard.getAddress())
-                        .postcode(deliveryCard.getPostcode())
-                        .municipality(deliveryCard.getMunicipality())
-                        .build()
-        ));
+        save.addClickListener(saveEvent(billingCard.getBinder().getBean(), deliveryCard.getBinder().getBean()));
+        save.setWidthFull();
 
         layoutContent.add(save);
+
+        setMargin(false);
+        setPadding(false);
+        setSpacing(false);
+        setFlexGrow(1, layoutContent);
 
         add(layoutContent);
     }
@@ -107,9 +68,9 @@ public class DeliveryLayout extends AbstractView {
 
     private ComponentEventListener<ClickEvent<Button>> saveEvent(BasketBilling billing, BasketShipping delivery) {
         return event -> {
-            billing.setUserId(sessionId);
+            billing.setUserId(session.getId());
             basketServiceClient.apiAddBasketBilling(billing);
-            delivery.setUserId(sessionId);
+            delivery.setUserId(session.getId());
             basketServiceClient.apiAddBasketShipping(delivery);
             new Notification("Billing and delivery are saved.", 3000).open();
         };

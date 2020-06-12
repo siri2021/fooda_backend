@@ -16,6 +16,7 @@ public class BasketProduct implements Serializable {
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private UUID basketId;
 
     @Getter
@@ -28,6 +29,7 @@ public class BasketProduct implements Serializable {
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private String restUrl;
 
     @Getter
@@ -36,17 +38,21 @@ public class BasketProduct implements Serializable {
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private String name;
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private double price;
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private int quantity;
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private String imageUrl;
 }

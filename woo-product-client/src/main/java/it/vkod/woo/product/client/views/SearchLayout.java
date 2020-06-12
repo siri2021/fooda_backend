@@ -42,6 +42,11 @@ public class SearchLayout extends AbstractView {
         this.appLayout = appLayout;
         Notification.show("Your session ID is " + sessionId, 2000, Notification.Position.BOTTOM_CENTER).open();
         getSearchText();
+
+        setMargin(false);
+        setPadding(false);
+        setSpacing(false);
+        setFlexGrow(1, layoutContent);
     }
 
     private void getSearchText() {

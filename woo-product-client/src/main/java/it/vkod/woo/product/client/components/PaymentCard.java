@@ -49,7 +49,7 @@ public class PaymentCard extends Div {
 
         final StringBuilder htmlBuilder = new StringBuilder();
         htmlBuilder
-                .append("<table class=\"responsive-table\">");
+                .append("<table>");
         if (withHeader) {
             final String[] headers = values.get(0);
             values.remove(0);

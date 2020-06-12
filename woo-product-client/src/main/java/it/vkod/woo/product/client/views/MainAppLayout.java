@@ -13,7 +13,11 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.WrappedSession;
 import com.vaadin.flow.spring.annotation.UIScope;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +28,15 @@ import org.springframework.stereotype.Component;
 @Component
 @UIScope // optional but useful; allows access to this instance from views, see View1.
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
-    private DefaultNotificationHolder notifications = new DefaultNotificationHolder();
-    private DefaultBadgeHolder badge = new DefaultBadgeHolder(0);
+
+    @Getter
+    private final DefaultNotificationHolder notifications = new DefaultNotificationHolder();
+
+    @Getter
+    private final DefaultBadgeHolder badge = new DefaultBadgeHolder(0);
+
+    @Getter @Setter
+    private WrappedSession session = VaadinSession.getCurrent().getSession();
 
     public MainAppLayout() {
         notifications.addClickListener(notification -> {/* ... */});
@@ -45,13 +56,5 @@ public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftRespons
                 .withAppMenu(LeftAppMenuBuilder.get().add(home, search, shops, basket, delivery, payment, orders)
                         .build())
                 .build());
-    }
-
-    public DefaultNotificationHolder getNotifications() {
-        return notifications;
-    }
-
-    public DefaultBadgeHolder getBadge() {
-        return badge;
     }
 }
