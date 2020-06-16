@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/woo-basket-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-config-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-csv-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-discovery-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-matching-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-order-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-payment-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-product-client/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-product-client/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-product-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-store-client/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/woo-store-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaBasketServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaConfigServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaCsvServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaCustomerFrontend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaCustomerFrontend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaDiscoveryServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaMatchingServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaStoreServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WooCommerceServer/src/main/java" charset="UTF-8" />
   </component>
 </project>

@@ -123,32 +123,22 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
 
-
     </dependencies>
 
     <modules>
-        <module>woo-config-service</module>
-        <module>woo-csv-service</module>
-        <module>woo-discovery-service</module>
-        <module>woo-matching-service</module>
-        <module>woo-product-client</module>
-        <module>woo-product-service</module>
-        <module>woo-order-service</module>
-        <module>woo-basket-service</module>
-        <module>woo-store-service</module>
-        <module>woo-store-client</module>
-        <module>woo-payment-service</module>
+        <module>FoodaBasketServer</module>
+        <module>FoodaConfigServer</module>
+        <module>FoodaCsvServer</module>
+        <module>FoodaCustomerFrontend</module>
+        <module>FoodaDiscoveryServer</module>
+        <module>FoodaMatchingServer</module>
+        <module>FoodaStoreServer</module>
+        <module>WooCommerceServer</module>
     </modules>
 
 </project>

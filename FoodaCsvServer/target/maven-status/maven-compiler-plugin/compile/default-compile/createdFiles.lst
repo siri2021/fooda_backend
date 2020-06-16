@@ -1,0 +1,13 @@
+it\vkod\fooda\csv\server\FoodaCsvServerApp.class
+it\vkod\fooda\csv\server\utils\CsvConverter.class
+it\vkod\fooda\csv\server\controllers\ProductController.class
+it\vkod\fooda\csv\server\definitions\ConvertableMediaTypes.class
+it\vkod\fooda\csv\server\configrations\WebConfig.class
+it\vkod\fooda\csv\server\models\Store$Data.class
+it\vkod\fooda\csv\server\utils\YamlConverter.class
+it\vkod\fooda\csv\server\models\ListParam.class
+it\vkod\fooda\csv\server\models\Store.class
+it\vkod\fooda\csv\server\configrations\EurekaConfig.class
+it\vkod\fooda\csv\server\models\Product$Data.class
+it\vkod\fooda\csv\server\models\Product.class
+it\vkod\fooda\csv\server\configrations\SwaggerConfig.class

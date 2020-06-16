@@ -7,46 +7,50 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="woo-payment-service" />
-        <module name="woo-matching-service" />
-        <module name="woo-basket-service" />
-        <module name="woo-csv-service" />
-        <module name="woo-store-client" />
-        <module name="woo-product-client" />
-        <module name="woo-discovery-service" />
-        <module name="woo-order-service" />
-        <module name="woo-config-service" />
-        <module name="woo-store-service" />
-        <module name="woo-product-service" />
+        <module name="FoodaBasketServer" />
+        <module name="FoodaConfigServer" />
+        <module name="FoodaStoreServer" />
+        <module name="FoodaCustomerFrontend" />
+        <module name="WooCommerceServer" />
+        <module name="FoodaMatchingServer" />
+        <module name="FoodaCsvServer" />
+        <module name="FoodaDiscoveryServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="FoodaSharedJavaObjects" target="11" />
       <module name="woo-admin-service" target="11" />
       <module name="woo-auth-service" target="11" />
       <module name="woo-core-payloads" target="11" />
       <module name="woo-login-service" target="11" />
+      <module name="woo-payment-service" target="11" />
       <module name="woo-product-db" target="11" />
+      <module name="woo-store-client" target="11" />
       <module name="woo-store-db" target="11" />
+      <module name="woo-store-service" target="11" />
+      <module name="WooCommerceOrderServer" target="11" />
       <module name="wp-content-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="fooda" options="-parameters" />
+      <module name="Fooda" options="-parameters" />
+      <module name="FoodaBasketServer" options="-parameters" />
+      <module name="FoodaConfigServer" options="-parameters" />
+      <module name="FoodaCsvServer" options="-parameters" />
+      <module name="FoodaCustomerFrontend" options="-parameters" />
+      <module name="FoodaDiscoveryServer" options="-parameters" />
+      <module name="FoodaMatchingServer" options="-parameters" />
+      <module name="FoodaSharedJavaObjects" options="-parameters" />
+      <module name="FoodaStoreServer" options="-parameters" />
+      <module name="WooCommerceOrderServer" options="-parameters" />
+      <module name="WooCommerceServer" options="-parameters" />
       <module name="woo-admin-service" options="-parameters" />
       <module name="woo-auth-service" options="-parameters" />
-      <module name="woo-basket-service" options="-parameters" />
-      <module name="woo-config-service" options="-parameters" />
       <module name="woo-core-payloads" options="-parameters" />
-      <module name="woo-csv-service" options="-parameters" />
-      <module name="woo-discovery-service" options="-parameters" />
       <module name="woo-login-service" options="-parameters" />
-      <module name="woo-matching-service" options="-parameters" />
-      <module name="woo-order-service" options="-parameters" />
       <module name="woo-payment-service" options="-parameters" />
-      <module name="woo-product-client" options="-parameters" />
       <module name="woo-product-db" options="-parameters" />
-      <module name="woo-product-service" options="-parameters" />
       <module name="woo-store-client" options="-parameters" />
       <module name="woo-store-db" options="-parameters" />
       <module name="woo-store-service" options="-parameters" />

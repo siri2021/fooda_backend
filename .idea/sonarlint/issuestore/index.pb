@@ -497,8 +497,6 @@ J
 woo-order-service/mvnw.cmd,d/d/dd1a780ac3b6f15ed905846a2a4c8d940338486d
 I
 woo-store-service/pom.xml,e\5\e502ce2d3e334da0ef1341979e51b66169d7dd80
-k
-;woo-store-service/src/main/resources/application.properties,f\8\f8a89338e101112bbb0052f6e5da516ef97e62e5
 ç
 ]woo-product-client/src/main/java/it/vkod/woo/product/client/clients/WooUserServiceClient.java,2\9\29b84f8531843ef9d3cc0fc3393f2bb52afa79ac
 
@@ -523,8 +521,6 @@ t
 Dwoo-product-client/src/main/java/it/vkod/woo/product/client/App.java,f\e\fe9be954bad9a919a31091084dcf4951035475f5
 v
 Fwoo-product-service/src/main/java/it/vkod/woo/product/service/App.java,b\2\b213ce9f7636f8930ec402b088073f09e3f4b9bc
-l
-<woo-basket-service/src/main/resources/application.properties,5\c\5c2b634f029e926dc30d48912f08103ba26580b3
 j
 :woo-store-client/src/main/resources/application.properties,8\b\8b5ba2b53412de5ad828913eca220b08d5435b55
 Ñ
@@ -635,8 +631,6 @@ H
 woo-store-client/pom.xml,4\a\4a7dcae8bb590856ac80f4ca912ce42f1623278b
 ;
 run-win.bat,6\b\6b892ceafe153b450c1dd97cebb9d71071ececa0
-m
-=woo-product-service/src/main/resources/application.properties,e\5\e584e1a71baafbd2a55b7e9b1bdab4b8346ceede
 Ä
 Pwoo-basket-service/src/main/java/it/vkod/woo/basket/service/ctrl/BasketCtrl.java,9\3\93ce6bc0e65ea19b7569fc93b2940ee61b72e805
 è
@@ -718,10 +712,12 @@ Swoo-product-client/src/main/java/it/vkod/woo/product/client/views/SearchLayout.
 á
 Wwoo-product-client/src/main/java/it/vkod/woo/product/client/components/PaymentCard.java,c\a\ca63822021eb9fc9983fb48f864112eb4025df12
 á
-Wwoo-product-client/src/main/java/it/vkod/woo/product/client/components/BillingCard.java,4\1\41975af3e46525e12d626fd4ec7e840ab48438a0
-á
 Wwoo-product-client/src/main/java/it/vkod/woo/product/client/components/ProductCard.java,1\7\17a4885491456a53307f21ba1a3f8e6b04de782e
-à
-Xwoo-product-client/src/main/java/it/vkod/woo/product/client/components/DeliveryCard.java,8\1\819e4e63ecdd698d726dd23a6fb3b84dfca3b86c
 Ö
 Uwoo-product-client/src/main/java/it/vkod/woo/product/client/views/DeliveryLayout.java,0\2\02bf285cef4a8040f8bec1ae2feda52246762c08
+é
+^woo-product-client/src/main/java/it/vkod/woo/product/client/pojo/basket/req/BasketProduct.java,3\8\38964aa116fb0acb942358d611e5fa5765f26a23
+Ñ
+Twoo-product-client/src/main/java/it/vkod/woo/product/client/views/MainAppLayout.java,f\5\f5de4a7c4c93a3b81fc0d6ab94e5a6b16cbe434b
+É
+Swoo-product-client/src/main/java/it/vkod/woo/product/client/views/AbstractView.java,7\c\7cc98da8be3bbe8029fc3834c89685ba8e95c4d5
