@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
 public class DeliveryLayout extends AbstractView {
 
     private final transient WooBasketServiceClient basketServiceClient;
+    private final VerticalLayout layout = new VerticalLayout();
     private final MainAppLayout app;
 
     public DeliveryLayout(final WooBasketServiceClient basketServiceClient, final MainAppLayout app) {
@@ -43,6 +45,7 @@ public class DeliveryLayout extends AbstractView {
 
         addBillingCard();
         addShippingCard();
+        add(layout);
     }
 
     private void addBillingCard() {
@@ -182,7 +185,7 @@ public class DeliveryLayout extends AbstractView {
         cardContent.add(layoutWithBinder);
         cardContent.add(actions);
         card.add(cardContent);
-        add(card);
+        layout.add(card);
     }
 
     private void addShippingCard() {
@@ -297,7 +300,7 @@ public class DeliveryLayout extends AbstractView {
         cardContent.add(layoutWithBinder);
         cardContent.add(actions);
         card.add(cardContent);
-        add(card);
+        layout.add(card);
     }
 
     private BasketShipping mapAddresses(final BasketBilling basketBilling) {

@@ -3,7 +3,9 @@ package it.vkod.fooda.customer.frontend.views;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -25,40 +27,39 @@ import java.util.stream.Stream;
 @Slf4j
 @Route(value = "", layout = MainAppLayout.class)
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+@CssImport("./styles/cards.css")
 public class HomeLayout extends AbstractView {
 
     private final transient WooMatchServiceClient matchServiceClient;
     private final transient WooBasketServiceClient basketServiceClient;
     private final MainAppLayout app;
 
-    private final VerticalLayout layoutContent = new VerticalLayout();
+    private final Div container = new Div();
 
     public HomeLayout(WooMatchServiceClient matchServiceClient, WooBasketServiceClient basketServiceClient, MainAppLayout app) {
         this.matchServiceClient = matchServiceClient;
         this.basketServiceClient = basketServiceClient;
         this.app = app;
-
+        container.setClassName("cards-container");
         initTopSellingProducts();
-        add(layoutContent);
+        add(new VerticalLayout(container));
     }
 
     private void initTopSellingProducts() {
         List<ProductResponse> products = Arrays.asList(matchServiceClient.apiGetProductsFromAllStores());
         Collections.shuffle(products);
         Stream<ProductResponse> shuffledProducts = products.stream();
-        shuffledProducts.forEach(this::mapProductResponseWithProductCardDiv);
+        shuffledProducts.forEach(product -> container.add(mapProductToDiv(product)));
     }
 
-    private void mapProductResponseWithProductCardDiv(ProductResponse productResponse) {
-        ProductCard card = new ProductCard(
+    private Div mapProductToDiv(ProductResponse productResponse) {
+        return new ProductCard(
                 productResponse.getName(),
                 productResponse.getImages().get(0).getSrc(),
                 productResponse.getDescription(),
                 productResponse.getPrice() != null ? productResponse.getPrice() : Double.parseDouble(productResponse.getRegularPrice()),
                 callAddToBasket(productResponse)
         );
-
-        layoutContent.add(card);
     }
 
     @NotNull

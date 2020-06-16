@@ -8,7 +8,6 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinSession;
 import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
 import it.vkod.fooda.customer.frontend.clients.WooOrderServiceClient;
 import it.vkod.fooda.customer.frontend.components.PaymentCard;
@@ -33,27 +32,25 @@ public class PaymentLayout extends AbstractView {
     private final transient WooBasketServiceClient basketServiceClient;
     private final transient WooOrderServiceClient orderServiceClient;
 
-    private final String sessionId = VaadinSession.getCurrent().getSession().getId();
+    private final MainAppLayout app;
+    private final VerticalLayout content = new VerticalLayout();
 
-    private final MainAppLayout appLayout;
-    private final VerticalLayout layoutContent = new VerticalLayout();
-
-    public PaymentLayout(WooBasketServiceClient basketServiceClient, WooOrderServiceClient orderServiceClient, MainAppLayout appLayout) {
+    public PaymentLayout(WooBasketServiceClient basketServiceClient, WooOrderServiceClient orderServiceClient, MainAppLayout app) {
         this.basketServiceClient = basketServiceClient;
         this.orderServiceClient = orderServiceClient;
-        this.appLayout = appLayout;
+        this.app = app;
 
         getBasketByUserId();
 
-        add(layoutContent);
+        add(content);
     }
 
     private void getBasketByUserId() {
 
         final Map<Long, List<BasketProduct>> groupedBaskets = Arrays
-                .stream(basketServiceClient.apiGetBasketProducts(sessionId))
+                .stream(basketServiceClient.apiGetBasketProducts(app.getSession().getId()))
                 .collect(Collectors.groupingBy(BasketProduct::getStoreId));
-        groupedBaskets.forEach((storeId, basketProducts) -> layoutContent.add(createBasketInfoDivs(storeId, basketProducts)));
+        groupedBaskets.forEach((storeId, basketProducts) -> content.add(createBasketInfoDivs(storeId, basketProducts)));
     }
 
     @SneakyThrows
@@ -93,15 +90,15 @@ public class PaymentLayout extends AbstractView {
         return addClick -> {
             final OrderResponse orderResponse = createOrderRequestWithOrderApi(storeId, basketProducts);
             log.info(orderResponse.toString());
-            // basketServiceClient.apiClearBasketProducts(sessionId);
+            basketServiceClient.apiClearBasketProducts(app.getSession().getId());
         };
     }
 
     @SneakyThrows
     private OrderResponse createOrderRequestWithOrderApi(final long storeId, List<BasketProduct> basketProducts) {
 
-        BasketShipping delivery = basketServiceClient.apiGetBasketShipping(sessionId)[0];
-        BasketBilling billing = basketServiceClient.apiGetBasketBilling(sessionId)[0];
+        BasketShipping delivery = basketServiceClient.apiGetBasketShipping(app.getSession().getId())[0];
+        BasketBilling billing = basketServiceClient.apiGetBasketBilling(app.getSession().getId())[0];
 
         List<OrderRequestLineItemsItem> products = new ArrayList<>();
         basketProducts.forEach(basketProduct -> products.add(
@@ -146,10 +143,10 @@ public class PaymentLayout extends AbstractView {
 
         final OrderResponse orderResponse = orderServiceClient.apiAddOrderWithResponse(orderRequest, storeId);
 
-        basketServiceClient.apiAddBasketOrder(new BasketOrder(UUID.randomUUID(), orderResponse.getId(), sessionId, storeId));
+        basketServiceClient.apiAddBasketOrder(new BasketOrder(UUID.randomUUID(), orderResponse.getId(), app.getSession().getId(), storeId));
 
         new Notification("Your order " + orderResponse.getId() + " is created!", 3000).open();
-        appLayout.getBadge().setCount(appLayout.getBadge().getCount() - basketProducts.size());
+        app.getBadge().setCount(app.getBadge().getCount() - basketProducts.size());
 
         return orderResponse;
     }

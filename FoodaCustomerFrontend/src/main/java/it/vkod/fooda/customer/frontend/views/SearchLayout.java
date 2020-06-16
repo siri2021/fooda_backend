@@ -4,7 +4,9 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -26,12 +28,14 @@ import java.util.stream.Stream;
 @Slf4j
 @Route(value = "search", layout = MainAppLayout.class)
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+@CssImport("./styles/cards.css")
 public class SearchLayout extends AbstractView {
 
     private final transient WooMatchServiceClient matchServiceClient;
     private final transient WooBasketServiceClient basketServiceClient;
     private final MainAppLayout app;
 
+    private final Div container = new Div();
     private final VerticalLayout layoutContent = new VerticalLayout();
     private transient Stream<ProductResponse> searchedProducts;
 
@@ -39,8 +43,10 @@ public class SearchLayout extends AbstractView {
         this.matchServiceClient = matchServiceClient;
         this.basketServiceClient = basketServiceClient;
         this.app = app;
-        getSearchText();
+        container.setClassName("cards-container");
 
+        getSearchText();
+        add(layoutContent);
     }
 
     private void getSearchText() {
@@ -52,25 +58,22 @@ public class SearchLayout extends AbstractView {
         searchButton.addClickShortcut(Key.ENTER);
         searchButton.addClickListener(click -> {
             searchedProducts = Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(searchTextField.getValue().toLowerCase()));
-            searchedProducts.forEach(this::mapProductResponseWithProductCardDiv);
+            searchedProducts.forEach(product -> container.add(mapProductToDiv(product)));
+            layoutContent.add(container);
         });
 
         layoutContent.add(searchTextField, searchButton);
-
-        add(layoutContent);
     }
 
 
-    private void mapProductResponseWithProductCardDiv(ProductResponse product) {
-        ProductCard card = new ProductCard(
+    private Div mapProductToDiv(ProductResponse product) {
+        return new ProductCard(
                 product.getName(),
                 product.getImages().get(0).getSrc(),
                 product.getDescription(),
                 product.getPrice() != null ? product.getPrice() : Double.parseDouble(product.getRegularPrice()),
                 callAddToBasket(product)
         );
-
-        layoutContent.add(card);
     }
 
     @NotNull
