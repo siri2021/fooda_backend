@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("it.vkod.woo.matching.service.ctrl"))
+                .apis(RequestHandlerSelectors.basePackage("it.vkod.fooda.matching.server"))
                 .paths(PathSelectors.any())
                 .build();
     }
