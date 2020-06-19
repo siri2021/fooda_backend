@@ -42,7 +42,20 @@ public class HomeLayout extends AbstractView {
         this.app = app;
         container.setClassName("cards-container");
         initTopSellingProducts();
+        final double numberOfBasketProducts = getNumberOfBasketProducts();
+        if (numberOfBasketProducts > 0)
+            app.getBadge().setCount((int) numberOfBasketProducts);
+
         add(new VerticalLayout(container));
+    }
+
+
+
+    private double getNumberOfBasketProducts() {
+        return Arrays
+                .stream(basketServiceClient.apiGetBasketProducts(app.getSession().getId()))
+                .mapToDouble(BasketProduct::getQuantity)
+                .sum();
     }
 
     private void initTopSellingProducts() {

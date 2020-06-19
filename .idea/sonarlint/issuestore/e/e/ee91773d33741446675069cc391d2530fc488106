@@ -1,0 +1,6 @@
+
+s	java:S116 "YRename this field "payment_method" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×ëˆóıÿÿÿÿ
+n	java:S116"YRename this field "shipping_lines" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÍóí
+h	java:S116"SRename this field "set_paid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âú·À
+j	java:S116"URename this field "line_items" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôµ˜
+t	java:S116"_Rename this field "payment_method_title" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸Ù™İ

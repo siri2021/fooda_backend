@@ -1,0 +1,34 @@
+
+q	java:S116"VRename this field "customer_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±®‹Ìÿÿÿÿÿ
+o	java:S116&"URename this field "line_items" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İˆˆæøÿÿÿÿ
+t	java:S116ƒ"YRename this field "shipping_lines" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×’¨øüÿÿÿÿ
+m	java:S116#"XRename this field "customer_note" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¿„
+m	java:S116"SRename this field "store_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿé¬şÿÿÿÿ
+w	java:S116"]Rename this field "prices_include_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô«ò…ùÿÿÿÿ
+s	java:S116Y"YRename this field "payment_method" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×ëˆóıÿÿÿÿ
+n	java:S116"YRename this field "discount_total" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ûí“
+i	java:S116J"TRename this field "meta_data" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üñİ½
+n	java:S116†"XRename this field "date_modified" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÌìÏ™
+j	java:S116Œ"TRename this field "fee_lines" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦øëş
+l	java:S116)"WRename this field "coupon_lines" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«šËè
+q	java:S116q"WRename this field "date_created" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şò¥´ÿÿÿÿÿ
+q	java:S116b"\Rename this field "date_modified_gmt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óİªë
+s	java:S116_"YRename this field "transaction_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ê‡¨ıüÿÿÿÿ
+l	java:S116;"XRename this field "date_paid_gmt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿÉ„U
+i	java:S116>"TRename this field "tax_lines" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²“¦Ç
+q	java:S116w"WRename this field "discount_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×§®Àşÿÿÿÿ
+q	java:S116\"WRename this field "shipping_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÚÒŠüÿÿÿÿ
+y	java:S116€"^Rename this field "customer_ip_address" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù†ïïúÿÿÿÿ
+t	java:S116G"_Rename this field "payment_method_title" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸Ù™İ
+i	java:S116A"TRename this field "date_paid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äîìú
+i	java:S116z"TRename this field "total_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·œŸ«
+n	java:S116e"TRename this field "cart_hash" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çòó¢ÿÿÿÿÿ
+n	java:S116M"YRename this field "date_completed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò•«Š
+w	java:S116V"]Rename this field "date_completed_gmt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ—¡ãşÿÿÿÿ
+k	java:S116n"VRename this field "created_via" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù‹¸
+i	java:S116"TRename this field "order_key" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö•êã
+h	java:S116k"SRename this field "cart_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€™í‹
+o	java:S116‰"TRename this field "parent_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢Äòûÿÿÿÿ
+x	java:S116D"^Rename this field "customer_user_agent" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–äÉÈüÿÿÿÿ
+u	java:S116t"[Rename this field "date_created_gmt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š®“íúÿÿÿÿ
+n	java:S116h"YRename this field "shipping_total" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èñòğ

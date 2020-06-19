@@ -56,10 +56,10 @@ public class ProductCard extends Div {
         s.setClassName("card-title");
         s.setText(name);
         cardImage.add(s);
-        Button b = new Button(new DecimalFormat("##.##").format(price));
+        Button b = new Button("Add to basket " + new DecimalFormat("##.##").format(price) + " €");
         b.addClickListener(addEvent);
         b.setClassName("btn-floating halfway-fab waves-effect waves-light blue");
-        b.getStyle().set("z-index", "9999");
+        b.getStyle().set("z-index", "9999").set("height", "48px").set("width", "50%");
         cardImage.add(b);
 
         Div cardContent = new Div();

@@ -14,6 +14,11 @@ abstract class AbstractView extends HorizontalLayout {
 
         setSizeFull();
         getElement().getStyle().set("overflow", "auto");
+
+        setMargin(false);
+        setSpacing(false);
+        setAlignItems(Alignment.CENTER);
+        setFlexGrow(1, layout);
     }
 
     abstract String getViewName();

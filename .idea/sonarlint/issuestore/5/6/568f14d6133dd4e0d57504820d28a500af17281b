@@ -1,0 +1,7 @@
+
+q	java:S116 "WRename this field "variation_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ëÃ„øÿÿÿÿ
+i	java:S116"TRename this field "total_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·œŸ«
+q	java:S1165"WRename this field "subtotal_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÔð©þÿÿÿÿ
+i	java:S116/"TRename this field "meta_data" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ˆð
+o	java:S116)"URename this field "product_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Îšßûüÿÿÿÿ
+n	java:S116"TRename this field "tax_class" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷¿Å·þÿÿÿÿ

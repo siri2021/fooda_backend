@@ -1,7 +1,0 @@
-
-p	java:S116/"TRename this field "meta_data" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ…ˆð8ýüã·§.
-v	java:S116)"URename this field "product_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Îšßûüÿÿÿÿ8¬¦ã·§.
-u	java:S116"TRename this field "tax_class" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷¿Å·þÿÿÿÿ8ÏÊá·§.
-x	java:S116 "WRename this field "variation_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ëÃ„øÿÿÿÿ8ìÔâ·§.
-p	java:S116"TRename this field "total_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·œŸ«8…—â·§.
-x	java:S1165"WRename this field "subtotal_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÔð©þÿÿÿÿ8—¸ä·§.

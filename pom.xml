@@ -138,6 +138,7 @@
         <module>FoodaDiscoveryServer</module>
         <module>FoodaMatchingServer</module>
         <module>FoodaStoreServer</module>
+        <module>FoodaPosFrontend</module>
         <module>WooCommerceServer</module>
     </modules>
 

@@ -22,8 +22,8 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializablePredicate;
 import com.vaadin.flow.router.Route;
 import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
-import it.vkod.fooda.customer.frontend.models.basket.req.BasketShipping;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketBilling;
+import it.vkod.fooda.customer.frontend.models.basket.req.BasketShipping;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -45,6 +45,8 @@ public class DeliveryLayout extends AbstractView {
 
         addBillingCard();
         addShippingCard();
+
+//        layout.add(new AddressCard(new BasketAddressRequest()).div());
         add(layout);
     }
 

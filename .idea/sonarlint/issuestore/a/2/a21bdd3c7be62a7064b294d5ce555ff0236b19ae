@@ -1,7 +1,0 @@
-
-p	java:S116"TRename this field "address_1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…≠÷8‚‹ª÷¶.
-p	java:S116"TRename this field "address_2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(∏Îπ†8µˇª÷¶.
-g
-java:S1128"JRemove this unused import 'com.fasterxml.jackson.annotation.JsonProperty'.(À√ßœ8Ä¨ª÷¶.
-q	java:S116&"URename this field "first_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ëï€Ï8ê»º÷¶.
-p	java:S116 "TRename this field "last_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö¯¥Ø8›≠º÷¶.
