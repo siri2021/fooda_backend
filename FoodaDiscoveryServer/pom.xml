@@ -12,7 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>FoodaDiscoveryServer</name>
     <description>Spring Boot project for Eureka discovery server</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

@@ -12,7 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>FoodaBasketServer</name>
     <description>Spring Boot project to add, remove or update product items..</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
 

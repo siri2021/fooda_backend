@@ -12,7 +12,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>WooCommerceServer</name>
     <description>Spring Boot project to get, post, put, delete using WooCommerce REST API</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
 

@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="FoodaStoreServer" />
+        <module name="FoodaPosFrontend" />
         <module name="FoodaDiscoveryServer" />
         <module name="FoodaConfigServer" />
         <module name="FoodaCsvServer" />
@@ -41,6 +42,7 @@
       <module name="FoodaCustomerFrontend" options="-parameters" />
       <module name="FoodaDiscoveryServer" options="-parameters" />
       <module name="FoodaMatchingServer" options="-parameters" />
+      <module name="FoodaPosFrontend" options="-parameters" />
       <module name="FoodaSharedJavaObjects" options="-parameters" />
       <module name="FoodaStoreServer" options="-parameters" />
       <module name="WooCommerceOrderServer" options="-parameters" />

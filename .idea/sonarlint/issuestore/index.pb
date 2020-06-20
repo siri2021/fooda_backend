@@ -727,8 +727,6 @@ hWooCommerceServer/src/main/java/it/vkod/woocommerce/server/models/product/reque
 jWooCommerceServer/src/main/java/it/vkod/woocommerce/server/models/product/response/WooProductResponse.java,f\6\f623468b786c6337d8f60dbc966c24cc873ef11c
 b
 2FoodaCustomerFrontend/src/main/webapp/offline.html,5\3\53748f708b4ebf3b67b1caa51eeabde545580847
-k
-;FoodaBasketServer/src/main/resources/application.properties,7\f\7f8905ce0ae5441291e5a8e18e3c0451c25693f3
 ñ
 fFoodaCustomerFrontend/src/main/java/it/vkod/fooda/customer/frontend/models/basket/req/BasketOrder.java,c\6\c679cb4b14032796086f009ddd36bd758ceb3db0
 ò
@@ -859,5 +857,3 @@ _FoodaCustomerFrontend/src/main/java/it/vkod/fooda/customer/frontend/components/
 YFoodaCustomerFrontend/src/main/java/it/vkod/fooda/customer/frontend/views/HomeLayout.java,9\6\96b6b37b857a5c776cf574b9d243ab7c6de7ab03
 ç
 ]FoodaCustomerFrontend/src/main/java/it/vkod/fooda/customer/frontend/views/DeliveryLayout.java,e\a\eaa05739bf076b1255473263ca0793f69ad8659b
-H
-FoodaPosFrontend/pom.xml,b\e\bebe70fee7ea77dba1da3abdc6d17e497603d163
