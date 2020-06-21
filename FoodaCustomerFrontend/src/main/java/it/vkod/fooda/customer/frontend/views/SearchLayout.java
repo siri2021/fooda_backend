@@ -17,6 +17,7 @@ import it.vkod.fooda.customer.frontend.clients.FoodaProductClient;
 import it.vkod.fooda.customer.frontend.views.components.ProductCard;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
 import it.vkod.fooda.customer.frontend.models.product.response.ProductResponse;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.NotNull;
@@ -48,6 +49,7 @@ public class SearchLayout extends AbstractView {
         add(layoutContent);
     }
 
+    @SneakyThrows
     private void getSearchText() {
 
         TextField searchTextField = new TextField();

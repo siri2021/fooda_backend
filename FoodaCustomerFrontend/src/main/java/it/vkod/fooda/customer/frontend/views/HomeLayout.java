@@ -21,7 +21,6 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Route(value = "", layout = MainAppLayout.class)
@@ -46,8 +45,8 @@ public class HomeLayout extends AbstractView {
     }
 
     private void initTopSellingProducts() {
-        final CompletableFuture<ProductResponse[]> products = productClient.apiGetProductsFromAllStores();
-        Arrays.stream(products.join()).forEach(product -> container.add(mapProductToDiv(product)));
+        final ProductResponse[] products = productClient.apiGetProductsFromAllStores();
+        Arrays.stream(products).forEach(product -> container.add(mapProductToDiv(product)));
     }
 
     private Div mapProductToDiv(ProductResponse productResponse) {
