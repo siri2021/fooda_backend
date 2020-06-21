@@ -11,17 +11,17 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
 import it.vkod.fooda.customer.frontend.clients.FoodaProductClient;
-import it.vkod.fooda.customer.frontend.views.components.ProductCard;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
 import it.vkod.fooda.customer.frontend.models.product.response.ProductResponse;
+import it.vkod.fooda.customer.frontend.views.components.ProductCard;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Route(value = "", layout = MainAppLayout.class)
@@ -29,39 +29,25 @@ import java.util.stream.Stream;
 @CssImport("./styles/cards.css")
 public class HomeLayout extends AbstractView {
 
-    private final transient FoodaProductClient matchServiceClient;
-    private final transient FoodaBasketClient basketServiceClient;
-    private final MainAppLayout app;
+    @Autowired
+    private FoodaProductClient productClient;
+    @Autowired
+    private FoodaBasketClient basketClient;
+    @Autowired
+    private MainAppLayout appLayout;
 
     private final Div container = new Div();
 
-    public HomeLayout(FoodaProductClient matchServiceClient, FoodaBasketClient basketServiceClient, MainAppLayout app) {
-        this.matchServiceClient = matchServiceClient;
-        this.basketServiceClient = basketServiceClient;
-        this.app = app;
+    @PostConstruct
+    public void init() {
         container.setClassName("cards-container");
         initTopSellingProducts();
-        final double numberOfBasketProducts = getNumberOfBasketProducts();
-        if (numberOfBasketProducts > 0)
-            app.getBadge().setCount((int) numberOfBasketProducts);
-
         add(new VerticalLayout(container));
     }
 
-
-
-    private double getNumberOfBasketProducts() {
-        return Arrays
-                .stream(basketServiceClient.apiGetBasketProducts(app.getSession().getId()))
-                .mapToDouble(BasketProduct::getQuantity)
-                .sum();
-    }
-
     private void initTopSellingProducts() {
-        List<ProductResponse> products = Arrays.asList(matchServiceClient.apiGetProductsFromAllStores());
-        Collections.shuffle(products);
-        Stream<ProductResponse> shuffledProducts = products.stream();
-        shuffledProducts.forEach(product -> container.add(mapProductToDiv(product)));
+        final CompletableFuture<ProductResponse[]> products = productClient.apiGetProductsFromAllStores();
+        Arrays.stream(products.join()).forEach(product -> container.add(mapProductToDiv(product)));
     }
 
     private Div mapProductToDiv(ProductResponse productResponse) {
@@ -80,7 +66,7 @@ public class HomeLayout extends AbstractView {
 
             final BasketProduct productToAdd = new BasketProduct(
                     UUID.randomUUID(),
-                    app.getSession().getId(),
+                    appLayout.getSession().getId(),
                     productResponse.getStoreId(),
                     productResponse.getRestUrl(),
                     productResponse.getId(),
@@ -89,10 +75,10 @@ public class HomeLayout extends AbstractView {
                     1,
                     productResponse.getImages().get(0).getSrc());
 
-            basketServiceClient.apiAddBasketProduct(productToAdd);
+            basketClient.apiAddBasketProduct(productToAdd);
 
             final String notificationMsg = productResponse.getName() + " is added.";
-            app.getBadge().setCount(app.getBadge().getCount() + 1);
+            appLayout.getBadge().setCount(appLayout.getBadge().getCount() + 1);
             Notification.show(notificationMsg, 1000, Notification.Position.BOTTOM_CENTER);
         };
     }

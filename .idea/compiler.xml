@@ -9,16 +9,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="FoodaGatewayServer" />
         <module name="FoodaRestoPosFrontend" />
-        <module name="FoodaDeliveryServer" />
         <module name="FoodaProductServer" />
         <module name="FoodaDiscoveryServer" />
         <module name="FoodaConfigServer" />
-        <module name="FoodaCustomerFrontend" />
         <module name="FoodaConvertServer" />
+        <module name="FoodaCustomerFrontend" />
         <module name="FoodaBasketServer" />
-        <module name="WooCommerceServer" />
+        <module name="FoodaDeliveryServer" />
         <module name="FoodaOrderServer" />
         <module name="FoodaStoreServer" />
+        <module name="WooCommerceServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
