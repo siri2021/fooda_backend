@@ -1,5 +1,8 @@
 package it.vkod.fooda.matching.server.controllers;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import it.vkod.fooda.matching.server.models.product.response.WooProduct;
 import it.vkod.fooda.matching.server.services.FoodaProductClient;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +16,6 @@ import springfox.documentation.annotations.Cacheable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @RestController
@@ -23,14 +25,20 @@ public class FoodaProductController {
     @Autowired
     private FoodaProductClient foodaProductClient;
 
+    @ApiOperation(httpMethod = "GET", value = "Search products by name, description, tag, category and more..", response = List.class, responseContainer = "List")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Products are successfully fetched"),
+            @ApiResponse(code = 404, message = "Products not found"),
+            @ApiResponse(code = 500, message = "The products could not be fetched")
+    })
     @Cacheable("/search")
     @GetMapping("search/{keyword}")
-    public List<CompletableFuture<WooProduct[]>> apiCallSearch(@PathVariable("keyword") final String keyword) {
-        List<CompletableFuture<WooProduct[]>> wooProducts = new ArrayList<>();
+    public List<WooProduct[]> apiCallSearch(@PathVariable("keyword") final String keyword) {
+        List<WooProduct[]> wooProducts = new ArrayList<>();
         final List<String> activeProductServices = foodaProductClient.apiClientGetServiceUrls("WOOCOMMERCE-SERVER");
         activeProductServices.forEach(url -> {
             final String urlFinal = url + "api/woocommerce/products/search/" + keyword;
-            final CompletableFuture<WooProduct[]> matchedProducts = foodaProductClient.apiSearch(urlFinal);
+            final WooProduct[] matchedProducts = foodaProductClient.apiSearch(urlFinal);
             wooProducts.addAll(Collections.singletonList(matchedProducts));
         });
         return wooProducts;
@@ -38,13 +46,13 @@ public class FoodaProductController {
 
     @Cacheable("/all")
     @GetMapping("all")
-    public List<CompletableFuture<WooProduct[]>> apiCallGetAll() {
-        List<CompletableFuture<WooProduct[]>> wooProducts = new ArrayList<>();
+    public List<WooProduct[]> apiCallGetAll() {
+        List<WooProduct[]> wooProducts = new ArrayList<>();
         final List<String> activeProductServices = foodaProductClient.apiClientGetServiceUrls("WOOCOMMERCE-SERVER");
         activeProductServices.forEach(url -> {
             final String urlFinal = url + "api/woocommerce/products/page/1";
-            final CompletableFuture<WooProduct[]> matchedProducts = foodaProductClient.apiSearch(urlFinal);
-            wooProducts.addAll(Collections.singletonList(matchedProducts));
+            final WooProduct[] matchedProducts = foodaProductClient.apiSearch(urlFinal);
+            Collections.addAll(wooProducts, matchedProducts);
         });
         return wooProducts;
     }

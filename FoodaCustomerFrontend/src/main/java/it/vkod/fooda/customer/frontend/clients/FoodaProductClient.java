@@ -15,9 +15,8 @@ public class FoodaProductClient {
     @Autowired
     private RestTemplate rest;
 
-    public ProductResponse[] apiGetMatchFromAllStores(final String keyword) {
-        final CompletableFuture<ProductResponse[]> future = CompletableFuture.completedFuture(rest.getForObject(GatewayClient.getServerUrl() + "/product/search/" + keyword, ProductResponse[].class));
-        return future.join();
+    public CompletableFuture<ProductResponse[]> apiGetMatchFromAllStores(final String keyword) {
+        return CompletableFuture.completedFuture(rest.getForObject(GatewayClient.getServerUrl() + "/product/search/" + keyword, ProductResponse[].class));
     }
 
     public CompletableFuture<ProductResponse[]> apiGetProductsFromAllStores() {

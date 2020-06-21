@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -40,10 +39,9 @@ public class FoodaProductClient {
 //    @HystrixCommand(fallbackMethod = "apiSearchFallback")
     @Async
     @SneakyThrows
-    public CompletableFuture<WooProduct[]> apiSearch(final String url) {
+    public WooProduct[] apiSearch(final String url) {
         log.info(String.format("Searching products from %s", url));
-        final WooProduct[] products = rest.getForObject(url, WooProduct[].class);
-        return CompletableFuture.completedFuture(products);
+        return rest.getForObject(url, WooProduct[].class);
     }
 
     // a fallback method to be called if failure happened
