@@ -11,29 +11,29 @@ import java.util.Arrays;
 
 @Slf4j
 @RestController
-@RequestMapping("api/basket/payments/")
+@RequestMapping("api/basket")
 public class PaymentCtrl {
 
     @Autowired
     private PaymentRepository repo;
 
-    @PostMapping("insert")
+    @PostMapping("/payments/insert")
     public void apiPostInsertBasketPayment(@NotNull @RequestBody final Payment payment) {
         repo.save(payment);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/payments/delete")
     public void apiDeleteBasketPayment(@NotNull @RequestBody final Payment payment) {
         repo.delete(payment);
     }
 
-    @DeleteMapping("delete/{user_id}")
+    @DeleteMapping("/payments/delete/{user_id}")
     public void apiClearBasketPayments(@PathVariable("user_id") final String userId) {
         final Payment[] payments = apiGetPayments(userId);
         Arrays.stream(payments).forEach(this::apiDeleteBasketPayment);
     }
 
-    @GetMapping("select/{user_id}")
+    @GetMapping("/payments/select/{user_id}")
     public Payment[] apiGetPayments(@PathVariable("user_id") final String userId) {
         return repo.findAllByUserId(userId).toArray(Payment[]::new);
     }

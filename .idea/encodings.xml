@@ -3,12 +3,15 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/FoodaBasketServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FoodaConfigServer/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/FoodaCsvServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaConvertServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FoodaCustomerFrontend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FoodaCustomerFrontend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaDeliveryServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FoodaDiscoveryServer/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/FoodaMatchingServer/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/FoodaPosFrontend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaGatewayServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaOrderServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaProductServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FoodaRestoPosFrontend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FoodaStoreServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WooCommerceServer/src/main/java" charset="UTF-8" />
   </component>

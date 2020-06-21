@@ -7,6 +7,7 @@ import com.icoderman.woocommerce.WooCommerce;
 import it.vkod.woocommerce.server.models.order.request.WooOrderRequest;
 import it.vkod.woocommerce.server.models.order.response.WooOrderResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,19 +19,16 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("api/orders/")
+@RequestMapping("api/woocommerce/orders/")
 public class WooOrderController implements OrderController<WooOrderResponse, WooOrderRequest> {
 
     @Value("${store.id}")
     private long storeId;
 
-    private final WooCommerce woo;
-    private final ObjectMapper mapper;
-
-    public WooOrderController(WooCommerce woo, ObjectMapper mapper) {
-        this.woo = woo;
-        this.mapper = mapper;
-    }
+    @Autowired
+    private WooCommerce woo;
+    @Autowired
+    private ObjectMapper mapper;
 
     @Override
     public WooOrderResponse[] apiGetOrdersAll(final int page) {

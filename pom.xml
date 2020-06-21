@@ -130,15 +130,30 @@
 
     </dependencies>
 
+    <build>
+        <finalName>FoodaParent</finalName>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
     <modules>
         <module>FoodaBasketServer</module>
         <module>FoodaConfigServer</module>
-        <module>FoodaCsvServer</module>
+        <module>FoodaConvertServer</module>
         <module>FoodaCustomerFrontend</module>
+        <module>FoodaDeliveryServer</module>
         <module>FoodaDiscoveryServer</module>
-        <module>FoodaMatchingServer</module>
+        <module>FoodaOrderServer</module>
+        <module>FoodaProductServer</module>
+        <module>FoodaRestoPosFrontend</module>
         <module>FoodaStoreServer</module>
-        <module>FoodaPosFrontend</module>
         <module>WooCommerceServer</module>
     </modules>
 

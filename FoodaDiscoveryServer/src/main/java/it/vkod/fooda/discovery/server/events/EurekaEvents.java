@@ -1,7 +1,5 @@
 package it.vkod.fooda.discovery.server.events;
 
-import com.netflix.appinfo.InstanceInfo;
-import it.vkod.fooda.discovery.server.models.store.FoodaStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.eureka.server.event.EurekaInstanceCanceledEvent;
@@ -26,16 +24,16 @@ public class EurekaEvents {
 
     @EventListener
     public void listen(EurekaInstanceRegisteredEvent registeredEvent) {
-        InstanceInfo instanceInfo = registeredEvent.getInstanceInfo();
-        if (instanceInfo.getAppName().toLowerCase().contains("woocommerce") && instanceInfo.getStatus() == InstanceInfo.InstanceStatus.UP && !registeredEvent.isReplication()) {
-            log.info("Product Service " + instanceInfo.getAppName() + " is loading..");
-            final String endpoint = instanceInfo.getHomePageUrl() + "api/products/store";
-            log.info("Endpoint: " + endpoint);
-            final FoodaStore store = rest.getForObject(endpoint, FoodaStore.class);
-            rest.postForObject("http://localhost:4401/api/stores/add", store, FoodaStore.class);
-            log.info("Store from " + instanceInfo.getAppName() + " is registered to store server..");
-            log.info("Product Service " + instanceInfo.getAppName() + " is online!");
-        }
+//        InstanceInfo instanceInfo = registeredEvent.getInstanceInfo();
+//        if (instanceInfo.getAppName().toLowerCase().contains("woocommerce") && instanceInfo.getStatus() == InstanceInfo.InstanceStatus.UP && !registeredEvent.isReplication()) {
+//            log.info("Product Service " + instanceInfo.getAppName() + " is loading..");
+//            final String endpoint = instanceInfo.getHomePageUrl() + "api/woocommerce/products/store";
+//            log.info("Endpoint: " + endpoint);
+//            final FoodaStore store = rest.getForObject(endpoint, FoodaStore.class);
+//            rest.postForObject("http://localhost:8080/api/store/add", store, FoodaStore.class);
+//            log.info("Store from " + instanceInfo.getAppName() + " is registered to store server..");
+//            log.info("Product Service " + instanceInfo.getAppName() + " is online!");
+//        }
 
     }
 }

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-@PWA(name = "Fooda WebApp", shortName = "Fooda")
+@PWA(name = "Resto WebApp", shortName = "Resto")
 @Component
 @UIScope // optional but useful; allows access to this instance from views, see View1.
 public class MainAppLayout extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {

@@ -7,18 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FoodaStoreServer" />
-        <module name="FoodaPosFrontend" />
+        <module name="FoodaGatewayServer" />
+        <module name="FoodaRestoPosFrontend" />
+        <module name="FoodaDeliveryServer" />
+        <module name="FoodaProductServer" />
         <module name="FoodaDiscoveryServer" />
         <module name="FoodaConfigServer" />
-        <module name="FoodaCsvServer" />
         <module name="FoodaCustomerFrontend" />
+        <module name="FoodaConvertServer" />
         <module name="FoodaBasketServer" />
         <module name="WooCommerceServer" />
-        <module name="FoodaMatchingServer" />
+        <module name="FoodaOrderServer" />
+        <module name="FoodaStoreServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="fooda-pos-frontend" target="11" />
+      <module name="FoodaPosClient" target="11" />
+      <module name="FoodaPosFrontend" target="11" />
       <module name="FoodaSharedJavaObjects" target="11" />
       <module name="woo-admin-service" target="11" />
       <module name="woo-auth-service" target="11" />
@@ -38,15 +44,21 @@
       <module name="Fooda" options="-parameters" />
       <module name="FoodaBasketServer" options="-parameters" />
       <module name="FoodaConfigServer" options="-parameters" />
-      <module name="FoodaCsvServer" options="-parameters" />
+      <module name="FoodaConvertServer" options="-parameters" />
       <module name="FoodaCustomerFrontend" options="-parameters" />
+      <module name="FoodaDeliveryServer" options="-parameters" />
       <module name="FoodaDiscoveryServer" options="-parameters" />
-      <module name="FoodaMatchingServer" options="-parameters" />
+      <module name="FoodaGatewayServer" options="-parameters" />
+      <module name="FoodaOrderServer" options="-parameters" />
+      <module name="FoodaPosClient" options="-parameters" />
       <module name="FoodaPosFrontend" options="-parameters" />
+      <module name="FoodaProductServer" options="-parameters" />
+      <module name="FoodaRestoPosFrontend" options="-parameters" />
       <module name="FoodaSharedJavaObjects" options="-parameters" />
       <module name="FoodaStoreServer" options="-parameters" />
       <module name="WooCommerceOrderServer" options="-parameters" />
       <module name="WooCommerceServer" options="-parameters" />
+      <module name="fooda-pos-frontend" options="-parameters" />
       <module name="woo-admin-service" options="-parameters" />
       <module name="woo-auth-service" options="-parameters" />
       <module name="woo-core-payloads" options="-parameters" />

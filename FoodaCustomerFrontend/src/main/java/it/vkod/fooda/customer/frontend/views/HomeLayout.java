@@ -9,13 +9,12 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
-import it.vkod.fooda.customer.frontend.clients.WooMatchServiceClient;
-import it.vkod.fooda.customer.frontend.components.ProductCard;
+import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
+import it.vkod.fooda.customer.frontend.clients.FoodaProductClient;
+import it.vkod.fooda.customer.frontend.views.components.ProductCard;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
 import it.vkod.fooda.customer.frontend.models.product.response.ProductResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.util.Precision;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
@@ -30,13 +29,13 @@ import java.util.stream.Stream;
 @CssImport("./styles/cards.css")
 public class HomeLayout extends AbstractView {
 
-    private final transient WooMatchServiceClient matchServiceClient;
-    private final transient WooBasketServiceClient basketServiceClient;
+    private final transient FoodaProductClient matchServiceClient;
+    private final transient FoodaBasketClient basketServiceClient;
     private final MainAppLayout app;
 
     private final Div container = new Div();
 
-    public HomeLayout(WooMatchServiceClient matchServiceClient, WooBasketServiceClient basketServiceClient, MainAppLayout app) {
+    public HomeLayout(FoodaProductClient matchServiceClient, FoodaBasketClient basketServiceClient, MainAppLayout app) {
         this.matchServiceClient = matchServiceClient;
         this.basketServiceClient = basketServiceClient;
         this.app = app;
@@ -86,7 +85,7 @@ public class HomeLayout extends AbstractView {
                     productResponse.getRestUrl(),
                     productResponse.getId(),
                     productResponse.getName(),
-                    Precision.round(productResponse.getPrice(), 2),
+                    Math.round(productResponse.getPrice()),
                     1,
                     productResponse.getImages().get(0).getSrc());
 

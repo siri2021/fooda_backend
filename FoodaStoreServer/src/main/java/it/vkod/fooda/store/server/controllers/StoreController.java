@@ -8,25 +8,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stores")
+@RequestMapping("/api/store")
 public class StoreController {
 
     @Autowired
     private StoreRepository repository;
 
     @PostMapping("/add")
-    public void addStore(@RequestBody final FoodaStore foodaStore) {
-        repository.save(foodaStore);
+    public void addStore(@RequestBody final FoodaStore store) {
+        repository.save(store);
     }
 
     @PostMapping("/add/list")
-    public void addStoreList(@RequestBody final List<FoodaStore> foodaStores) {
-        foodaStores.forEach(this::addStore);
+    public void addStoreList(@RequestBody final List<FoodaStore> stores) {
+        stores.forEach(this::addStore);
     }
 
     @PutMapping("/upt/{id}")
-    public void updateStore(@RequestBody final FoodaStore foodaStore, @PathVariable("id") final Long id) {
-        if (repository.existsById(id)) repository.save(foodaStore);
+    public void updateStore(@RequestBody final FoodaStore store, @PathVariable("id") final Long id) {
+        if (repository.existsById(id)) repository.save(store);
     }
 
     @DeleteMapping("/del/{id}")

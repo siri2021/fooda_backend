@@ -9,8 +9,8 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
-import it.vkod.fooda.customer.frontend.components.BasketCard;
+import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
+import it.vkod.fooda.customer.frontend.views.components.BasketCard;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,12 +22,12 @@ import java.util.Arrays;
 @CssImport("./styles/cards.css")
 public class BasketLayout extends AbstractView {
 
-    private final transient WooBasketServiceClient basketServiceClient;
+    private final transient FoodaBasketClient basketServiceClient;
     private final MainAppLayout app;
 
     private final Div container = new Div();
 
-    public BasketLayout(final WooBasketServiceClient basketServiceClient, final MainAppLayout app) {
+    public BasketLayout(final FoodaBasketClient basketServiceClient, final MainAppLayout app) {
         this.app = app;
         this.basketServiceClient = basketServiceClient;
         container.setClassName("cards-container");

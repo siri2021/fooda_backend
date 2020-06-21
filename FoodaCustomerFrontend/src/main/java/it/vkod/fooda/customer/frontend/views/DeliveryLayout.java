@@ -21,7 +21,7 @@ import com.vaadin.flow.data.validator.StringLengthValidator;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.function.SerializablePredicate;
 import com.vaadin.flow.router.Route;
-import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
+import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketBilling;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketShipping;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +35,11 @@ import java.util.stream.Collectors;
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class DeliveryLayout extends AbstractView {
 
-    private final transient WooBasketServiceClient basketServiceClient;
+    private final transient FoodaBasketClient basketServiceClient;
     private final VerticalLayout layout = new VerticalLayout();
     private final MainAppLayout app;
 
-    public DeliveryLayout(final WooBasketServiceClient basketServiceClient, final MainAppLayout app) {
+    public DeliveryLayout(final FoodaBasketClient basketServiceClient, final MainAppLayout app) {
         this.basketServiceClient = basketServiceClient;
         this.app = app;
 

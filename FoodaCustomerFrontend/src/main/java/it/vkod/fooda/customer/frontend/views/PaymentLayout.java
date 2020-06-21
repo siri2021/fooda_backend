@@ -8,9 +8,9 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
-import it.vkod.fooda.customer.frontend.clients.WooOrderServiceClient;
-import it.vkod.fooda.customer.frontend.components.PaymentCard;
+import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
+import it.vkod.fooda.customer.frontend.clients.FoodaOrderClient;
+import it.vkod.fooda.customer.frontend.views.components.PaymentCard;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketBilling;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketOrder;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
@@ -29,13 +29,13 @@ import java.util.stream.Collectors;
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class PaymentLayout extends AbstractView {
 
-    private final transient WooBasketServiceClient basketServiceClient;
-    private final transient WooOrderServiceClient orderServiceClient;
+    private final transient FoodaBasketClient basketServiceClient;
+    private final transient FoodaOrderClient orderServiceClient;
 
     private final MainAppLayout app;
     private final VerticalLayout content = new VerticalLayout();
 
-    public PaymentLayout(WooBasketServiceClient basketServiceClient, WooOrderServiceClient orderServiceClient, MainAppLayout app) {
+    public PaymentLayout(FoodaBasketClient basketServiceClient, FoodaOrderClient orderServiceClient, MainAppLayout app) {
         this.basketServiceClient = basketServiceClient;
         this.orderServiceClient = orderServiceClient;
         this.app = app;

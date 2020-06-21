@@ -6,8 +6,8 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
-import it.vkod.fooda.customer.frontend.clients.WooBasketServiceClient;
-import it.vkod.fooda.customer.frontend.clients.WooOrderServiceClient;
+import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
+import it.vkod.fooda.customer.frontend.clients.FoodaOrderClient;
 import it.vkod.fooda.customer.frontend.models.order.res.OrderResponse;
 
 import java.util.Arrays;
@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class OrdersLayout extends VerticalLayout {
 
-    private final transient WooBasketServiceClient basketServiceClient;
-    private final transient WooOrderServiceClient orderServiceClient;
+    private final transient FoodaBasketClient basketServiceClient;
+    private final transient FoodaOrderClient orderServiceClient;
 
     private final String sessionId = VaadinSession.getCurrent().getSession().getId();
     private final VerticalLayout layoutContent = new VerticalLayout();
     private final transient List<OrderResponse> actualOrders;
 
-    public OrdersLayout(final WooBasketServiceClient basketServiceClient, final WooOrderServiceClient orderServiceClient) {
+    public OrdersLayout(final FoodaBasketClient basketServiceClient, final FoodaOrderClient orderServiceClient) {
 
         this.basketServiceClient = basketServiceClient;
         this.orderServiceClient = orderServiceClient;

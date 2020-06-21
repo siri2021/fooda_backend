@@ -11,13 +11,13 @@ import java.util.Arrays;
 
 @Slf4j
 @RestController
-@RequestMapping("api/basket/shipping/")
+@RequestMapping("api/basket")
 public class ShippingCtrl {
 
     @Autowired
     private ShippingRepository repo;
 
-    @PostMapping("insert")
+    @PostMapping("/shipping/insert")
     public void apiPostInsertBasketShipping(@NotNull @RequestBody final Shipping shipping) {
         if (repo.existsByFirstNameAndLastNameAndUserIdAndAddressAndPostcode(shipping.getFirstName(), shipping.getLastName(),
                 shipping.getUserId(), shipping.getAddress(), shipping.getPostcode())) {
@@ -29,25 +29,25 @@ public class ShippingCtrl {
         }
     }
 
-    @PutMapping("update")
+    @PutMapping("/shipping/update")
     public void apiPutUpdateBasketShipping(@NotNull @RequestBody Shipping shipping) {
         shipping = repo.findByFirstNameAndLastNameAndUserIdAndAddressAndPostcode(shipping.getFirstName(), shipping.getLastName(),
                 shipping.getUserId(), shipping.getAddress(), shipping.getPostcode());
         repo.save(shipping);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/shipping/delete")
     public void apiDeleteBasketShipping(@NotNull @RequestBody final Shipping shipping) {
         repo.delete(shipping);
     }
 
-    @DeleteMapping("delete/{user_id}")
+    @DeleteMapping("/shipping/delete/{user_id}")
     public void apiClearBasketShipping(@PathVariable("user_id") final String userId) {
         final Shipping[] shipping = apiGetShipping(userId);
         Arrays.stream(shipping).forEach(this::apiDeleteBasketShipping);
     }
 
-    @GetMapping("select/{user_id}")
+    @GetMapping("/shipping/select/{user_id}")
     public Shipping[] apiGetShipping(@PathVariable("user_id") final String userId) {
         return repo.findAllByUserId(userId).toArray(Shipping[]::new);
     }

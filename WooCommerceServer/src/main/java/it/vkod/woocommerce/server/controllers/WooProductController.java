@@ -18,7 +18,7 @@ import java.util.*;
 import static java.util.Objects.requireNonNull;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("api/woocommerce/products/")
 public class WooProductController implements ProductController<WooProductResponse, WooProductRequest> {
 
     @Autowired
