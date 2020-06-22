@@ -9351,8 +9351,6 @@ J
 FoodaGatewayServer/pom.xml,0\c\0c2aa285726a7fdbd9a52e7219b971d3e14f3187
 K
 FoodaGatewayServer/mvnw.cmd,7\8\78ebc37a360c9347f1569c9405db5196c989fc62
-l
-<FoodaGatewayServer/src/main/resources/application.properties,c\4\c446844d3285ab808c2bc614630e48ce6e40b4b0
 ˆ
 XFoodaGatewayServer/src/main/java/it/vkod/fooda/gateway/server/FoodaGatewayServerApp.java,d\1\d19c7611c683d93d42b5817bd68e0ca7a33b71c3
 
