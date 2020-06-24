@@ -19,11 +19,11 @@ public class FoodaBasketClient {
     private RestTemplate rest;
 
     public BasketProduct[] apiGetBasketProducts(final String userId) {
-        return rest.getForObject(GatewayClient.getServerUrl() + "/basket/products/select/" + userId, BasketProduct[].class);
+        return rest.getForObject(GatewayClient.getServerUrl() + "/basket/product/select/" + userId, BasketProduct[].class);
     }
 
     public BasketOrder[] apiGetBasketOrders(final String userId) {
-        return rest.getForObject(GatewayClient.getServerUrl() + "/basket/orders/select/" + userId, BasketOrder[].class);
+        return rest.getForObject(GatewayClient.getServerUrl() + "/basket/order/select/" + userId, BasketOrder[].class);
     }
 
     public double apiGetBasketTotalPrice(final String userId) {
@@ -34,19 +34,19 @@ public class FoodaBasketClient {
     }
 
     public void apiIncreaseBasketProductQuantity(final BasketProduct basketProduct) {
-        rest.put(GatewayClient.getServerUrl() + "/basket/products/increase/", basketProduct);
+        rest.put(GatewayClient.getServerUrl() + "/basket/product/increase/", basketProduct);
     }
 
     public void apiDecreaseBasketProductQuantity(final BasketProduct basketProduct) {
-        rest.put(GatewayClient.getServerUrl() + "/basket/products/decrease/", basketProduct);
+        rest.put(GatewayClient.getServerUrl() + "/basket/product/decrease/", basketProduct);
     }
 
     public void apiAddBasketProduct(final BasketProduct basketProduct) {
-        rest.postForObject(GatewayClient.getServerUrl() + "/basket/products/insert/", basketProduct, BasketProduct.class);
+        rest.postForObject(GatewayClient.getServerUrl() + "/basket/product/insert/", basketProduct, BasketProduct.class);
     }
 
     public void apiAddBasketOrder(final BasketOrder basketOrder) {
-        rest.postForObject(GatewayClient.getServerUrl() + "/basket/orders/insert/", basketOrder, BasketOrder.class);
+        rest.postForObject(GatewayClient.getServerUrl() + "/basket/order/insert/", basketOrder, BasketOrder.class);
     }
 
     public void apiAddBasketShipping(final BasketShipping basketShipping) {
@@ -66,11 +66,11 @@ public class FoodaBasketClient {
     }
 
     public void apiClearBasketProducts(final String userId) {
-        rest.delete(GatewayClient.getServerUrl() + "/basket/products/clear/" + userId);
+        rest.delete(GatewayClient.getServerUrl() + "/basket/product/clear/" + userId);
     }
 
     public void apiClearBasketProductsByStoreId(final String userId, final long storeId) {
-        rest.delete(GatewayClient.getServerUrl() + "/basket/products/clear/" + userId + "/store/" + storeId);
+        rest.delete(GatewayClient.getServerUrl() + "/basket/product/clear/" + userId + "/store/" + storeId);
     }
 
 }

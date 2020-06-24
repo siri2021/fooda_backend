@@ -17,7 +17,7 @@ public class BasketCtrl {
     @Autowired
     private ProductRepository repo;
 
-    @PostMapping("/products/insert")
+    @PostMapping("/product/insert")
     public void apiPostInsertProduct(@NotNull @RequestBody final Product product) {
         if (repo.existsByUserIdAndStoreIdAndProductId(product.getUserId(), product.getStoreId(), product.getProductId())) {
             apiPutIncreaseBasketProductQuantity(product);
@@ -27,7 +27,7 @@ public class BasketCtrl {
         }
     }
 
-    @PutMapping("/products/increase")
+    @PutMapping("/product/increase")
     public void apiPutIncreaseBasketProductQuantity(@NotNull @RequestBody final Product product) {
         final Product existingProduct = repo.findByUserIdAndStoreIdAndProductId(product.getUserId(), product.getStoreId(), product.getProductId());
         existingProduct.setQuantity(existingProduct.getQuantity() + 1);
@@ -35,7 +35,7 @@ public class BasketCtrl {
         log.info("Product quantity increased: " + product.toString());
     }
 
-    @PutMapping("/products/decrease")
+    @PutMapping("/product/decrease")
     public void apiPutDecreaseBasketProductQuantity(@NotNull @RequestBody final Product product) {
         final Product existingProduct = repo.findByUserIdAndStoreIdAndProductId(product.getUserId(), product.getStoreId(), product.getProductId());
         if (existingProduct.getQuantity() > 0) {
@@ -47,18 +47,18 @@ public class BasketCtrl {
         }
     }
 
-    @DeleteMapping("/products/delete")
+    @DeleteMapping("/product/delete")
     public void apiDeleteBasketProduct(@NotNull @RequestBody final Product product) {
         repo.delete(product);
     }
 
-    @DeleteMapping("/products/clear/{user_id}")
+    @DeleteMapping("/product/clear/{user_id}")
     public void apiClearBasketProducts(@PathVariable("user_id") final String userId) {
         final Product[] product = apiGetBasketProducts(userId);
         Arrays.stream(product).forEach(this::apiDeleteBasketProduct);
     }
 
-    @DeleteMapping("/products/clear/{user_id}/store/{store_id}")
+    @DeleteMapping("/product/clear/{user_id}/store/{store_id}")
     public void apiClearBasketProducts(@PathVariable("user_id") final String userId, @PathVariable("user_id") final long storeId) {
         final Product[] product = apiGetBasketProducts(userId);
         Arrays.stream(product)
@@ -66,7 +66,7 @@ public class BasketCtrl {
                 .forEach(this::apiDeleteBasketProduct);
     }
 
-    @GetMapping("select/{user_id}")
+    @GetMapping("/product/select/{user_id}")
     public Product[] apiGetBasketProducts(@PathVariable("user_id") final String userId) {
         return repo.findAllByUserId(userId).toArray(Product[]::new);
     }

@@ -7,18 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="FoodaOrderServer" />
+        <module name="FoodaBasketServer" />
         <module name="FoodaGatewayServer" />
+        <module name="FoodaConfigServer" />
         <module name="FoodaRestoPosFrontend" />
         <module name="FoodaProductServer" />
-        <module name="FoodaDiscoveryServer" />
-        <module name="FoodaConfigServer" />
-        <module name="FoodaConvertServer" />
         <module name="FoodaCustomerFrontend" />
-        <module name="FoodaBasketServer" />
-        <module name="FoodaDeliveryServer" />
-        <module name="FoodaOrderServer" />
-        <module name="FoodaStoreServer" />
         <module name="WooCommerceServer" />
+        <module name="FoodaConvertServer" />
+        <module name="FoodaDeliveryServer" />
+        <module name="FoodaRestaurantFrontend" />
+        <module name="FoodaStoreServer" />
+        <module name="FoodaDiscoveryServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -53,6 +54,7 @@
       <module name="FoodaPosClient" options="-parameters" />
       <module name="FoodaPosFrontend" options="-parameters" />
       <module name="FoodaProductServer" options="-parameters" />
+      <module name="FoodaRestaurantFrontend" options="-parameters" />
       <module name="FoodaRestoPosFrontend" options="-parameters" />
       <module name="FoodaSharedJavaObjects" options="-parameters" />
       <module name="FoodaStoreServer" options="-parameters" />

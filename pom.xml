@@ -152,7 +152,7 @@
         <module>FoodaDiscoveryServer</module>
         <module>FoodaOrderServer</module>
         <module>FoodaProductServer</module>
-        <module>FoodaRestoPosFrontend</module>
+        <module>FoodaRestaurantFrontend</module>
         <module>FoodaStoreServer</module>
         <module>WooCommerceServer</module>
     </modules>
