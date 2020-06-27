@@ -10,10 +10,12 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
-import it.vkod.fooda.customer.frontend.views.components.BasketCard;
 import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
+import it.vkod.fooda.customer.frontend.views.components.BasketCard;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @Slf4j
@@ -22,34 +24,28 @@ import java.util.Arrays;
 @CssImport("./styles/cards.css")
 public class BasketLayout extends AbstractView {
 
-    private final transient FoodaBasketClient basketServiceClient;
-    private final MainAppLayout app;
+    @Autowired
+    private FoodaBasketClient basketServiceClient;
+    @Autowired
+    private MainAppLayout app;
 
     private final Div container = new Div();
 
-    public BasketLayout(final FoodaBasketClient basketServiceClient, final MainAppLayout app) {
-        this.app = app;
-        this.basketServiceClient = basketServiceClient;
+    @PostConstruct
+    public void init() {
         container.setClassName("cards-container");
 
-        Arrays
-                .stream(basketServiceClient.apiGetBasketProducts(app.getSession().getId()))
-                .forEach(product -> container.add(mapBasketToDiv(product)));
+        Arrays.stream(basketServiceClient.apiGetBasketProducts(app.getSession().getId()))
+                .forEach(product -> container.add(BasketCard.builder()
+                        .product(product)
+                        .increaseEvent(increaseEvent(product))
+                        .decreaseEvent(decreaseEvent(product))
+                        .build()
+                        .init()));
 
         VerticalLayout content = new VerticalLayout();
         content.add(container);
         add(content);
-    }
-
-    private BasketCard mapBasketToDiv(BasketProduct product) {
-        return new BasketCard(
-                product.getName(),
-                product.getImageUrl(),
-                product.getRestUrl(),
-                product.getPrice() * product.getQuantity(),
-                increaseEvent(product),
-                decreaseEvent(product)
-        );
     }
 
     private ComponentEventListener<ClickEvent<Button>> increaseEvent(BasketProduct product) {

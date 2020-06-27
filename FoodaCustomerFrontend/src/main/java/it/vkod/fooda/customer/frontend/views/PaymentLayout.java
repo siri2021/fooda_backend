@@ -10,18 +10,16 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import it.vkod.fooda.customer.frontend.clients.FoodaBasketClient;
 import it.vkod.fooda.customer.frontend.clients.FoodaOrderClient;
-import it.vkod.fooda.customer.frontend.views.components.PaymentCard;
-import it.vkod.fooda.customer.frontend.models.basket.req.BasketBilling;
-import it.vkod.fooda.customer.frontend.models.basket.req.BasketOrder;
-import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
-import it.vkod.fooda.customer.frontend.models.basket.req.BasketShipping;
+import it.vkod.fooda.customer.frontend.models.basket.req.*;
 import it.vkod.fooda.customer.frontend.models.order.req.*;
 import it.vkod.fooda.customer.frontend.models.order.res.OrderResponse;
+import it.vkod.fooda.customer.frontend.views.components.PaymentCard;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,61 +27,39 @@ import java.util.stream.Collectors;
 @StyleSheet("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
 public class PaymentLayout extends AbstractView {
 
-    private final transient FoodaBasketClient basketServiceClient;
-    private final transient FoodaOrderClient orderServiceClient;
+    @Autowired
+    private FoodaBasketClient basketServiceClient;
+    @Autowired
+    private FoodaOrderClient orderServiceClient;
+    @Autowired
+    private MainAppLayout app;
 
-    private final MainAppLayout app;
     private final VerticalLayout content = new VerticalLayout();
 
-    public PaymentLayout(FoodaBasketClient basketServiceClient, FoodaOrderClient orderServiceClient, MainAppLayout app) {
-        this.basketServiceClient = basketServiceClient;
-        this.orderServiceClient = orderServiceClient;
-        this.app = app;
-
-        getBasketByUserId();
-
-        add(content);
-    }
-
-    private void getBasketByUserId() {
-
-        final Map<Long, List<BasketProduct>> groupedBaskets = Arrays
+    @PostConstruct
+    public void init() {
+        Arrays
                 .stream(basketServiceClient.apiGetBasketProducts(app.getSession().getId()))
-                .collect(Collectors.groupingBy(BasketProduct::getStoreId));
-        groupedBaskets.forEach((storeId, basketProducts) -> content.add(createBasketInfoDivs(storeId, basketProducts)));
+                .collect(Collectors.groupingBy(BasketProduct::getStoreId))
+                .forEach((storeId, basketProducts) -> content.add(createBasketInfoDivs(storeId, basketProducts)));
+        add(content);
     }
 
     @SneakyThrows
     private Div createBasketInfoDivs(final long storeId, final List<BasketProduct> basketProducts) {
-
-        AtomicReference<Double> subTotal = new AtomicReference<>((double) 0);
-        basketProducts.forEach(basketProduct -> {
-            final double price = basketProduct.getPrice() * basketProduct.getQuantity();
-            subTotal.updateAndGet(v -> v + price);
-        });
-
-        return new PaymentCard(
-                "https://www.codespromo.be/wp-content/uploads/2017/02/Pizzahut.jpg",
-                subTotal.get(),
-                mapProductsWithArrayList(basketProducts),
-                true,
-                orderEvent(storeId, basketProducts)
-        );
-
-    }
-
-    private List<String[]> mapProductsWithArrayList(List<BasketProduct> basketProducts) {
-        final List<String[]> products = new ArrayList<>();
-        products.add(new String[]{"Product", "Quantity", "Price", "Subtotal"});
-        products.addAll(basketProducts.stream()
-                .map(p -> new String[]{
-                        p.getName(),
-                        String.valueOf(p.getQuantity()),
-                        p.getPrice() + "€",
-                        p.getPrice() * p.getQuantity() + "€"
-                })
-                .collect(Collectors.toList()));
-        return products;
+        return PaymentCard.builder()
+                .logo("https://www.codespromo.be/wp-content/uploads/2017/02/Pizzahut.jpg")
+                .products(basketProducts)
+                .billingAddress(basketServiceClient.apiGetBasketBilling(app.getSession().getId()))
+                .shippingAddress(basketServiceClient.apiGetBasketAddress(app.getSession().getId()))
+                .payment(BasketPayment.builder()
+                        .paymentId(UUID.randomUUID())
+                        .method("cod")
+                        .title("Cash on delivery")
+                        .storeId(storeId)
+                        .userId(app.getSession().getId()).build())
+                .confirmEvent(orderEvent(storeId, basketProducts))
+                .build();
     }
 
     private ComponentEventListener<ClickEvent<Button>> orderEvent(long storeId, List<BasketProduct> basketProducts) {
@@ -97,17 +73,34 @@ public class PaymentLayout extends AbstractView {
     @SneakyThrows
     private OrderResponse createOrderRequestWithOrderApi(final long storeId, List<BasketProduct> basketProducts) {
 
-        BasketShipping delivery = basketServiceClient.apiGetBasketShipping(app.getSession().getId())[0];
-        BasketBilling billing = basketServiceClient.apiGetBasketBilling(app.getSession().getId())[0];
+        BasketAddress delivery = basketServiceClient.apiGetBasketAddress(app.getSession().getId());
+        BasketAddress billing = basketServiceClient.apiGetBasketAddress(app.getSession().getId());
 
         List<OrderRequestLineItemsItem> products = new ArrayList<>();
-        basketProducts.forEach(basketProduct -> products.add(
-                OrderRequestLineItemsItem.builder()
-                        .product_id((int) basketProduct.getProductId())
-                        .quantity(basketProduct.getQuantity()).build()));
+        basketProducts.forEach(basketProduct -> products.add(OrderRequestLineItemsItem.builder()
+                .product_id((int) basketProduct.getProductId())
+                .quantity(basketProduct.getQuantity()).build()));
 
-        String paymentMethod = "Cash on delivery";
-        OrderRequest orderRequest = OrderRequest.builder()
+        BasketPayment basketPayment = BasketPayment.builder()
+                .paymentId(UUID.randomUUID())
+                .method("Cash on Delivery")
+                .storeId(storeId)
+                .title("cod")
+                .userId(app.getSession().getId())
+                .build();
+
+        OrderRequest orderRequest = mapBasketToOrderRequest(delivery, billing, products, basketPayment);
+        final OrderResponse orderResponse = orderServiceClient.apiAddOrderWithResponse(orderRequest, storeId);
+        basketServiceClient.apiAddBasketOrder(new BasketOrder(UUID.randomUUID(), orderResponse.getId(), app.getSession().getId(), storeId));
+
+        new Notification("Your order " + orderResponse.getId() + " is created!", 3000).open();
+        app.getBadge().setCount(app.getBadge().getCount() - basketProducts.size());
+
+        return orderResponse;
+    }
+
+    private OrderRequest mapBasketToOrderRequest(BasketAddress delivery, BasketAddress billing, List<OrderRequestLineItemsItem> products, BasketPayment basketPayment) {
+        return OrderRequest.builder()
                 .shipping_lines(Collections.singletonList(OrderRequestShippingLinesItem.builder()
                         .method_id("free_shipping")
                         .method_title("Free Shipping")
@@ -118,37 +111,28 @@ public class PaymentLayout extends AbstractView {
                         .last_name(billing.getLastName())
                         .email(billing.getEmail())
                         .phone(billing.getPhone())
-                        .address_1(billing.getAddress())
-                        .address_2(" ")
+                        .address_1(billing.getAddressLine1())
+                        .address_2(billing.getAddressLine2())
                         .postcode(billing.getPostcode())
-                        .city(billing.getMunicipality())
-                        .state(billing.getMunicipality())
-                        .country("Belgium")
+                        .city(billing.getMunicipality() + "," + billing.getCity())
+                        .state(billing.getRegion())
+                        .country(billing.getCountry())
                         .build())
                 .shipping(OrderRequestShipping.builder()
                         .first_name(delivery.getFirstName())
                         .last_name(delivery.getLastName())
-                        .address_1(delivery.getAddress())
-                        .address_2(" ")
+                        .address_1(delivery.getAddressLine1())
+                        .address_2(delivery.getAddressLine2())
                         .postcode(delivery.getPostcode())
-                        .city(delivery.getMunicipality())
-                        .state(billing.getMunicipality())
-                        .country("Belgium")
+                        .city(delivery.getMunicipality() + "," + delivery.getCity())
+                        .state(delivery.getRegion())
+                        .country(delivery.getCountry())
                         .build())
                 .line_items(products)
-                .payment_method("cod")
-                .payment_method_title(paymentMethod)
+                .payment_method(basketPayment.getMethod())
+                .payment_method_title(basketPayment.getTitle())
                 .set_paid(false)
                 .build();
-
-        final OrderResponse orderResponse = orderServiceClient.apiAddOrderWithResponse(orderRequest, storeId);
-
-        basketServiceClient.apiAddBasketOrder(new BasketOrder(UUID.randomUUID(), orderResponse.getId(), app.getSession().getId(), storeId));
-
-        new Notification("Your order " + orderResponse.getId() + " is created!", 3000).open();
-        app.getBadge().setCount(app.getBadge().getCount() - basketProducts.size());
-
-        return orderResponse;
     }
 
     @Override

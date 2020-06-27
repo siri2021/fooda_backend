@@ -7,11 +7,11 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import it.vkod.fooda.customer.frontend.models.basket.req.BasketAddressRequest;
-import lombok.AllArgsConstructor;
+import it.vkod.fooda.customer.frontend.models.basket.req.BasketAddress;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -40,20 +40,22 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @EqualsAndHashCode(callSuper = true)
-@Value
-@AllArgsConstructor
+@Data
+@Builder
 @Tag("div")
 public class AddressCard extends Div {
 
     @Getter
-    BasketAddressRequest addressBeingEdited;
+    private BasketAddress addressBeingEdited;
 
-    public AddressCard div() {
+    public AddressCard init() {
+
         setClassName("container");
 
-        Binder<BasketAddressRequest> binder = new Binder<>(BasketAddressRequest.class);
+        Binder<BasketAddress> binder = new Binder<>(BasketAddress.class);
 
-        binder.readBean(addressBeingEdited);
+        if (addressBeingEdited != null)
+            binder.readBean(addressBeingEdited);
 
         Div row = new Div();
         row.setClassName("row");
@@ -83,12 +85,12 @@ public class AddressCard extends Div {
         Input firstNameField = new Input(ValueChangeMode.EAGER);
         firstNameField.setId("firstName");
         firstNameField.setClassName("validate");
-        firstNameField.addFocusListener(focused -> firstNameField.getElement().setText(""));
-        binder.forField(firstNameField).bind(BasketAddressRequest::getFirstName, BasketAddressRequest::setFirstName);
+        binder.forField(firstNameField).bind(BasketAddress::getFirstName, BasketAddress::setFirstName);
 
         Label firstNameLabel = new Label();
         firstNameLabel.setFor("firstName");
         firstNameLabel.setText("First Name");
+        firstNameField.addFocusListener(focused -> firstNameLabel.setText(""));
 
         firstNameDiv.add(firstNameField, firstNameLabel);
         form.add(firstNameDiv);
@@ -100,7 +102,7 @@ public class AddressCard extends Div {
         Input lastNameField = new Input(ValueChangeMode.EAGER);
         lastNameField.setId("lastName");
         lastNameField.setClassName("validate");
-        binder.forField(firstNameField).bind(BasketAddressRequest::getLastName, BasketAddressRequest::setLastName);
+        binder.forField(lastNameField).bind(BasketAddress::getLastName, BasketAddress::setLastName);
 
         Label lastNameLabel = new Label();
         lastNameLabel.setFor("lastName");
@@ -109,21 +111,37 @@ public class AddressCard extends Div {
         lastNameDiv.add(lastNameField, lastNameLabel);
         form.add(lastNameDiv);
 
-        // Address Div
-        Div addressDiv = new Div();
-        addressDiv.setClassName("input-field col m6");
+        // Address Line 1 Div
+        Div addressLine1Div = new Div();
+        addressLine1Div.setClassName("input-field col m6");
 
-        Input addressField = new Input(ValueChangeMode.EAGER);
-        addressField.setId("address");
-        addressField.setClassName("validate");
-        binder.forField(firstNameField).bind(BasketAddressRequest::getAddress, BasketAddressRequest::setAddress);
+        Input addressLine1Field = new Input(ValueChangeMode.EAGER);
+        addressLine1Field.setId("addressLine1");
+        addressLine1Field.setClassName("validate");
+        binder.forField(addressLine1Field).bind(BasketAddress::getAddressLine1, BasketAddress::setAddressLine1);
 
-        Label addressLabel = new Label();
-        addressLabel.setFor("address");
-        addressLabel.setText("Address");
+        Label addressLine1Label = new Label();
+        addressLine1Label.setFor("addressLine1");
+        addressLine1Label.setText("Address Line 1");
 
-        addressDiv.add(addressField, addressLabel);
-        form.add(addressDiv);
+        addressLine1Div.add(addressLine1Field, addressLine1Label);
+        form.add(addressLine1Div);
+
+        // Address Line 2 Div
+        Div addressLine2Div = new Div();
+        addressLine2Div.setClassName("input-field col m6");
+
+        Input addressLine2Field = new Input(ValueChangeMode.EAGER);
+        addressLine2Field.setId("addressLine2");
+        addressLine2Field.setClassName("validate");
+        binder.forField(addressLine2Field).bind(BasketAddress::getAddressLine2, BasketAddress::setAddressLine2);
+
+        Label addressLine2Label = new Label();
+        addressLine2Label.setFor("addressLine2");
+        addressLine2Label.setText("Address Line 2");
+
+        addressLine2Div.add(addressLine2Field, addressLine2Label);
+        form.add(addressLine2Div);
 
         // Postcode Div
         Div postcodeDiv = new Div();
@@ -132,7 +150,7 @@ public class AddressCard extends Div {
         Input postcodeField = new Input(ValueChangeMode.EAGER);
         postcodeField.setId("postcode");
         postcodeField.setClassName("validate");
-        binder.forField(firstNameField).bind(BasketAddressRequest::getPostcode, BasketAddressRequest::setPostcode);
+        binder.forField(postcodeField).bind(BasketAddress::getPostcode, BasketAddress::setPostcode);
 
         Label postcodeLabel = new Label();
         postcodeLabel.setFor("postcode");
@@ -148,7 +166,7 @@ public class AddressCard extends Div {
         Input municipalityField = new Input(ValueChangeMode.EAGER);
         municipalityField.setId("municipality");
         municipalityField.setClassName("validate");
-        binder.forField(firstNameField).bind(BasketAddressRequest::getMunicipality, BasketAddressRequest::setMunicipality);
+        binder.forField(municipalityField).bind(BasketAddress::getMunicipality, BasketAddress::setMunicipality);
 
         Label municipalityLabel = new Label();
         municipalityLabel.setFor("municipality");
@@ -164,7 +182,7 @@ public class AddressCard extends Div {
         Input cityField = new Input(ValueChangeMode.EAGER);
         cityField.setId("city");
         cityField.setClassName("validate");
-        binder.forField(firstNameField).bind(BasketAddressRequest::getCity, BasketAddressRequest::setCity);
+        binder.forField(cityField).bind(BasketAddress::getCity, BasketAddress::setCity);
 
         Label cityLabel = new Label();
         cityLabel.setFor("city");
@@ -173,6 +191,22 @@ public class AddressCard extends Div {
         cityDiv.add(cityField, cityLabel);
         form.add(cityDiv);
 
+        // City Div
+        Div regionDiv = new Div();
+        regionDiv.setClassName("input-field col m6");
+
+        Input regionField = new Input(ValueChangeMode.EAGER);
+        regionField.setId("region");
+        regionField.setClassName("validate");
+        binder.forField(regionField).bind(BasketAddress::getCity, BasketAddress::setCity);
+
+        Label regionLabel = new Label();
+        regionLabel.setFor("region");
+        regionLabel.setText("Region");
+
+        regionDiv.add(regionField, regionLabel);
+        form.add(regionDiv);
+
         // Country Div
         Div countryDiv = new Div();
         countryDiv.setClassName("input-field col m6");
@@ -180,7 +214,7 @@ public class AddressCard extends Div {
         Input countryField = new Input(ValueChangeMode.EAGER);
         countryField.setId("country");
         countryField.setClassName("validate");
-        binder.forField(firstNameField).bind(BasketAddressRequest::getCountry, BasketAddressRequest::setCountry);
+        binder.forField(countryField).bind(BasketAddress::getCountry, BasketAddress::setCountry);
 
         Label countryLabel = new Label();
         countryLabel.setFor("country");
@@ -192,7 +226,7 @@ public class AddressCard extends Div {
         NativeButton saveButton = new NativeButton("Save", click -> {
             try {
                 binder.writeBean(addressBeingEdited);
-                log.info("Address: " + addressBeingEdited.getFirstName() + " " + addressBeingEdited.getLastName() + "\n" + addressBeingEdited.getAddress());
+                log.info("Address: " + addressBeingEdited.getFirstName() + " " + addressBeingEdited.getLastName() + " from " + addressBeingEdited.getCity());
             } catch (ValidationException e) {
                 log.error(e.getMessage());
             }

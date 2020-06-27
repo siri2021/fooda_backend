@@ -33,7 +33,7 @@ public class HomeLayout extends AbstractView {
     @Autowired
     private FoodaBasketClient basketClient;
     @Autowired
-    private MainAppLayout appLayout;
+    private MainAppLayout app;
 
     private final Div container = new Div();
 
@@ -46,17 +46,13 @@ public class HomeLayout extends AbstractView {
 
     private void initTopSellingProducts() {
         final ProductResponse[] products = productClient.apiGetProductsFromAllStores();
-        Arrays.stream(products).forEach(product -> container.add(mapProductToDiv(product)));
-    }
-
-    private Div mapProductToDiv(ProductResponse productResponse) {
-        return new ProductCard(
-                productResponse.getName(),
-                productResponse.getImages().get(0).getSrc(),
-                productResponse.getDescription(),
-                productResponse.getPrice() != null ? productResponse.getPrice() : Double.parseDouble(productResponse.getRegularPrice()),
-                callAddToBasket(productResponse)
-        );
+        Arrays
+                .stream(products)
+                .forEach(product -> container.add(ProductCard.builder()
+                        .product(product)
+                        .addEvent(callAddToBasket(product))
+                        .build()
+                        .init()));
     }
 
     @NotNull
@@ -65,7 +61,7 @@ public class HomeLayout extends AbstractView {
 
             final BasketProduct productToAdd = new BasketProduct(
                     UUID.randomUUID(),
-                    appLayout.getSession().getId(),
+                    app.getSession().getId(),
                     productResponse.getStoreId(),
                     productResponse.getRestUrl(),
                     productResponse.getId(),
@@ -77,7 +73,7 @@ public class HomeLayout extends AbstractView {
             basketClient.apiAddBasketProduct(productToAdd);
 
             final String notificationMsg = productResponse.getName() + " is added.";
-            appLayout.getBadge().setCount(appLayout.getBadge().getCount() + 1);
+            app.getBadge().setCount(app.getBadge().getCount() + 1);
             Notification.show(notificationMsg, 1000, Notification.Position.BOTTOM_CENTER);
         };
     }

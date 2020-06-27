@@ -10,10 +10,16 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import it.vkod.fooda.customer.frontend.models.basket.req.BasketAddress;
+import it.vkod.fooda.customer.frontend.models.basket.req.BasketPayment;
+import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * <div class="card large">
@@ -27,12 +33,20 @@ import java.util.List;
  *     </div>
  * </div>
  */
+@Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Tag("div")
 public class PaymentCard extends Div {
 
-    public PaymentCard(final String logo, final double subtotal, final List<String[]> values, final boolean withHeader,
-                       final ComponentEventListener<ClickEvent<Button>> confirmEvent) {
+    private final String logo;
+    private final List<BasketProduct> products;
+    private final BasketAddress billingAddress;
+    private final BasketAddress shippingAddress;
+    private BasketPayment payment;
+    private final ComponentEventListener<ClickEvent<Button>> confirmEvent;
+
+    public PaymentCard init() {
 
         setClassName("card large");
 
@@ -44,43 +58,43 @@ public class PaymentCard extends Div {
         i.setClassName("halfway-fab waves-effect waves-light");
         cardContent.add(i);
 
-
         final StringBuilder htmlBuilder = new StringBuilder();
         htmlBuilder
                 .append("<table>");
-        if (withHeader) {
-            final String[] headers = values.get(0);
-            values.remove(0);
-            htmlBuilder
-                    .append("<thead>")
-                    .append("<tr>");
-            for (String header : headers) {
-                htmlBuilder
-                        .append("<th>")
-                        .append(header)
-                        .append("</th>");
-            }
-            htmlBuilder
-                    .append("</tr>")
-                    .append("</thead>");
-        }
+
+        Stream<String> headers = Stream.of("Product", "Quantity", "Price", "Subtotal");
+
+        htmlBuilder
+                .append("<thead>")
+                .append("<tr>");
+
+        headers.forEach(header -> htmlBuilder
+                .append("<th>")
+                .append(header)
+                .append("</th>"));
+
+        htmlBuilder
+                .append("</tr>")
+                .append("</thead>");
 
         htmlBuilder
                 .append("<tbody>");
 
-        for (String[] val : values) {
-            htmlBuilder
-                    .append("<tr>");
 
-            for (String v : val) {
-                htmlBuilder
-                        .append("<td>")
-                        .append(v)
-                        .append("</td>");
-            }
-
-            htmlBuilder.append("</tr>");
-        }
+        products.forEach(product -> htmlBuilder
+                .append("<tr>")
+                .append("<td>")
+                .append(product.getName())
+                .append("</td>")
+                .append("<td>")
+                .append(product.getQuantity())
+                .append("</td>")
+                .append("<td>")
+                .append(product.getPrice())
+                .append("</td>")
+                .append("<td>").append(new DecimalFormat("##.##").format(product.getQuantity() * product.getPrice())).append("€")
+                .append("</td>")
+                .append("</tr>"));
 
         htmlBuilder
                 .append("</tbody>")
@@ -95,7 +109,10 @@ public class PaymentCard extends Div {
 
         final Icon c = VaadinIcon.CREDIT_CARD.create();
         c.setSize("28px");
-        Button b = new Button("Confirm order with " + new DecimalFormat("##.##").format(subtotal) + "€", c);
+        final double sum = products.stream()
+                .mapToDouble(product -> product.getQuantity() * product.getPrice())
+                .sum();
+        Button b = new Button("Confirm order with " + new DecimalFormat("##.##").format(sum) + "€", c);
         b.setWidthFull();
         b.getStyle().set("margin-left", "10px").set("margin-right", "10px");
         b.addClickListener(confirmEvent);
@@ -103,5 +120,7 @@ public class PaymentCard extends Div {
         cardContent.add(i, t, p, b);
 
         add(cardContent);
+
+        return this;
     }
 }

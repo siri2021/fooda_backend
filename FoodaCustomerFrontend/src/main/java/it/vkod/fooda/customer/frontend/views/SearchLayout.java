@@ -19,7 +19,9 @@ import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
 import it.vkod.fooda.customer.frontend.models.product.response.ProductResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.UUID;
@@ -31,18 +33,19 @@ import java.util.stream.Stream;
 @CssImport("./styles/cards.css")
 public class SearchLayout extends AbstractView {
 
-    private final transient FoodaProductClient matchServiceClient;
-    private final transient FoodaBasketClient basketServiceClient;
-    private final MainAppLayout app;
+    @Autowired
+    private FoodaProductClient matchServiceClient;
+    @Autowired
+    private FoodaBasketClient basketServiceClient;
+    @Autowired
+    private MainAppLayout app;
 
     private final Div container = new Div();
     private final VerticalLayout layoutContent = new VerticalLayout();
     private transient Stream<ProductResponse> searchedProducts;
 
-    public SearchLayout(FoodaProductClient matchServiceClient, FoodaBasketClient basketServiceClient, MainAppLayout app) {
-        this.matchServiceClient = matchServiceClient;
-        this.basketServiceClient = basketServiceClient;
-        this.app = app;
+    @PostConstruct
+    public void init() {
         container.setClassName("cards-container");
 
         getSearchText();
@@ -59,22 +62,15 @@ public class SearchLayout extends AbstractView {
         searchButton.addClickShortcut(Key.ENTER);
         searchButton.addClickListener(click -> {
             searchedProducts = Arrays.stream(matchServiceClient.apiGetMatchFromAllStores(searchTextField.getValue().toLowerCase()));
-            searchedProducts.forEach(product -> container.add(mapProductToDiv(product)));
+            searchedProducts.forEach(product -> container.add(ProductCard.builder()
+                    .product(product)
+                    .addEvent(callAddToBasket(product))
+                    .build()
+                    .init()));
             layoutContent.add(container);
         });
 
         layoutContent.add(searchTextField, searchButton);
-    }
-
-
-    private Div mapProductToDiv(ProductResponse product) {
-        return new ProductCard(
-                product.getName(),
-                product.getImages().get(0).getSrc(),
-                product.getDescription(),
-                product.getPrice() != null ? product.getPrice() : Double.parseDouble(product.getRegularPrice()),
-                callAddToBasket(product)
-        );
     }
 
     @NotNull

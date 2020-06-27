@@ -6,9 +6,9 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import it.vkod.fooda.customer.frontend.models.basket.req.BasketProduct;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 /**
  * <div class="card small">
@@ -22,35 +22,24 @@ import lombok.Getter;
  *     </div>
  * </div>
  */
-@Builder(toBuilder = true)
-@Getter
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Tag("div")
 public class BasketCard extends Div {
 
-    private final String imageUrl;
-    private final String name;
-    private final String content;
-    private final double price;
+    private final BasketProduct product;
     private final ComponentEventListener<ClickEvent<Button>> increaseEvent;
     private final ComponentEventListener<ClickEvent<Button>> decreaseEvent;
 
-    public BasketCard(final String name, final String imageUrl, final String description, final double price,
-                      final ComponentEventListener<ClickEvent<Button>> increaseEvent, final ComponentEventListener<ClickEvent<Button>> decreaseEvent) {
-        this.imageUrl = imageUrl;
-        this.name = name;
-        this.content = description;
-        this.price = price;
-        this.increaseEvent = increaseEvent;
-        this.decreaseEvent = decreaseEvent;
+    public BasketCard init() {
 
-        setClassName("card small");
+        setClassName("card");
 
         Div productImageDiv = new Div();
         productImageDiv.setClassName("card-image");
-        Image i = new Image(imageUrl, name);
+        Image i = new Image(product.getImage(), product.getName());
         productImageDiv.add(i);
-        Span t = new Span(name);
+        Span t = new Span(product.getName());
         t.setClassName("card-title");
         productImageDiv.add(t);
         Button add = new Button(VaadinIcon.PLUS.create());
@@ -66,10 +55,12 @@ public class BasketCard extends Div {
 
         Div contentDiv = new Div();
         contentDiv.setClassName("card-content");
-        H4 subtotal = new H4("Subtotal: " + price + "€");
+        H4 subtotal = new H4("Subtotal: " + product.getPrice() + "€");
         Paragraph c = new Paragraph();
-        c.setText("Product source: " + description);
+        c.setText("Product source: " + product.getRestUrl());
         contentDiv.add(subtotal, c);
         add(contentDiv);
+
+        return this;
     }
 }

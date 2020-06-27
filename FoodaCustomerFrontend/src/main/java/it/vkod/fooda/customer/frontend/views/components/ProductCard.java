@@ -8,9 +8,9 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
+import it.vkod.fooda.customer.frontend.models.product.response.ProductResponse;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.text.DecimalFormat;
 
@@ -26,37 +26,27 @@ import java.text.DecimalFormat;
  *     </div>
  * </div>
  */
-@NoArgsConstructor
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @Tag("div")
 public class ProductCard extends Div {
 
-//    private final String imageUrl;
-//    private final String title;
-//    private final String content;
-//    private final double price;
-//    private final ComponentEventListener<ClickEvent<Button>> addEvent;
+    private final ProductResponse product;
+    private final ComponentEventListener<ClickEvent<Button>> addEvent;
 
-    public ProductCard(final String name, final String imageUrl, final String description, final double price,
-                       final ComponentEventListener<ClickEvent<Button>> addEvent) {
-//        this.imageUrl = imageUrl;
-//        this.title = name;
-//        this.content = description;
-//        this.price = price;
-//        this.addEvent = addEvent;
+    public ProductCard init() {
 
         setClassName("card");
 
         Div cardImage = new Div();
         cardImage.setClassName("card-image");
-        Image i = new Image(imageUrl, name);
+        Image i = new Image(product.getImages().get(0).getSrc(), product.getImages().get(0).getAlt());
         cardImage.add(i);
         Span s = new Span();
         s.setClassName("card-title");
-        s.setText(name);
+        s.setText(product.getName());
         cardImage.add(s);
-        Button b = new Button("Add to basket " + new DecimalFormat("##.##").format(price) + " €");
+        Button b = new Button("Add to basket " + new DecimalFormat("##.##").format(product.getPrice()) + " €");
         b.addClickListener(addEvent);
         b.setClassName("btn-floating halfway-fab waves-effect waves-light blue");
         b.getStyle().set("z-index", "9999").set("height", "48px").set("width", "50%");
@@ -66,10 +56,12 @@ public class ProductCard extends Div {
         cardContent.setClassName("card-content");
         Paragraph p = new Paragraph();
         String htmlElementsRegex = "<[^>]*>";
-        String desc = description.replaceAll(htmlElementsRegex, "");
+        String desc = product.getDescription().replaceAll(htmlElementsRegex, "");
         p.setText(desc);
         cardContent.add(p);
 
         add(cardImage, cardContent);
+
+        return this;
     }
 }
