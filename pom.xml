@@ -147,14 +147,11 @@
         <module>FoodaBasketServer</module>
         <module>FoodaConfigServer</module>
         <module>FoodaConvertServer</module>
-        <module>FoodaCustomerFrontend</module>
         <module>FoodaDeliveryServer</module>
         <module>FoodaDiscoveryServer</module>
-        <module>FoodaOrderServer</module>
         <module>FoodaProductServer</module>
-        <module>FoodaRestaurantFrontend</module>
         <module>FoodaStoreServer</module>
-        <module>WooCommerceServer</module>
+        <module>FoodaOrderServer</module>
     </modules>
 
 </project>

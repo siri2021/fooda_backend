@@ -16,14 +16,19 @@
         <option value="$PROJECT_DIR$/FoodaGatewayServer/pom.xml" />
         <option value="$PROJECT_DIR$/FoodaOrderServer/pom.xml" />
         <option value="$PROJECT_DIR$/FoodaDeliveryServer/pom.xml" />
+        <option value="$PROJECT_DIR$/FoodaRestaurantFrontend/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/FoodaCustomerFrontend/pom.xml" />
+        <option value="$PROJECT_DIR$/FoodaCustomerWebApp/pom.xml" />
         <option value="$PROJECT_DIR$/FoodaPosClient/pom.xml" />
         <option value="$PROJECT_DIR$/FoodaPosFrontend/pom.xml" />
+        <option value="$PROJECT_DIR$/FoodaRestaurantFrontend/pom.xml" />
         <option value="$PROJECT_DIR$/FoodaSharedJavaObjects/pom.xml" />
         <option value="$PROJECT_DIR$/WooCommerceOrderServer/pom.xml" />
+        <option value="$PROJECT_DIR$/WooCommerceServer/pom.xml" />
         <option value="$PROJECT_DIR$/woo-auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/woo-core-payloads/pom.xml" />
         <option value="$PROJECT_DIR$/woo-payment-service/pom.xml" />
