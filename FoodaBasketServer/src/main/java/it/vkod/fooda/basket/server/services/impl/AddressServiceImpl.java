@@ -6,10 +6,12 @@ import it.vkod.fooda.basket.server.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -23,13 +25,18 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void edit(Address address, UUID id) {
+    public void add(List<Address> addresses) {
+        repository.saveAll(addresses);
+    }
+
+    @Override
+    public void edit(Address address, BigInteger id) {
         if (repository.existsById(id))
             repository.save(address);
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(BigInteger id) {
         repository.deleteById(id);
     }
 
@@ -39,13 +46,18 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Optional<Address> get(UUID id) {
+    public Optional<Address> get(BigInteger id) {
         return repository.findById(id);
     }
 
     @Override
-    public Page<Address> getAll(UUID userId) {
-        return repository.findAllByUserId(userId);
+    public Page<Address> get(Pageable page) {
+        return repository.findAll(page);
+    }
+
+    @Override
+    public Page<Address> get(BigInteger userId, Pageable pageable) {
+        return repository.findAllByUserId(userId, pageable);
     }
 
     @Override
@@ -54,7 +66,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Boolean exists(UUID id) {
+    public Boolean exists(BigInteger id) {
         return repository.existsById(id);
     }
 }

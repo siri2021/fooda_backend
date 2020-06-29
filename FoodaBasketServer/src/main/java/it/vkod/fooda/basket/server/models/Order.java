@@ -5,22 +5,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @Document
 @JsonAutoDetect
-public class Order {
+public class Order  implements Serializable {
     @Id
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private UUID id;
-    private UUID userId;
+    private BigInteger orderId;
+    private BigInteger userId;
     private String sessionId;
     private Long storeId;
     private Long relatedOrderId;

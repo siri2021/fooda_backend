@@ -6,10 +6,12 @@ import it.vkod.fooda.basket.server.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -23,13 +25,18 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void edit(Payment payment, UUID id) {
+    public void add(List<Payment> payments) {
+        repository.saveAll(payments);
+    }
+
+    @Override
+    public void edit(Payment payment, BigInteger id) {
         if (repository.existsById(id))
             repository.save(payment);
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(BigInteger id) {
         repository.deleteById(id);
     }
 
@@ -39,13 +46,18 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Optional<Payment> get(UUID id) {
+    public Optional<Payment> get(BigInteger id) {
         return repository.findById(id);
     }
 
     @Override
-    public Page<Payment> getAll(UUID userId) {
-        return repository.findAllByUserId(userId);
+    public Page<Payment> get(Pageable page) {
+        return repository.findAll(page);
+    }
+
+    @Override
+    public Page<Payment> get(BigInteger userId, Pageable pageable) {
+        return repository.findAllByUserId(userId, pageable);
     }
 
     @Override
@@ -54,7 +66,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Boolean exists(UUID id) {
+    public Boolean exists(BigInteger id) {
         return repository.existsById(id);
     }
 }

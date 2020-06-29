@@ -1,18 +1,11 @@
 package it.vkod.fooda.basket.server.services;
 
 import it.vkod.fooda.basket.server.models.Product;
-import org.springframework.data.domain.Page;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.math.BigInteger;
 
-public interface ProductService {
-    void add(final Product order);
-    void edit(final Product order, final UUID id);
-    void delete(final UUID id);
-    void delete(final Product order);
-    Optional<Product> get(final UUID id);
-    Page<Product> getAll(final UUID userId);
-    Boolean exists(final Product order);
-    Boolean exists(final UUID id);
+public interface ProductService extends BasketService<Product>{
+    void increase(final Product product);
+    void decrease(final Product product);
+    void clear(final BigInteger userId, final BigInteger sessionId);
 }

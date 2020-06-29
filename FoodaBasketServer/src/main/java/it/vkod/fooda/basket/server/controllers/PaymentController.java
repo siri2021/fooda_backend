@@ -4,9 +4,11 @@ import it.vkod.fooda.basket.server.models.Payment;
 import it.vkod.fooda.basket.server.services.impl.PaymentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+import java.math.BigInteger;
+
 
 @RestController
 @RequestMapping("basket/payment/")
@@ -16,29 +18,28 @@ public class PaymentController {
     private PaymentServiceImpl paymentService;
 
     @GetMapping("{paymentId}")
-    public Payment getPayment(@PathVariable final UUID id) {
-        return paymentService.get(id).orElse(null);
+    public Payment getPayment(@PathVariable final BigInteger paymentId) {
+        return paymentService.get(paymentId).orElse(null);
     }
 
-    @GetMapping("{userId}")
-    public Page<Payment> getPaymentsByUser(@PathVariable final UUID userId) {
-        return paymentService.getAll(userId);
+    @GetMapping("{userId}/page/{page}")
+    public Page<Payment> getPaymentsByUser(@PathVariable final BigInteger userId, @PathVariable final int page) {
+        return paymentService.get(userId, PageRequest.of(page, 10));
     }
 
     @PostMapping
     public void addPayment(@RequestBody final Payment payment) {
-        payment.setId(UUID.randomUUID());
         paymentService.add(payment);
     }
 
     @PutMapping("{paymentId}")
-    public void editPayment(@RequestBody final Payment payment, @PathVariable final UUID paymentId) {
-        if (paymentService.exists(paymentId))
+    public void editPayment(@RequestBody final Payment payment, @PathVariable final BigInteger paymentId) {
+        if (paymentService.exists(paymentId).equals(true))
             paymentService.edit(payment, paymentId);
     }
 
     @DeleteMapping("{paymentId}")
-    public void deletePayment(@PathVariable final UUID paymentId) {
+    public void deletePayment(@PathVariable final BigInteger paymentId) {
         paymentService.delete(paymentId);
     }
 

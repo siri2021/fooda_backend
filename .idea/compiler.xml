@@ -7,16 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FoodaBasketServer" />
         <module name="FoodaGatewayServer" />
-        <module name="FoodaConfigServer" />
         <module name="FoodaRestoPosFrontend" />
         <module name="FoodaProductServer" />
-        <module name="FoodaStoreServer" />
-        <module name="FoodaConvertServer" />
-        <module name="FoodaDeliveryServer" />
-        <module name="FoodaOrderServer" />
         <module name="FoodaDiscoveryServer" />
+        <module name="FoodaConfigServer" />
+        <module name="FoodaOrderServer" />
+        <module name="FoodaConvertServer" />
+        <module name="FoodaBasketServer" />
+        <module name="FoodaDeliveryServer" />
+        <module name="FoodaStoreServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -3,14 +3,20 @@ package it.vkod.fooda.basket.server.services.impl;
 import it.vkod.fooda.basket.server.models.User;
 import it.vkod.fooda.basket.server.repositories.UserRepository;
 import it.vkod.fooda.basket.server.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -23,13 +29,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void edit(User user, UUID id) {
+    public void add(List<User> users) {
+        repository.saveAll(users);
+    }
+
+    @Override
+    public void edit(User user, BigInteger id) {
         if (repository.existsById(id))
             repository.save(user);
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(BigInteger id) {
         repository.deleteById(id);
     }
 
@@ -39,13 +50,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> get(UUID id) {
+    public Optional<User> get(BigInteger id) {
         return repository.findById(id);
     }
 
     @Override
-    public Page<User> getAll(UUID userId) {
-        return repository.findAllByUserId(userId);
+    public Page<User> get(Pageable page) {
+        return null;
+    }
+
+    @Override
+    public Page<User> get(BigInteger userId, Pageable pageable) {
+        final User list = repository.findById(userId).orElse(null);
+        return new PageImpl<>(Collections.singletonList(list), pageable, 1);
     }
 
     @Override
@@ -54,7 +71,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean exists(UUID id) {
+    public Boolean exists(BigInteger id) {
         return repository.existsById(id);
+    }
+
+    @Override
+    public boolean login(String username, String password) {
+        return repository.existsByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public void logout(BigInteger userId) {
+        repository.findById(userId).ifPresentOrElse(
+                user -> user.setActive(false),
+                () -> log.error("Logout failed, User already logged out or it does not exists"));
     }
 }

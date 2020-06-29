@@ -5,7 +5,8 @@ import it.vkod.fooda.basket.server.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
+import java.math.BigInteger;
+
 
 @RestController
 @RequestMapping("basket/user/")
@@ -15,24 +16,23 @@ public class UserController {
     private UserServiceImpl userService;
 
     @GetMapping("{userId}")
-    public User getUser(@PathVariable final UUID id) {
-        return userService.get(id).orElse(null);
+    public User getUser(@PathVariable final BigInteger userId) {
+        return userService.get(userId).orElse(null);
     }
 
     @PostMapping
     public void addUser(@RequestBody final User user) {
-        user.setId(UUID.randomUUID());
         userService.add(user);
     }
 
     @PutMapping("{userId}")
-    public void editUser(@RequestBody final User user, @PathVariable final UUID userId) {
-        if (userService.exists(userId))
+    public void editUser(@RequestBody final User user, @PathVariable final BigInteger userId) {
+        if (userService.exists(userId).equals(true))
             userService.edit(user, userId);
     }
 
     @DeleteMapping("{userId}")
-    public void deleteUser(@PathVariable final UUID userId) {
+    public void deleteUser(@PathVariable final BigInteger userId) {
         userService.delete(userId);
     }
 
