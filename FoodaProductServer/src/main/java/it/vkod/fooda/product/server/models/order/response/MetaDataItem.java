@@ -1,22 +1,21 @@
 package it.vkod.fooda.product.server.models.order.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 @NoArgsConstructor
-public class MetaDataItem {
-    @Getter
-    @Setter
-    private int id;
-    @Getter
-    @Setter
-    private String value;
-    @Getter
-    @Setter
-    private String key;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class MetaDataItem{
+
+	@JsonProperty("id")
+	private int id;
+
+	@JsonProperty("value")
+	private String value;
+
+	@JsonProperty("key")
+	private String key;
 }

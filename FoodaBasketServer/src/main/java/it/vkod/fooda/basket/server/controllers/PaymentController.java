@@ -17,33 +17,33 @@ public class PaymentController {
     @Autowired
     private PaymentServiceImpl paymentService;
 
-    @GetMapping("{paymentId}")
-    public Payment getPayment(@PathVariable final BigInteger paymentId) {
+    @GetMapping("getByPaymentId")
+    public Payment getPayment(@RequestParam final BigInteger paymentId) {
         return paymentService.get(paymentId).orElse(null);
     }
 
-    @GetMapping("{userId}/page/{page}")
-    public Page<Payment> getPaymentsByUser(@PathVariable final BigInteger userId, @PathVariable final int page) {
+    @GetMapping("getAllByUserId")
+    public Page<Payment> getPaymentsByUser(@RequestParam final BigInteger userId, @RequestParam final int page) {
         return paymentService.get(userId, PageRequest.of(page, 10));
     }
 
-    @PostMapping
+    @PostMapping("add")
     public void addPayment(@RequestBody final Payment payment) {
         paymentService.add(payment);
     }
 
-    @PutMapping("{paymentId}")
-    public void editPayment(@RequestBody final Payment payment, @PathVariable final BigInteger paymentId) {
-        if (paymentService.exists(paymentId).equals(true))
-            paymentService.edit(payment, paymentId);
+    @PutMapping("edit")
+    public void editPayment(@RequestBody final Payment payment) {
+        if (paymentService.exists(payment.getPaymentId()).equals(true))
+            paymentService.edit(payment, payment.getPaymentId());
     }
 
-    @DeleteMapping("{paymentId}")
-    public void deletePayment(@PathVariable final BigInteger paymentId) {
+    @DeleteMapping("deleteByPaymentId")
+    public void deletePayment(@RequestParam final BigInteger paymentId) {
         paymentService.delete(paymentId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("delete")
     public void deletePayment(@RequestBody final Payment payment) {
         paymentService.delete(payment);
     }

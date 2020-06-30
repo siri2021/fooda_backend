@@ -1,57 +1,56 @@
 package it.vkod.fooda.product.server.models.order.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
-@JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 @NoArgsConstructor
-public class LineItemsItem {
-    @Getter
-    @Setter
-    private int quantity;
-    @Getter
-    @Setter
-    private String tax_class;
-    @Getter
-    @Setter
-    private List<TaxesItem> taxes;
-    @Getter
-    @Setter
-    private String total_tax;
-    @Getter
-    @Setter
-    private String total;
-    @Getter
-    @Setter
-    private int variation_id;
-    @Getter
-    @Setter
-    private String subtotal;
-    @Getter
-    @Setter
-    private int price;
-    @Getter
-    @Setter
-    private int product_id;
-    @Getter
-    @Setter
-    private String name;
-    @Getter
-    @Setter
-    private List<Object> meta_data;
-    @Getter
-    @Setter
-    private int id;
-    @Getter
-    @Setter
-    private String subtotal_tax;
-    @Getter
-    @Setter
-    private String sku;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class LineItemsItem{
+
+	@JsonProperty("quantity")
+	private int quantity;
+
+	@JsonProperty("tax_class")
+	private String taxClass;
+
+	@JsonProperty("taxes")
+	private List<TaxesItem> taxes;
+
+	@JsonProperty("total_tax")
+	private String totalTax;
+
+	@JsonProperty("total")
+	private String total;
+
+	@JsonProperty("variation_id")
+	private int variationId;
+
+	@JsonProperty("subtotal")
+	private String subtotal;
+
+	@JsonProperty("price")
+	private int price;
+
+	@JsonProperty("product_id")
+	private int productId;
+
+	@JsonProperty("name")
+	private String name;
+
+	@JsonProperty("meta_data")
+	private List<Object> metaData;
+
+	@JsonProperty("id")
+	private int id;
+
+	@JsonProperty("subtotal_tax")
+	private String subtotalTax;
+
+	@JsonProperty("sku")
+	private String sku;
 }

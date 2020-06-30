@@ -1,39 +1,38 @@
 package it.vkod.fooda.product.server.models.order.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
-@JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 @NoArgsConstructor
-public class TaxLinesItem {
-    @Getter
-    @Setter
-    private String taxTotal;
-    @Getter
-    @Setter
-    private int rateId;
-    @Getter
-    @Setter
-    private List<Object> metaData;
-    @Getter
-    @Setter
-    private int id;
-    @Getter
-    @Setter
-    private String label;
-    @Getter
-    @Setter
-    private String rateCode;
-    @Getter
-    @Setter
-    private boolean compound;
-    @Getter
-    @Setter
-    private String shippingTaxTotal;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class TaxLinesItem{
+
+	@JsonProperty("tax_total")
+	private String taxTotal;
+
+	@JsonProperty("rate_id")
+	private int rateId;
+
+	@JsonProperty("meta_data")
+	private List<Object> metaData;
+
+	@JsonProperty("id")
+	private int id;
+
+	@JsonProperty("label")
+	private String label;
+
+	@JsonProperty("rate_code")
+	private String rateCode;
+
+	@JsonProperty("compound")
+	private boolean compound;
+
+	@JsonProperty("shipping_tax_total")
+	private String shippingTaxTotal;
 }

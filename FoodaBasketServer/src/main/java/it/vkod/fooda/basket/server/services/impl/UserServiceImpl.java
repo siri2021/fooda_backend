@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void add(User user) {
+        user.setUsername(user.getUsername().toLowerCase());
         repository.save(user);
     }
 
@@ -35,8 +36,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void edit(User user, BigInteger id) {
-        if (repository.existsById(id))
+        if (repository.existsById(id)) {
+            user.setUsername(user.getUsername().toLowerCase());
             repository.save(user);
+        }
     }
 
     @Override
@@ -56,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> get(Pageable page) {
-        return null;
+        return repository.findAll(page);
     }
 
     @Override
@@ -76,14 +79,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String username, String password) {
-        return repository.existsByUsernameAndPassword(username, password);
+    public Boolean exists(String username) {
+        return repository.existsByUsername(username.toLowerCase());
+    }
+
+    @Override
+    public Optional<User> login(String username, String password) {
+        final Optional<User> optionalUser = repository.findByUsername(username);
+        return optionalUser.isPresent() && optionalUser.get().getPassword().equalsIgnoreCase(password) ? optionalUser : Optional.empty();
     }
 
     @Override
     public void logout(BigInteger userId) {
         repository.findById(userId).ifPresentOrElse(
-                user -> user.setActive(false),
+                user -> {
+                    user.setActive(false);
+                    repository.save(user);
+                },
                 () -> log.error("Logout failed, User already logged out or it does not exists"));
     }
 }

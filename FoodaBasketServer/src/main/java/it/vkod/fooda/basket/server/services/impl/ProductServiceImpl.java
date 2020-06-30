@@ -3,6 +3,7 @@ package it.vkod.fooda.basket.server.services.impl;
 import it.vkod.fooda.basket.server.models.Product;
 import it.vkod.fooda.basket.server.repositories.ProductRepository;
 import it.vkod.fooda.basket.server.services.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -75,21 +77,37 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void increase(Product product) {
         repository.findById(product.getProductId()).ifPresentOrElse(p -> {
-            p.increase();
+            p.increase(product.getQuantity());
             repository.save(p);
         }, () -> repository.save(product));
+    }
+
+    @Override
+    public void increase(BigInteger productId) {
+        repository.findById(productId).ifPresentOrElse(p -> {
+            p.increase();
+            repository.save(p);
+        }, () -> log.error("Product does not exist"));
     }
 
     @Override
     public void decrease(Product product) {
         repository.findById(product.getProductId()).ifPresentOrElse(p -> {
-            p.decrease();
+            p.decrease(product.getQuantity());
             repository.save(p);
         }, () -> repository.save(product));
     }
 
     @Override
-    public void clear(BigInteger userId, BigInteger sessionId) {
+    public void decrease(BigInteger productId) {
+        repository.findById(productId).ifPresentOrElse(p -> {
+            p.decrease();
+            repository.save(p);
+        }, () -> log.error("Product does not exist"));
+    }
+
+    @Override
+    public void clear(BigInteger userId, String sessionId) {
         final List<Product> products = repository.findByUserId(userId, Pageable.unpaged());
         products.forEach(this::delete);
     }

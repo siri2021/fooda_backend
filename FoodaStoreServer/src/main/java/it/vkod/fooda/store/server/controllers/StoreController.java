@@ -1,10 +1,13 @@
 package it.vkod.fooda.store.server.controllers;
 
-import it.vkod.fooda.store.server.models.store.request.FoodaStore;
-import it.vkod.fooda.store.server.repositories.StoreRepository;
+import it.vkod.fooda.store.server.models.Store;
+import it.vkod.fooda.store.server.services.impl.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -12,36 +15,41 @@ import java.util.List;
 public class StoreController {
 
     @Autowired
-    private StoreRepository repository;
+    private StoreServiceImpl storeService;
 
-    @PostMapping("/add")
-    public void addStore(@RequestBody final FoodaStore store) {
-        repository.save(store);
+    @GetMapping("/getList")
+    public List<Store> getStoreList() {
+        return storeService.get();
     }
 
-    @PostMapping("/add/list")
-    public void addStoreList(@RequestBody final List<FoodaStore> stores) {
+    @GetMapping("/getPaged")
+    public Page<Store> getStorePaged(@RequestParam final int page) {
+        return storeService.get(PageRequest.of(page - 1, 10));
+    }
+
+    @GetMapping("/getByStoreId")
+    public Store getStore(@RequestParam final BigInteger storeId) {
+        return storeService.get(storeId).orElse(null);
+    }
+
+    @PostMapping("/add")
+    public void addStore(@RequestBody final Store store) {
+        storeService.add(store);
+    }
+
+    @PostMapping("/addList")
+    public void addStoreList(@RequestBody final List<Store> stores) {
         stores.forEach(this::addStore);
     }
 
-    @PutMapping("/upt/{id}")
-    public void updateStore(@RequestBody final FoodaStore store, @PathVariable("id") final Long id) {
-        if (repository.existsById(id)) repository.save(store);
+    @PutMapping("/edit")
+    public void editStore(@RequestBody final Store store) {
+        storeService.edit(store, store.getStoreId());
     }
 
-    @DeleteMapping("/del/{id}")
-    public void deleteStore(@PathVariable("id") final Long id) {
-        if (repository.existsById(id)) repository.deleteById(id);
-    }
-
-    @GetMapping("/get")
-    public List<FoodaStore> getStoreList() {
-        return repository.findAll();
-    }
-
-    @GetMapping("/get/id/{id}")
-    public FoodaStore getStore(@PathVariable("id") final Long id) {
-        return repository.findById(id).orElse(new FoodaStore().empty());
+    @DeleteMapping("/deleteByStoreId")
+    public void deleteStore(@RequestParam final BigInteger storeId) {
+        storeService.delete(storeId);
     }
 
 }

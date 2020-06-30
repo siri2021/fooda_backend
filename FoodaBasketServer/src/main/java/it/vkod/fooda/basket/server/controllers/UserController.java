@@ -2,12 +2,14 @@ package it.vkod.fooda.basket.server.controllers;
 
 import it.vkod.fooda.basket.server.models.User;
 import it.vkod.fooda.basket.server.services.impl.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 
-
+@Slf4j
 @RestController
 @RequestMapping("basket/user/")
 public class UserController {
@@ -15,28 +17,48 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping("{userId}")
-    public User getUser(@PathVariable final BigInteger userId) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @GetMapping("getByUserId")
+    public User getUser(@RequestParam final BigInteger userId) {
         return userService.get(userId).orElse(null);
     }
 
-    @PostMapping
+    @GetMapping("login")
+    public User loginUser(@RequestParam String username, @RequestParam String password) {
+        return userService.login(username, passwordEncoder.encode(password)).orElse(null);
+    }
+
+    @GetMapping("logout")
+    public void logoutUser(@RequestParam final BigInteger userId) {
+        userService.logout(userId);
+    }
+
+    @PostMapping("add")
     public void addUser(@RequestBody final User user) {
-        userService.add(user);
+        if (userService.exists(user.getUsername()).equals(false)) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userService.add(user);
+        } else {
+            log.error("Username already exists..!");
+        }
     }
 
-    @PutMapping("{userId}")
-    public void editUser(@RequestBody final User user, @PathVariable final BigInteger userId) {
-        if (userService.exists(userId).equals(true))
-            userService.edit(user, userId);
+    @PutMapping("edit")
+    public void editUser(@RequestBody final User user) {
+        if (userService.exists(user.getUserId()).equals(true)) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userService.edit(user, user.getUserId());
+        }
     }
 
-    @DeleteMapping("{userId}")
-    public void deleteUser(@PathVariable final BigInteger userId) {
+    @DeleteMapping("deleteByUserId")
+    public void deleteUser(@RequestParam final BigInteger userId) {
         userService.delete(userId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("delete")
     public void deleteUser(@RequestBody final User user) {
         userService.delete(user);
     }

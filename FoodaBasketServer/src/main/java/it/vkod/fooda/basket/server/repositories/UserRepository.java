@@ -5,8 +5,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, BigInteger> {
-    boolean existsByUsernameAndPassword(final String userName, final String password);
+    Optional<User> findByUsername(final String username);
+    Boolean existsByUsername(final String username);
 }

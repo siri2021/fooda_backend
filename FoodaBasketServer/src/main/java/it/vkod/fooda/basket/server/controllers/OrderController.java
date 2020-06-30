@@ -17,33 +17,33 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
 
-    @GetMapping("{orderId}")
-    public Order getOrder(@PathVariable final BigInteger contactId) {
-        return orderService.get(contactId).orElse(null);
+    @GetMapping("getByOrderId")
+    public Order getOrder(@RequestParam final BigInteger orderId) {
+        return orderService.get(orderId).orElse(null);
     }
 
-    @GetMapping("{userId}/page/{page}")
-    public Page<Order> getOrdersByUser(@PathVariable final BigInteger userId, @PathVariable final int page) {
+    @GetMapping("getAllByUserId")
+    public Page<Order> getOrdersByUser(@RequestParam final BigInteger userId, @RequestParam final int page) {
         return orderService.get(userId, PageRequest.of(page, 10));
     }
 
-    @PostMapping
+    @PostMapping("add")
     public void addOrder(@RequestBody final Order order) {
         orderService.add(order);
     }
 
-    @PutMapping("{orderId}")
-    public void editOrder(@RequestBody final Order order, @PathVariable final BigInteger orderId) {
-        if (orderService.exists(orderId).equals(true))
-            orderService.edit(order, orderId);
+    @PutMapping("edit")
+    public void editOrder(@RequestBody final Order order) {
+        if (orderService.exists(order.getOrderId()).equals(true))
+            orderService.edit(order, order.getOrderId());
     }
 
-    @DeleteMapping("{orderId}")
-    public void deleteOrder(@PathVariable final BigInteger orderId) {
+    @DeleteMapping("deleteByOrderId")
+    public void deleteOrder(@RequestParam final BigInteger orderId) {
         orderService.delete(orderId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("delete")
     public void deleteOrder(@RequestBody final Order order) {
         orderService.delete(order);
     }

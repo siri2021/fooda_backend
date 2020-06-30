@@ -1,23 +1,30 @@
-package it.vkod.fooda.store.server.models.store.request;
+package it.vkod.fooda.store.server.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 @Data
-@Document(value = "store")
-public class FoodaStore implements Serializable {
+@NoArgsConstructor
+@AllArgsConstructor
+@Document
+public class Store implements Serializable {
 
     @Id
-    private Long id;
+    private BigInteger storeId;
+    private BigInteger parentId;
     private String name;
     private String consumerSecret;
     private String consumerKey;
     private String currency;
 
     private String address;
+    private String postcode;
     private String municipality;
     private String city;
     private String region;
@@ -25,13 +32,15 @@ public class FoodaStore implements Serializable {
     private Double longitude;
     private Double latitude;
 
-    private String homeUrl;
+    private String apiUrl;
     private String siteUrl;
     private String port;
 
+    private Boolean active;
+
     private static final Double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
-    public FoodaStore empty() {
+    public Store empty() {
         return null;
     }
 
@@ -41,7 +50,7 @@ public class FoodaStore implements Serializable {
 
     // return distance between this location and that location
     // measured in statute miles
-    public Double distanceTo(FoodaStore that, DistanceUnit unit) {
+    public Double distanceTo(Store that, DistanceUnit unit) {
         double lat1 = Math.toRadians(this.latitude);
         double lon1 = Math.toRadians(this.longitude);
         double lat2 = Math.toRadians(that.latitude);

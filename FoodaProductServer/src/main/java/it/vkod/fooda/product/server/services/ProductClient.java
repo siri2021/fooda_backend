@@ -2,11 +2,10 @@ package it.vkod.fooda.product.server.services;
 
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Applications;
-import it.vkod.fooda.product.server.models.product.response.WooProduct;
+import it.vkod.fooda.product.server.models.product.response.ProductResponseList;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class FoodaProductClient {
+public class ProductClient {
 
     @Autowired
     private EurekaClient discoveryClient;
@@ -36,18 +35,17 @@ public class FoodaProductClient {
     }
 
     // TODO still have issues with Circuit breakers, possibly timeout settings..
-//    @HystrixCommand(fallbackMethod = "apiSearchFallback")
-    @Async
+//    @HystrixCommand(fallbackMethod = "searchFallback")
     @SneakyThrows
-    public WooProduct[] apiSearch(final String url) {
+    public ProductResponseList search(final String url) {
         log.info(String.format("Searching products from %s", url));
-        return rest.getForObject(url, WooProduct[].class);
+        return rest.getForObject(url, ProductResponseList.class);
     }
 
     // a fallback method to be called if failure happened
-    public WooProduct[] apiSearchFallback(final String url) {
+    public ProductResponseList searchFallback(final String url) {
         log.info(String.format("Woo product service is down.. ! %s", url));
-        return new WooProduct[]{};
+        return new ProductResponseList();
     }
 
 }

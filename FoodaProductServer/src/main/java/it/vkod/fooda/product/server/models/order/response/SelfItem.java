@@ -1,16 +1,15 @@
 package it.vkod.fooda.product.server.models.order.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@JsonAutoDetect
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SelfItem{
-	@Getter
-	@Setter
+
+	@JsonProperty("href")
 	private String href;
 }

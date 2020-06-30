@@ -17,34 +17,34 @@ public class ContactController {
     @Autowired
     private ContactServiceImpl contactService;
 
-    @GetMapping("{contactId}")
-    public Contact getContact(@PathVariable final BigInteger contactId) {
+    @GetMapping("getByContactId")
+    public Contact getContact(@RequestParam final BigInteger contactId) {
         return contactService.get(contactId).orElse(null);
     }
 
-    @GetMapping("{userId}/page/{page}")
-    public Page<Contact> getContactsByUser(@PathVariable final BigInteger userId, @PathVariable final int page) {
+    @GetMapping("getAllByUserId")
+    public Page<Contact> getContactsByUser(@RequestParam final BigInteger userId, @RequestParam final int page) {
         return contactService.get(userId, PageRequest.of(page, 10));
     }
 
-    @PostMapping
+    @PostMapping("add")
     public void addContact(@RequestBody final Contact contact) {
         contactService.add(contact);
     }
 
-    @PutMapping("{contactId}")
-    public void editContact(@RequestBody final Contact contact, @PathVariable final BigInteger contactId) {
-        if (contactService.exists(contactId).equals(true))
-            contactService.edit(contact, contactId);
+    @PutMapping("edit")
+    public void editContact(@RequestBody final Contact contact) {
+        if (contactService.exists(contact.getContactId()).equals(true))
+            contactService.edit(contact, contact.getContactId());
     }
 
-    @DeleteMapping("{contactId}")
-    public void deleteContact(@PathVariable final BigInteger contactId) {
+    @DeleteMapping("deleteByContactId")
+    public void deleteContact(@RequestParam final BigInteger contactId) {
         contactService.delete(contactId);
     }
 
-    @DeleteMapping
-    public void deleteContact(@RequestBody final Contact contact) {
+    @DeleteMapping("delete")
+    public void deleteContact(@RequestParam final Contact contact) {
         contactService.delete(contact);
     }
 

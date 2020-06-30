@@ -1,41 +1,40 @@
 package it.vkod.fooda.product.server.models.order.request;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
 
-@JsonAutoDetect
-@NoArgsConstructor
-public class Billing {
-    @Getter
-    @Setter
-    private String country;
-    @Getter
-    @Setter
-    private String city;
-    @Getter
-    @Setter
-    private String phone;
-    @Getter
-    @Setter
-    private String address_1;
-    @Getter
-    @Setter
-    private String address_2;
-    @Getter
-    @Setter
-    private String postcode;
-    @Getter
-    @Setter
-    private String last_name;
-    @Getter
-    @Setter
-    private String state;
-    @Getter
-    @Setter
-    private String first_name;
-    @Getter
-    @Setter
-    private String email;
+@Data
+@Builder
+public class Billing{
+
+	@JsonProperty("country")
+	private String country;
+
+	@JsonProperty("city")
+	private String city;
+
+	@JsonProperty("phone")
+	private String phone;
+
+	@JsonProperty("address_1")
+	private String address1;
+
+	@JsonProperty("address_2")
+	private String address2;
+
+	@JsonProperty("postcode")
+	private String postcode;
+
+	@JsonProperty("last_name")
+	private String lastName;
+
+	@JsonProperty("state")
+	private String state;
+
+	@JsonProperty("first_name")
+	private String firstName;
+
+	@JsonProperty("email")
+	private String email;
 }

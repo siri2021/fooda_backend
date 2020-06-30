@@ -17,33 +17,33 @@ public class AddressController {
     @Autowired
     private AddressServiceImpl addressService;
 
-    @GetMapping("{addressId}")
-    public Address getAddress(@PathVariable final BigInteger addressId) {
+    @GetMapping("getByAddressId")
+    public Address getAddress(@RequestParam final BigInteger addressId) {
         return addressService.get(addressId).orElse(null);
     }
 
-    @GetMapping("{userId}/page/{page}")
-    public Page<Address> getAddressesByUser(@PathVariable final BigInteger userId, @PathVariable final int page) {
+    @GetMapping("getAllByUserId")
+    public Page<Address> getAddressesByUser(@RequestParam final BigInteger userId, @RequestParam final int page) {
         return addressService.get(userId, PageRequest.of(page, 10));
     }
 
-    @PostMapping
+    @PostMapping("add")
     public void addAddress(@RequestBody final Address address) {
         addressService.add(address);
     }
 
-    @PutMapping("{addressId}")
-    public void editAddress(@RequestBody final Address address, @PathVariable final BigInteger addressId) {
-        if (addressService.exists(addressId).equals(true))
-            addressService.edit(address, addressId);
+    @PutMapping("edit")
+    public void editAddress(@RequestBody final Address address) {
+        if (addressService.exists(address.getAddressId()).equals(true))
+            addressService.edit(address, address.getAddressId());
     }
 
-    @DeleteMapping("{addressId}")
-    public void deleteAddress(@PathVariable final BigInteger addressId) {
+    @DeleteMapping("deleteByAddressId")
+    public void deleteAddress(@RequestParam final BigInteger addressId) {
         addressService.delete(addressId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("delete")
     public void deleteAddress(@RequestBody final Address address) {
         addressService.delete(address);
     }

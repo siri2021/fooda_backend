@@ -1,20 +1,19 @@
 package it.vkod.fooda.product.server.models.order.request;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
 
-@JsonAutoDetect
-@NoArgsConstructor
-public class LineItemsItem {
-    @Getter
-    @Setter
-    private int quantity;
-    @Getter
-    @Setter
-    private int variation_id;
-    @Getter
-    @Setter
-    private int product_id;
+@Data
+@Builder
+public class LineItemsItem{
+
+	@JsonProperty("quantity")
+	private int quantity;
+
+	@JsonProperty("variation_id")
+	private int variationId;
+
+	@JsonProperty("product_id")
+	private int productId;
 }

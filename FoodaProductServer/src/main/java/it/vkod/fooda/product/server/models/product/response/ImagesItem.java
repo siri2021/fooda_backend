@@ -1,38 +1,21 @@
 package it.vkod.fooda.product.server.models.product.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @NoArgsConstructor
-@JsonAutoDetect
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ImagesItem {
-    @Getter
-    @Setter
-    private String dateModifiedGmt;
-    @Getter
-    @Setter
-    private String dateModified;
-    @Getter
-    @Setter
-    private String src;
-    @Getter
-    @Setter
-    private String dateCreated;
-    @Getter
-    @Setter
-    private String name;
-    @Getter
-    @Setter
-    private String alt;
-    @Getter
-    @Setter
-    private String dateCreatedGmt;
-    @Getter
-    @Setter
-    private int id;
+public class ImagesItem{
 
+	@JsonProperty("id")
+	private int id;
+
+	@JsonProperty("src")
+	private String src;
+
+	@JsonProperty("alt")
+	private String alt;
 }
