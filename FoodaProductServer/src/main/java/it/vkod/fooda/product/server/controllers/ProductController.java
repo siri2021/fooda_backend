@@ -27,7 +27,7 @@ public class ProductController {
         ProductResponseList list = new ProductResponseList();
         final List<String> activeProductServices = productClient.apiClientGetServiceUrls("WOOCOMMERCE-SERVER");
         activeProductServices.forEach(url -> {
-            final ProductResponseList matchedProducts = productClient.search(url + "api/woocommerce/product/search/?keyword=" + keyword + "&page=" + page);
+            final ProductResponseList matchedProducts = productClient.search(url + "api/woocommerce/product/search?keyword=" + keyword + "&page=" + page);
             list.addAll(matchedProducts);
         });
         return list;
@@ -39,7 +39,7 @@ public class ProductController {
         ProductResponseList list = new ProductResponseList();
         final List<String> activeProductServices = productClient.apiClientGetServiceUrls("WOOCOMMERCE-SERVER");
         activeProductServices.forEach(url -> {
-            final ProductResponseList matchedProducts = productClient.search(url + "api/woocommerce/product/getAllPaged/?page=" + page);
+            final ProductResponseList matchedProducts = productClient.search(url + "api/woocommerce/product/getAllPaged?page=" + page);
             list.addAll(matchedProducts);
         });
         return list;
