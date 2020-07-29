@@ -10,8 +10,8 @@
         <version>2.2.6.RELEASE</version>
     </parent>
 
-    <groupId>it.vkod</groupId>
-    <artifactId>fooda</artifactId>
+    <groupId>be.fooda</groupId>
+    <artifactId>backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -131,8 +131,6 @@
     </dependencies>
 
     <build>
-        <finalName>FoodaParent</finalName>
-
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -144,14 +142,29 @@
     </build>
 
     <modules>
-        <module>FoodaBasketServer</module>
-        <module>FoodaConfigServer</module>
-        <module>FoodaConvertServer</module>
-        <module>FoodaDeliveryServer</module>
-        <module>FoodaDiscoveryServer</module>
-        <module>FoodaProductServer</module>
-        <module>FoodaStoreServer</module>
-        <module>FoodaOrderServer</module>
+        <module>discovery</module>
+        <module>gateway</module>
+        <module>security</module>
+        <module>config</module>
+        <module>events</module>
+        <module>admin</module>
+        <module>logs</module> 
+        <!-- <module>commons</module> internal library to import-->
+        <module>matching</module>
+        <module>delivery</module>
+        <module>converter</module>
+        <module>user</module>
+        <module>payment</module>
+        <module>translation</module>
+        <module>basket</module>
+        <module>order</module>
+        <module>inventory</module>
+        <module>product</module>
+        <module>media</module>
+        <module>review</module>
+        <module>store</module>
+        <module>ranking</module>
+        <module>analysis</module>
     </modules>
 
 </project>
