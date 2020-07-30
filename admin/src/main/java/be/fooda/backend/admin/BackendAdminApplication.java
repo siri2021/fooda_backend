@@ -1,11 +1,13 @@
-package be.fooda.admin;
+package be.fooda.backend.admin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-// @EnableEurekaClient
-// @EnableAdminServer
+@EnableEurekaClient
+@EnableAdminServer
 public class BackendAdminApplication {
 	public static void main(String[] args) {
 	      SpringApplication.run(BackendAdminApplication.class, args);
