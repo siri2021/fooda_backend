@@ -1,8 +1,8 @@
 package be.fooda.backend.product.services;
 
+import be.fooda.backend.commons.model.woocommerce.product.response.ProductResponseList;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Applications;
-import be.fooda.backend.product.models.product.response.ProductResponseList;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

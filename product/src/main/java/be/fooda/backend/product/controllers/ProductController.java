@@ -1,6 +1,6 @@
 package be.fooda.backend.product.controllers;
 
-import be.fooda.backend.product.models.product.response.ProductResponseList;
+import be.fooda.backend.commons.model.woocommerce.product.response.ProductResponseList;
 import be.fooda.backend.product.services.ProductClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ public class ProductController {
 
     @Autowired
     private ProductClient productClient;
-
 
     @Cacheable("/search")
     @GetMapping("search")

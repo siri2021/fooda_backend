@@ -165,6 +165,7 @@
         <module>store</module>
         <module>ranking</module>
         <module>analysis</module>
+        <module>commons</module>
     </modules>
 
 </project>
