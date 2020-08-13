@@ -149,7 +149,7 @@
         <module>events</module>
         <module>admin</module>
         <module>logs</module> 
-        <!-- <module>commons</module> internal library to import-->
+        <module>commons</module>
         <module>matching</module>
         <module>delivery</module>
         <module>converter</module>
@@ -165,7 +165,6 @@
         <module>store</module>
         <module>ranking</module>
         <module>analysis</module>
-        <module>commons</module>
     </modules>
 
 </project>
