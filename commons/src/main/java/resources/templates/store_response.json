@@ -1,0 +1,191 @@
+{
+    "store_id": 11,
+    "name": "Manhattan's Restaurant",
+    "slogan": "Hello Belgium!",
+    "about": "This is a well-know burger restaurants chain which has 3 restaurants in Belgium, one in Gent, and two in Brussels..",
+    "images": [
+        {
+            "title": "Restaurant BG Mobile Light Theme",
+            "url": "https://fooda.be/temp/images/store_11_01.png"
+        },
+        {
+            "title": "Restaurant BG Mobile Dark Theme",
+            "url": "https://fooda.be/temp/images/store_11_02.png"
+        },
+        {
+            "title": "Restaurant BG Desktop Light Theme",
+            "url": "https://fooda.be/temp/images/store_11_03.png"
+        },
+        {
+            "title": "Restaurant BG Desktop Dark Theme",
+            "url": "https://fooda.be/temp/images/store_11_04.png"
+        },
+        {
+            "title": "Master Chef's Profile Image",
+            "url": "https://fooda.be/temp/images/store_11_05.png"
+        },
+        {
+            "title": "Top Product Canvas Mix Photo",
+            "url": "https://fooda.be/temp/images/store_11_06.png"
+        }
+    ],
+    "videos": [
+        {
+            "title": "Restaurant Intro Video",
+            "url": "https://fooda.be/temp/images/store_11_03.avi"
+        },
+        {
+            "title": "The Master Chef's Video",
+            "url": "https://fooda.be/temp/images/store_11_03.avi"
+        },
+        {
+            "title": "Production Line Video",
+            "url": "https://fooda.be/temp/images/store_11_03.avi"
+        }
+    ],
+    "address": {
+        "door_no": "2",
+        "number": "82",
+        "street": "Langestraat",
+        "municipality": "Zele",
+        "city": "Zele",
+        "region": "East Flanders",
+        "country": "Belgium"
+    },
+    "contact": {
+        "first_name": "John",
+        "family_name": "Doe",
+        "phone_number": "0032467711709",
+        "email": "order@manhattans.be",
+        "call": "true"
+    },
+    "type": {
+        "title": "WooCommerce"
+    },
+    "site_url": "http://manhattan-restaurant.be/",
+    "store_url": "http://fooda.be/stores/manhattans",
+    "logo": {
+        "url": "https://fooda.be/temp/images/store_11_logo_light.png"
+    },
+    "auth": [
+        {
+            "key": "5ef1ze1fzfeaey1r53jrtjrt34r5g4dad4z15v3f1e38hrzg0",
+            "secret": "8eg8r4eb183err8fz3e1a3f38z48da4z834d3fae4zgrh4tr38h4",
+            "expiry": "05/08/2020"
+        },
+        {
+            "key": "1v2s1vz8fz4e8rtjrt34r5g4dad4z15v3f1e38hrzg0",
+            "secret": "v21z3e3grgz4efz3e1a3f38z48da4z834d3fae4zgrh4tr38h4",
+            "expiry": "05/08/2023"
+        }
+    ],
+    "delivery_costs": [
+        {
+            "min_price": 0.00,
+            "max_price": 10.00,
+            "amount": 1.00
+        },
+        {
+            "min_price": 10.00,
+            "amount": 0.00
+        }
+    ],
+    "working_hours": [
+        {
+            "working_date": "09/08/2020",
+            "open_time": "08:30",
+            "close_time": "18:30"
+        },
+        {
+            "working_date": "09/08/2020",
+            "open_time": "20:00",
+            "close_time": "23:30"
+        },
+        {
+            "working_date": "10/08/2020",
+            "open_time": "08:30",
+            "close_time": "18:30"
+        },
+        {
+            "working_date": "10/08/2020",
+            "open_time": "20:00",
+            "close_time": "23:30"
+        },
+        {
+            "working_date": "11/08/2020",
+            "open_time": "08:30",
+            "close_time": "18:30"
+        },
+        {
+            "working_date": "11/08/2020",
+            "open_time": "20:00",
+            "close_time": "23:30"
+        },
+        {
+            "working_date": "13/08/2020",
+            "open_time": "08:30",
+            "close_time": "18:30"
+        },
+        {
+            "working_date": "13/08/2020",
+            "open_time": "20:00",
+            "close_time": "23:30"
+        }
+    ],
+    "payment_methods": [
+        {
+            "title": "Cash on Delivery",
+            "min_order_amount": 10.00
+        },
+        {
+            "title": "Credit Card on Delivery",
+            "min_order_amount": 10.00
+        },
+        {
+            "title": "Debit Card on Delivery",
+            "min_order_amount": 10.00
+        },
+        {
+            "title": "PayPal",
+            "min_order_amount": 10.00,
+            "expiry": "22/01/2021"
+        },
+        {
+            "title": "Bancontact",
+            "min_order_amount": 5.00,
+            "expiry": "11/03/2023"
+        },
+        {
+            "title": "Sodexho Cheque",
+            "min_order_amount": 15.00
+        },
+        {
+            "title": "Fooda Coin"
+        }
+    ],
+    "delivery_locations": [
+        {
+            "municipality": "Zele",
+            "city": "Gent",
+            "region": "East Flanders",
+            "country": "Belgium",
+            "delivery_time": "25"
+        },
+        {
+            "municipality": "Lokeren",
+            "city": "Gent",
+            "region": "East Flanders",
+            "country": "Belgium",
+            "delivery_time": "45",
+            "delivery_cost": 1.00
+        },
+        {
+            "municipality": "Dendermonde",
+            "city": "Gent",
+            "region": "East Flanders",
+            "country": "Belgium",
+            "delivery_time": "35",
+            "delivery_cost": 0.00
+        }
+    ]
+}
