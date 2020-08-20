@@ -10,7 +10,7 @@
 
     <artifactId>discovery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BackendDiscovery</name>
+    <name>discovery</name>
     <description>Spring Boot project for Eureka discovery server</description>
     <packaging>jar</packaging>
 

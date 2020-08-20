@@ -146,9 +146,9 @@
         <module>gateway</module>
         <module>security</module>
         <module>config</module>
-        <module>events</module>
+        <module>flow</module>
         <module>admin</module>
-        <module>logs</module> 
+        <module>log</module>
         <module>commons</module>
         <module>matching</module>
         <module>delivery</module>

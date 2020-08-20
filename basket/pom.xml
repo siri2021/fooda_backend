@@ -10,7 +10,7 @@
 
     <artifactId>basket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BackendBasket</name>
+    <name>basket</name>
     <description>Spring Boot project to add, remove or update product items..</description>
     <packaging>jar</packaging>
 

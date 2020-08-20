@@ -10,7 +10,7 @@
 
     <artifactId>config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BackendConfig</name>
+    <name>config</name>
     <description>Fooda Backend Config Server for Microservices</description>
     <packaging>jar</packaging>
 

@@ -11,7 +11,7 @@
 
     <artifactId>product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BackendProduct</name>
+    <name>product</name>
     <description>Spring Boot application for providing and matching products using food names, tags, and all other properties..</description>
     <packaging>jar</packaging>
 
