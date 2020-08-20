@@ -18,7 +18,7 @@ public class FoodaProductCategoryDto extends FoodaAbstractDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private FoodaProductKeyDto productKey;
+//    private FoodaProductKeyDto productKey;
 
     private String title;
 }

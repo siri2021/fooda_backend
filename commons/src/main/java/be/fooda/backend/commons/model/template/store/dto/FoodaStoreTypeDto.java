@@ -1,4 +1,4 @@
-package be.fooda.backend.commons.model.template.product.dto;
+package be.fooda.backend.commons.model.template.store.dto;
 
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.Builder;
@@ -11,11 +11,12 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name = "PRODUCT_TAG")
-public class FoodaProductTagDto extends FoodaAbstractDto {
+@Table(name = "STORE_TYPE")
+public class FoodaStoreTypeDto extends FoodaAbstractDto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long tagId;
-//    private FoodaProductKeyDto key;
-    private String value;
+    private Long id;
+
+    private String title;
 }
