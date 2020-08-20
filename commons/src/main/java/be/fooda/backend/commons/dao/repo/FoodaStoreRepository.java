@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FoodaStoreRepository extends CrudRepository<FoodaStoreDto, Long> {
-}
+public interface FoodaStoreRepository extends CrudRepository<FoodaStoreDto, Long> { }

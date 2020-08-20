@@ -1,0 +1,157 @@
+{
+    "customer_id": 1986,
+    "billing": {
+        "address": {
+            "number": "36",
+            "street": "Collegestraat",
+            "municipality": "Zele",
+            "city": "Zele",
+            "region": "East Flanders",
+            "country": "Belgium"
+        },
+        "contact": {
+            "first_name": "John",
+            "family_name": "The Customer",
+            "company": "Fooda Co.",
+            "phone_number": "0032467711711",
+            "email": "customer_company_name@mycompany.be"
+        }
+    },
+    "delivery": {
+        "address_same_as_billing": "true",
+        "contact": {
+            "first_name": "John",
+            "family_name": "The Customer",
+            "phone_number": "0032467711711",
+            "email": "firstname_familyname@gmail.be"
+        }
+    },
+    "orders": [
+        {
+            "store": {
+                "store_id": 11,
+                "name": "Manhattan's Restaurant",
+                "logo": "https://fooda.be/temp/images/store_11_01.png",
+                "address": {
+                    "door_no": "2",
+                    "number": "82",
+                    "street": "Langestraat",
+                    "municipality": "Zele",
+                    "city": "Zele",
+                    "region": "East Flanders",
+                    "country": "Belgium"
+                },
+                "contact": {
+                    "first_name": "John",
+                    "family_name": "Doe",
+                    "phone_number": "0032467711709",
+                    "email": "order@manhattans.be",
+                    "call": "true"
+                }
+            },
+            "status": {
+                "title": "Being delivered by driver",
+                "parent": "On Delivery"
+            },
+            "note": "I am allergic to gluten.",
+            "registry": "13/08/2020 15:45",
+            "required": "13/08/2020 16:50",
+            "delivery": "13/08/2020 16:52",
+            "payment": "13/08/2020 16:54",
+            "products_total": 56.76,
+            "tax_total": 12.24,
+            "delivery_total": 1.00,
+            "price_total": 69.00,
+            "ordered_products": [
+                {
+                    "product_id": 125,
+                    "name": "Pizza Margheritta",
+                    "quantity": 1,
+                    "price": 15.00
+                },
+                {
+                    "product_id": 154,
+                    "name": "Pizza Napoiltana",
+                    "quantity": 4,
+                    "price": 9.00
+                },
+                {
+                    "product_id": 158,
+                    "name": "Spaghetti Bolognese",
+                    "variant": {
+                        "title": "Plant-based meat",
+                        "price": "-1.00"
+                    },
+                    "quantity": 2,
+                    "price": 14.50
+                }
+            ],
+            "payments": [
+                {
+                    "title": "Sodexho Cheque",
+                    "method": "Online",
+                    "amount": 10.00
+                },
+                {
+                    "title": "Credit Card",
+                    "method": "Online",
+                    "amount": 5.00
+                },
+                {
+                    "title": "Cash",
+                    "method": "On Delivery",
+                    "amount": 17.00
+                }
+            ]
+        },
+        {
+            "store": {
+                "store_id": 125,
+                "name": "Burger King",
+                "logo": "https://fooda.be/temp/images/store_125_01.png",
+                "address": {
+                    "number": "82",
+                    "street": "Langestraat",
+                    "municipality": "Dendermonde",
+                    "city": "Gent",
+                    "region": "East Flanders",
+                    "country": "Belgium"
+                },
+                "contact": {
+                    "first_name": "John",
+                    "family_name": "Doe",
+                    "phone_number": "0032467715412",
+                    "email": "order@burgerking.be",
+                    "call": "true"
+                }
+            },
+            "status": {
+                "title": "Waiting for confirmation from restaurant",
+                "parent": "Processing"
+            },
+            "registry_time": "13/08/2020 15:45",
+            "required_time": "13/08/2020 16:50",
+            "delivery_time": "13/08/2020 16:52",
+            "payment_time": "13/08/2020 16:54",
+            "products_total_price": 23.78,
+            "tax_total": 6.12,
+            "price_total": 30.00,
+            "ordered_products": [
+                {
+                    "product_id": 163,
+                    "name": "Plant-based meat menu",
+                    "type": "grouped",
+                    "quantity": 2,
+                    "price": 15.00
+                }
+            ],
+            "payments": [
+                {
+                    "title": "Cash",
+                    "method": "On Delivery",
+                    "amount": 30.00
+                }
+            ]
+        }
+    ]
+}

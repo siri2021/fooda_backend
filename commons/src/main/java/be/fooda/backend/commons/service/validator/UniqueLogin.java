@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueLoginValidator.class)
 public @interface UniqueLogin {
-    String message() default "The phone number already exists";
+    String message() default "The user already exists";
 
     Class<?>[] groups() default {};
 

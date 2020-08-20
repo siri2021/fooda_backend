@@ -13,7 +13,7 @@ import java.util.List;
 public class FoodaStoreResponse {
 
     @JsonProperty("store_id")
-    private Integer storeId;
+    private Long storeId;
 
     @JsonProperty("images")
     private List<ImagesItem> images;
