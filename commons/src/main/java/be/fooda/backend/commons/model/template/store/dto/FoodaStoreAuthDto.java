@@ -19,8 +19,6 @@ public class FoodaStoreAuthDto extends FoodaAbstractDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long authId;
 
-//    private FoodaStoreDto store;
-
     private String key;
 
     private String secret;
