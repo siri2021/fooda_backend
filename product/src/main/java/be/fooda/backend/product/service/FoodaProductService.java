@@ -1,8 +1,7 @@
 package be.fooda.backend.product.service;
 
-import be.fooda.backend.commons.model.template.product.request.FoodaProductRequest;
+import be.fooda.backend.commons.model.template.product.dto.FoodaProductDto;
 
-public interface FoodaProductService extends GenericService<FoodaProductRequest, Integer>  {
-    FoodaProductRequest findByKey(Integer productId, Integer storeId);
-    
+public interface FoodaProductService extends GenericService<FoodaProductDto, Integer> {
+    FoodaProductDto findByKey(Integer productId, Integer storeId);
 }

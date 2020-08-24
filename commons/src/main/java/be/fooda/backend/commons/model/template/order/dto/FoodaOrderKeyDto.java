@@ -1,9 +1,11 @@
-package be.fooda.backend.commons.model.order;
+package be.fooda.backend.commons.model.template.order.dto;
 
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import lombok.*;
-import javax.persistance.*;
+import javax.persistence.Embeddable;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

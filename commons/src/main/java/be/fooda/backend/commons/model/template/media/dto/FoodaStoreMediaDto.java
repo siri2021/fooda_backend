@@ -8,9 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "STORE_MEDIA")
 public class FoodaStoreMediaDto {
-
     @Id
-    @GeneratedValue(strategy = GeneratedValue.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long mediaId;
     private Long storeId;
     private FoodaMediaTypeDto type;

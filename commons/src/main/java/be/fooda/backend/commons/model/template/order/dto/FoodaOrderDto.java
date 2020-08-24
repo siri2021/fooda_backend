@@ -1,9 +1,12 @@
 package be.fooda.backend.commons.model.template.order.dto;
 
-import be.fooda.backend.commons.model.order.FoodaOrderKeyDto;
+import lombok.Builder;
+import lombok.Data;
 
-import lombok.*;
-import javax.persistance.*;
+import javax.persistence.EmbeddedId;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder

@@ -1,53 +1,22 @@
-package be.fooda.backend.commons.model.template.product.response;
+package be.fooda.backend.commons.model.template.product.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
+@Builder
 public class FoodaProductReq {
-
-    @JsonProperty("is_featured")
     private Boolean isFeatured;
-
-    @JsonProperty("images")
-    private List<ImagesItem> images;
-
-    @JsonProperty("description")
+    private List<FoodaProductImagesItemReq> images;
     private String description;
-
-    @JsonProperty("taxes")
-    private List<TaxesItem> taxes;
-
-    @JsonProperty("store")
-    private Store store;
-
-    @JsonProperty("stock_quantity")
+    private List<FoodaProductTaxesItemReq> taxes;
+    private FoodaProductStoreReq store;
     private Integer stockQuantity;
-
-    @JsonProperty("type")
-    private Type type;
-
-    @JsonProperty("tags")
+    private FoodaProductTypeReq type;
     private List<String> tags;
-
-    @JsonProperty("product_id")
-    private Integer productId;
-
-    @JsonProperty("name")
+    private Long productId;
     private String name;
-
-    @JsonProperty("categories")
     private List<String> categories;
-
-    @JsonProperty("order_limit")
     private Integer orderLimit;
-
-    @JsonProperty("prices")
-    private List<PricesItem> prices;
+    private List<FoodaProductPricesItemReq> prices;
 }

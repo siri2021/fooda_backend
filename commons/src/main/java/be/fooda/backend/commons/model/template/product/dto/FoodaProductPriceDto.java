@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
@@ -18,6 +20,6 @@ public class FoodaProductPriceDto extends FoodaAbstractDto {
     private Long priceId;
     private FoodaProductKeyDto productKey;
     private String title;
-    private Double amount;
+    private BigDecimal amount;
     private LocalDate expiry;
 }

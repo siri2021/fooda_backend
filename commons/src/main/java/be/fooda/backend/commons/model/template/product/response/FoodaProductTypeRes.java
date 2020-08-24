@@ -1,24 +1,11 @@
 package be.fooda.backend.commons.model.template.product.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class FoodaProductTypeRes {
-
-    @JsonProperty("type_id")
-    private Integer typeId;
-
-    @JsonProperty("name")
+    private Long typeId;
     private String name;
-
-    @JsonProperty("extension")
     private String extension;
-
-    @JsonProperty("title")
     private String title;
 }

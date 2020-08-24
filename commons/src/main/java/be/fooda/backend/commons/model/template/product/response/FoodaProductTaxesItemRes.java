@@ -1,24 +1,11 @@
 package be.fooda.backend.commons.model.template.product.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class FoodaProductTaxesItemRes {
-
-    @JsonProperty("percentage")
     private Double percentage;
-
-    @JsonProperty("title")
     private String title;
-
-    @JsonProperty("tax_id")
-    private Integer taxId;
-
-    @JsonProperty("is_default")
+    private Long taxId;
     private Boolean isDefault;
 }
