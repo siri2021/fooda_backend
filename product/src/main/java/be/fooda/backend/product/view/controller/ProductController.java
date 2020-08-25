@@ -1,8 +1,13 @@
 package be.fooda.backend.product.view.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +31,8 @@ public class ProductController {
 
     @GetMapping("/getAll")
     public List<FoodaProductRes> apiGetAllProducts() {
-        List<FoodaProductDto> dtoList = productRepo.findAll();
-        return dtoList.stream().map(productMapper::dtoToResponse).collect(Collectors.toList());
+        Iterable<FoodaProductDto> dtoList = productRepo.findAll();
+        return stream(dtoList.iterator()).map(productMapper::dtoToResponse).collect(Collectors.toList());
     }
 
     @PostMapping("/add")
@@ -35,5 +40,12 @@ public class ProductController {
         FoodaProductDto productDto = productMapper.requestToDto(req);
         FoodaProductDto addedProduct = productRepo.save(productDto);
         return productMapper.dtoToResponse(addedProduct);
+    }
+
+    public static <T> Stream<T> stream(Iterator<T> iterator) {
+        Spliterator<T> spliterator = Spliterators.spliteratorUnknownSize(iterator, 0);
+
+        // Get a Sequential Stream from spliterator
+        return StreamSupport.stream(spliterator, false);
     }
 }

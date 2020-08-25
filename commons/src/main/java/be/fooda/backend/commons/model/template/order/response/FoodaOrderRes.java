@@ -2,13 +2,15 @@
 
 package be.fooda.backend.commons.model.template.order.response;
 
+import java.util.List;
+
 import lombok.*;
 
 @NoArgsConstructor
 @Data
 public class FoodaOrderRes {
-    private long customerID;
+    private long customerId;
     private FoodaOrderBillingRes billing;
     private FoodaOrderDeliveryRes delivery;
-    private FoodaSubOrderRes[] orders;
+    private List<FoodaSubOrderRes> orders;
 }

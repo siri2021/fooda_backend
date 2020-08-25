@@ -2,6 +2,9 @@
 
 package be.fooda.backend.commons.model.template.order.response;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import lombok.*;
 
 @NoArgsConstructor
@@ -14,15 +17,14 @@ public class FoodaSubOrderRes {
     private String required;
     private String delivery;
     private String payment;
-    private Double productsTotal;
-    private double taxTotal;
-    private Double deliveryTotal;
-    private double priceTotal;
-    private OrderedProduct[] orderedProducts;
-    private FoodaOrderPaymentRes[] payments;
+    private BigDecimal productsTotal;
+    private BigDecimal taxTotal;
+    private BigDecimal deliveryTotal;
+    private BigDecimal priceTotal;
+    private List<FoodaOrderProductRes> orderedProducts;
+    private List<FoodaOrderPaymentRes> payments;
     private String registryTime;
     private String requiredTime;
     private String deliveryTime;
     private String paymentTime;
-    private Double productsTotalPrice;
 }

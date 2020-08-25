@@ -134,8 +134,7 @@ public class FoodaProductMapper implements FoodaObjectMapper<FoodaProductDto, Fo
             .type(type(res))
             .url(img.getUrl())
             .build()
-        )
-        .collect(Collectors.toList());
+        ).collect(Collectors.toList());
     }
 
     private List<FoodaProductPricesItemReq> prices(final FoodaProductRes res){

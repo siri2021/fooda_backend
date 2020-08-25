@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class FoodaOrderStoreRes {
-    private long storeID;
+    private long storeId;
     private String name;
     private String logo;
     private FoodaOrderAddressRes address;

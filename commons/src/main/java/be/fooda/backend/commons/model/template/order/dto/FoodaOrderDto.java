@@ -1,16 +1,19 @@
 package be.fooda.backend.commons.model.template.order.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import javax.persistence.*;
+import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 
-import javax.persistence.EmbeddedId;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
-public class FoodaOrderDto{
+@Entity
+@Table(name = "ORDER")
+public class FoodaOrderDto extends FoodaAbstractDto{
     @EmbeddedId
     private FoodaOrderKeyDto orderKey;
     private FoodaOrderStatusDto orderStatus;

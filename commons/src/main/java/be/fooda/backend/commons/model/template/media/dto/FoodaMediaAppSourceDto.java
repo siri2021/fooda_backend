@@ -6,12 +6,13 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name = "STORE_MEDIA")
-public class FoodaStoreMediaDto {
+@Table(name = "APP_SOURCE")
+public class FoodaMediaAppSourceDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long mediaId;
-    private Long storeId;
-    private FoodaMediaTypeDto type;
+    private Long appSourceId;
+    private String title;
     private String url;
+    private String resolution;
+    private Boolean mustBeCached;
 }
