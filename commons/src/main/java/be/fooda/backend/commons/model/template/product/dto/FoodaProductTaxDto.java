@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,6 +18,8 @@ public class FoodaProductTaxDto extends FoodaAbstractDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long taxId;
     private FoodaProductKeyDto productKey;
+    @NotNull
     private String title;
+    @NotNull
     private Double percentage;
 }

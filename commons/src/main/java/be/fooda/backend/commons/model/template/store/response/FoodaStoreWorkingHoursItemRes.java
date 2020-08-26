@@ -1,21 +1,12 @@
 package be.fooda.backend.commons.model.template.store.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class FoodaStoreWorkingHoursItemRes {
-
-    @JsonProperty("open_time")
     private String openTime;
-
-    @JsonProperty("close_time")
     private String closeTime;
-
-    @JsonProperty("working_date")
     private String workingDate;
 }

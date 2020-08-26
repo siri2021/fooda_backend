@@ -1,12 +1,12 @@
 package be.fooda.backend.commons.model.template.order.dto;
 
-import lombok.*;
+import be.fooda.backend.commons.model.template.FoodaAbstractDto;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import be.fooda.backend.commons.model.template.FoodaAbstractDto;
-
 import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @Data

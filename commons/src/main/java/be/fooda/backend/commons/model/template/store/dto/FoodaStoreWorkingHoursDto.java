@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "STORE_WORKING_HOURS")
 public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
-
     private LocalDateTime openTime;
-
     private LocalDateTime closeTime;
 }

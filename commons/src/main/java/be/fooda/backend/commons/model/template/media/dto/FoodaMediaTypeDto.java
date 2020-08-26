@@ -1,7 +1,10 @@
 package be.fooda.backend.commons.model.template.media.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -11,6 +14,7 @@ public class FoodaMediaTypeDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long typeId;
+    @NotNull
     private String title;
     private String extension;
 }

@@ -1,14 +1,14 @@
 package be.fooda.backend.matching.config;
 
-import be.fooda.backend.matching.model.request.MatchResultCategoryRequest;
-import be.fooda.backend.matching.model.request.MatchResultRequest;
-import be.fooda.backend.matching.repository.MatchResultRepository;
-import be.fooda.backend.matching.service.flow.exception.MatchingException;
-import be.fooda.backend.matching.service.mappers.KeywordMapper;
-import be.fooda.backend.matching.service.mappers.MatchId;
-import be.fooda.backend.matching.service.mappers.Matchable;
-import be.fooda.backend.matching.service.mappers.SearchableItem;
-import be.fooda.backend.matching.service.utils.MatchUtils;
+import be.fooda.backend.commons.model.template.matching.dto.FoodaMatchCategoryDto;
+import be.fooda.backend.commons.model.template.matching.dto.FoodaMatchDto;
+import be.fooda.backend.commons.model.template.matching.request.FoodaMatchReq;
+import be.fooda.backend.commons.service.exception.MatchingException;
+import be.fooda.backend.commons.service.mapper.FoodaMatchingMapper;
+import be.fooda.backend.commons.service.util.FoodaMatchUtil;
+import be.fooda.backend.commons.service.validator.MatchId;
+import be.fooda.backend.commons.service.validator.Matchable;
+import be.fooda.backend.matching.dao.MatchResultRepository;
 import com.google.common.util.concurrent.AtomicDouble;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.System.out;
 
@@ -28,11 +29,11 @@ import static java.lang.System.out;
 @RequiredArgsConstructor
 public class CmdStartupRunner implements CommandLineRunner {
 
-    private final KeywordMapper mapper;
+    private final FoodaMatchingMapper mapper;
     private final MatchResultRepository repo;
 
     @Override
-    public void run(final String... args) throws Exception {
+    public void run(final String... args) {
         log.info("Application started with command-line arguments: {} . \n To kill this application, press Ctrl + C.",
                 Arrays.toString(args));
 
@@ -44,46 +45,46 @@ public class CmdStartupRunner implements CommandLineRunner {
         out.println("-------------------------- TEMP DB TRANSACTION IS STARTED --------------------------");
 
         Arrays.asList("pizza", "margheritta", "italian").forEach(keyword -> {
-            List<SearchableItem> itemsToSearchIn = null;
+            List<FoodaMatchReq> reqList = null;
             try {
-                itemsToSearchIn = mapper.match(p);
+                reqList = mapper.objectToRequest(p);
             } catch (final MatchingException e) {
                 e.printStackTrace();
             }
-            final List<MatchResultRequest> results = generateMatchTable(itemsToSearchIn, keyword);
+            final List<FoodaMatchDto> results = generateMatchTable(Objects.requireNonNull(reqList), keyword);
             results.forEach(repo::save);
         });
 
         out.println("---------------------------- TEMP DB TRANSACTION IS ENDED ----------------------------");
     }
 
-    private static List<MatchResultRequest> generateMatchTable(final List<SearchableItem> itemsToSearchIn, final String keyword) {
+    private static List<FoodaMatchDto> generateMatchTable(final List<FoodaMatchReq> itemsToSearchIn, final String keyword) {
         // H2 memory DB
-        final MatchUtils utils = new MatchUtils();
-        final List<MatchResultRequest> results = new ArrayList<>();
-        itemsToSearchIn.stream().forEach(result -> {
+        final FoodaMatchUtil utils = new FoodaMatchUtil();
+        final List<FoodaMatchDto> results = new ArrayList<>();
+        itemsToSearchIn.forEach(result -> {
             final AtomicDouble matchSum = new AtomicDouble(0);
-            final String[] words = String.valueOf(result.getValue()).split("\\W+");
+            final String[] words = String.valueOf(result.getMatched()).split("\\W+");
             Arrays.stream(words).forEach(word -> {
                 final double scoreByWord = (utils.levensteinRatio(word.toLowerCase(), keyword.toLowerCase()));
                 matchSum.addAndGet(scoreByWord);
             });
 
             if (matchSum.get() > result.getMinScore()) {
-                final MatchResultCategoryRequest category = MatchResultCategoryRequest.builder()
-                        .title(result.getName())
-                        .weight(result.getWeight())
+                final FoodaMatchCategoryDto category = FoodaMatchCategoryDto.builder()
+                        .title(result.getCategory().getTitle())
+                        .weight(result.getCategory().getWeight())
                         .build();
 
-                final MatchResultRequest request = MatchResultRequest.builder()
-                        .relatedId(Integer.valueOf(result.getId()))
+                final FoodaMatchDto matchDto = FoodaMatchDto.builder()
+                        .relatedId(result.getRelatedId())
                         .category(category)
-                        .keyword(result.getValue())
+                        .keyword(result.getKeyword())
                         .score(matchSum.get() / words.length)
                         .build();
 
                 // saving to MatchDB ..
-                results.add(request);
+                results.add(matchDto);
             }
 
         });
@@ -99,7 +100,7 @@ public class CmdStartupRunner implements CommandLineRunner {
         @Matchable
         private Integer id;
 
-        @Matchable(value = "product.name", weight = 1.00, minScore = 0.75)
+        @Matchable(value = "product.name", minScore = 0.75)
         private String name;
 
         @Matchable(value = "product.description", weight = 0.75, minScore = 0.50)

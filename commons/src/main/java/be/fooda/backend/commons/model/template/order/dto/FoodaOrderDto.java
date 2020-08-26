@@ -1,9 +1,13 @@
 package be.fooda.backend.commons.model.template.order.dto;
 
-import lombok.*;
-import javax.persistence.*;
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,5 +29,6 @@ public class FoodaOrderDto extends FoodaAbstractDto{
     private BigDecimal taxTotal;
     private BigDecimal deliveryTotal;
     private BigDecimal priceTotal;
+    private List<FoodaOrderProductDto> products;
     private List<FoodaOrderPaymentDto> payments;
 }

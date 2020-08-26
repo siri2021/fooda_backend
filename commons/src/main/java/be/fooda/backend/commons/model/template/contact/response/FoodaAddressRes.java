@@ -1,12 +1,13 @@
 package be.fooda.backend.commons.model.template.contact.response;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class FoodaAddressRes {
-    private Integer addressId;
-    private Integer userId;
+    private Long addressId;
+    private Long userId;
     private String doorNo;
     private String number;
     private String street;

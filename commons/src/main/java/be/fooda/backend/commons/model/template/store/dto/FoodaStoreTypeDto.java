@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -13,10 +14,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "STORE_TYPE")
 public class FoodaStoreTypeDto extends FoodaAbstractDto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotNull
     private String title;
 }

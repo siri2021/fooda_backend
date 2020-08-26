@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -16,8 +17,11 @@ import javax.validation.constraints.Email;
 public class FoodaContactDto {
     @Id
     private Integer contactId;
+    @NotNull
     private Integer userId;
+    @NotNull
     private String firstName;
+    @NotNull
     private String familyName;
     private String companyName;
     @PhoneNumber

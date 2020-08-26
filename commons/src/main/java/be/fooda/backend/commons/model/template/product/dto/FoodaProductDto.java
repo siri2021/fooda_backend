@@ -1,10 +1,12 @@
 package be.fooda.backend.commons.model.template.product.dto;
 
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
-
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -15,9 +17,11 @@ import java.util.List;
 public class FoodaProductDto extends FoodaAbstractDto {
     @EmbeddedId
     private FoodaProductKeyDto key;
+    @NotNull
     private String name;
     private String description;
     private Integer limit;
+    @NotNull
     private FoodaProductPriceDto price;
     private Boolean isFeatured;
     private FoodaProductTypeDto type;

@@ -1,30 +1,15 @@
 package be.fooda.backend.commons.model.template.store.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class FoodaStoreDeliveryLocationsItemRes {
-
-    @JsonProperty("country")
     private String country;
-
-    @JsonProperty("delivery_cost")
     private Double deliveryCost;
-
-    @JsonProperty("city")
     private String city;
-
-    @JsonProperty("municipality")
     private String municipality;
-
-    @JsonProperty("delivery_time")
     private String deliveryTime;
-
-    @JsonProperty("region")
     private String region;
 }

@@ -1,4 +1,4 @@
-package be.fooda.backend.matching.service.mappers;
+package be.fooda.backend.commons.service.validator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface MatchId {
+public @interface Matchable {
+    public String value() default "";
+    public double weight() default 1.00;
+    public double minScore() default 1.00;
 }

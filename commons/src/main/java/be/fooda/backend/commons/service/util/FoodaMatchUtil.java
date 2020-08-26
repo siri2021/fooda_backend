@@ -1,8 +1,8 @@
-package be.fooda.backend.matching.service.utils;
+package be.fooda.backend.commons.service.util;
 
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
-public class MatchUtils {
+public class FoodaMatchUtil {
 
     private static final LevenshteinDistance lv = new LevenshteinDistance();
 

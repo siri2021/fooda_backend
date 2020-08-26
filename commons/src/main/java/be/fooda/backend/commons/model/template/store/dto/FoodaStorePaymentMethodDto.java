@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
@@ -15,6 +14,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "STORE_TYPE")
 public class FoodaStorePaymentMethodDto extends FoodaAbstractDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long methodId;
     private Double minOrderAmount;
     private LocalDate expiryDate;

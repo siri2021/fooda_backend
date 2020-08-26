@@ -1,7 +1,10 @@
 package be.fooda.backend.commons.model.template.media.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -12,6 +15,7 @@ public class FoodaMediaAppSourceDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long appSourceId;
     private String title;
+    @NotNull
     private String url;
     private String resolution;
     private Boolean mustBeCached;

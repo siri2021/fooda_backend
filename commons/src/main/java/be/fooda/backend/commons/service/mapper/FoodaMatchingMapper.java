@@ -1,6 +1,11 @@
-package be.fooda.backend.matching.service.mappers;
+package be.fooda.backend.commons.service.mapper;
 
-import be.fooda.backend.matching.service.flow.exception.MatchingException;
+
+import be.fooda.backend.commons.model.template.matching.request.FoodaMatchCategoryReq;
+import be.fooda.backend.commons.model.template.matching.request.FoodaMatchReq;
+import be.fooda.backend.commons.service.exception.MatchingException;
+import be.fooda.backend.commons.service.validator.MatchId;
+import be.fooda.backend.commons.service.validator.Matchable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -10,41 +15,38 @@ import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
-/**
- * REFLECTION API
- */
-public class KeywordMapper {
-	public List<SearchableItem> match(final Object object) throws MatchingException {
+public class FoodaMatchingMapper {
+
+	public List<FoodaMatchReq> objectToRequest(final Object object) throws MatchingException {
 		try {
 			final Class<?> objectClass = requireNonNull(object).getClass();
-			final List<SearchableItem> results = new ArrayList<>();
+			final List<FoodaMatchReq> results = new ArrayList<>();
 			final Optional<Field> idField = Arrays.stream(objectClass.getDeclaredFields())
 					.filter(field -> field.isAnnotationPresent(MatchId.class)).findFirst();
 
-			final String relatedId;
+			final Long relatedId;
 			if (idField.isPresent()) {
 				idField.get().setAccessible(true);
-				relatedId = String.valueOf(idField.get().get(object));
+				relatedId = Long.parseLong(idField.get().get(object).toString());
 			} else {
-				relatedId = "-1";
+				relatedId = 0L;
 			}
 
 			for (final Field field : objectClass.getDeclaredFields()) {
 				field.setAccessible(true);
 
 				if (field.isAnnotationPresent(Matchable.class)) {
-					final SearchableItem searchableItem = SearchableItem.builder()
-							.id(relatedId)
-							.name(getName(field))
-							.value(String.valueOf(field.get(object)))
-							.weight(getWeight(field))
+					final FoodaMatchReq req = FoodaMatchReq.builder()
+							.relatedId(relatedId)
+							.keyword(getName(field))
+							.matched(String.valueOf(field.get(object)))
 							.minScore(getMinScore(field))
+							.category(FoodaMatchCategoryReq.builder().weight(getWeight(field)).build())
 							.build();
 
-					results.add(searchableItem);
+					results.add(req);
 				}
 			}
-
 
 			return results;
 		} catch (final IllegalAccessException e) {

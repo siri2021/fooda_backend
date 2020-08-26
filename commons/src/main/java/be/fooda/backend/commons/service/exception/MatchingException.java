@@ -1,4 +1,4 @@
-package be.fooda.backend.matching.service.flow.exception;
+package be.fooda.backend.commons.service.exception;
 
 public class MatchingException extends Exception {
 

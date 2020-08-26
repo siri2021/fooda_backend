@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class FoodaAddressReq { // sending post, put, delete, get request
-    private Integer addressId;
-    private Integer userId;
+public class FoodaAddressReq {
+    private Long addressId;
+    private Long userId;
     private String doorNo;
     private String number;
     private String street;
