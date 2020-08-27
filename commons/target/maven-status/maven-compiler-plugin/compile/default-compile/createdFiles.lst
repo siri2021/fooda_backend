@@ -82,6 +82,7 @@ be\fooda\backend\commons\model\woocommerce\product\attributes\request\WooCommerc
 be\fooda\backend\commons\model\woocommerce\product\categories\response\SelfItem.class
 be\fooda\backend\commons\model\template\store\dto\FoodaStoreAuthDto$FoodaStoreAuthDtoBuilder.class
 be\fooda\backend\commons\model\template\media\request\FoodaMediaProductInfoReq.class
+be\fooda\backend\commons\service\mapper\FoodaDtoMapper.class
 be\fooda\backend\commons\model\template\store\response\FoodaStoreAddressRes.class
 be\fooda\backend\commons\model\template\order\request\FoodaOrderReq.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreVideosItemReq.class
@@ -97,6 +98,7 @@ be\fooda\backend\commons\model\woocommerce\product\tags\request\WooCommerceProdu
 be\fooda\backend\commons\model\woocommerce\product\variations\request\WooCommerceProductVariationRequest$WooCommerceProductVariationRequestBuilder.class
 be\fooda\backend\commons\service\util\FoodaMatchUtil.class
 be\fooda\backend\commons\service\validator\UniqueLogin.class
+be\fooda\backend\commons\service\mapper\FoodaMatchingHttpMapper.class
 be\fooda\backend\commons\model\template\product\dto\FoodaProductDto.class
 be\fooda\backend\commons\model\template\store\response\FoodaStoreTypeRes.class
 be\fooda\backend\commons\model\woocommerce\product\attributes\response\CollectionItem.class
@@ -109,6 +111,7 @@ be\fooda\backend\commons\model\template\media\response\FoodaMediaAppSourceRes.cl
 be\fooda\backend\commons\model\template\media\dto\FoodaMediaAppDto$FoodaMediaAppDtoBuilder.class
 be\fooda\backend\commons\model\woocommerce\product\request\WooCommerceProductRequest$WooCommerceProductRequestBuilder.class
 be\fooda\backend\commons\model\template\order\dto\FoodaOrderStatusDto.class
+be\fooda\backend\commons\service\mapper\FoodaHttpMapper.class
 be\fooda\backend\commons\model\template\matching\response\FoodaMatchItemRes.class
 be\fooda\backend\commons\model\woocommerce\product\shipping_classes\response\CollectionItem.class
 be\fooda\backend\commons\model\template\store\response\FoodaStoreAuthItemRes.class
@@ -121,7 +124,6 @@ be\fooda\backend\commons\model\woocommerce\product\attributes\request\WooCommerc
 be\fooda\backend\commons\model\template\FoodaAbstractDto.class
 be\fooda\backend\commons\model\template\order\dto\FoodaOrderDto$FoodaOrderDtoBuilder.class
 be\fooda\backend\commons\service\mapper\FoodaMediaProductMapper.class
-be\fooda\backend\commons\model\template\matching\dto\FoodaMatchDto.class
 be\fooda\backend\commons\model\template\store\response\FoodaStoreContactRes.class
 be\fooda\backend\commons\model\template\contact\dto\FoodaAddressMunicipalityDto$FoodaAddressMunicipalityDtoBuilder.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreVideosItemReq$FoodaStoreVideosItemReqBuilder.class
@@ -161,7 +163,6 @@ be\fooda\backend\commons\model\template\inventory\dto\FoodaInventoryDto$FoodaInv
 be\fooda\backend\commons\model\woocommerce\product\request\ImagesItem.class
 be\fooda\backend\commons\model\woocommerce\product\reviews\response\ReviewerAvatarUrls.class
 be\fooda\backend\commons\model\woocommerce\product\variations\response\SelfItem.class
-be\fooda\backend\commons\dao\repo\FoodaMatchingRepository.class
 be\fooda\backend\commons\model\template\order\request\FoodaOrderPaymentReq.class
 be\fooda\backend\commons\service\mapper\FoodaOrderMapper.class
 be\fooda\backend\commons\model\woocommerce\product\variations\response\WooCommerceProductVariationResponse.class
@@ -198,7 +199,6 @@ be\fooda\backend\commons\model\template\store\dto\FoodaStoreDeliveryLocationDto.
 be\fooda\backend\commons\model\template\store\request\FoodaStoreAuthItemReq$FoodaStoreAuthItemReqBuilder.class
 be\fooda\backend\commons\model\woocommerce\product\attributes\response\WooCommerceProductAttributeResponse.class
 be\fooda\backend\commons\model\template\order\request\FoodaOrderDeliveryReq.class
-be\fooda\backend\commons\service\mapper\FoodaMatchingMapper.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreReq.class
 be\fooda\backend\commons\model\template\inventory\request\FoodaInventoryReq.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreImagesItemReq$FoodaStoreImagesItemReqBuilder.class
@@ -216,7 +216,6 @@ be\fooda\backend\commons\model\woocommerce\product\categories\response\Image.cla
 be\fooda\backend\commons\model\woocommerce\product\attributes\terms\request\WooCommerceProductAttributeTermRequest.class
 be\fooda\backend\commons\service\validator\UniqueLoginValidator.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreDeliveryCostsItemReq.class
-be\fooda\backend\commons\model\template\matching\dto\FoodaMatchDto$FoodaMatchDtoBuilder.class
 be\fooda\backend\commons\model\woocommerce\product\response\Links.class
 be\fooda\backend\commons\model\template\media\dto\FoodaMediaAppDto.class
 be\fooda\backend\commons\model\template\order\request\FoodaOrderStoreReq$FoodaOrderStoreReqBuilder.class

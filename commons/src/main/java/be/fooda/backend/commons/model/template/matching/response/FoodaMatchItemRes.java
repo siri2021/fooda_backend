@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class FoodaMatchItemRes {
+public class FoodaMatchItemRes implements java.io.Serializable {
     private Long matchId;
     private String keyword;
     private String matched;

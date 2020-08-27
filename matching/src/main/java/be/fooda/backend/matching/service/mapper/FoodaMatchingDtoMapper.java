@@ -1,29 +1,34 @@
-package be.fooda.backend.commons.service.mapper;
+package be.fooda.backend.matching.service.mapper;
 
 
-import be.fooda.backend.commons.model.template.matching.dto.FoodaMatchDto;
 import be.fooda.backend.commons.model.template.matching.request.FoodaMatchReq;
-import be.fooda.backend.commons.model.template.matching.response.FoodaMatchItemRes;
 import be.fooda.backend.commons.model.template.matching.response.FoodaMatchRes;
-import be.fooda.backend.commons.service.util.FoodaMatchUtil;
+import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.commons.service.validator.MatchId;
 import be.fooda.backend.commons.service.validator.Matchable;
+import be.fooda.backend.matching.model.dto.FoodaMatchDto;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import java.lang.reflect.Field;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
 @RequiredArgsConstructor
-public class FoodaMatchingMapper implements FoodaObjectMapper<FoodaMatchDto, FoodaMatchReq, FoodaMatchRes> {
-
-    private final FoodaMatchUtil utils;
+public class FoodaMatchingDtoMapper implements FoodaDtoMapper<FoodaMatchDto, FoodaMatchReq, FoodaMatchRes> {
 
     @SneakyThrows
     public List<FoodaMatchDto> objectToDto(final Object matchableObject, final String keyword) {
+        return objectToDto(matchableObject, keyword, 0.50);
+    }
+
+    @SneakyThrows
+    public List<FoodaMatchDto> objectToDto(final Object matchableObject, final String keyword, final Double minScore) {
         final Class<?> objectClass = requireNonNull(matchableObject).getClass();
         final List<FoodaMatchDto> dtoList = new ArrayList<>();
         final Optional<Field> idField = Arrays.stream(objectClass.getDeclaredFields())
@@ -41,14 +46,17 @@ public class FoodaMatchingMapper implements FoodaObjectMapper<FoodaMatchDto, Foo
             field.setAccessible(true);
             if (field.isAnnotationPresent(Matchable.class)) {
                 Arrays.stream(getValue(field, matchableObject).split("\\W+")).forEach(word -> {
-                    dtoList.add(FoodaMatchDto.builder()
-                            .relatedId(relatedId)
-                            .category(getCategory(field))
-                            .keyword(keyword)
-                            .matched(word)
-                            .weight(getWeight(field))
-                            .score(utils.levensteinRatio(word.toLowerCase(), keyword.toLowerCase()))
-                            .build());
+                    final double score = levensteinRatio(word.toLowerCase(), keyword.toLowerCase());
+                    if (score >= minScore) {
+                        dtoList.add(FoodaMatchDto.builder()
+                                .relatedId(relatedId)
+                                .category(getCategory(field))
+                                .keyword(keyword)
+                                .matched(word)
+                                .weight(getWeight(field))
+                                .score(score)
+                                .build());
+                    }
                 });
             }
         }
@@ -70,31 +78,6 @@ public class FoodaMatchingMapper implements FoodaObjectMapper<FoodaMatchDto, Foo
     }
 
     @Override
-    public FoodaMatchReq dtoToRequest(FoodaMatchDto foodaMatchDto) {
-        return FoodaMatchReq.builder()
-                .keywordSet(Set.of(foodaMatchDto.getKeyword()))
-                .build();
-    }
-
-    @Override
-    public FoodaMatchReq responseToRequest(FoodaMatchRes foodaMatchRes) {
-        return FoodaMatchReq.builder()
-                .session(foodaMatchRes.getSession())
-                .keywordSet(foodaMatchRes.getResultSet().stream().map(FoodaMatchItemRes::getKeyword).collect(Collectors.toSet()))
-                .build();
-    }
-
-    @Override
-    public FoodaMatchRes dtoToResponse(FoodaMatchDto foodaMatchDto) {
-        return null;
-    }
-
-    @Override
-    public FoodaMatchRes requestToResponse(FoodaMatchReq req) {
-        return null;
-    }
-
-    @Override
     public FoodaMatchDto requestToDto(FoodaMatchReq req) {
         return null;
     }
@@ -102,5 +85,21 @@ public class FoodaMatchingMapper implements FoodaObjectMapper<FoodaMatchDto, Foo
     @Override
     public FoodaMatchDto responseToDto(FoodaMatchRes foodaMatchRes) {
         return null;
+    }
+
+    @Override
+    public FoodaMatchReq dtoToRequest(FoodaMatchDto foodaMatchDto) {
+        return null;
+    }
+
+    @Override
+    public FoodaMatchRes dtoToResponse(FoodaMatchDto foodaMatchDto) {
+        return null;
+    }
+
+    private static final LevenshteinDistance lv = new LevenshteinDistance();
+
+    public double levensteinRatio(final String s, final String s1) {
+        return 1 - ((double) lv.apply(s, s1)) / Math.max(s.length(), s1.length());
     }
 }

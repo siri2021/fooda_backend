@@ -1,7 +1,7 @@
 package be.fooda.backend.matching;
 
-import be.fooda.backend.commons.service.mapper.FoodaMatchingMapper;
-import be.fooda.backend.commons.service.util.FoodaMatchUtil;
+import be.fooda.backend.commons.service.mapper.FoodaMatchingHttpMapper;
+import be.fooda.backend.matching.service.mapper.FoodaMatchingDtoMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,12 @@ public class FoodaMatchingApp {
 	}
 
 	@Bean
-	public FoodaMatchingMapper loadMapper() {
-		return new FoodaMatchingMapper(new FoodaMatchUtil());
+	public FoodaMatchingDtoMapper loadDtoMapper() {
+		return new FoodaMatchingDtoMapper();
+	}
+
+	@Bean
+	public FoodaMatchingHttpMapper loadHttpMapper() {
+		return new FoodaMatchingHttpMapper();
 	}
 }

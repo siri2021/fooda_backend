@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Data
 @Builder
-public class FoodaMatchReq {
+public class FoodaMatchReq implements java.io.Serializable {
     private Long userId;
     private String session;
     private Set<String> keywordSet;

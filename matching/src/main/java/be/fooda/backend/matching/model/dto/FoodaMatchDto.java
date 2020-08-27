@@ -1,4 +1,4 @@
-package be.fooda.backend.commons.model.template.matching.dto;
+package be.fooda.backend.matching.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "MATCH_RESULT")
-public class FoodaMatchDto {
+public class FoodaMatchDto implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long matchId;

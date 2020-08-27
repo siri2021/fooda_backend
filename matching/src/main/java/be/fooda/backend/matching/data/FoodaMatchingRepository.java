@@ -1,6 +1,6 @@
-package be.fooda.backend.commons.dao.repo;
+package be.fooda.backend.matching.data;
 
-import be.fooda.backend.commons.model.template.matching.dto.FoodaMatchDto;
+import be.fooda.backend.matching.model.dto.FoodaMatchDto;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

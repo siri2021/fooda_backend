@@ -1,9 +1,9 @@
 package be.fooda.backend.matching.config;
 
-import be.fooda.backend.commons.dao.repo.FoodaMatchingRepository;
-import be.fooda.backend.commons.service.mapper.FoodaMatchingMapper;
 import be.fooda.backend.commons.service.validator.MatchId;
 import be.fooda.backend.commons.service.validator.Matchable;
+import be.fooda.backend.matching.data.FoodaMatchingRepository;
+import be.fooda.backend.matching.service.mapper.FoodaMatchingDtoMapper;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,12 @@ import static java.lang.System.out;
 @RequiredArgsConstructor
 public class FoodaStartupRunner implements CommandLineRunner {
 
-    private final FoodaMatchingMapper mapper;
+    private final FoodaMatchingDtoMapper mapper;
     private final FoodaMatchingRepository repo;
 
     @Override
     public void run(final String... args) {
-        final Product p = Product.builder()
+        final Product product = Product.builder()
                 .id(125)
                 .name("Pizza Margheritta").desc("An amazin Italian taste..! Ingredients. 1 12-inch round of pizza dough, stretched (see recipe) 3 tablespoons tomato sauce (see note) Extra-virgin olive oil. 2 ¾ ounces fresh mozzarella. 4 to 5 basil leaves, roughly torn.")
                 .price(12.50)
@@ -34,7 +34,7 @@ public class FoodaStartupRunner implements CommandLineRunner {
                 .build();
 
         out.println("-------------------------- MATCHING STARTED --------------------------");
-        Arrays.asList("pizza", "margheritta", "italian").forEach(keyword -> mapper.objectToDto(p, keyword).forEach(repo::save));
+        Arrays.asList("pizza", "margheritta", "italian", "basil", "tomato").forEach(keyword -> mapper.objectToDto(product, keyword, 0.75).forEach(repo::save));
         out.println("--------------------------- MATCHING ENDED ---------------------------");
     }
 

@@ -9,6 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Matchable {
     String category() default "";
-
     double weight() default 1.00;
 }

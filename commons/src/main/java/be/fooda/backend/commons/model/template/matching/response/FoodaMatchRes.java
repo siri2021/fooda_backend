@@ -7,7 +7,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @Data
-public class FoodaMatchRes {
+public class FoodaMatchRes implements java.io.Serializable {
     private Long customerId;
     private String session;
     private Set<FoodaMatchItemRes> resultSet;
