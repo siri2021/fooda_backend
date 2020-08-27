@@ -24,27 +24,27 @@
             }
         },
         {
-            "category": "Product Image",
-            "keyword": "tomatoes",
-            "weight": 0.80,
-            "score": 0.95,
-            "product": {
-                "product_id": 125,
-                "name": "Pizza Margheritta",
-                "price": 15.00
-            }
+          "category": "Product.Image",
+          "keyword": "tomatoes",
+          "weight": 0.80,
+          "score": 0.95,
+          "product": {
+            "product_id": 125,
+            "name": "Pizza Margheritta",
+            "price": 15.00
+          }
         },
-        {
-            "category": "Store Name",
-            "keyword": "manhattans",
-            "weight": 0.90,
-            "score": 0.98,
-            "store": {
-                "store_id": 11,
-                "name": "Manhattan's Restaurant",
-                "logo": "https://fooda.be/temp/images/store_11_01.png"
-            }
-        },
+      {
+        "category": "Store.Name",
+        "keyword": "manhattans",
+        "weight": 0.90,
+        "score": 0.98,
+        "store": {
+          "store_id": 11,
+          "name": "Manhattan's Restaurant",
+          "logo": "https://fooda.be/temp/images/store_11_01.png"
+        }
+      },
         {
             "category": "Store Location City",
             "keyword": "brussels",

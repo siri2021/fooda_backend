@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 @RequiredArgsConstructor
 public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, String> {
 
-    private FoodaUserRepository foodaUserRepository;
+    private final FoodaUserRepository foodaUserRepository;
 
     public void initialize(UniqueLogin constraint) {
     }

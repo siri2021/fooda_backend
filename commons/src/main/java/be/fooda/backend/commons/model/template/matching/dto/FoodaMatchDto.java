@@ -16,7 +16,7 @@ public class FoodaMatchDto {
     private Long relatedId;
     private String keyword;
     private String matched;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private FoodaMatchCategoryDto category;
+    private String category;
+    private Double weight;
     private Double score;
 }

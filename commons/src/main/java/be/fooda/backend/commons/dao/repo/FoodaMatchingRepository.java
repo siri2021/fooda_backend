@@ -1,10 +1,10 @@
-package be.fooda.backend.matching.dao;
+package be.fooda.backend.commons.dao.repo;
 
 import be.fooda.backend.commons.model.template.matching.dto.FoodaMatchDto;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MatchResultRepository extends CrudRepository<FoodaMatchDto, Long> {
+public interface FoodaMatchingRepository extends CrudRepository<FoodaMatchDto, Long> {
 
 }

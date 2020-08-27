@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Matchable {
-    public String value() default "";
-    public double weight() default 1.00;
-    public double minScore() default 1.00;
+    String category() default "";
+
+    double weight() default 1.00;
 }
