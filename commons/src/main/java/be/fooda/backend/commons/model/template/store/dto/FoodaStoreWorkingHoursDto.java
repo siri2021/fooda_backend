@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "STORE_WORKING_HOURS")
 public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
 
-    private LocalDateTime openTime;
+    private LocalTime openTime;
 
-    private LocalDateTime closeTime;
+    private LocalTime closeTime;
 }

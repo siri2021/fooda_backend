@@ -2,10 +2,13 @@ package be.fooda.backend.commons.model.template.store.request;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Data
 @Builder
 public class FoodaStoreWorkingHoursItemReq {
-    private String openTime;
-    private String closeTime;
-    private String workingDate;
+    private LocalTime openTime;
+    private LocalTime closeTime;
+    private LocalDate workingDate;
 }

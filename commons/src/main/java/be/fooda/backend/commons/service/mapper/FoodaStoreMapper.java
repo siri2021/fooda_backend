@@ -82,8 +82,9 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
 
     @Override
     public FoodaStoreReq responseToRequest(FoodaStoreRes res) {
-        
-    return FoodaStoreReq.builder().name()
+
+    return FoodaStoreReq.builder()
+            .name(res.)
             .contact()
             .videos()
             .paymentMethods()

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -15,6 +16,6 @@ import javax.persistence.Table;
 @Table(name = "STORE_DELIVERY_LOCATION")
 public class FoodaStoreDeliveryLocationDto extends FoodaAbstractDto {
     private Long municipalityId;
-    private Integer deliveryTime;
+    private LocalTime deliveryTime;
     private Double deliveryCost;
 }
