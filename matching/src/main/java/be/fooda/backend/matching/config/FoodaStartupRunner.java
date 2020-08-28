@@ -20,8 +20,8 @@ import static java.lang.System.out;
 @RequiredArgsConstructor
 public class FoodaStartupRunner implements CommandLineRunner {
 
-    private final FoodaMatchingDtoMapper mapper;
-    private final FoodaMatchingRepository repo;
+    private final FoodaMatchingDtoMapper dtoMapper;
+    private final FoodaMatchingRepository matchingRepo;
 
     @Override
     public void run(final String... args) {
@@ -34,8 +34,9 @@ public class FoodaStartupRunner implements CommandLineRunner {
                 .build();
 
         out.println("-------------------------- MATCHING STARTED --------------------------");
-        Arrays.asList("pizza", "margheritta", "italian", "basil", "tomato").forEach(keyword -> mapper.objectToDto(product, keyword, 0.75).forEach(repo::save));
+        Arrays.asList("pizza", "margheritta", "italian", "basil", "tomato").forEach(keyword -> dtoMapper.objectToDto(product, keyword, 0.75).forEach(matchingRepo::save));
         out.println("--------------------------- MATCHING ENDED ---------------------------");
+
     }
 
     @Data

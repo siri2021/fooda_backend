@@ -1,9 +1,10 @@
 package be.fooda.backend.commons.service.mapper;
 
-import be.fooda.backend.commons.model.template.order.dto.FoodaOrderDto;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderReq;
 import be.fooda.backend.commons.model.template.order.response.FoodaOrderRes;
+import be.fooda.backend.order.model.dto.FoodaOrderDto;
 
+@Deprecated
 public class FoodaOrderMapper implements FoodaObjectMapper<FoodaOrderDto, FoodaOrderReq, FoodaOrderRes>{
 
     @Override
@@ -41,5 +42,5 @@ public class FoodaOrderMapper implements FoodaObjectMapper<FoodaOrderDto, FoodaO
         // TODO Auto-generated method stub
         return null;
     }
-    
+
 }

@@ -1,9 +1,10 @@
 package be.fooda.backend.commons.service.mapper;
 
-import be.fooda.backend.commons.model.template.media.dto.FoodaMediaProductDto;
 import be.fooda.backend.commons.model.template.media.request.FoodaMediaProductReq;
 import be.fooda.backend.commons.model.template.media.response.FoodaMediaProductRes;
+import be.fooda.backend.media.model.dto.FoodaMediaProductDto;
 
+@Deprecated
 public class FoodaMediaProductMapper implements FoodaObjectMapper<FoodaMediaProductDto, FoodaMediaProductReq, FoodaMediaProductRes>{
 
     @Override
@@ -41,7 +42,6 @@ public class FoodaMediaProductMapper implements FoodaObjectMapper<FoodaMediaProd
         // TODO Auto-generated method stub
         return null;
     }
-    
 
 
 }

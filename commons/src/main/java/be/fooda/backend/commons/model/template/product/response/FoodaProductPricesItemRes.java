@@ -1,8 +1,10 @@
 package be.fooda.backend.commons.model.template.product.response;
 
-import java.math.BigDecimal;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Data
@@ -10,7 +12,7 @@ public class FoodaProductPricesItemRes {
     private BigDecimal amount;
     private Long priceId;
     private String currency;
-    private String expiry;
+    private LocalDate expiry;
     private String title;
     private Boolean isDefault;
 }

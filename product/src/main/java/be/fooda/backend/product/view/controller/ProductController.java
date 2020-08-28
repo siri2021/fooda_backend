@@ -1,6 +1,16 @@
 package be.fooda.backend.product.view.controller;
 
-import java.util.ArrayList;
+import be.fooda.backend.commons.model.template.product.request.FoodaProductReq;
+import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
+import be.fooda.backend.product.dao.FoodaProductRepository;
+import be.fooda.backend.product.model.dto.FoodaProductDto;
+import be.fooda.backend.product.service.mapper.FoodaProductDtoMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
@@ -9,37 +19,25 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import be.fooda.backend.commons.dao.repo.FoodaProductRepository;
-import be.fooda.backend.commons.model.template.product.dto.FoodaProductDto;
-import be.fooda.backend.commons.model.template.product.request.FoodaProductReq;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
-import be.fooda.backend.commons.service.mapper.FoodaProductMapper;
-import lombok.*;
-
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
 
     private FoodaProductRepository productRepo;
-    private FoodaProductMapper productMapper;
+    private FoodaProductDtoMapper productDtoMapper;
 
     @GetMapping("/getAll")
     public List<FoodaProductRes> apiGetAllProducts() {
         Iterable<FoodaProductDto> dtoList = productRepo.findAll();
-        return stream(dtoList.iterator()).map(productMapper::dtoToResponse).collect(Collectors.toList());
+        return stream(dtoList.iterator()).map(productDtoMapper::dtoToResponse).collect(Collectors.toList());
     }
 
     @PostMapping("/add")
     public FoodaProductRes apiAddProduct(final FoodaProductReq req) {
-        FoodaProductDto productDto = productMapper.requestToDto(req);
+        FoodaProductDto productDto = productDtoMapper.requestToDto(req);
         FoodaProductDto addedProduct = productRepo.save(productDto);
-        return productMapper.dtoToResponse(addedProduct);
+        return productDtoMapper.dtoToResponse(addedProduct);
     }
 
     public static <T> Stream<T> stream(Iterator<T> iterator) {
