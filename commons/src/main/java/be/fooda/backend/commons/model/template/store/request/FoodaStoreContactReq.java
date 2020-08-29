@@ -4,6 +4,7 @@ import lombok.*;
 @Data
 @Builder
 public class FoodaStoreContactReq {
+    private Long storeContactId;
     private String call;
     private String phoneNumber;
     private String firstName;
