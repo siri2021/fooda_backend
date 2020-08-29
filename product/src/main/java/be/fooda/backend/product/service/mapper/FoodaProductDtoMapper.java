@@ -52,12 +52,12 @@ public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, Fo
     }
 
     private List<FoodaProductPricesItemReq> pricesAsReq(final FoodaProductDto dto) {
-        return Collections.singletonList(FoodaProductPricesItemReq.builder().priceId(dto.getPrice().getPriceId()).amount(dto.getPrice().getAmount()).build());
+        return Collections.singletonList(FoodaProductPricesItemReq.builder().priceId(dto.getPrice().getProductPriceId()).amount(dto.getPrice().getAmount()).build());
     }
 
     private List<FoodaProductPricesItemRes> pricesAsRes(final FoodaProductDto dto) {
         FoodaProductPricesItemRes resPrice = new FoodaProductPricesItemRes();
-        resPrice.setPriceId(dto.getPrice().getPriceId());
+        resPrice.setPriceId(dto.getPrice().getProductPriceId());
         resPrice.setAmount(dto.getPrice().getAmount());
         resPrice.setCurrency("EUR");
         resPrice.setExpiry(dto.getPrice().getExpiry());
@@ -91,56 +91,6 @@ public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, Fo
                 .build();
     }
 
-    private FoodaProductTypeReq type(final FoodaProductRes res) {
-        return FoodaProductTypeReq.builder()
-                .title(res.getType().getTitle())
-                .typeId(res.getType().getTypeId())
-                .build();
-    }
-
-    private List<FoodaProductTaxesItemReq> taxes(final FoodaProductRes res) {
-        return res.getTaxes().stream()
-                .map(tax -> FoodaProductTaxesItemReq.builder()
-                        .taxId(tax.getTaxId())
-                        .isDefault(tax.getIsDefault())
-                        .percentage(tax.getPercentage())
-                        .title(tax.getTitle())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    private FoodaProductStoreReq store(final FoodaProductRes res) {
-        return FoodaProductStoreReq.builder()
-                .name(res.getStore().getName())
-                .logo(res.getStore().getLogo())
-                .storeId(res.getStore().getStoreId())
-                .build();
-    }
-
-    private List<FoodaProductImagesItemReq> imagesAsReq(final FoodaProductRes res) {
-        return res.getImages().stream()
-                .map(img ->
-                        FoodaProductImagesItemReq.builder()
-                                .mediaId(img.getMediaId())
-                                .isDefault(img.getIsDefault())
-                                .type(type(res))
-                                .url(img.getUrl())
-                                .build()
-                ).collect(Collectors.toList());
-    }
-
-    private List<FoodaProductPricesItemReq> pricesAsReq(final FoodaProductRes res) {
-        return res.getPrices().stream()
-                .map(pri -> FoodaProductPricesItemReq.builder()
-                        .amount(pri.getAmount())
-                        .currency(pri.getCurrency())
-                        .expiry(pri.getExpiry())
-                        .isDefault(pri.getIsDefault())
-                        .priceId(pri.getPriceId())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
     @Override
     public FoodaProductRes dtoToResponse(final FoodaProductDto dto) {
         final FoodaProductRes res = new FoodaProductRes();
@@ -168,7 +118,8 @@ public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, Fo
         return FoodaProductDto.builder()
                 .categories(categories(foodaProductReq))
                 .description(foodaProductReq.getDescription())
-                .isFeatured(false).key(productKey(foodaProductReq))
+                .isFeatured(false)
+                .key(productKey(foodaProductReq))
                 .limit(foodaProductReq.getOrderLimit())
                 .name(foodaProductReq.getName())
                 .price(price(foodaProductReq).orElse(FoodaProductPriceDto.builder().build()))
@@ -195,7 +146,7 @@ public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, Fo
                 .map(pReq -> FoodaProductPriceDto.builder()
                         .amount(pReq.getAmount())
                         .expiry(pReq.getExpiry())
-                        .priceId(pReq.getPriceId())
+                        .productPriceId(pReq.getPriceId())
                         .productKey(FoodaProductKeyDto.builder().productId(req.getProductId()).build())
                         .title(pReq.getTitle()).build())
                 .findFirst();

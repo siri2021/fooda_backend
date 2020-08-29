@@ -11,7 +11,7 @@
     <artifactId>basket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>basket</name>
-    <description>Spring Boot project to add, remove or update product items..</description>
+    <description>Spring Boot project to add, remove or update basket items..</description>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -19,6 +19,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
+        <dependency>
+            <groupId>be.fooda</groupId>
+            <artifactId>commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
-
 </project>

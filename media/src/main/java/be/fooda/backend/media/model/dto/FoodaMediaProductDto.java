@@ -1,6 +1,5 @@
 package be.fooda.backend.media.model.dto;
 
-import be.fooda.backend.product.model.dto.FoodaProductKeyDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,7 @@ public class FoodaMediaProductDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private Long mediaProductId;
-    private FoodaProductKeyDto productKey;
+    private FoodaMediaProductKeyDto productKey;
     @OneToOne
     private FoodaMediaTypeDto type;
     @NotNull
