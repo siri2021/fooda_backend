@@ -2,24 +2,20 @@ package be.fooda.backend.commons.service.mapper;
 
 import be.fooda.backend.commons.dao.repo.FoodaAddressRepository;
 import be.fooda.backend.commons.dao.repo.FoodaContactRepository;
-import be.fooda.backend.commons.model.template.store.dto.FoodaStoreAuthDto;
-import be.fooda.backend.commons.model.template.store.dto.FoodaStoreDto;
+import be.fooda.backend.commons.model.template.store.dto.*;
 import be.fooda.backend.commons.model.template.store.request.*;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreAuthItemRes;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import lombok.RequiredArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> {
 
-    private final FoodaContactRepository contactRepo;
-    private final FoodaAddressRepository addressRepo;
+    
 
     @Override
     public FoodaStoreReq dtoToRequest(FoodaStoreDto dto) {
@@ -55,9 +51,9 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
 
 
     private List<FoodaStoreDeliveryLocationsItemReq> deliveryLocations(final FoodaStoreDto dto) {
-        dto.getDeliveryLocations().stream().map(loc -> FoodaStoreDeliveryLocationsItemReq.builder()
-                //.municipalityId(dto.getMunicipalityId()) // lond municipalId expected but dto has string municipality
-                .deliveryTime(loc.getDeliveryTime())
+    return dto.getDeliveryLocations()
+            .stream().map(loc -> FoodaStoreDeliveryLocationsItemReq.builder()
+                    .deliveryTime(loc.getDeliveryTime())
                 .deliveryCost(loc.getDeliveryCost())
                 .build()).collect(Collectors.toList());
     }
@@ -82,13 +78,12 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
 
     @Override
     public FoodaStoreReq responseToRequest(FoodaStoreRes res) {
-
-    return FoodaStoreReq.builder()
+        return FoodaStoreReq.builder()
             .name(res.)
-            .contact()
-            .videos()
+              .contact(contact(res))
+            .videos(videos(res))
             .paymentMethods()
-            .images()
+            .images(res.)
             .deliveryCosts()
             .deliveryLocations()
             .about()
@@ -105,9 +100,26 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
 
     }
 
+    private FoodaStoreContactReq contact(FoodaStoreRes res) {
+    }
+
+    private List<FoodaStoreVideosItemReq> videos(FoodaStoreRes res) {
+    }
+
+
+
     @Override
     public FoodaStoreRes dtoToResponse(FoodaStoreDto dto) {
-        return FoodaStoreRes.builder().
+        return FoodaStoreRes.builder()
+                .about(dto.getAbout())
+                .auth(auth(dto))
+                .deliveryCosts(deliveryCosts())
+                .deliveryLocations(deliveryLocations(dto))
+                .logo()
+                .images()
+                .paymentMethods()
+                .
+                .
     }
 
     @Override
@@ -122,17 +134,44 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
                 .bgImageId(req.)
                 .bgVideoId(req.)
                 .contactId(req.getContact())
-                .deliveryCosts(deliveryCosts(req))
-                .deliveryLocations(deliveryLocarions(req))
-                .logoImageId(logo(req))
-                .paymentMethods(paymentMethods(req))
+                .deliveryCosts(deliveryCostsReqToDto(req))
+                .deliveryLocations(deliveryLocationsReqToDto(req))
+                .logoImageId(logoReqToDto(req))
+                .paymentMethods(paymentMethodsReqToDto(req))
                 .siteUrl(req.getSiteUrl())
                 .storeUrl(req.getStoreUrl())
-                .type(type(req))
-                .workingHours(workingHours(req))
-                .auth(auth(req))
-                .about()
-                .build()
+                .type(typeReqToDto(req))
+                .workingHours(workingHoursReqToDto(req))
+                .auth(authReqToDto(req))
+                .about(req.getAbout())
+                .build();
+    }
+
+    private List<FoodaStoreDeliveryCostDto> deliveryCostsReqToDto(FoodaStoreReq req) {
+    }
+
+    private FoodaStoreAuthDto authReqToDto(FoodaStoreReq req) {
+    }
+
+    private List<FoodaStoreWorkingHoursDto> workingHoursReqToDto(FoodaStoreReq req) {
+    }
+
+    private FoodaStoreTypeDto typeReqToDto(FoodaStoreReq req) {
+    }
+
+    private List<FoodaStorePaymentMethodDto> paymentMethodsReqToDto(FoodaStoreReq req) {
+    }
+
+    private Long logoReqToDto(FoodaStoreReq req) {
+    }
+
+    private List<FoodaStoreDeliveryLocationDto> deliveryLocationsReqToDto(FoodaStoreReq req) {
+    }
+
+    private FoodaStoreAuthDto auth(FoodaStoreReq req) {
+    }
+
+    private List<FoodaStoreWorkingHoursDto> workingHours(FoodaStoreReq req) {
     }
 
     @Override
