@@ -1,23 +1,21 @@
-package be.fooda.backend.basket.model.dto;
+package be.fooda.backend.commons.model.template.basket.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "ORDER")
-public class FoodaBasketOrderDto {
-    @Id
+public class FoodaBasketOrderRes {
     private Long basketOrderId;
-    private FoodaBasketKeyDto basketKey;
+    private Long userId;
+    private String session;
+    private Long storeId;
     private LocalDateTime registryTime;
     private LocalDateTime requiredTime;
     private LocalDateTime expiryTime;
