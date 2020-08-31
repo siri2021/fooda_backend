@@ -1,7 +1,5 @@
 package be.fooda.backend.commons.model.template.store.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.NoArgsConstructor;
 import lombok.*;
 

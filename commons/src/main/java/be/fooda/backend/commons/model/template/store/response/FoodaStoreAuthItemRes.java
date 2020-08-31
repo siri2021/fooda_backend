@@ -1,21 +1,14 @@
 package be.fooda.backend.commons.model.template.store.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
+@Builder
 public class FoodaStoreAuthItemRes {
-
-    @JsonProperty("secret")
     private String secret;
-
-    @JsonProperty("expiry")
-    private String expiry;
-
-    @JsonProperty("key")
+    private LocalDate expiry;
     private String key;
 }

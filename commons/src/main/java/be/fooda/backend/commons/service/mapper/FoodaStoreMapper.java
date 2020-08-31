@@ -35,9 +35,7 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
                 .build()).collect(Collectors.toList());
     }
 
-    private List<FoodaStorePaymentMethodsItemRes> paymentMethodsAsRes(FoodaStoreDto dto) {
-        return null;
-    }
+
 
     private FoodaStoreTypeReq type(FoodaStoreDto dto) {
         return FoodaStoreTypeReq.builder().title(dto.getType().getTitle()).build();
@@ -61,7 +59,11 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
     }
 
     private List<FoodaStoreDeliveryLocationsItemRes> deliveryLocationsAsRes(final FoodaStoreDto dto) {
-        return null;
+        return dto.getDeliveryLocations().stream().map(locs -> FoodaStoreDeliveryLocationsItemRes
+                .builder()
+                .deliveryCost(locs.getDeliveryCost())
+                .deliveryTime(locs.getDeliveryTime())
+                .build()).collect(Collectors.toList());
     }
 
     private List<FoodaStoreDeliveryCostsItemReq> deliveryCostsAsReq(final FoodaStoreDto dto) {
@@ -75,7 +77,11 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
     }
 
     private List<FoodaStoreDeliveryCostsItemRes> deliveryCostsAsRes(final FoodaStoreDto dto) {
-        return null;
+        return dto.getDeliveryCosts().stream().map(costs -> FoodaStoreDeliveryCostsItemRes.builder()
+                .amount(costs.getAmount())
+                .minPrice(costs.getMinPrice())
+                .maxPrice(costs.getMaxPrice())
+                .build()).collect(Collectors.toList());
     }
 
     private List<FoodaStoreWorkingHoursItemReq> workHours(final FoodaStoreDto dto) {
@@ -112,54 +118,89 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
     }
 
     private List<FoodaStoreAuthItemReq> auth(FoodaStoreRes res) {
-        return null;
+
+        return res.getAuth().stream().map(auth -> FoodaStoreAuthItemReq.builder()
+         .key(auth.getKey())
+        .secret(auth.getSecret())
+        .expiry(auth.getExpiry())
+        .build()).collect(Collectors.toList());
     }
 
 
 
     private List<FoodaStoreWorkingHoursItemReq> workingHours(FoodaStoreRes res) {
-        return null;
+        return res.getWorkingHours().stream()
+                .map(hours -> FoodaStoreWorkingHoursItemReq
+                        .builder()
+                        .openTime(hours.getOpenTime())
+                        .closeTime(hours.getCloseTime())
+                        .workingDate(hours.getWorkingDate())
+                        .build())
+                .collect(Collectors.toList());
     }
 
 
     private FoodaStoreLogoReq logoAsReq(FoodaStoreRes res) {
-        return null;
+        return FoodaStoreLogoReq.builder().url(res.getLogo().getUrl()).build();
     }
 
     private FoodaStoreTypeReq typeAsReq(FoodaStoreRes res) {
-        return null;
+        return FoodaStoreTypeReq.builder().title(res.getType().getTitle()).build();
     }
 
     private FoodaStoreTypeDto typeAsDto(FoodaStoreRes res) {
-        return null;
+
+        return FoodaStoreTypeDto.builder().title(res.getType().getTitle()).build() ;
+
     }
 
     private FoodaStoreAddressReq address(FoodaStoreRes res) {
-        return null;
+        return FoodaStoreAddressReq.builder().doorNo(res.getAddress().getDoorNo())
+                .street(res.getAddress().getStreet())
+                .city(res.getAddress().getCity())
+                .region(res.getAddress().getRegion())
+                .municipality(res.getAddress().getMunicipality())
+                .country(res.getAddress().getCountry())
+                .number(res.getAddress().getNumber())
+                .build();
     }
 
     private List<FoodaStoreDeliveryLocationsItemReq> deliveryLocationsAsReq(FoodaStoreRes res) {
-        return null;
+        return res.getDeliveryLocations().stream().map(locs -> FoodaStoreDeliveryLocationsItemReq.builder()
+                .city(locs.getCity())
+                .country(locs.getCountry())
+                .deliveryCost(locs.getDeliveryCost())
+                .deliveryTime(locs.getDeliveryTime())
+                .municipality(locs.getMunicipality())
+                .region(locs.getRegion())
+                .build()).collect(Collectors.toList());
     }
 
     private List<FoodaStoreDeliveryCostsItemReq> deliveryCostsAsReq(FoodaStoreRes res) {
-        return null;
+        return res.getDeliveryCosts().stream().map(costs -> FoodaStoreDeliveryCostsItemReq.builder()
+                .amount(costs.getAmount())
+                .minPrice(costs.getMinPrice())
+                .maxPrice(costs.getMaxPrice())
+                .build()).collect(Collectors.toList());
     }
 
     private List<FoodaStoreImagesItemReq> images(FoodaStoreRes res) {
-        return null;
+        return res.getImages().stream().map(images -> FoodaStoreImagesItemReq.builder()
+                .title(res.getType().getTitle()).build()).collect(Collectors.toList());
     }
 
     private List<FoodaStorePaymentMethodsItemReq> paymentMethodsResToReq(FoodaStoreRes res) {
-        return null;
+        return res.getPaymentMethods().stream().map(payments -> FoodaStorePaymentMethodsItemReq.builder()
+                .title(payments.getTitle())
+                .minOrderAmount(payments.getMinOrderAmount())
+                .expiry(payments.getExpiry())
+                .build()).collect(Collectors.toList());
     }
 
-    private List<FoodaStorePaymentMethodsItemReq> paymentMethodsResToReq(FoodaStorePaymentMethodsItemRes res) {
-        return null;
-    }
+
 
     private FoodaStoreContactReq contact(FoodaStoreRes res) {
-        return null;
+        return res.getContact().;
     }
 
     private List<FoodaStoreVideosItemReq> videos(FoodaStoreRes res) {
@@ -181,6 +222,10 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
                 .paymentMethods(paymentMethodsAsRes(dto))
                 .build();
     }
+    private List<FoodaStorePaymentMethodsItemRes> paymentMethodsAsRes(FoodaStoreDto dto) {
+        return null;
+
+    }
 
     private List<FoodaStoreImagesItemRes> images(FoodaStoreDto dto) {
         return null;
@@ -192,7 +237,15 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
 
     @Override
     public FoodaStoreRes requestToResponse(FoodaStoreReq req) {
-        return FoodaStoreRes.builder().build();
+        return FoodaStoreRes.builder().paymentMethods(paymentMethodsReqToRes()).images(imagesReqToRes(req)).build();
+    }
+
+    private List<FoodaStoreImagesItemRes> imagesReqToRes(FoodaStoreReq req) {
+        return null;
+    }
+
+    private List<FoodaStorePaymentMethodsItemRes> paymentMethodsReqToRes() {
+        return null;
     }
 
     @Override
