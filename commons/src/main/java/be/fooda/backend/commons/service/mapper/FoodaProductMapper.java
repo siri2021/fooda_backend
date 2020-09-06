@@ -153,7 +153,7 @@ public class FoodaProductMapper implements FoodaObjectMapper<FoodaProductDto, Fo
     @Override
     public FoodaProductRes dtoToResponse(final FoodaProductDto foodaProductDto) {
         final FoodaProductRes res = new FoodaProductRes();
-        // TODO setters ..
+
         return res;
     }
 

@@ -6,7 +6,9 @@ import be.fooda.backend.commons.model.template.store.request.*;
 import be.fooda.backend.commons.model.template.store.response.*;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -197,16 +199,25 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
                 .build()).collect(Collectors.toList());
     }
 
-
-
     private FoodaStoreContactReq contact(FoodaStoreRes res) {
-        return res.getContact().;
+        return FoodaStoreContactReq.builder()
+                .call("true")
+                .storeContactId(res.getStoreId())
+                .phoneNumber(res.getContact().getPhoneNumber())
+                .email(res.getContact().getEmail())
+                .firstName(res.getContact().getFirstName())
+                .familyName(res.getContact().getFamilyName())
+                .build();
     }
 
     private List<FoodaStoreVideosItemReq> videos(FoodaStoreRes res) {
         FoodaStoreRes res1 = new FoodaStoreRes();
         res.setAbout("safabuhjfba");
-        return null;
+        return res.getVideos().stream()
+                .map(videos -> FoodaStoreVideosItemReq.builder()
+                .url(videos.getUrl())
+                .title(videos.getTitle())
+                 .build()).collect(Collectors.toList());
     }
 
 
@@ -271,46 +282,72 @@ public class FoodaStoreMapper implements FoodaObjectMapper<FoodaStoreDto, FoodaS
     private Long bgVideoId(FoodaStoreReq req) {
         return null;
     }
-
+/*therse 2 methods above n below r not needed i guess, but not sure*/
     private Long bgImageId(FoodaStoreReq req) {
         return null;
     }
 
     private List<FoodaStoreDeliveryCostDto> deliveryCostsReqToDto(FoodaStoreReq req) {
-        return null;
+        return req.getDeliveryCosts().stream()
+                .map(costs -> FoodaStoreDeliveryCostDto.builder()
+                        .amount(costs.getAmount())
+                        .maxPrice(costs.getMaxPrice())
+                        .minPrice(costs.getMinPrice()).build()).collect(Collectors.toList());
     }
 
     private FoodaStoreAuthDto authReqToDto(FoodaStoreReq req) {
-        return null;
+    return req.getAuth().stream().map(auth -> FoodaStoreAuthDto.builder()
+            .key(auth.getKey())
+            .expiryDate(auth.getExpiry())
+            .secret(auth.getSecret())
+            .build()).findFirst().get();
     }
 
     private List<FoodaStoreWorkingHoursDto> workingHoursReqToDto(FoodaStoreReq req) {
-        return null;
+        return req.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursDto.builder()
+                .openTime(hours.getOpenTime())
+                .closeTime(hours.getCloseTime())
+                .build()).collect(Collectors.toList());
     }
 
     private FoodaStoreTypeDto typeReqToDto(FoodaStoreReq req) {
-        return null;
+
+        return FoodaStoreTypeDto.builder().title(req.getType().getTitle()).build();
     }
 
     private List<FoodaStorePaymentMethodDto> paymentMethodsReqToDto(FoodaStoreReq req) {
-        return null;
+        return req.getPaymentMethods().stream()
+                .map(payments -> FoodaStorePaymentMethodDto.builder()
+                .expiryDate(payments.getExpiry())
+                .minOrderAmount(payments.getMinOrderAmount()).build()).collect(Collectors.toList());
     }
 
     private Long logoReqToDto(FoodaStoreReq req) {
+        //need to make changes long in dto and string in req
+        //return req.getLogo().getUrl();
         return null;
     }
 
     private List<FoodaStoreDeliveryLocationDto> deliveryLocationsReqToDto(FoodaStoreReq req) {
-        return null;
+        return req.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto.builder()
+        .deliveryCost(locs.getDeliveryCost())
+        .deliveryTime(locs.getDeliveryTime())
+       /* .municipalityId(locs.getMunicipality()) lond and string conflict here*/
+        .build()).collect(Collectors.toList());
+
     }
 
     private FoodaStoreAuthDto auth(FoodaStoreReq req) {
-        return null;
+        return req.getAuth().stream().map(auth -> FoodaStoreAuthDto
+                .builder()
+                .secret(auth.getSecret())
+                 .expiryDate(auth.getExpiry())
+        .key(auth.getKey())
+        .build()).findFirst().get() ;
+
     }
 
-    private List<FoodaStoreWorkingHoursDto> workingHours(FoodaStoreReq req) {
-        return null;
-    }
+
 
     @Override
     public FoodaStoreDto responseToDto(FoodaStoreRes res) {
