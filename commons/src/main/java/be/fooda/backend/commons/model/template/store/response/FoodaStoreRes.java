@@ -1,5 +1,6 @@
 package be.fooda.backend.commons.model.template.store.response;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Data
+@Builder
 public class FoodaStoreRes {
     private Long storeId;
     private List<FoodaStoreImagesItemRes> images;
