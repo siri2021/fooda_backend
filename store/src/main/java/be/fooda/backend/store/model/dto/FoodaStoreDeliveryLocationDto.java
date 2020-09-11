@@ -16,6 +16,7 @@ public class FoodaStoreDeliveryLocationDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeDeliveryLocationId;
+
     private Long municipalityId;
     private Integer deliveryTime;
     private Double deliveryCost;
