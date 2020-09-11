@@ -1,6 +1,8 @@
 package be.fooda.backend.commons.model.template.store.response;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 

@@ -1,0 +1,16 @@
+{
+    "appSourceMediaId": 125,
+    "appSource" : {
+        "appSourceId": 11,
+        "title": "Desktop",
+        "url": "https://fooda.be/manhattans/src/loader.png",
+        "resolution": "1920,1080",
+        "mustBeCached": "true"
+    },
+    "type": {
+        "typeId": 1,
+        "title": "Image",
+        "extension": "jpg"
+    },
+    "url" : "https://fooda.be/manhattans/src/restaurant_bg.jpg"
+}

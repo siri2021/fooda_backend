@@ -1,0 +1,17 @@
+{
+    "productMediaId": 125,
+    "store": {
+        "store_id": 11,
+        "name": "Manhattan's Restaurant"
+    },
+    "product": {
+        "product_id": 125,
+        "name": "Pizza Margheritta"
+    },
+    "type": {
+        "typeId": 1,
+        "title": "Image",
+        "extension": "jpg"
+    },
+    "url" : "https://fooda.be/manhattans/src/restaurant_bg.jpg"
+}

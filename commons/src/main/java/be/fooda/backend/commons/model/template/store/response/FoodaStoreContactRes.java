@@ -1,17 +1,14 @@
 package be.fooda.backend.commons.model.template.store.response;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder(toBuilder = true)
+@Builder
 public class FoodaStoreContactRes {
-    private Long storeContactId;
+
     private String call;
     private String phoneNumber;
     private String firstName;

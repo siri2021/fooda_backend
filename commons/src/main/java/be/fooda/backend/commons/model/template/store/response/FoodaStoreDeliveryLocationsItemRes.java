@@ -1,9 +1,10 @@
 package be.fooda.backend.commons.model.template.store.response;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
-
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data
@@ -13,6 +14,6 @@ public class FoodaStoreDeliveryLocationsItemRes {
     private Double deliveryCost;
     private String city;
     private String municipality;
-    private LocalTime deliveryTime;
+    private LocalDateTime deliveryTime;
     private String region;
 }
