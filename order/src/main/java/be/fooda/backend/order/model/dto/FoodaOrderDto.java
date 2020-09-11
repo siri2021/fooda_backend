@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "ORDER")
-public class FoodaOrderDto extends FoodaAbstractDto{
+public class FoodaOrderDto extends FoodaAbstractDto {
     @EmbeddedId
     private FoodaOrderKeyDto orderKey;
     @OneToOne
@@ -28,8 +28,26 @@ public class FoodaOrderDto extends FoodaAbstractDto{
     private BigDecimal taxTotal;
     private BigDecimal deliveryTotal;
     private BigDecimal priceTotal;
+
     @OneToMany
     private List<FoodaOrderProductDto> products;
+
     @OneToMany
     private List<FoodaOrderPaymentDto> payments;
+
+    public void addProduct(final FoodaOrderProductDto product) {
+        this.products.add(product);
+    }
+
+    public void removeProduct(final FoodaOrderProductDto product) {
+        this.products.remove(product);
+    }
+
+    public void addPayment(final FoodaOrderPaymentDto payment) {
+        this.payments.add(payment);
+    }
+
+    public void removePayment(final FoodaOrderPaymentDto payment) {
+        this.payments.remove(payment);
+    }
 }

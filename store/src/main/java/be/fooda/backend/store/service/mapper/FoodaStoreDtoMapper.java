@@ -4,16 +4,15 @@ import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.store.model.dto.*;
-
 import be.fooda.backend.commons.model.template.store.request.*;
-
-        import be.fooda.backend.commons.model.template.store.response.*;
+import be.fooda.backend.commons.model.template.store.response.*;
 import lombok.RequiredArgsConstructor;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import be.fooda.backend.store.model.dto.FoodaStoreDeliveryLocationDto;
+import be.fooda.backend.store.model.dto.FoodaStoreDto;
 
-        import java.util.Arrays;
-        import java.util.List;
-
-        import java.util.stream.Collectors;
 
 
 
@@ -53,14 +52,10 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
 
     }
 
-    private FoodaStoreLogoRes logoAsRes(FoodaStoreDto dto) {
-        return null;
-    }
-
-    private List<FoodaStoreDeliveryLocationsItemReq> deliveryLocationsAsReq(final FoodaStoreDto dto) {
-        return dto.getDeliveryLocations()
+    private List<FoodaStoreDeliveryLocationsItemReq> deliveryLocationsAsReq(final FoodaStoreDto storedto) {
+        return storedto.getDeliveryLocations()
                 .stream().map(loc -> FoodaStoreDeliveryLocationsItemReq.builder()
-                        .deliveryTime(loc.)
+                        .deliveryTime(loc.getDeliveryTime())
                         .deliveryCost(loc.getDeliveryCost())
                         .build()).collect(Collectors.toList());
     }
@@ -212,7 +207,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
         return req.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto.builder()
                 .deliveryCost(locs.getDeliveryCost())
                 .deliveryTime(locs.getDeliveryTime())
-                /* .municipalityId(locs.getMunicipality()) lond and string conflict here*/
+                /* .municipalityId(locs.getMunicipality()) long and string conflict here*/
                 .build()).collect(Collectors.toList());
 
     }
