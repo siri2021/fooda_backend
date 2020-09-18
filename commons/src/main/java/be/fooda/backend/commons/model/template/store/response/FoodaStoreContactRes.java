@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FoodaStoreContactRes {
 
+    private Long contactId;
     private String call;
     private String phoneNumber;
     private String firstName;

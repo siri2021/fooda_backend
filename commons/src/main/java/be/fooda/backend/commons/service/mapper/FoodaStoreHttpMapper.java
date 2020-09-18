@@ -43,7 +43,6 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
     }
 
 
-
     private List<FoodaStoreWorkingHoursItemReq> workingHours(FoodaStoreRes res) {
         return res.getWorkingHours().stream()
                 .map(hours -> FoodaStoreWorkingHoursItemReq
@@ -63,7 +62,6 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
     private FoodaStoreTypeReq typeAsReq(FoodaStoreRes res) {
         return FoodaStoreTypeReq.builder().title(res.getType().getTitle()).build();
     }
-
 
 
     private FoodaStoreAddressReq address(FoodaStoreRes res) {
@@ -130,7 +128,6 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
     }
 
 
-
     @Override
     public FoodaStoreRes requestToResponse(FoodaStoreReq req) {
         return FoodaStoreRes.builder()
@@ -147,7 +144,6 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
                 .slogan(req.getSlogan())
                 .build();
     }
-
 
 
     private List<FoodaStoreAuthItemRes> authReqToRes(FoodaStoreReq req) {
@@ -189,7 +185,7 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
     private List<FoodaStoreImagesItemRes> imagesReqToRes(FoodaStoreReq req) {
 
         return req.getImages().stream().map(images -> FoodaStoreImagesItemRes
-               .builder()
+                .builder()
                 .url(images.getUrl())
                 .title(images.getTitle())
                 .build()).collect(Collectors.toList());
@@ -197,8 +193,9 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
 
     private List<FoodaStorePaymentMethodsItemRes> paymentMethodsReqToRes(FoodaStoreReq req) {
         return req.getPaymentMethods().stream().map(payments -> FoodaStorePaymentMethodsItemRes
-             .builder()
+                .builder()
                 .title(payments.getTitle())
                 .minOrderAmount(payments.getMinOrderAmount())
-                .expiry(payments.getExpiry()).build()).collect(Collectors.toList()) ;
+                .expiry(payments.getExpiry()).build()).collect(Collectors.toList());
     }
+}

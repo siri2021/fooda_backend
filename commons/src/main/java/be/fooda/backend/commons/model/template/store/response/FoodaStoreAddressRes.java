@@ -8,7 +8,7 @@ import lombok.*;
 @Data
 @Builder(toBuilder = true)
 public class FoodaStoreAddressRes {
-    private Long storeAddressId;
+    private Long addressId;
     private String number;
     private String country;
     private String city;

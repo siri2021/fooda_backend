@@ -7,6 +7,7 @@ import lombok.*;
 @Data
 @Builder
 public class FoodaStoreImagesItemRes {
+    private Long storeImageId;
     private String title;
     private String url;
     private Boolean isDefault;

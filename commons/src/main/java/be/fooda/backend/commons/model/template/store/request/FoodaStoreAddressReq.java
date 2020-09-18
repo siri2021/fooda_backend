@@ -5,6 +5,7 @@ import lombok.*;
 @Data
 @Builder
 public class FoodaStoreAddressReq {
+
     private String number;
     private String country;
     private String city;
