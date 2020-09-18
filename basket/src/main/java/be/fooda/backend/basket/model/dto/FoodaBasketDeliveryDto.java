@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "DELIVERY")
+@Document
 public class FoodaBasketDeliveryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "PRODUCT")
+@Document
 public class FoodaBasketProductDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

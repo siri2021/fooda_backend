@@ -1,6 +1,7 @@
 package be.fooda.backend.basket.view.controller;
 
 import be.fooda.backend.basket.dao.FoodaBasketOrderRepository;
+import be.fooda.backend.basket.model.dto.FoodaBasketKeyDto;
 import be.fooda.backend.basket.service.mapper.FoodaBasketOrderDtoMapper;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketOrderReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketOrderRes;
@@ -33,9 +34,9 @@ public class FoodaBasketOrderController {
     }
 
     @GetMapping("getAllByUserId")
-    public ResponseEntity<List<FoodaBasketOrderRes>> apiBasketGetOrdersByUser(@RequestParam final Long userId) {
+    public ResponseEntity<List<FoodaBasketOrderRes>> apiBasketGetOrdersByUser(@RequestBody final FoodaBasketKeyDto key) {
         return new ResponseEntity<>(basketOrderRepo
-                .findAllByUserId(userId)
+                .findAllByBasketKey(key)
                 .stream()
                 .map(basketOrderDtoMapper::dtoToResponse)
                 .collect(Collectors.toList()), HttpStatus.FOUND);

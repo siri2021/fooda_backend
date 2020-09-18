@@ -1,6 +1,7 @@
 package be.fooda.backend.basket.view.controller;
 
 import be.fooda.backend.basket.dao.FoodaBasketPaymentRepository;
+import be.fooda.backend.basket.model.dto.FoodaBasketKeyDto;
 import be.fooda.backend.basket.service.mapper.FoodaBasketPaymentDtoMapper;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketPaymentReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketPaymentRes;
@@ -33,9 +34,9 @@ public class FoodaBasketPaymentController {
     }
 
     @GetMapping("getAllByUserId")
-    public ResponseEntity<List<FoodaBasketPaymentRes>> apiBasketGetPaymentsByUser(@RequestParam final Long userId) {
+    public ResponseEntity<List<FoodaBasketPaymentRes>> apiBasketGetPaymentsByUser(@RequestBody final FoodaBasketKeyDto key) {
         return new ResponseEntity<>(basketPaymentRepo
-                .findAllByUserId(userId)
+                .findAllByBasketKey(key)
                 .stream()
                 .map(basketPaymentDtoMapper::dtoToResponse)
                 .collect(Collectors.toList()), HttpStatus.FOUND);

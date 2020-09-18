@@ -1,6 +1,7 @@
 package be.fooda.backend.basket.view.controller;
 
 import be.fooda.backend.basket.dao.FoodaBasketProductRepository;
+import be.fooda.backend.basket.model.dto.FoodaBasketKeyDto;
 import be.fooda.backend.basket.service.mapper.FoodaBasketProductDtoMapper;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketProductReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketProductRes;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@RestController //API
 @RequestMapping("basket/product/")
 @RequiredArgsConstructor
 public class FoodaBasketProductController {
@@ -32,34 +33,34 @@ public class FoodaBasketProductController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("getAllByUserId")
-    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUser(@RequestParam final Long userId) {
+    @GetMapping("apiBasketGetProductsByUser")
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUser(@RequestBody final FoodaBasketKeyDto key) {
         return new ResponseEntity<>(basketProductRepo
-                .findAllByUserId(userId)
+                .findAllByBasketKey(key)
                 .stream()
                 .map(basketProductDtoMapper::dtoToResponse)
                 .collect(Collectors.toList()), HttpStatus.FOUND);
     }
 
-    @PostMapping("add")
+    @PostMapping("apiBasketAddProduct")
     public ResponseEntity<FoodaBasketProductRes> apiBasketAddProduct(@RequestBody final FoodaBasketProductReq product) {
-        return basketProductRepo.exists(Example.of(basketProductDtoMapper.requestToDto(product)))
+        return !basketProductRepo.exists(Example.of(basketProductDtoMapper.requestToDto(product)))
                 ? new ResponseEntity<>
                 (basketProductDtoMapper.dtoToResponse(
                         basketProductRepo.save(
                                 basketProductDtoMapper.requestToDto(product))), HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.valueOf("ADDRESS_ALREADY_EXISTS"));
+                : new ResponseEntity<>(HttpStatus.valueOf("PRODUCT_ALREADY_EXIST..!"));
     }
 
-    @PutMapping("edit/{productId}")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketEditProduct(@RequestBody final FoodaBasketProductReq product, @PathVariable final Long productId) {
+    @PutMapping("apiBasketEditProduct/{basketProductId}")
+    public ResponseEntity<FoodaBasketProductRes> apiBasketEditProduct(@RequestBody final FoodaBasketProductReq product, @PathVariable final Long basketProductId) {
         ResponseEntity<FoodaBasketProductRes> result = basketProductRepo
-                .findById(productId)
+                .findById(basketProductId)
                 .map(basketProductDtoMapper::dtoToResponse)
                 .map(res -> new ResponseEntity<>(basketProductHttpMapper
                         .requestToResponse(product)
                         .toBuilder()
-                        .basketProductId(productId)
+                        .basketProductId(basketProductId)
                         .build()
                         , HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -70,12 +71,12 @@ public class FoodaBasketProductController {
         return result;
     }
 
-    @DeleteMapping("deleteByProductId")
-    public void apiBasketDeleteProduct(@RequestParam final Long productId) {
+    @DeleteMapping("apiBasketDeleteProductById")
+    public void apiBasketDeleteProductById(@RequestParam final Long productId) {
         basketProductRepo.deleteById(productId);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("apiBasketDeleteProduct")
     public void apiBasketDeleteProduct(@RequestBody final FoodaBasketProductReq product) {
         basketProductRepo.delete(basketProductDtoMapper.requestToDto(product));
     }

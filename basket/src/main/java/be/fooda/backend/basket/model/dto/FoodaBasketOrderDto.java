@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "ORDER")
+@Document
 public class FoodaBasketOrderDto {
     @Id
     private Long basketOrderId;
