@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
@@ -18,12 +20,18 @@ import java.math.BigDecimal;
 public class FoodaBasketProductDto {
     @MongoId(FieldType.OBJECT_ID)
     private String basketProductId;
+    @NotNull
     private Long productId;
+    @NotNull
     private FoodaBasketKeyDto key;
+    @NotNull
     private String name;
     private String imageUrl;
+    @NotNull
     private BigDecimal price;
     private String description;
+    @Min(value = 0)
+    @NotNull
     private Integer quantity;
 
     public void increase() {

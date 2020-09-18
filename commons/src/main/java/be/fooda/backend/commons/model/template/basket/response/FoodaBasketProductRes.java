@@ -28,7 +28,8 @@ public class FoodaBasketProductRes {
     }
 
     public void decrease() {
-        setQuantity(getQuantity() - 1);
+        if (getQuantity() > 0)
+            setQuantity(getQuantity() - 1);
     }
 
     public void increase(final Integer quantity) {
@@ -36,6 +37,7 @@ public class FoodaBasketProductRes {
     }
 
     public void decrease(final Integer quantity) {
-        setQuantity(getQuantity() - quantity);
+        if (getQuantity() - quantity > 0)
+            setQuantity(getQuantity() - quantity);
     }
 }

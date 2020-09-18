@@ -11,6 +11,12 @@ import java.util.List;
 
 @Repository
 public interface FoodaBasketProductRepository extends MongoRepository<FoodaBasketProductDto, ObjectId> {
-    @Query("{userId: ?0, session: ?1, storeId: ?3}")
-    List<FoodaBasketProductDto> findAllByBasketKey(final FoodaBasketKeyDto key);
+    @Query("{key: ?0}")
+    List<FoodaBasketProductDto> findAllByKey(final FoodaBasketKeyDto key);
+
+    @Query("{key.userId: ?0, key.session: ?1}")
+    List<FoodaBasketProductDto> findAllByUser(final Long userId, final String session);
+
+    List<FoodaBasketProductDto> findAllByKey_UserIdAndKey_Session(final Long userId, final String session);
+
 }

@@ -13,8 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,37 +30,63 @@ public class FoodaBasketProductController {
 
     @GetMapping("apiBasketGetProductById")
     public ResponseEntity<FoodaBasketProductRes> apiBasketGetProductById(@RequestParam final String productId) {
-        return basketProductRepo
-                .findById(new ObjectId(productId))
-                .map(basketProductDtoMapper::dtoToResponse)
+        return getGetProductById(productId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    private Optional<FoodaBasketProductRes> getGetProductById(@RequestParam String productId) {
+        return basketProductRepo
+                .findById(new ObjectId(productId))
+                .map(basketProductDtoMapper::dtoToResponse);
+    }
+
+    @GetMapping("apiBasketGetProductsByUserAndStore")
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUserAndStore(@RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
+        return new ResponseEntity<>(getProductsByBasketKey(FoodaBasketKeyDto.builder()
+                .userId(userId)
+                .storeId(storeId)
+                .session(session)
+                .build()), HttpStatus.FOUND);
+    }
+
     @GetMapping("apiBasketGetProductsByUser")
-    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUser(@RequestBody final FoodaBasketKeyDto key) {
-        return new ResponseEntity<>(basketProductRepo
-                .findAllByBasketKey(key)
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUserAndStore(@RequestParam final Long userId, @RequestParam final String session) {
+        return new ResponseEntity<>(getProductsByUser(userId, session), HttpStatus.FOUND);
+    }
+
+    private List<FoodaBasketProductRes> getProductsByBasketKey(FoodaBasketKeyDto key) {
+        return basketProductRepo
+                .findAllByKey(key)
                 .stream()
                 .map(basketProductDtoMapper::dtoToResponse)
-                .collect(Collectors.toList()), HttpStatus.FOUND);
+                .collect(Collectors.toList());
+    }
+
+    private List<FoodaBasketProductRes> getProductsByUser(final Long userId, final String session) {
+        return basketProductRepo
+                .findAllByKey_UserIdAndKey_Session(userId, session)
+                .stream()
+                .map(basketProductDtoMapper::dtoToResponse)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("apiBasketAddProduct")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketAddProduct(@RequestBody final FoodaBasketProductReq product) {
+    public ResponseEntity<FoodaBasketProductRes> apiBasketAddProduct(@RequestBody @Valid final FoodaBasketProductReq product) {
         return !basketProductRepo.exists(Example.of(basketProductDtoMapper.requestToDto(product)))
-                ? new ResponseEntity<>
-                (basketProductDtoMapper.dtoToResponse(
-                        basketProductRepo.save(
-                                basketProductDtoMapper.requestToDto(product))), HttpStatus.OK)
+                ? new ResponseEntity<>(addBasketProductAndReturn(product), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
+
+    private FoodaBasketProductRes addBasketProductAndReturn(FoodaBasketProductReq product) {
+        return basketProductDtoMapper.dtoToResponse(
+                basketProductRepo.save(
+                        basketProductDtoMapper.requestToDto(product)));
     }
 
     @PutMapping("apiBasketIncreaseProductQuantity/{basketProductId}")
     public ResponseEntity<FoodaBasketProductRes> apiBasketIncreaseProductQuantity(@PathVariable final String basketProductId) {
-        ResponseEntity<FoodaBasketProductRes> result = basketProductRepo
-                .findById(new ObjectId(basketProductId))
-                .map(basketProductDtoMapper::dtoToResponse)
+        ResponseEntity<FoodaBasketProductRes> result = getGetProductById(basketProductId)
                 .map(res -> {
                     res.increase();
                     return new ResponseEntity<>(res, HttpStatus.FOUND);
@@ -73,9 +101,7 @@ public class FoodaBasketProductController {
 
     @PutMapping("apiBasketDecreaseProductQuantity/{basketProductId}")
     public ResponseEntity<FoodaBasketProductRes> apiBasketDecreaseProductQuantity(@PathVariable final String basketProductId) {
-        ResponseEntity<FoodaBasketProductRes> result = basketProductRepo
-                .findById(new ObjectId(basketProductId))
-                .map(basketProductDtoMapper::dtoToResponse)
+        ResponseEntity<FoodaBasketProductRes> result = getGetProductById(basketProductId)
                 .map(res -> {
                     res.decrease();
                     return new ResponseEntity<>(res, HttpStatus.FOUND);
@@ -90,9 +116,7 @@ public class FoodaBasketProductController {
 
     @PutMapping("apiBasketEditProduct/{basketProductId}")
     public ResponseEntity<FoodaBasketProductRes> apiBasketEditProduct(@RequestBody final FoodaBasketProductReq product, @PathVariable final String basketProductId) {
-        ResponseEntity<FoodaBasketProductRes> result = basketProductRepo
-                .findById(new ObjectId(basketProductId))
-                .map(basketProductDtoMapper::dtoToResponse)
+        ResponseEntity<FoodaBasketProductRes> result = getGetProductById(basketProductId)
                 .map(res -> new ResponseEntity<>(basketProductHttpMapper
                         .requestToResponse(product)
                         .toBuilder()
