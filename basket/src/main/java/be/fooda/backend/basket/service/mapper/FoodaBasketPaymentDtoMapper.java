@@ -9,10 +9,8 @@ public class FoodaBasketPaymentDtoMapper implements FoodaDtoMapper<FoodaBasketPa
 
     @Override
     public FoodaBasketPaymentDto requestToDto(FoodaBasketPaymentReq req) {
-
         return FoodaBasketPaymentDto.builder()
                 .amount(req.getAmount())
-                .basketPaymentId(req.getPaymentId())
                 .paymentId(req.getPaymentId())
                 .build();
     }

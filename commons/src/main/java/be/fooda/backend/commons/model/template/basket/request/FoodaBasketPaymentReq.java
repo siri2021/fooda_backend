@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodaBasketPaymentReq {
+    private Long paymentId;
     private Long userId;
     private String session;
     private Long storeId;
-    private Long paymentId;
     private BigDecimal amount;
 }

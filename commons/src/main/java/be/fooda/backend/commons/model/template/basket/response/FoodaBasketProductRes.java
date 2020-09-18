@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodaBasketProductRes {
-    private Long basketProductId;
+    private String basketProductId;
     private Long productId;
     private Long userId;
     private String session;

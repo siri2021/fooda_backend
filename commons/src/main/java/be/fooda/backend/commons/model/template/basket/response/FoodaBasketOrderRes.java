@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodaBasketOrderRes {
-    private Long basketOrderId;
+    private String basketOrderId;
     private Long userId;
     private String session;
     private Long storeId;

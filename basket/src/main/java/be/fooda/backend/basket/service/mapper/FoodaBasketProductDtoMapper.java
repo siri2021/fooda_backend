@@ -10,7 +10,6 @@ public class FoodaBasketProductDtoMapper implements FoodaDtoMapper<FoodaBasketPr
 
     @Override
     public FoodaBasketProductDto requestToDto(FoodaBasketProductReq req) {
-
         return FoodaBasketProductDto.builder()
                 .description(req.getDescription())
                 .imageUrl(req.getImageUrl())
@@ -56,6 +55,9 @@ public class FoodaBasketProductDtoMapper implements FoodaDtoMapper<FoodaBasketPr
     @Override
     public FoodaBasketProductReq dtoToRequest(FoodaBasketProductDto dto) {
         return FoodaBasketProductReq.builder()
+                .storeId(dto.getKey().getStoreId())
+                .session(dto.getKey().getSession())
+                .userId(dto.getKey().getUserId())
                 .quantity(dto.getQuantity())
                 .productId(dto.getProductId())
                 .price(dto.getPrice())
@@ -67,8 +69,10 @@ public class FoodaBasketProductDtoMapper implements FoodaDtoMapper<FoodaBasketPr
 
     @Override
     public FoodaBasketProductRes dtoToResponse(FoodaBasketProductDto dto) {
-
         return FoodaBasketProductRes.builder()
+                .storeId(dto.getKey().getStoreId())
+                .session(dto.getKey().getSession())
+                .userId(dto.getKey().getUserId())
                 .quantity(dto.getQuantity())
                 .productId(dto.getProductId())
                 .price(dto.getPrice())

@@ -7,16 +7,18 @@ import be.fooda.backend.commons.model.template.basket.request.FoodaBasketDeliver
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketDeliveryRes;
 import be.fooda.backend.commons.service.mapper.FoodaBasketDeliveryHttpMapper;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("basket/delivery/")  // https://www.fooda.be/basket/delivery/...
+@RequestMapping("basket/delivery/")
 @RequiredArgsConstructor
 public class FoodaBasketDeliveryController {
 
@@ -25,9 +27,9 @@ public class FoodaBasketDeliveryController {
     private final FoodaBasketDeliveryHttpMapper basketDeliveryHttpMapper;
 
     @GetMapping("apiBasketGetDeliveryById")
-    public ResponseEntity<FoodaBasketDeliveryRes> apiBasketGetDeliveryById(@RequestParam final Long deliveryId) {
+    public ResponseEntity<FoodaBasketDeliveryRes> apiBasketGetDeliveryById(@RequestParam final String deliveryId) {
         return basketDeliveryRepo
-                .findById(deliveryId)
+                .findById(new ObjectId(deliveryId))
                 .map(basketDeliveryDtoMapper::dtoToResponse)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -44,7 +46,7 @@ public class FoodaBasketDeliveryController {
 
     @PostMapping("add")
     public ResponseEntity<FoodaBasketDeliveryRes> apiBasketAddDelivery(@RequestBody final FoodaBasketDeliveryReq delivery) {
-        return basketDeliveryRepo.exists(Example.of(basketDeliveryDtoMapper.requestToDto(delivery)))
+        return !basketDeliveryRepo.exists(Example.of(basketDeliveryDtoMapper.requestToDto(delivery)))
                 ? new ResponseEntity<>
                 (basketDeliveryDtoMapper.dtoToResponse(
                         basketDeliveryRepo.save(
@@ -53,9 +55,9 @@ public class FoodaBasketDeliveryController {
     }
 
     @PutMapping("edit/{deliveryId}")
-    public ResponseEntity<FoodaBasketDeliveryRes> apiBasketEditDelivery(@RequestBody final FoodaBasketDeliveryReq delivery, @PathVariable final Long deliveryId) {
+    public ResponseEntity<FoodaBasketDeliveryRes> apiBasketEditDelivery(@RequestBody final FoodaBasketDeliveryReq delivery, @PathVariable final String deliveryId) {
         ResponseEntity<FoodaBasketDeliveryRes> result = basketDeliveryRepo
-                .findById(deliveryId)
+                .findById(new ObjectId(deliveryId))
                 .map(basketDeliveryDtoMapper::dtoToResponse)
                 .map(res -> new ResponseEntity<>(basketDeliveryHttpMapper
                         .requestToResponse(delivery)
@@ -65,14 +67,14 @@ public class FoodaBasketDeliveryController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         if (result.getStatusCode().equals(HttpStatus.FOUND)) {
-            basketDeliveryRepo.save(basketDeliveryDtoMapper.responseToDto(result.getBody()));
+            basketDeliveryRepo.save(basketDeliveryDtoMapper.responseToDto(Objects.requireNonNull(result.getBody())));
         }
         return result;
     }
 
     @DeleteMapping("deleteByAddressId")
-    public void apiBasketDeleteDelivery(@RequestParam final Long deliveryId) {
-        basketDeliveryRepo.deleteById(deliveryId);
+    public void apiBasketDeleteDelivery(@RequestParam final String deliveryId) {
+        basketDeliveryRepo.deleteById(new ObjectId(deliveryId));
     }
 
     @DeleteMapping("delete")

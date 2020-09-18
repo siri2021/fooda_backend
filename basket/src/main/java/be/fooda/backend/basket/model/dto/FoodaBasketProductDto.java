@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 
 @Data
@@ -17,9 +16,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Document
 public class FoodaBasketProductDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long basketProductId;
+    @MongoId(FieldType.OBJECT_ID)
+    private String basketProductId;
     private Long productId;
     private FoodaBasketKeyDto key;
     private String name;

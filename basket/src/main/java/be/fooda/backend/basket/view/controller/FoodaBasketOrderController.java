@@ -7,12 +7,14 @@ import be.fooda.backend.commons.model.template.basket.request.FoodaBasketOrderRe
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketOrderRes;
 import be.fooda.backend.commons.service.mapper.FoodaBasketOrderHttpMapper;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,9 +27,9 @@ public class FoodaBasketOrderController {
     private final FoodaBasketOrderHttpMapper basketOrderHttpMapper;
 
     @GetMapping("apiBasketGetOrderById")
-    public ResponseEntity<FoodaBasketOrderRes> apiBasketGetOrderById(@RequestParam final Long orderId) {
+    public ResponseEntity<FoodaBasketOrderRes> apiBasketGetOrderById(@RequestParam final String orderId) {
         return basketOrderRepo
-                .findById(orderId)
+                .findById(new ObjectId(orderId))
                 .map(basketOrderDtoMapper::dtoToResponse)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -44,7 +46,7 @@ public class FoodaBasketOrderController {
 
     @PostMapping("add")
     public ResponseEntity<FoodaBasketOrderRes> apiBasketAddOrder(@RequestBody final FoodaBasketOrderReq order) {
-        return basketOrderRepo.exists(Example.of(basketOrderDtoMapper.requestToDto(order)))
+        return !basketOrderRepo.exists(Example.of(basketOrderDtoMapper.requestToDto(order)))
                 ? new ResponseEntity<>
                 (basketOrderDtoMapper.dtoToResponse(
                         basketOrderRepo.save(
@@ -53,9 +55,9 @@ public class FoodaBasketOrderController {
     }
 
     @PutMapping("edit/{orderId}")
-    public ResponseEntity<FoodaBasketOrderRes> apiBasketEditOrder(@RequestBody final FoodaBasketOrderReq order, @PathVariable final Long orderId) {
+    public ResponseEntity<FoodaBasketOrderRes> apiBasketEditOrder(@RequestBody final FoodaBasketOrderReq order, @PathVariable final String orderId) {
         ResponseEntity<FoodaBasketOrderRes> result = basketOrderRepo
-                .findById(orderId)
+                .findById(new ObjectId(orderId))
                 .map(basketOrderDtoMapper::dtoToResponse)
                 .map(res -> new ResponseEntity<>(basketOrderHttpMapper
                         .requestToResponse(order)
@@ -66,14 +68,14 @@ public class FoodaBasketOrderController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         if (result.getStatusCode().equals(HttpStatus.FOUND)) {
-            basketOrderRepo.save(basketOrderDtoMapper.responseToDto(result.getBody()));
+            basketOrderRepo.save(basketOrderDtoMapper.responseToDto(Objects.requireNonNull(result.getBody())));
         }
         return result;
     }
 
     @DeleteMapping("deleteByAddressId")
-    public void apiBasketDeleteOrder(@RequestParam final Long orderId) {
-        basketOrderRepo.deleteById(orderId);
+    public void apiBasketDeleteOrder(@RequestParam final String orderId) {
+        basketOrderRepo.deleteById(new ObjectId(orderId));
     }
 
     @DeleteMapping("delete")

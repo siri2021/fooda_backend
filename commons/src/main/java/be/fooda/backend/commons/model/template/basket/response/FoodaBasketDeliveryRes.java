@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodaBasketDeliveryRes {
-    private Long basketDeliveryId;
+    private String basketDeliveryId;
     private FoodaBasketUserRes user;
     private String session;
     private FoodaBasketStoreRes store;
