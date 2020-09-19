@@ -9,6 +9,7 @@ import be.fooda.backend.commons.service.mapper.FoodaBasketProductHttpMapper;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Example;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -78,6 +80,23 @@ public class FoodaBasketProductController {
                 : new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
+    @PostMapping("apiBasketAddProductMany")
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketAddProductMany(@RequestBody final Set<FoodaBasketProductReq> productSet) {
+        final List<FoodaBasketProductRes> productsAdded = productSet.stream()
+                .map(this::apiBasketAddProduct)
+                .collect(Collectors.toList())
+                .stream()
+                .filter(res -> res.getStatusCode().is2xxSuccessful() || res.getStatusCode().is3xxRedirection())
+                .map(HttpEntity::getBody)
+                .collect(Collectors.toList());
+
+        if (!productsAdded.isEmpty()) {
+            return new ResponseEntity<>(productsAdded, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     private FoodaBasketProductRes addBasketProductAndReturn(FoodaBasketProductReq product) {
         return basketProductDtoMapper.dtoToResponse(
                 basketProductRepo.save(
@@ -109,7 +128,10 @@ public class FoodaBasketProductController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
         if (result.getStatusCode().equals(HttpStatus.FOUND)) {
-            basketProductRepo.save(basketProductDtoMapper.responseToDto(Objects.requireNonNull(result.getBody())));
+            if (Objects.requireNonNull(result.getBody()).getQuantity() == 0)
+                basketProductRepo.save(basketProductDtoMapper.responseToDto(Objects.requireNonNull(result.getBody())));
+            else
+                basketProductRepo.deleteById(new ObjectId(basketProductId));
         }
         return result;
     }
