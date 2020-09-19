@@ -40,7 +40,7 @@ public class FoodaBasketOrderController {
                 .map(basketOrderDtoMapper::dtoToResponse);
     }
 
-    @GetMapping("apiBasketGetOrdersByBasketKey")
+    @GetMapping("getBasketOrdersByBasketKey")
     public ResponseEntity<List<FoodaBasketOrderRes>> apiBasketGetOrdersByBasketKey(@RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
         return new ResponseEntity<>(getBasketOrdersByBasketKey(FoodaBasketKeyDto.builder()
                 .userId(userId)
@@ -70,7 +70,7 @@ public class FoodaBasketOrderController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("add")
+    @PostMapping("apiBasketAddOrder")
     public ResponseEntity<FoodaBasketOrderRes> apiBasketAddOrder(@RequestBody final FoodaBasketOrderReq order) {
         return !basketOrderRepo.exists(Example.of(basketOrderDtoMapper.requestToDto(order)))
                 ? new ResponseEntity<>
@@ -80,7 +80,7 @@ public class FoodaBasketOrderController {
                 : new ResponseEntity<>(HttpStatus.valueOf("ORDER_ALREADY_EXISTS"));
     }
 
-    @PutMapping("edit/{orderId}")
+    @PutMapping("apiBasketEditOrder/{orderId}")
     public ResponseEntity<FoodaBasketOrderRes> apiBasketEditOrder(@RequestBody final FoodaBasketOrderReq order, @PathVariable final String orderId) {
         ResponseEntity<FoodaBasketOrderRes> result = getBasketOrderById(orderId)
                 .map(res -> new ResponseEntity<>(basketOrderHttpMapper
@@ -97,12 +97,12 @@ public class FoodaBasketOrderController {
         return result;
     }
 
-    @DeleteMapping("deleteByAddressId")
+    @DeleteMapping("apiBasketDeleteOrderById")
     public void apiBasketDeleteOrder(@RequestParam final String orderId) {
         basketOrderRepo.deleteById(new ObjectId(orderId));
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("apiBasketDeleteOrder")
     public void apiBasketDeleteOrder(@RequestBody final FoodaBasketOrderReq order) {
         basketOrderRepo.delete(basketOrderDtoMapper.requestToDto(order));
     }

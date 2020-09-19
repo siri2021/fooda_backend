@@ -31,7 +31,6 @@ public class FoodaBasketProductDtoMapper implements FoodaDtoMapper<FoodaBasketPr
 
     @Override
     public FoodaBasketProductDto responseToDto(FoodaBasketProductRes res) {
-
         return FoodaBasketProductDto.builder()
                 .quantity(res.getQuantity())
                 .productId(res.getProductId())

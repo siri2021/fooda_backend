@@ -6,14 +6,17 @@ import be.fooda.backend.commons.model.template.basket.request.FoodaBasketOrderRe
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketOrderRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 
+import java.time.LocalDateTime;
+
 public class FoodaBasketOrderDtoMapper implements FoodaDtoMapper<FoodaBasketOrderDto, FoodaBasketOrderReq, FoodaBasketOrderRes> {
 
     @Override
     public FoodaBasketOrderDto requestToDto(FoodaBasketOrderReq req) {
-
         return FoodaBasketOrderDto.builder()
                 .basketKey(reqBasketKey(req))
                 .requiredTime(req.getRequiredTime())
+                .registryTime(LocalDateTime.now())
+                .expiryTime(LocalDateTime.now().plusHours(2))
                 .note(req.getNote())
                 .build();
     }
@@ -28,7 +31,6 @@ public class FoodaBasketOrderDtoMapper implements FoodaDtoMapper<FoodaBasketOrde
 
     @Override
     public FoodaBasketOrderDto responseToDto(FoodaBasketOrderRes res) {
-
         return FoodaBasketOrderDto.builder()
                 .note(res.getNote())
                 .requiredTime(res.getRequiredTime())
@@ -49,7 +51,6 @@ public class FoodaBasketOrderDtoMapper implements FoodaDtoMapper<FoodaBasketOrde
 
     @Override
     public FoodaBasketOrderReq dtoToRequest(FoodaBasketOrderDto dto) {
-
         return FoodaBasketOrderReq.builder()
                 .userId(dto.getBasketKey().getUserId())
                 .storeId(dto.getBasketKey().getStoreId())
@@ -61,7 +62,6 @@ public class FoodaBasketOrderDtoMapper implements FoodaDtoMapper<FoodaBasketOrde
 
     @Override
     public FoodaBasketOrderRes dtoToResponse(FoodaBasketOrderDto dto) {
-
         return FoodaBasketOrderRes.builder()
                 .basketOrderId(dto.getBasketOrderId())
                 .userId(dto.getBasketKey().getUserId())
