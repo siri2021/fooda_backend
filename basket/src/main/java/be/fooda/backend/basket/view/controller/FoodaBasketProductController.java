@@ -53,7 +53,7 @@ public class FoodaBasketProductController {
     }
 
     @GetMapping("apiBasketGetProductsByUser")
-    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUserAndStore(@RequestParam final Long userId, @RequestParam final String session) {
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUser(@RequestParam final Long userId, @RequestParam final String session) {
         return new ResponseEntity<>(getProductsByUser(userId, session), HttpStatus.FOUND);
     }
 

@@ -88,7 +88,6 @@ public class FoodaBasketDeliveryDtoMapper implements FoodaDtoMapper<FoodaBasketD
     private FoodaBasketContactRes deliveryContact(FoodaBasketDeliveryDto dto) {
         return FoodaBasketContactRes.builder()
                 .contactId(dto.getDeliveryContactId())
-                .userId(dto.getBasketKey().getUserId())
                 .build();
     }
 
@@ -101,7 +100,6 @@ public class FoodaBasketDeliveryDtoMapper implements FoodaDtoMapper<FoodaBasketD
     private FoodaBasketContactRes billingContact(FoodaBasketDeliveryDto dto) {
         return FoodaBasketContactRes.builder()
                 .contactId(dto.getBillingContactId())
-                .userId(dto.getBasketKey().getUserId())
                 .build();
     }
 

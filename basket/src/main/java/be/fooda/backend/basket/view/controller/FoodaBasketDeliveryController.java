@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,37 +29,64 @@ public class FoodaBasketDeliveryController {
 
     @GetMapping("apiBasketGetDeliveryById")
     public ResponseEntity<FoodaBasketDeliveryRes> apiBasketGetDeliveryById(@RequestParam final String deliveryId) {
-        return basketDeliveryRepo
-                .findById(new ObjectId(deliveryId))
-                .map(basketDeliveryDtoMapper::dtoToResponse)
+        return getBasketDeliveryById(deliveryId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("getAllByUserId")
-    public ResponseEntity<List<FoodaBasketDeliveryRes>> apiBasketGetDeliveriesByUser(@RequestBody final FoodaBasketKeyDto key) {
-        return new ResponseEntity<>(basketDeliveryRepo
+    private Optional<FoodaBasketDeliveryRes> getBasketDeliveryById(@RequestParam String deliveryId) {
+        return basketDeliveryRepo
+                .findById(new ObjectId(deliveryId))
+                .map(basketDeliveryDtoMapper::dtoToResponse);
+    }
+
+    @GetMapping("apiBasketGetDeliveriesByBasketKey")
+    public ResponseEntity<List<FoodaBasketDeliveryRes>> apiBasketGetDeliveriesByBasketKey(@RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
+        return new ResponseEntity<>(getAllDeliveriesByKey(FoodaBasketKeyDto.builder()
+                .userId(userId)
+                .session(session)
+                .storeId(storeId)
+                .build()
+        ), HttpStatus.FOUND);
+    }
+
+    private List<FoodaBasketDeliveryRes> getAllDeliveriesByKey(final FoodaBasketKeyDto key) {
+        return basketDeliveryRepo
                 .findAllByBasketKey(key)
                 .stream()
                 .map(basketDeliveryDtoMapper::dtoToResponse)
-                .collect(Collectors.toList()), HttpStatus.FOUND);
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("apiBasketGetDeliveriesByUser")
+    public ResponseEntity<List<FoodaBasketDeliveryRes>> apiBasketGetDeliveriesByUser(@RequestParam final Long userId, @RequestParam final String session) {
+        return new ResponseEntity<>(getAllDeliveriesByUser(userId, session), HttpStatus.FOUND);
+    }
+
+    private List<FoodaBasketDeliveryRes> getAllDeliveriesByUser(final Long userId, final String session) {
+        return basketDeliveryRepo
+                .findAllByBasketKey_UserIdAndBasketKey_Session(userId, session)
+                .stream()
+                .map(basketDeliveryDtoMapper::dtoToResponse)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("add")
     public ResponseEntity<FoodaBasketDeliveryRes> apiBasketAddDelivery(@RequestBody final FoodaBasketDeliveryReq delivery) {
         return !basketDeliveryRepo.exists(Example.of(basketDeliveryDtoMapper.requestToDto(delivery)))
-                ? new ResponseEntity<>
-                (basketDeliveryDtoMapper.dtoToResponse(
-                        basketDeliveryRepo.save(
-                                basketDeliveryDtoMapper.requestToDto(delivery))), HttpStatus.OK)
+                ? new ResponseEntity<>(addBasketDelivery(delivery), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.valueOf("ADDRESS_ALREADY_EXISTS"));
+    }
+
+    private FoodaBasketDeliveryRes addBasketDelivery(FoodaBasketDeliveryReq delivery) {
+        return basketDeliveryDtoMapper.dtoToResponse(
+                basketDeliveryRepo.save(
+                        basketDeliveryDtoMapper.requestToDto(delivery)));
     }
 
     @PutMapping("edit/{deliveryId}")
     public ResponseEntity<FoodaBasketDeliveryRes> apiBasketEditDelivery(@RequestBody final FoodaBasketDeliveryReq delivery, @PathVariable final String deliveryId) {
-        ResponseEntity<FoodaBasketDeliveryRes> result = basketDeliveryRepo
-                .findById(new ObjectId(deliveryId))
-                .map(basketDeliveryDtoMapper::dtoToResponse)
+        ResponseEntity<FoodaBasketDeliveryRes> result = getBasketDeliveryById(deliveryId)
                 .map(res -> new ResponseEntity<>(basketDeliveryHttpMapper
                         .requestToResponse(delivery)
                         .toBuilder()
