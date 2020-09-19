@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,20 +29,45 @@ public class FoodaBasketOrderController {
 
     @GetMapping("apiBasketGetOrderById")
     public ResponseEntity<FoodaBasketOrderRes> apiBasketGetOrderById(@RequestParam final String orderId) {
-        return basketOrderRepo
-                .findById(new ObjectId(orderId))
-                .map(basketOrderDtoMapper::dtoToResponse)
+        return getBasketOrderById(orderId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("getAllByUserId")
-    public ResponseEntity<List<FoodaBasketOrderRes>> apiBasketGetOrdersByUser(@RequestBody final FoodaBasketKeyDto key) {
-        return new ResponseEntity<>(basketOrderRepo
+    private Optional<FoodaBasketOrderRes> getBasketOrderById(@RequestParam String orderId) {
+        return basketOrderRepo
+                .findById(new ObjectId(orderId))
+                .map(basketOrderDtoMapper::dtoToResponse);
+    }
+
+    @GetMapping("apiBasketGetOrdersByBasketKey")
+    public ResponseEntity<List<FoodaBasketOrderRes>> apiBasketGetOrdersByBasketKey(@RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
+        return new ResponseEntity<>(getBasketOrdersByBasketKey(FoodaBasketKeyDto.builder()
+                .userId(userId)
+                .session(session)
+                .storeId(storeId)
+                .build()), HttpStatus.FOUND);
+    }
+
+    private List<FoodaBasketOrderRes> getBasketOrdersByBasketKey(FoodaBasketKeyDto key) {
+        return basketOrderRepo
                 .findAllByBasketKey(key)
                 .stream()
                 .map(basketOrderDtoMapper::dtoToResponse)
-                .collect(Collectors.toList()), HttpStatus.FOUND);
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("apiBasketGetOrdersByUser")
+    public ResponseEntity<List<FoodaBasketOrderRes>> apiBasketGetOrdersByUser(@RequestParam final Long userId, @RequestParam final String session) {
+        return new ResponseEntity<>(getBasketOrdersByUser(userId, session), HttpStatus.FOUND);
+    }
+
+    private List<FoodaBasketOrderRes> getBasketOrdersByUser(final Long userId, final String session) {
+        return basketOrderRepo
+                .findAllByBasketKey_UserIdAndBasketKey_Session(userId, session)
+                .stream()
+                .map(basketOrderDtoMapper::dtoToResponse)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("add")
@@ -56,9 +82,7 @@ public class FoodaBasketOrderController {
 
     @PutMapping("edit/{orderId}")
     public ResponseEntity<FoodaBasketOrderRes> apiBasketEditOrder(@RequestBody final FoodaBasketOrderReq order, @PathVariable final String orderId) {
-        ResponseEntity<FoodaBasketOrderRes> result = basketOrderRepo
-                .findById(new ObjectId(orderId))
-                .map(basketOrderDtoMapper::dtoToResponse)
+        ResponseEntity<FoodaBasketOrderRes> result = getBasketOrderById(orderId)
                 .map(res -> new ResponseEntity<>(basketOrderHttpMapper
                         .requestToResponse(order)
                         .toBuilder()
