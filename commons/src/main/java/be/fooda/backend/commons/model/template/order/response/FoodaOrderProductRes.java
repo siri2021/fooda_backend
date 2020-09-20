@@ -2,16 +2,17 @@
 
 package be.fooda.backend.commons.model.template.order.response;
 
-import java.math.BigDecimal;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @Data
 public class FoodaOrderProductRes {
     private Long productId;
     private String name;
-    private Long quantity;
+    private Integer quantity;
     private BigDecimal price;
     private FoodaOrderVariantRes variant;
     private String type;

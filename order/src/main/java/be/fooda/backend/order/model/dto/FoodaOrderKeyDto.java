@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class FoodaOrderKeyDto extends FoodaAbstractDto {
     private Long orderId;
+    private Long externalOrderId;
     private Long userId;
     private Long storeId;
-    private String sessionId;
 }

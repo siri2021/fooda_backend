@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
-public class FoodaOrderProductReq {
-    private Long productId;
-    private Integer quantity;
-    private BigDecimal price;
+public class FoodaOrderKeyReq {
+    private Long userId;
+    private Long storeId;
 }
