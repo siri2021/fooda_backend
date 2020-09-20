@@ -6,6 +6,8 @@ import lombok.*;
 
 @NoArgsConstructor
 @Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
 public class FoodaOrderStoreRes {
     private long storeId;
     private String name;

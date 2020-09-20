@@ -3,7 +3,7 @@ package be.fooda.backend.order.service.mapper;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderKeyReq;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderProductReq;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderReq;
-import be.fooda.backend.commons.model.template.order.response.FoodaOrderRes;
+import be.fooda.backend.commons.model.template.order.response.*;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.order.model.dto.*;
 
@@ -137,8 +137,10 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
     }
 
     private Set<Long> payments(FoodaOrderDto foodaOrderDto) {
-        return foodaOrderDto.getPayments().stream()
-                .map(FoodaOrderPaymentDto::getPaymentId).collect(Collectors.toSet());
+        return foodaOrderDto.getPayments()
+                            .stream()
+                            .map(FoodaOrderPaymentDto::getPaymentId)
+                            .collect(Collectors.toSet());
     }
 
     private FoodaOrderKeyReq orderKey(FoodaOrderDto foodaOrderDto) {
@@ -148,12 +150,56 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
                 .build();
     }
 
-    // TODO doorgaan met hier, veel success ..
     @Override
     public FoodaOrderRes dtoToResponse(FoodaOrderDto foodaOrderDto) {
         return FoodaOrderRes.builder()
                 .externalOrderId(foodaOrderDto.getOrderKey().getExternalOrderId())
                 .productsTotal(productsTotal(foodaOrderDto))
+                .note(foodaOrderDto.getNote())
+                .orderId(foodaOrderDto.getOrderKey().getOrderId())
+                .registryTime(foodaOrderDto.getRegisteredAt())
+                .requiredTime(foodaOrderDto.getRequiredTime())
+                .deliveryTime(foodaOrderDto.getDeliveryTime())
+                .paymentTime(foodaOrderDto.getPaymentTime())
+                .userId(foodaOrderDto.getOrderKey().getUserId())
+                .store(FoodaOrderStoreRes.builder().storeId(foodaOrderDto.getOrderKey().getStoreId()).build())
+                .taxTotal(foodaOrderDto.getTaxTotal())
+                .deliveryTotal(foodaOrderDto.getDeliveryTotal())
+                .status(statusFromDto(foodaOrderDto))
+                .payments(paymentsFromDto(foodaOrderDto))
+                .orderedProducts(productsFromDto(foodaOrderDto))
+                .priceTotal(priceTotal(foodaOrderDto))
+                .build();
+    }
+
+    private List<FoodaOrderProductRes> productsFromDto(FoodaOrderDto foodaOrderDto) {
+        return foodaOrderDto.getProducts()
+                .stream()
+                .map(p -> FoodaOrderProductRes.builder()
+                        .productId(p.getProductKey().getProductId())
+                        .quantity(p.getQuantity())
+                        .price(p.getPrice())
+                        .build()
+                )
+                .collect(Collectors.toList());
+    }
+
+    private List<FoodaOrderPaymentRes> paymentsFromDto(FoodaOrderDto foodaOrderDto) {
+        return foodaOrderDto.getPayments()
+                .stream()
+                .map(p -> FoodaOrderPaymentRes.builder()
+                        .paymentId(p.getPaymentId())
+                        .amount(p.getAmount())
+                        .orderPaymentId(p.getOrderPaymentId())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private FoodaOrderStatusRes statusFromDto(FoodaOrderDto foodaOrderDto) {
+        return FoodaOrderStatusRes.builder()
+                .orderStatusId(foodaOrderDto.getOrderStatus().getOrderStatusId())
+                .title(foodaOrderDto.getOrderStatus().getTitle())
+                .parent(foodaOrderDto.getOrderStatus().getParent().getTitle())
                 .build();
     }
 
@@ -162,4 +208,10 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
                 .mapToDouble(prod -> prod.getPrice().doubleValue() * prod.getQuantity())
                 .sum());
     }
+    private BigDecimal priceTotal(FoodaOrderDto foodaOrderDto) {
+        return foodaOrderDto.getDeliveryTotal()
+                .add(foodaOrderDto.getProductsTotal()
+                        .multiply(BigDecimal.ONE.add(foodaOrderDto.getTaxTotal().divide(BigDecimal.valueOf(100))))
+                    );
+        }
 }

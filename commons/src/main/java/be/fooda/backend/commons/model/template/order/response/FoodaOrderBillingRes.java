@@ -6,6 +6,8 @@ import lombok.*;
 
 @NoArgsConstructor
 @Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
 public class FoodaOrderBillingRes {
     private FoodaOrderAddressRes address;
     private FoodaOrderContactRes contact;
