@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, FoodaOrderRes> {
+
     @Override
     public Optional<FoodaOrderRes> getOrderByKey(Long orderKey) {
         return Optional.empty();
@@ -23,7 +24,7 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
     }
 
     @Override
-    public Optional<FoodaOrderRes> getOrderByExample(Long orderReq) {
+    public Optional<FoodaOrderRes> getOrderByExample(FoodaOrderReq orderReq) {
         return Optional.empty();
     }
 
@@ -34,11 +35,6 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
 
     @Override
     public List<FoodaOrderRes> getOrdersByStatusId(Long statusId) {
-        return null;
-    }
-
-    @Override
-    public List<FoodaOrderRes> getOrdersByNote(String name) {
         return null;
     }
 
@@ -68,17 +64,17 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
     }
 
     @Override
+    public List<FoodaOrderRes> getOrdersByPaymentAmount(BigDecimal minAmount, BigDecimal maxAmount) {
+        return null;
+    }
+
+    @Override
     public List<FoodaOrderRes> getOrdersByStoreId(Long storeId) {
         return null;
     }
 
     @Override
     public List<FoodaOrderRes> getOrdersByUserId(Long userId) {
-        return null;
-    }
-
-    @Override
-    public List<FoodaOrderRes> getOrdersBySessionId(Long sessionId) {
         return null;
     }
 
@@ -93,7 +89,12 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
     }
 
     @Override
-    public Optional<FoodaOrderRes> editOrderByKey(Long orderId, Long externalOrderId, Long userID, Long storeId) {
+    public Optional<FoodaOrderRes> editOrderByKey(Long orderKey, FoodaOrderReq orderREQ) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<FoodaOrderRes> editOrderByKey(Long orderId, Long externalOrderId, Long userID, Long storeId, FoodaOrderReq orderREQ) {
         return Optional.empty();
     }
 
@@ -104,6 +105,11 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
 
     @Override
     public Optional<FoodaOrderRes> removeOrderByKey(Long orderId, Long externalOrderId, Long userID, Long storeId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<FoodaOrderRes> removeOrderByKey(Long orderKey) {
         return Optional.empty();
     }
 

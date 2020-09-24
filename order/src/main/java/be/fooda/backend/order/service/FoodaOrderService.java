@@ -1,12 +1,9 @@
 package be.fooda.backend.order.service;
 
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 
 public interface FoodaOrderService <REQ, RES>{
 
@@ -14,13 +11,11 @@ public interface FoodaOrderService <REQ, RES>{
 
     Optional<RES> getOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
 
-    Optional<RES> getOrderByExample(final Long orderReq);
+    Optional<RES> getOrderByExample(final REQ orderReq);
 
     List<RES> getAllOrders();
 
     List<RES> getOrdersByStatusId(final Long statusId);
-
-    List<RES> getOrdersByNote(final String name);
 
     List<RES> getOrdersByRequiredTime(final LocalDateTime requiredTime);
 
@@ -32,21 +27,25 @@ public interface FoodaOrderService <REQ, RES>{
 
     List<RES> getOrdersByPaymentAmount(final BigDecimal amount);
 
+    List<RES> getOrdersByPaymentAmount(final BigDecimal minAmount, final BigDecimal maxAmount);
+
     List<RES> getOrdersByStoreId(final Long storeId);
 
     List<RES> getOrdersByUserId(final Long userId);
-
-    List<RES> getOrdersBySessionId(final Long sessionId);
 
     List<RES> getOrdersByProductKey(final Long productKey);
 
     Optional<RES> addOrder(final REQ req);
 
-    Optional<RES> editOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
+    Optional<RES> editOrderByKey(final Long orderKey, REQ orderREQ);
+
+    Optional<RES> editOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId, REQ orderREQ);
 
     Optional<RES> editOrderByExample(final REQ orderReq);
 
     Optional<RES> removeOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
+
+    Optional<RES> removeOrderByKey(final Long orderKey);
 
     Optional<RES> removeOrderByExample(final REQ orderReq);
 
@@ -55,10 +54,5 @@ public interface FoodaOrderService <REQ, RES>{
     Boolean doesOrderExistsByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
 
     Boolean doesOrderExistsByExample(final REQ orderReq);
-
-
-
-
-
 
 }
