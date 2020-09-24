@@ -18,12 +18,16 @@ import java.util.List;
 public class FoodaOrderDto extends FoodaAbstractDto {
     @EmbeddedId
     private FoodaOrderKeyDto orderKey;
+
     @OneToOne
     private FoodaOrderStatusDto orderStatus;
+
     private String note;
+
     private LocalDateTime requiredTime;
     private LocalDateTime deliveryTime;
     private LocalDateTime paymentTime;
+
     private BigDecimal productsTotal;
     private BigDecimal taxTotal;
     private BigDecimal deliveryTotal;

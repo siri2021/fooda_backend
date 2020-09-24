@@ -1,18 +1,16 @@
-// OrderedProduct.java
-
 package be.fooda.backend.commons.model.template.order.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-import lombok.*;
-
 @Data
-@Builder
+@Builder(toBuilder = true)
+@AllArgsConstructor
 public class FoodaOrderProductReq {
     private Long productId;
-    private String name;
-    private Long quantity;
+    private Integer quantity;
     private BigDecimal price;
-    private FoodaOrderVariantReq variant;
-    private String type;
 }

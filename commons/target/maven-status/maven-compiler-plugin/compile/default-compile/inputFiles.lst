@@ -16,7 +16,6 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\attributes\terms\response\CollectionItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreAddressReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\media\request\FoodaMediaProductInfoReq.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderContactReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderBillingRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreLogoReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\response\ImagesItem.java
@@ -29,6 +28,7 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\contact\response\FoodaAddressRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreVideosItemReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\response\Dimensions.java
+C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaInventoryHttpMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\user\response\FoodaUserRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\contact\request\FoodaAddressReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\attributes\response\CollectionItem.java
@@ -58,6 +58,7 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\tags\response\CollectionItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\response\FoodaBasketOrderRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\matching\response\FoodaMatchItemRes.java
+C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderKeyReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\tags\response\SelfItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\product\response\FoodaProductPricesItemRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaBasketDeliveryHttpMapper.java
@@ -73,7 +74,6 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaBasketOrderHttpMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderStatusRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderStoreRes.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaSubOrderReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreWorkingHoursItemReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\attributes\request\WooCommerceProductAttributeRequest.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\response\FoodaBasketContactRes.java
@@ -83,11 +83,9 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderAddressRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderContactRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\response\FoodaBasketAddressRes.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaSubOrderRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreAuthItemRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\product\request\FoodaProductTypeReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreDeliveryLocationsItemReq.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderVariantReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaAddressHttpMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreAddressRes.java
@@ -103,7 +101,6 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreAuthItemReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\product\request\FoodaProductReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\request\ImagesItem.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderAddressReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\validator\PhoneNumber.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\request\FoodaStoreContactReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaOrderHttpMapper.java
@@ -114,7 +111,6 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\contact\request\FoodaContactReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\variations\request\Image.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\inventory\request\FoodaInventoryProductReq.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderPaymentReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreDeliveryCostsItemRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreImagesItemRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\reviews\response\ReviewerAvatarUrls.java
@@ -139,13 +135,11 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\exception\MatchingException.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\FoodaAbstractDto.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\response\FoodaBasketDeliveryRes.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderStatusReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreLogoRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\reviews\response\UpItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\media\response\FoodaMediaTypeRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\variations\request\AttributesItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\response\CollectionItem.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderStoreReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreContactRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\store\response\FoodaStoreRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\request\FoodaBasketOrderReq.java
@@ -157,7 +151,6 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\validator\Matchable.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\media\response\FoodaMediaProductRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\media\response\FoodaMediaAppSourceRes.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderBillingReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaHttpMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaProductHttpMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\categories\request\Image.java
@@ -172,5 +165,4 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderPaymentRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\inventory\response\FoodaInventoryProductRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\inventory\response\FoodaInventoryRes.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderDeliveryReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\attributes\terms\response\SelfItem.java

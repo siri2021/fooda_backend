@@ -2,11 +2,12 @@
 
 package be.fooda.backend.commons.model.template.order.response;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
 public class FoodaOrderDeliveryRes {
-    private Boolean isAddressSameAsBilling;
+    private FoodaOrderAddressRes address;
     private FoodaOrderContactRes contact;
 }

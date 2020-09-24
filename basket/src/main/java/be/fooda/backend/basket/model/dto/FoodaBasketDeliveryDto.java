@@ -5,20 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "DELIVERY")
+@Document
 public class FoodaBasketDeliveryDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long basketDeliveryId;
+    @MongoId(FieldType.OBJECT_ID)
+    private String basketDeliveryId;
     private FoodaBasketKeyDto basketKey;
     private Long billingAddressId;
     private Long billingContactId;

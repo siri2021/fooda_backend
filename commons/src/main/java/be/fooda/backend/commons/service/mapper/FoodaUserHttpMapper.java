@@ -6,12 +6,18 @@ import be.fooda.backend.commons.model.template.user.response.FoodaUserRes;
 public class FoodaUserHttpMapper implements FoodaHttpMapper<FoodaUserReq, FoodaUserRes> {
 
     @Override
-    public FoodaUserReq responseToRequest(FoodaUserRes foodaUserRes) {
-        return null;
+    public FoodaUserReq responseToRequest(FoodaUserRes res) {
+
+        return FoodaUserReq.builder()
+                .login(res.getLogin())
+                .build();
     }
 
     @Override
-    public FoodaUserRes requestToResponse(FoodaUserReq foodaUserReq) {
-        return null;
+    public FoodaUserRes requestToResponse(FoodaUserReq req) {
+
+        return FoodaUserRes.builder()
+                .login(req.getLogin())
+                .build();
     }
 }
