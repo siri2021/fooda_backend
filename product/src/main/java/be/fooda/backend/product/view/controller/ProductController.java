@@ -1,49 +1,42 @@
 package be.fooda.backend.product.view.controller;
 
-import be.fooda.backend.commons.model.template.product.request.FoodaProductReq;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
-import be.fooda.backend.product.dao.FoodaProductRepository;
-import be.fooda.backend.product.model.dto.FoodaProductDto;
-import be.fooda.backend.product.service.mapper.FoodaProductDtoMapper;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import be.fooda.backend.commons.model.template.product.request.FoodaProductReq;
+import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
+import be.fooda.backend.product.service.FoodaProductService;
 
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
 
-    private FoodaProductRepository productRepo;
-    private FoodaProductDtoMapper productDtoMapper;
+    private final FoodaProductService<FoodaProductReq, FoodaProductRes> productService;
 
-    @GetMapping("/getAll")
-    public List<FoodaProductRes> apiGetAllProducts() {
-        Iterable<FoodaProductDto> dtoList = productRepo.findAll();
-        return stream(dtoList.iterator()).map(productDtoMapper::dtoToResponse).collect(Collectors.toList());
+    @GetMapping("apiProductGetByProductIdAndStoreId")
+    public ResponseEntity<FoodaProductRes> apiProductGetByProductIdAndStoreId(@RequestParam final Long productId,
+            @RequestParam final Long storeId) {
+        return productService.getProductByKey(productId, storeId)
+                .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/add")
-    public FoodaProductRes apiAddProduct(final FoodaProductReq req) {
-        FoodaProductDto productDto = productDtoMapper.requestToDto(req);
-        FoodaProductDto addedProduct = productRepo.save(productDto);
-        return productDtoMapper.dtoToResponse(addedProduct);
+    @PostMapping("apiProductAdd")
+    public ResponseEntity<FoodaProductRes> apiProductAdd(@RequestBody final FoodaProductReq productReq){
+        return productService.doesProductExistsByExample(productReq).equals(Boolean.FALSE)
+        ? productService.addProduct(productReq)
+            .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.CONFLICT))
+        : new ResponseEntity<>(HttpStatus.FOUND);
     }
 
-    public static <T> Stream<T> stream(Iterator<T> iterator) {
-        Spliterator<T> spliterator = Spliterators.spliteratorUnknownSize(iterator, 0);
-
-        // Get a Sequential Stream from spliterator
-        return StreamSupport.stream(spliterator, false);
-    }
 }

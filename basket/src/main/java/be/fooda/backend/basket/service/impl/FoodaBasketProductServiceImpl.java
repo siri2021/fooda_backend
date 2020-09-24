@@ -57,10 +57,10 @@ public class FoodaBasketProductServiceImpl implements FoodaBasketProductService<
     }
 
     @Override
-    public FoodaBasketProductRes addBasketProductAndReturn(FoodaBasketProductReq foodaBasketProductReq) {
-        return basketProductDtoMapper.dtoToResponse(
+    public Optional<FoodaBasketProductRes> addBasketProductAndReturn(FoodaBasketProductReq foodaBasketProductReq) {
+        return Optional.of(basketProductDtoMapper.dtoToResponse(
                 basketProductRepo.save(
-                        basketProductDtoMapper.requestToDto(foodaBasketProductReq)));
+                        basketProductDtoMapper.requestToDto(foodaBasketProductReq))));
     }
 
     @Override

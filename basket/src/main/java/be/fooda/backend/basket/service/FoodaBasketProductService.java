@@ -16,7 +16,7 @@ public interface FoodaBasketProductService<REQ, RES> {
 
     List<RES> getBasketProductsByUser(final Long userId, final String session);
 
-    RES addBasketProductAndReturn(final REQ req);
+    Optional<RES> addBasketProductAndReturn(final REQ req);
 
     Optional<RES> editBasketProductByIdAndReturn(final String basketProductId, final REQ req);
 

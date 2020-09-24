@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("basket/product/")
+@RequestMapping("basket/product/") // http://www.fooda.be/basket/product/
 @RequiredArgsConstructor
 public class FoodaBasketProductController {
 
@@ -23,37 +23,39 @@ public class FoodaBasketProductController {
 
     @GetMapping("apiBasketGetProductById")
     public ResponseEntity<FoodaBasketProductRes> apiBasketGetProductById(@RequestParam final String basketProductId) {
-        return basketProductService.getBasketProductById(basketProductId)
+        return basketProductService.getBasketProductById(basketProductId) // FoodaBasketProductRes
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("apiBasketGetProductsByUserAndStore")
-    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUserAndStore(@RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
-        return new ResponseEntity<>(basketProductService.getBasketProductsByBasketKey(userId, session, storeId), HttpStatus.FOUND);
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUserAndStore(
+            @RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
+        return new ResponseEntity<>(basketProductService.getBasketProductsByBasketKey(userId, session, storeId),
+                HttpStatus.FOUND);
     }
 
     @GetMapping("apiBasketGetProductsByUser")
-    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUser(@RequestParam final Long userId, @RequestParam final String session) {
+    public ResponseEntity<List<FoodaBasketProductRes>> apiBasketGetProductsByUser(@RequestParam final Long userId,
+            @RequestParam final String session) {
         return new ResponseEntity<>(basketProductService.getBasketProductsByUser(userId, session), HttpStatus.FOUND);
     }
 
     @PostMapping("apiBasketAddProduct")
     public ResponseEntity<FoodaBasketProductRes> apiBasketAddProduct(@RequestBody @Valid final FoodaBasketProductReq product) {
         return basketProductService.doesBasketProductExistByExample(product).equals(Boolean.FALSE)
-                ? new ResponseEntity<>(basketProductService.addBasketProductAndReturn(product), HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.CONFLICT);
+                ? basketProductService.addBasketProductAndReturn(product)
+                        .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
+                        .orElse(new ResponseEntity<>(HttpStatus.CONFLICT))
+                : new ResponseEntity<>(HttpStatus.FOUND);
     }
 
     @PostMapping("apiBasketAddProductMany")
-    public ResponseEntity<Set<FoodaBasketProductRes>> apiBasketAddProductMany(@RequestBody final Set<FoodaBasketProductReq> productSet) {
-        final Set<FoodaBasketProductRes> productsAdded = productSet.stream()
-                .map(this::apiBasketAddProduct)
-                .collect(Collectors.toList())
-                .stream()
-                .filter(res -> res.getStatusCode().is2xxSuccessful() || res.getStatusCode().is3xxRedirection())
-                .map(HttpEntity::getBody)
-                .collect(Collectors.toSet());
+    public ResponseEntity<Set<FoodaBasketProductRes>> apiBasketAddProductMany( @RequestBody final Set<FoodaBasketProductReq> productSet) {
+        final Set<FoodaBasketProductRes> productsAdded = productSet.stream().map(this::apiBasketAddProduct)
+                .collect(Collectors.toList()) // List<ResponseEntity<FoodaBasketProductRes>>
+                .stream().filter(res -> res.getStatusCode().is2xxSuccessful() || res.getStatusCode().is3xxRedirection())
+                .map(HttpEntity::getBody).collect(Collectors.toSet());
 
         if (!productsAdded.isEmpty()) {
             return new ResponseEntity<>(productsAdded, HttpStatus.OK);
@@ -63,35 +65,40 @@ public class FoodaBasketProductController {
     }
 
     @PutMapping("apiBasketIncreaseProductQuantity")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketIncreaseProductQuantity(@RequestParam final String basketProductId) {
+    public ResponseEntity<FoodaBasketProductRes> apiBasketIncreaseProductQuantity(
+            @RequestParam final String basketProductId) {
         return basketProductService.increaseBasketProductQuantityByIdAndReturn(basketProductId, 1)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("apiBasketDecreaseProductQuantity")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketDecreaseProductQuantity(@RequestParam final String basketProductId) {
+    public ResponseEntity<FoodaBasketProductRes> apiBasketDecreaseProductQuantity(
+            @RequestParam final String basketProductId) {
         return basketProductService.decreaseBasketProductQuantityByIdAndReturn(basketProductId, 1)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("apiBasketEditProduct")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketEditProduct(@RequestParam final String basketProductId, @RequestBody final FoodaBasketProductReq req) {
+    public ResponseEntity<FoodaBasketProductRes> apiBasketEditProduct(@RequestParam final String basketProductId,
+            @RequestBody final FoodaBasketProductReq req) {
         return basketProductService.editBasketProductByIdAndReturn(basketProductId, req)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("apiBasketDeleteProductById")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketDeleteProductById(@RequestParam final String basketProductId) {
+    public ResponseEntity<FoodaBasketProductRes> apiBasketDeleteProductById(
+            @RequestParam final String basketProductId) {
         return basketProductService.removeBasketProductByIdAndReturn(basketProductId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("apiBasketDeleteProduct")
-    public ResponseEntity<FoodaBasketProductRes> apiBasketDeleteProduct(@RequestBody final FoodaBasketProductReq req) {
+    @DeleteMapping("apiBasketDeleteProductByExample")
+    public ResponseEntity<FoodaBasketProductRes> apiBasketDeleteProductByExample(
+            @RequestBody final FoodaBasketProductReq req) {
         return basketProductService.removeBasketProductByExampleAndReturn(req)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
