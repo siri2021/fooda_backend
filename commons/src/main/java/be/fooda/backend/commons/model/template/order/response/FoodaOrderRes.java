@@ -16,7 +16,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class FoodaOrderRes {
-    private Long orderId;
+    private Long orderKeyId;
     private Long externalOrderId;
     private Long userId;
     private FoodaOrderBillingRes billing;

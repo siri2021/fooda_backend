@@ -4,6 +4,7 @@ import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.*;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Id;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -12,7 +13,8 @@ import javax.persistence.Embeddable;
 @Builder
 @Embeddable
 public class FoodaOrderKeyDto extends FoodaAbstractDto {
-    private Long orderId;
+    @Id
+    private Long orderKeyId;
     private Long externalOrderId;
     private Long userId;
     private Long storeId;

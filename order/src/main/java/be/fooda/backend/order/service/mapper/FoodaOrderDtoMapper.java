@@ -97,7 +97,7 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
         return FoodaOrderKeyDto.builder()
                 .userId(foodaOrderRes.getUserId())
                 .storeId(foodaOrderRes.getStore().getStoreId())
-                .orderId(foodaOrderRes.getOrderId())
+                .orderKeyId(foodaOrderRes.getOrderKeyId())
                 .externalOrderId(foodaOrderRes.getExternalOrderId())
                 .build();
     }
@@ -156,7 +156,7 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
                 .externalOrderId(foodaOrderDto.getOrderKey().getExternalOrderId())
                 .productsTotal(productsTotal(foodaOrderDto))
                 .note(foodaOrderDto.getNote())
-                .orderId(foodaOrderDto.getOrderKey().getOrderId())
+                .orderKeyId(foodaOrderDto.getOrderKey().getOrderKeyId())
                 .registryTime(foodaOrderDto.getRegisteredAt())
                 .requiredTime(foodaOrderDto.getRequiredTime())
                 .deliveryTime(foodaOrderDto.getDeliveryTime())

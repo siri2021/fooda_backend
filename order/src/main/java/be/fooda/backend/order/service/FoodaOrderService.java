@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface FoodaOrderService <REQ, RES>{
 
-    Optional<RES> getOrderByKey(final Long orderKey);
+    Optional<RES> getOrderByKey(final Long orderKeyId);
 
-    Optional<RES> getOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
+    Optional<RES> getOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId);
 
     Optional<RES> getOrderByExample(final REQ orderReq);
 
@@ -33,25 +33,25 @@ public interface FoodaOrderService <REQ, RES>{
 
     List<RES> getOrdersByUserId(final Long userId);
 
-    List<RES> getOrdersByProductKey(final Long productKey);
+    List<RES> getOrdersByProductKey(final Long orderKeyId);
 
     Optional<RES> addOrder(final REQ req);
 
-    Optional<RES> editOrderByKey(final Long orderKey, REQ orderREQ);
+    Optional<RES> editOrderByKey(final Long orderKeyId, REQ orderREQ);
 
-    Optional<RES> editOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId, REQ orderREQ);
+    Optional<RES> editOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId, REQ orderREQ);
 
     Optional<RES> editOrderByExample(final REQ orderReq);
 
-    Optional<RES> removeOrderByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
+    Optional<RES> removeOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId);
 
-    Optional<RES> removeOrderByKey(final Long orderKey);
+    Optional<RES> removeOrderByKey(final Long orderKeyId);
 
     Optional<RES> removeOrderByExample(final REQ orderReq);
 
-    Boolean doesOrderExistsByKey(final Long orderKey);
+    Boolean doesOrderExistsByKey(final Long orderKeyId);
 
-    Boolean doesOrderExistsByKey(final Long orderId, final Long externalOrderId, final Long userID, final Long storeId);
+    Boolean doesOrderExistsByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId);
 
     Boolean doesOrderExistsByExample(final REQ orderReq);
 
