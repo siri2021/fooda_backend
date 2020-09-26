@@ -9,7 +9,7 @@ public interface FoodaOrderService <REQ, RES>{
 
     Optional<RES> getOrderByKey(final Long orderKeyId);
 
-    Optional<RES> getOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId);
+    Optional<RES> getOrderByKey(final Long externalOrderId, final Long userID, final Long storeId);
 
     Optional<RES> getOrderByExample(final REQ orderReq);
 
@@ -43,7 +43,7 @@ public interface FoodaOrderService <REQ, RES>{
 
     Optional<RES> editOrderByExample(final REQ orderReq);
 
-    Optional<RES> removeOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId);
+    Optional<RES> removeOrderByKey(final Long externalOrderId, final Long userID, final Long storeId);
 
     Optional<RES> removeOrderByKey(final Long orderKeyId);
 
@@ -51,7 +51,7 @@ public interface FoodaOrderService <REQ, RES>{
 
     Boolean doesOrderExistsByKey(final Long orderKeyId);
 
-    Boolean doesOrderExistsByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId);
+    Boolean doesOrderExistsByKey(final Long externalOrderId, final Long userID, final Long storeId);
 
     Boolean doesOrderExistsByExample(final REQ orderReq);
 

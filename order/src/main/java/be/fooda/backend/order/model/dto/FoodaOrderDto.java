@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ORDER")
 public class FoodaOrderDto extends FoodaAbstractDto {
     @EmbeddedId
     private FoodaOrderKeyDto orderKey;

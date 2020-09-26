@@ -4,21 +4,25 @@ import be.fooda.backend.commons.model.template.order.request.FoodaOrderReq;
 import be.fooda.backend.commons.model.template.order.response.FoodaOrderRes;
 import be.fooda.backend.order.model.dto.FoodaOrderDto;
 import be.fooda.backend.order.model.dto.FoodaOrderKeyDto;
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface FoodaOrderRepository extends CrudRepository<FoodaOrderDto, Long> {
+public interface FoodaOrderRepository extends CrudRepository<FoodaOrderDto, FoodaOrderKeyDto> {
+
+    Optional<FoodaOrderDto> findByOrderKey_OrderKeyId(Long orderKeyId);
+
+    Optional<FoodaOrderDto> findByOrderKey_ExternalOrderIdAndOrderKey_UserIdAndOrderKey_StoreId (Long externalOrderId, Long userId,Long storeId);
     
-    Optional<FoodaOrderDto> findByKey(final FoodaOrderKeyDto key);
-    
-    Optional<FoodaOrderDto> findByExample(final FoodaOrderReq example);
+    Optional<FoodaOrderDto> findByExample(FoodaOrderReq example);
 
     List<FoodaOrderDto> findByStatusId(Long statusId);
 
@@ -28,13 +32,33 @@ public interface FoodaOrderRepository extends CrudRepository<FoodaOrderDto, Long
 
     List<FoodaOrderDto> findByPaymentTime(LocalDateTime paymentTime);
 
-    List<FoodaOrderDto> findByPaymentId(Long paymentId);
+    @Query("FROM FoodaOrderDto o WHERE o.orderKey IN (SELECT op.orderKey FROM FoodaOrderPaymentDto  op WHERE op.paymentId = ?1)")
+    List<FoodaOrderDto> findByPaymentId(Long productKey);
 
+    @Query("FROM FoodaOrderDto o WHERE o.orderKey IN (SELECT op.orderKey FROM FoodaOrderPaymentDto  op WHERE op.amount = ?1)")
     List<FoodaOrderDto> findByPaymentAmount(BigDecimal amount);
 
-    List<FoodaOrderDto> findByPaymentStoreId(Long storeId);
+    @Query("FROM FoodaOrderDto o WHERE o.orderKey IN (SELECT op.orderKey FROM FoodaOrderPaymentDto  op WHERE op.amount between ?1 AND ?2)")
+    List<FoodaOrderDto> findByPaymentAmount(BigDecimal minAmount, BigDecimal maxAmount);
 
-    List<FoodaOrderDto> findByPaymentUserId(Long userId);
+    List<FoodaOrderDto> findByProductKey(Long productKey);
 
-    List<FoodaOrderDto> findByPaymentProductKey(Long productKey);
+    List<FoodaOrderDto> findByOrderKey_StoreId(Long storeId);
+
+    List<FoodaOrderDto> findByOrderKey_UserId(Long userId);
+
+    @Modifying
+    @Query("DELETE FROM FoodaOrderDto o WHERE o.orderKey.orderKeyId = ?1")
+    void deleteByOrderKey_orderKeyId(Long orderKeyId);
+
+    @Modifying
+    @Query("DELETE FROM FoodaOrderDto o WHERE o.orderKey.externalOrderId = ?1 AND o.orderKey.userId = ?2 AND o.orderKey.storeId = ?3")
+    void deleteByOrderKey_ExternalOrderIdAndOrderKey_UserIdAndOrderKey_StoreId(Long externalOrderId, Long userID, Long storeId);
+
+
+    Boolean existsByOrderKey_OrderKeyId(Long orderKeyId);
+
+    Boolean existsByOrderKey_ExternalOrderIdAndOrderKey_UserIdAndOrderKey_StoreId(Long externalOrderId, Long userID, Long storeId);
+
+    Boolean exists(Example<FoodaOrderDto> example);
 }

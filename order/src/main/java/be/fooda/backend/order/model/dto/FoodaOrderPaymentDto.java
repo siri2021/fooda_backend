@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ORDER_PAYMENT")
 public class FoodaOrderPaymentDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue
     private Long orderPaymentId;
+    private FoodaOrderKeyDto orderKey;
     private Long paymentId;
     private BigDecimal amount;
 }

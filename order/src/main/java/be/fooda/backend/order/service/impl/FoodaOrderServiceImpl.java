@@ -1,16 +1,15 @@
 package be.fooda.backend.order.service.impl;
 
-import be.fooda.backend.commons.model.template.basket.response.FoodaBasketProductRes;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderReq;
 import be.fooda.backend.commons.model.template.order.response.FoodaOrderRes;
 import be.fooda.backend.commons.model.template.order.response.FoodaOrderStoreRes;
 import be.fooda.backend.commons.service.mapper.FoodaOrderHttpMapper;
 import be.fooda.backend.order.dao.FoodaOrderRepository;
 import be.fooda.backend.order.model.dto.FoodaOrderDto;
-import be.fooda.backend.order.model.dto.FoodaOrderKeyDto;
 import be.fooda.backend.order.service.FoodaOrderService;
 import be.fooda.backend.order.service.mapper.FoodaOrderDtoMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,17 +27,12 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
 
     @Override
     public Optional<FoodaOrderRes> getOrderByKey(Long orderKeyId) {
-        return orderRepository.findById(orderKeyId).map(orderDtoMapper :: dtoToResponse);
+        return orderRepository.findByOrderKey_OrderKeyId(orderKeyId).map(orderDtoMapper :: dtoToResponse);
     }
 
     @Override
-    public Optional<FoodaOrderRes> getOrderByKey(Long orderKeyId, Long externalOrderId, Long userID, Long storeId) {
-        return orderRepository.findByKey(FoodaOrderKeyDto.builder()
-                                                         .orderKeyId(orderKeyId)
-                                                         .storeId(storeId)
-                                                         .userId(userID)
-                                                         .externalOrderId(externalOrderId)
-                                                         .build())
+    public Optional<FoodaOrderRes> getOrderByKey(Long externalOrderId, Long userID, Long storeId) {
+        return orderRepository.findByOrderKey_ExternalOrderIdAndOrderKey_UserIdAndOrderKey_StoreId(externalOrderId, userID, storeId)
                               .map(orderDtoMapper :: dtoToResponse);
     }
 
@@ -105,14 +99,17 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
                 .collect(Collectors.toList());
     }
 
-    @Override//TODO
+    @Override
     public List<FoodaOrderRes> getOrdersByPaymentAmount(BigDecimal minAmount, BigDecimal maxAmount) {
-        return null;
+        return orderRepository.findByPaymentAmount(minAmount, maxAmount)
+                .stream()
+                .map(orderDtoMapper :: dtoToResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<FoodaOrderRes> getOrdersByStoreId(Long storeId) {
-        return orderRepository.findByPaymentStoreId(storeId)
+        return orderRepository.findByOrderKey_StoreId(storeId)
                 .stream()
                 .map(orderDtoMapper :: dtoToResponse)
                 .collect(Collectors.toList());
@@ -120,15 +117,16 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
 
     @Override
     public List<FoodaOrderRes> getOrdersByUserId(Long userId) {
-        return orderRepository.findByPaymentUserId(userId)
+        return orderRepository.findByOrderKey_UserId(userId)
                 .stream()
                 .map(orderDtoMapper :: dtoToResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<FoodaOrderRes> getOrdersByProductKey(Long orderKeyId) {
-        return orderRepository.findByPaymentProductKey(orderKeyId)
+    public List<FoodaOrderRes> getOrdersByProductKey(Long productKey) {
+
+        return orderRepository.findByProductKey(productKey)
                 .stream()
                 .map(orderDtoMapper :: dtoToResponse)
                 .collect(Collectors.toList());
@@ -179,7 +177,7 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
     @Override
     public Optional<FoodaOrderRes> removeOrderByKey(Long orderKeyId) {
         final Optional<FoodaOrderRes> foundOrder = getOrderByKey(orderKeyId);
-        foundOrder.ifPresent(res -> orderRepository.deleteById(orderKeyId));
+        foundOrder.ifPresent(res -> orderRepository.deleteByOrderKey_orderKeyId(orderKeyId));
         final Optional<FoodaOrderRes> oOrderAfterDelete = getOrderByKey(orderKeyId);
         if (oOrderAfterDelete.isEmpty()) {
             return foundOrder;
@@ -189,27 +187,41 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
     }
 
     @Override
-    public Optional<FoodaOrderRes> removeOrderByKey(Long orderKeyId, Long externalOrderId, Long userID, Long storeId) {
-        return Optional.empty();
+    public Optional<FoodaOrderRes> removeOrderByKey(Long externalOrderId, Long userID, Long storeId) {
+        final Optional<FoodaOrderRes> foundOrder = getOrderByKey(externalOrderId, userID, storeId);
+        foundOrder.ifPresent(res -> orderRepository.deleteByOrderKey_ExternalOrderIdAndOrderKey_UserIdAndOrderKey_StoreId(externalOrderId, userID, storeId));
+        final Optional<FoodaOrderRes> oOrderAfterDelete = getOrderByKey(externalOrderId, userID, storeId);
+        if (oOrderAfterDelete.isEmpty()) {
+            return foundOrder;
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<FoodaOrderRes> removeOrderByExample(FoodaOrderReq orderReq) {
-        return Optional.empty();
+        final Optional<FoodaOrderRes> foundOrder = getOrderByExample(orderReq);
+        foundOrder.ifPresent(res -> orderRepository.delete(orderDtoMapper.requestToDto(orderReq)));
+        final Optional<FoodaOrderRes> oOrderAfterDelete = getOrderByExample(orderReq);
+        if (oOrderAfterDelete.isEmpty()) {
+            return foundOrder;
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Boolean doesOrderExistsByKey(Long orderKeyId) {
-        return null;
+        return orderRepository.existsByOrderKey_OrderKeyId(orderKeyId);
     }
 
     @Override
-    public Boolean doesOrderExistsByKey(Long orderKeyId, Long externalOrderId, Long userID, Long storeId) {
-        return null;
+    public Boolean doesOrderExistsByKey(Long externalOrderId, Long userID, Long storeId) {
+        return  orderRepository.existsByOrderKey_ExternalOrderIdAndOrderKey_UserIdAndOrderKey_StoreId(externalOrderId, userID, storeId);
     }
 
     @Override
     public Boolean doesOrderExistsByExample(FoodaOrderReq orderReq) {
-        return null;
+        return orderRepository.exists(Example.of(orderDtoMapper.requestToDto(orderReq)));
     }
 }
