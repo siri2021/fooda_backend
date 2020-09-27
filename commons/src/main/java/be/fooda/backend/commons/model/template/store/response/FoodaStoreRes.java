@@ -1,13 +1,14 @@
 package be.fooda.backend.commons.model.template.store.response;
+import lombok.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import java.io.Serializable;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class FoodaStoreRes {
+@Builder(toBuilder = true)
+public class FoodaStoreRes implements Serializable {
     private Long storeId;
     private List<FoodaStoreImagesItemRes> images;
     private FoodaStoreAddressRes address;
