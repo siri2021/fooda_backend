@@ -18,10 +18,14 @@ public class ServiceConfig {
     private final FoodaOrderRepository foodaOrderRepository;
 
     @Bean
-    public FoodaOrderDtoMapper getFoodaOrderDtoMapper(){ return new FoodaOrderDtoMapper();}
+    public FoodaOrderDtoMapper getFoodaOrderDtoMapper(){
+        return new FoodaOrderDtoMapper();
+    }
 
     @Bean
-    public FoodaOrderHttpMapper getFoodaOrderHttpMapper(){ return new FoodaOrderHttpMapper();}
+    public FoodaOrderHttpMapper getFoodaOrderHttpMapper(){
+        return new FoodaOrderHttpMapper();
+    }
 
     @Bean
     public FoodaOrderService<FoodaOrderReq, FoodaOrderRes> getFoodaOrderService(){
