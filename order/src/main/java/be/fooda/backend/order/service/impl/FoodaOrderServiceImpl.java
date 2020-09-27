@@ -38,7 +38,6 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
 
     @Override
     public Optional<FoodaOrderRes> getOrderByExample(FoodaOrderReq orderReq) {
-
         return orderRepository.findByExample(orderReq).map(orderDtoMapper:: dtoToResponse) ;
     }
 
