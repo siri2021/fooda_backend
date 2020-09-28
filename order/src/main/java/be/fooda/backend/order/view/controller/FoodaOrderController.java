@@ -50,6 +50,11 @@ public class FoodaOrderController {
         return new ResponseEntity<>(orderService.getOrdersByStatusId(statusId), HttpStatus.FOUND);
     }
 
+    @RequestMapping("apiGetOrdersByRequiredTime")
+    public ResponseEntity<List<FoodaOrderRes>> apiGetOrdersByRequiredTime(@RequestParam LocalDateTime requiredTime){
+        return new ResponseEntity<>(orderService.getOrdersByRequiredTime(requiredTime), HttpStatus.FOUND);
+    }
+
     @RequestMapping("apiGetOrdersByDeliveryTime")
     public ResponseEntity<List<FoodaOrderRes>> apiGetOrdersByDeliveryTime(@RequestParam LocalDateTime deliveryTime){
         return new ResponseEntity<>(orderService.getOrdersByDeliveryTime(deliveryTime), HttpStatus.FOUND);
@@ -68,6 +73,11 @@ public class FoodaOrderController {
     @RequestMapping("apiGetOrdersByPaymentAmount")
     public ResponseEntity<List<FoodaOrderRes>> apiGetOrdersByPaymentAmount(@RequestParam BigDecimal amount){
         return new ResponseEntity<>(orderService.getOrdersByPaymentAmount(amount), HttpStatus.FOUND);
+    }
+
+    @RequestMapping("apiGetOrdersByPaymentAmount")
+    public ResponseEntity<List<FoodaOrderRes>> apiGetOrdersByPaymentAmount(@RequestParam BigDecimal minAmount, @RequestParam BigDecimal maxAmount){
+        return new ResponseEntity<>(orderService.getOrdersByPaymentAmount(minAmount, maxAmount), HttpStatus.FOUND);
     }
 
     @RequestMapping("apiGetOrdersByStoreId")
