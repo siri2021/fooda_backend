@@ -37,7 +37,7 @@ public interface FoodaOrderService <REQ, RES>{
 
     Optional<RES> addOrder(final REQ req);
 
-    Optional<RES> editOrderByKey(final Long orderKeyId, REQ orderREQ);
+    Optional<RES> editOrderByKey(final Long orderKeyId,final REQ orderREQ);
 
     Optional<RES> editOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId, REQ orderREQ);
 

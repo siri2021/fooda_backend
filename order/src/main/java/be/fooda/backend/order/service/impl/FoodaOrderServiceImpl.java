@@ -27,7 +27,8 @@ public class FoodaOrderServiceImpl implements FoodaOrderService<FoodaOrderReq, F
 
     @Override
     public Optional<FoodaOrderRes> getOrderByKey(Long orderKeyId) {
-        return orderRepository.findByOrderKey_OrderKeyId(orderKeyId).map(orderDtoMapper :: dtoToResponse);
+        return orderRepository.findByOrderKey_OrderKeyId(orderKeyId)
+                              .map(orderDtoMapper :: dtoToResponse);
     }
 
     @Override

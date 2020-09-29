@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "INVENTORY")
 public class FoodaInventoryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
