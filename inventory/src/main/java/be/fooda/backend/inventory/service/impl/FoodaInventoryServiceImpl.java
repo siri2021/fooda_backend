@@ -68,7 +68,15 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
 
     @Override
     public Optional<FoodaInventoryRes> editInventoryById(Long inventoryId, FoodaInventoryReq inventoryREQ) {
-        return Optional.empty();
+        return getInventoryById(inventoryId)
+                .map(res -> inventoryHttpMapper
+                        .requestToResponse(inventoryREQ)
+                        .toBuilder()
+                        .inventoryId(inventoryId)
+                        .build())
+                .map(res -> inventoryDtoMapper.dtoToResponse(
+                        inventoryRepository.save(
+                                inventoryDtoMapper.responseToDto(res))));
     }
 
     @Override
