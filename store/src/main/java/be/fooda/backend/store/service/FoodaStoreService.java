@@ -1,5 +1,7 @@
 package be.fooda.backend.store.service;
 
+import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,8 +55,8 @@ public interface FoodaStoreService<REQ, RES> {
 
     Optional<RES> removeStoreByExample(final REQ storeReq);
 
-    Optional<RES> doesStoreExistById(final Long storeId);
+    Boolean doesStoreExistById(final Long storeId);
 
-    Optional<RES> doesStoreExistByExample(final Long storeId);
+    Boolean doesStoreExistByExample(final FoodaStoreReq req);
 
 }

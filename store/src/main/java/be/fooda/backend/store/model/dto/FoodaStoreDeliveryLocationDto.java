@@ -4,6 +4,7 @@ import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
@@ -20,5 +21,5 @@ public class FoodaStoreDeliveryLocationDto extends FoodaAbstractDto {
 
     private Long municipalityId;
     private LocalDateTime deliveryTime;
-    private Double deliveryCost;
+    private BigDecimal deliveryCost;
 }

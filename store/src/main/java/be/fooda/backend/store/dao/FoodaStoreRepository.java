@@ -3,37 +3,47 @@ package be.fooda.backend.store.dao;
 import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import be.fooda.backend.store.model.dto.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
-public interface FoodaStoreRepository extends CrudRepository<FoodaStoreDto, Long> {    public List<FoodaStoreDto> findAllByName(final FoodaStoreDto name);
+public interface FoodaStoreRepository extends JpaRepository<FoodaStoreDto, Long> {
 
-    List<FoodaStoreDto> findByAddressId(final FoodaStoreDto address);
+    List<FoodaStoreDto> findAllByName(String name);
 
-    List<FoodaStoreDto> findByTypeId(final FoodaStoreTypeDto storeTypeId);
+    List<FoodaStoreDto> findByAddressId(final Set<Long> address);
 
-    List<FoodaStoreDto> findByParentId(final FoodaStoreDto parent);
+    List<FoodaStoreDto> findByTypeId(final Long storeTypeId);
 
-    List<FoodaStoreDto> findByAbout(final FoodaStoreDto about);
+    List<FoodaStoreDto> findByParentId(final Long parent);
 
-    Optional<FoodaStoreDto> findByAuth(FoodaStoreAuthDto auth);
+    List<FoodaStoreDto> findByAbout(final String about);
 
-    Optional<FoodaStoreDto> findByWorkingHours(FoodaStoreWorkingHoursDto hours);
+    Optional<FoodaStoreDto> findByAuth(final String key, final String secret );
 
-    List<FoodaStoreDto> findByDeliveryLocation(FoodaStoreDeliveryLocationDto municipalityId);
+    Optional<FoodaStoreDto> findByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes);
 
-    List<FoodaStoreDto> findByDeliveryTime(FoodaStoreDeliveryLocationDto build);
+    Optional<FoodaStoreDto> findByWorkingHours(final LocalDateTime opens, final LocalDateTime closes);
 
-    Optional<FoodaStoreDto> findByExample(FoodaStoreReq example);
+    List<FoodaStoreDto> findByDeliveryLocation(final Long municipalityId);
+
+    List<FoodaStoreDto> findByDeliveryTime(final Integer timeAsMinutes);
+
+      List<FoodaStoreDto> findByDeliveryCost(final BigDecimal minPrice, final BigDecimal maxPrice);
+
+    List<FoodaStoreDto> findByDeliveryCost(final BigDecimal minPrice, final BigDecimal maxPrice,final BigDecimal amount);
+
+    List<FoodaStoreDto> findByPaymentMethodId(final Long paymentMethodId, final BigDecimal minOrderAmount);
+
+    List<FoodaStoreDto> findByPaymentMethodId(final Long paymentMethodId);
 
 
-
-    List<FoodaStoreDto> findByDeliveryCost(FoodaStoreDeliveryCostDto build);
-
-    List<FoodaStoreDto> findByPaymentMethodId(FoodaStorePaymentMethodDto build);
 }
