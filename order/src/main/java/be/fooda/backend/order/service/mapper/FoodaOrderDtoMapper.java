@@ -1,11 +1,13 @@
 package be.fooda.backend.order.service.mapper;
 
-import be.fooda.backend.commons.model.template.order.request.FoodaOrderKeyReq;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderProductReq;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderReq;
 import be.fooda.backend.commons.model.template.order.response.*;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
-import be.fooda.backend.order.model.dto.*;
+import be.fooda.backend.order.model.dto.FoodaOrderDto;
+import be.fooda.backend.order.model.dto.FoodaOrderPaymentDto;
+import be.fooda.backend.order.model.dto.FoodaOrderProductDto;
+import be.fooda.backend.order.model.dto.FoodaOrderStatusDto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,7 +19,8 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
     public FoodaOrderDto requestToDto(FoodaOrderReq foodaOrderReq) {
         return FoodaOrderDto.builder()
                 .note(foodaOrderReq.getNote())
-                .orderKey(orderKey(foodaOrderReq))
+                .storeId(foodaOrderReq.getStoreId())
+                .userId(foodaOrderReq.getUserId())
                 .orderStatus(orderStatus(foodaOrderReq))
                 .payments(payments(foodaOrderReq))
                 .products(product(foodaOrderReq))
@@ -28,12 +31,9 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
     private List<FoodaOrderProductDto> product(FoodaOrderReq foodaOrderReq) {
         return foodaOrderReq.getProducts().stream()
                 .map(req -> FoodaOrderProductDto.builder()
-                        .productKey(FoodaOrderProductKeyDto.builder()
-                                .productId(req.getProductId())
-                                .storeId(foodaOrderReq.getOrderKey().getStoreId())
-                                .build())
-                        .price(req.getPrice())
+                        .productId(req.getProductId())
                         .quantity(req.getQuantity())
+                        .price(req.getPrice())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -41,10 +41,8 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
     private List<FoodaOrderProductDto> product(FoodaOrderRes foodaOrderRes) {
         return foodaOrderRes.getOrderedProducts().stream()
                 .map(req -> FoodaOrderProductDto.builder()
-                        .productKey(FoodaOrderProductKeyDto.builder()
-                                .productId(req.getProductId())
-                                .storeId(foodaOrderRes.getStore().getStoreId())
-                                .build())
+                        .productId(req.getProductId())
+                        .orderId(foodaOrderRes.getOrderId())
                         .price(req.getPrice())
                         .quantity(req.getQuantity())
                         .build())
@@ -86,27 +84,13 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
                 .build();
     }
 
-    private FoodaOrderKeyDto orderKey(FoodaOrderReq foodaOrderReq) {
-        return FoodaOrderKeyDto.builder()
-                .userId(foodaOrderReq.getOrderKey().getUserId())
-                .storeId(foodaOrderReq.getOrderKey().getStoreId())
-                .build();
-    }
-
-    private FoodaOrderKeyDto orderKey(FoodaOrderRes foodaOrderRes) {
-        return FoodaOrderKeyDto.builder()
-                .userId(foodaOrderRes.getUserId())
-                .storeId(foodaOrderRes.getStore().getStoreId())
-                .orderKeyId(foodaOrderRes.getOrderKeyId())
-                .externalOrderId(foodaOrderRes.getExternalOrderId())
-                .build();
-    }
-
     @Override
     public FoodaOrderDto responseToDto(FoodaOrderRes foodaOrderRes) {
         return FoodaOrderDto.builder()
                 .note(foodaOrderRes.getNote())
-                .orderKey(orderKey(foodaOrderRes))
+                .externalOrderId(foodaOrderRes.getExternalOrderId())
+                .userId(foodaOrderRes.getUserId())
+                .storeId(foodaOrderRes.getStore().getStoreId())
                 .orderStatus(orderStatus(foodaOrderRes))
                 .payments(payments(foodaOrderRes))
                 .products(product(foodaOrderRes))
@@ -118,7 +102,8 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
     public FoodaOrderReq dtoToRequest(FoodaOrderDto foodaOrderDto) {
         return FoodaOrderReq.builder()
                 .note(foodaOrderDto.getNote())
-                .orderKey(orderKey(foodaOrderDto))
+                .storeId(foodaOrderDto.getStoreId())
+                .userId(foodaOrderDto.getUserId())
                 .orderStatusId(foodaOrderDto.getOrderStatus().getOrderStatusId())
                 .payments(payments(foodaOrderDto))
                 .products(products(foodaOrderDto))
@@ -130,7 +115,7 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
         return foodaOrderDto.getProducts().stream()
                 .map(dto -> FoodaOrderProductReq.builder()
                         .price(dto.getPrice())
-                        .productId(dto.getProductKey().getProductId())
+                        .productId(dto.getProductId())
                         .quantity(dto.getQuantity())
                         .build())
                 .collect(Collectors.toSet());
@@ -138,31 +123,23 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
 
     private Set<Long> payments(FoodaOrderDto foodaOrderDto) {
         return foodaOrderDto.getPayments()
-                            .stream()
-                            .map(FoodaOrderPaymentDto::getPaymentId)
-                            .collect(Collectors.toSet());
-    }
-
-    private FoodaOrderKeyReq orderKey(FoodaOrderDto foodaOrderDto) {
-        return FoodaOrderKeyReq.builder()
-                .userId(foodaOrderDto.getOrderKey().getUserId())
-                .storeId(foodaOrderDto.getOrderKey().getStoreId())
-                .build();
+                .stream()
+                .map(FoodaOrderPaymentDto::getPaymentId)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public FoodaOrderRes dtoToResponse(FoodaOrderDto foodaOrderDto) {
         return FoodaOrderRes.builder()
-                .externalOrderId(foodaOrderDto.getOrderKey().getExternalOrderId())
+                .externalOrderId(foodaOrderDto.getExternalOrderId())
                 .productsTotal(productsTotal(foodaOrderDto))
                 .note(foodaOrderDto.getNote())
-                .orderKeyId(foodaOrderDto.getOrderKey().getOrderKeyId())
                 .registryTime(foodaOrderDto.getRegisteredAt())
                 .requiredTime(foodaOrderDto.getRequiredTime())
                 .deliveryTime(foodaOrderDto.getDeliveryTime())
                 .paymentTime(foodaOrderDto.getPaymentTime())
-                .userId(foodaOrderDto.getOrderKey().getUserId())
-                .store(FoodaOrderStoreRes.builder().storeId(foodaOrderDto.getOrderKey().getStoreId()).build())
+                .userId(foodaOrderDto.getUserId())
+                .store(FoodaOrderStoreRes.builder().storeId(foodaOrderDto.getStoreId()).build())
                 .taxTotal(foodaOrderDto.getTaxTotal())
                 .deliveryTotal(foodaOrderDto.getDeliveryTotal())
                 .status(statusFromDto(foodaOrderDto))
@@ -175,10 +152,10 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
     private List<FoodaOrderProductRes> productsFromDto(FoodaOrderDto foodaOrderDto) {
         return foodaOrderDto.getProducts()
                 .stream()
-                .map(p -> FoodaOrderProductRes.builder()
-                        .productId(p.getProductKey().getProductId())
-                        .quantity(p.getQuantity())
-                        .price(p.getPrice())
+                .map(dto -> FoodaOrderProductRes.builder()
+                        .productId(dto.getProductId())
+                        .quantity(dto.getQuantity())
+                        .price(dto.getPrice())
                         .build()
                 )
                 .collect(Collectors.toList());
@@ -208,10 +185,11 @@ public class FoodaOrderDtoMapper implements FoodaDtoMapper<FoodaOrderDto, FoodaO
                 .mapToDouble(prod -> prod.getPrice().doubleValue() * prod.getQuantity())
                 .sum());
     }
+
     private BigDecimal priceTotal(FoodaOrderDto foodaOrderDto) {
         return foodaOrderDto.getDeliveryTotal()
                 .add(foodaOrderDto.getProductsTotal()
                         .multiply(BigDecimal.ONE.add(foodaOrderDto.getTaxTotal().divide(BigDecimal.valueOf(100))))
-                    );
-        }
+                );
+    }
 }

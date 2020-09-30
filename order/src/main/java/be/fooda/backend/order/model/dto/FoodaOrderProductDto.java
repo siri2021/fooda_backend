@@ -16,8 +16,8 @@ public class FoodaOrderProductDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderProductId;
-    private FoodaOrderKeyDto orderKey;
-    private FoodaOrderProductKeyDto productKey;
+    private Long productId;
+    private Long orderId;
     private Integer quantity;
     private BigDecimal price;
 }

@@ -1,58 +1,53 @@
 package be.fooda.backend.order.service;
 
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface FoodaOrderService <REQ, RES>{
 
-    Optional<RES> getOrderByKey(final Long orderKeyId);
+    Optional<RES> getById(final Long orderId);
 
-    Optional<RES> getOrderByKey(final Long externalOrderId, final Long userID, final Long storeId);
+    List<RES> getAll();
 
-    Optional<RES> getOrderByExample(final REQ orderReq);
+    Optional<RES> getByExample(final REQ orderReq);
 
-    List<RES> getAllOrders();
+    List<RES> getByStatusId(final Long statusId);
 
-    List<RES> getOrdersByStatusId(final Long statusId);
+    List<RES> getByRequiredTime(final LocalDateTime requiredTime);
 
-    List<RES> getOrdersByRequiredTime(final LocalDateTime requiredTime);
+    List<RES> getByDeliveryTime(final LocalDateTime deliveryTime);
 
-    List<RES> getOrdersByDeliveryTime(final LocalDateTime deliveryTime);
+    List<RES> getByPaymentTime(final LocalDateTime paymentTime);
 
-    List<RES> getOrdersByPaymentTime(final LocalDateTime paymentTime);
+    List<RES> getByPaymentId(final Long userId, final Long paymentId);
 
-    List<RES> getOrdersByPaymentId(final Long paymentId);
+    List<RES> getByPaymentAmount(final BigDecimal amount);
 
-    List<RES> getOrdersByPaymentAmount(final BigDecimal amount);
+    List<RES> getByPaymentAmount(final BigDecimal minAmount, final BigDecimal maxAmount);
 
-    List<RES> getOrdersByPaymentAmount(final BigDecimal minAmount, final BigDecimal maxAmount);
+    List<RES> getByStoreId(final Long storeId);
 
-    List<RES> getOrdersByStoreId(final Long storeId);
+    List<RES> getByUserId(final Long userId);
 
-    List<RES> getOrdersByUserId(final Long userId);
+    Optional<RES> add(final REQ req);
 
-    List<RES> getOrdersByProductKey(final Long orderKeyId);
+    Optional<RES> editById(final Long orderId, REQ orderREQ);
 
-    Optional<RES> addOrder(final REQ req);
+    Optional<RES> editByExample(final REQ orderReq);
 
-    Optional<RES> editOrderByKey(final Long orderKeyId,final REQ orderREQ);
+    Optional<RES> removeById(final Long orderId);
 
-    Optional<RES> editOrderByKey(final Long orderKeyId, final Long externalOrderId, final Long userID, final Long storeId, REQ orderREQ);
+    List<RES> removeByUserId(final Long userId);
 
-    Optional<RES> editOrderByExample(final REQ orderReq);
+    Optional<RES> removeByExample(final REQ orderReq);
 
-    Optional<RES> removeOrderByKey(final Long externalOrderId, final Long userID, final Long storeId);
+    Boolean existsById(final Long orderId);
 
-    Optional<RES> removeOrderByKey(final Long orderKeyId);
-
-    Optional<RES> removeOrderByExample(final REQ orderReq);
-
-    Boolean doesOrderExistsByKey(final Long orderKeyId);
-
-    Boolean doesOrderExistsByKey(final Long externalOrderId, final Long userID, final Long storeId);
-
-    Boolean doesOrderExistsByExample(final REQ orderReq);
+    Boolean existsByExample(final REQ orderReq);
 
 }

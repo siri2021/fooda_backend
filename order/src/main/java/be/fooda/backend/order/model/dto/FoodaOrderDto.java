@@ -15,16 +15,25 @@ import java.util.List;
 @Builder
 @Entity
 public class FoodaOrderDto extends FoodaAbstractDto {
-    @EmbeddedId
-    private FoodaOrderKeyDto orderKey;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderId;
+
+    private Long externalOrderId;
+    private Long userId;
+    private Long storeId;
 
     @OneToOne
     private FoodaOrderStatusDto orderStatus;
 
     private String note;
 
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime requiredTime;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime deliveryTime;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime paymentTime;
 
     private BigDecimal productsTotal;
