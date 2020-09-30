@@ -21,6 +21,7 @@ public class FoodaOrderController {
 
     @GetMapping("apiOrderGetById")
     public ResponseEntity<FoodaOrderRes> apiOrderGetById(@RequestParam Long orderId) {
+        System.out.println("Hello from Order Branch  .. ");
         return orderService.getById(orderId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
