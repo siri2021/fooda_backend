@@ -11,11 +11,13 @@ import java.util.Set;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class FoodaOrderReq {
-    private FoodaOrderKeyReq orderKey;
+    private Long userId;
+    private Long storeId;
+
     private Long orderStatusId;
     private String note;
     private LocalDateTime requiredTime;
-
+    
     private Set<FoodaOrderProductReq> products;
 
     private Set<Long> payments;

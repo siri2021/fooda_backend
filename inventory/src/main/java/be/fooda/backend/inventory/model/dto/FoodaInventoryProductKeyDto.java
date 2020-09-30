@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @Builder
@@ -13,6 +16,9 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @Embeddable
 public class FoodaInventoryProductKeyDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long productKeyId;
     private Long productId;
     private Long storeId;
 }

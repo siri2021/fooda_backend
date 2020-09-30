@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder(toBuilder = true)
 public class FoodaStoreContactReq {
+
     private String call;
     private String phoneNumber;
     private String firstName;

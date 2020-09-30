@@ -81,7 +81,7 @@ public class FoodaProductHttpMapper implements FoodaHttpMapper<FoodaProductReq, 
     @Override
     public FoodaProductRes requestToResponse(final FoodaProductReq foodaProductReq) {
         final FoodaProductRes res = new FoodaProductRes();
-        // TODO setters ..
+
         return res;
     }
 }
