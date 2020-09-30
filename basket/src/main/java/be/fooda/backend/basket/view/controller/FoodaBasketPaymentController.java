@@ -1,82 +1,64 @@
 package be.fooda.backend.basket.view.controller;
 
-import be.fooda.backend.basket.dao.FoodaBasketPaymentRepository;
-import be.fooda.backend.basket.service.mapper.FoodaBasketPaymentDtoMapper;
+import be.fooda.backend.basket.service.FoodaBasketPaymentService;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketPaymentReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketPaymentRes;
-import be.fooda.backend.commons.service.mapper.FoodaBasketPaymentHttpMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("basket/payment/")
 @RequiredArgsConstructor
 public class FoodaBasketPaymentController {
 
-    private final FoodaBasketPaymentRepository basketPaymentRepo;
-    private final FoodaBasketPaymentDtoMapper basketPaymentDtoMapper;
-    private final FoodaBasketPaymentHttpMapper basketPaymentHttpMapper;
+    private final FoodaBasketPaymentService<FoodaBasketPaymentReq, FoodaBasketPaymentRes> basketPaymentService;
 
     @GetMapping("apiBasketGetPaymentById")
-    public ResponseEntity<FoodaBasketPaymentRes> apiBasketGetPaymentById(@RequestParam final Long paymentId) {
-        return basketPaymentRepo
-                .findById(paymentId)
-                .map(basketPaymentDtoMapper::dtoToResponse)
+    public ResponseEntity<FoodaBasketPaymentRes> apiBasketGetPaymentById(@RequestParam final String deliveryId) {
+        return basketPaymentService.getBasketPaymentById(deliveryId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("getAllByUserId")
-    public ResponseEntity<List<FoodaBasketPaymentRes>> apiBasketGetPaymentsByUser(@RequestParam final Long userId) {
-        return new ResponseEntity<>(basketPaymentRepo
-                .findAllByUserId(userId)
-                .stream()
-                .map(basketPaymentDtoMapper::dtoToResponse)
-                .collect(Collectors.toList()), HttpStatus.FOUND);
+    @GetMapping("apiBasketGetPaymentsByBasketKey")
+    public ResponseEntity<List<FoodaBasketPaymentRes>> apiBasketGetPaymentsByBasketKey(@RequestParam final Long userId, @RequestParam final String session, @RequestParam final Long storeId) {
+        return new ResponseEntity<>(basketPaymentService.getBasketDeliveriesByBasketKey(userId, session, storeId), HttpStatus.FOUND);
     }
 
-    @PostMapping("add")
-    public ResponseEntity<FoodaBasketPaymentRes> apiBasketAddPayment(@RequestBody final FoodaBasketPaymentReq payment) {
-        return basketPaymentRepo.exists(Example.of(basketPaymentDtoMapper.requestToDto(payment)))
-                ? new ResponseEntity<>
-                (basketPaymentDtoMapper.dtoToResponse(
-                        basketPaymentRepo.save(
-                                basketPaymentDtoMapper.requestToDto(payment))), HttpStatus.OK)
+    @GetMapping("apiBasketGetPaymentsByUser")
+    public ResponseEntity<List<FoodaBasketPaymentRes>> apiBasketGetPaymentsByUser(@RequestParam final Long userId, @RequestParam final String session) {
+        return new ResponseEntity<>(basketPaymentService.getBasketDeliveriesByUser(userId, session), HttpStatus.FOUND);
+    }
+
+    @PostMapping("apiBasketAddPayment")
+    public ResponseEntity<FoodaBasketPaymentRes> apiBasketAddPayment(@RequestBody final FoodaBasketPaymentReq req) {
+        return basketPaymentService.doesBasketPaymentExistByExample(req).equals(Boolean.FALSE)
+                ? new ResponseEntity<>(basketPaymentService.addBasketPaymentAndReturn(req), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.valueOf("ADDRESS_ALREADY_EXISTS"));
     }
 
-    @PutMapping("edit/{paymentId}")
-    public ResponseEntity<FoodaBasketPaymentRes> apiBasketEditPayment(@RequestBody final FoodaBasketPaymentReq payment, @PathVariable final Long paymentId) {
-        ResponseEntity<FoodaBasketPaymentRes> result = basketPaymentRepo
-                .findById(paymentId)
-                .map(basketPaymentDtoMapper::dtoToResponse)
-                .map(res -> new ResponseEntity<>(basketPaymentHttpMapper
-                        .requestToResponse(payment)
-                        .toBuilder()
-                        .basketPaymentId(paymentId)
-                        .build()
-                        , HttpStatus.FOUND))
+    @PutMapping("apiBasketEditPayment")
+    public ResponseEntity<FoodaBasketPaymentRes> apiBasketEditPayment(@RequestBody final FoodaBasketPaymentReq req, @RequestParam final String basketPaymentId) {
+        return basketPaymentService.editBasketPaymentByIdAndReturn(basketPaymentId, req)
+                .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
-        if (result.getStatusCode().equals(HttpStatus.FOUND)) {
-            basketPaymentRepo.save(basketPaymentDtoMapper.responseToDto(result.getBody()));
-        }
-        return result;
     }
 
-    @DeleteMapping("deleteByAddressId")
-    public void apiBasketDeletePayment(@RequestParam final Long paymentId) {
-        basketPaymentRepo.deleteById(paymentId);
+    @DeleteMapping("apiBasketDeletePaymentById")
+    public ResponseEntity<FoodaBasketPaymentRes> apiBasketDeletePayment(@RequestParam final String basketPaymentId) {
+        return basketPaymentService.removeBasketPaymentByIdAndReturn(basketPaymentId)
+                .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("delete")
-    public void apiBasketDeletePayment(@RequestBody final FoodaBasketPaymentReq payment) {
-        basketPaymentRepo.delete(basketPaymentDtoMapper.requestToDto(payment));
+    @DeleteMapping("apiBasketDeletePaymentByExample")
+    public ResponseEntity<FoodaBasketPaymentRes> apiBasketDeletePayment(@RequestBody final FoodaBasketPaymentReq req) {
+        return basketPaymentService.removeBasketPaymentByExampleAndReturn(req)
+                .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

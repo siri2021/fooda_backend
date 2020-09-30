@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodaBasketPaymentReq {
+    private Long paymentId;
     private Long userId;
     private String session;
     private Long storeId;
-    private Long paymentId;
     private BigDecimal amount;
 }

@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
 
@@ -13,10 +14,10 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "ORDER")
+@Document
 public class FoodaBasketOrderDto {
-    @Id
-    private Long basketOrderId;
+    @MongoId(FieldType.OBJECT_ID)
+    private String basketOrderId;
     private FoodaBasketKeyDto basketKey;
     private LocalDateTime registryTime;
     private LocalDateTime requiredTime;

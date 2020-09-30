@@ -14,7 +14,6 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 public class FoodaBasketContactRes {
     private Long contactId;
-    private Long userId;
     private String firstName;
     private String familyName;
     private String companyName;

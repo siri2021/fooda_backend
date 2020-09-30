@@ -4,21 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
 public class FoodaBasketKeyDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long basketKeyId;
+    @MongoId(FieldType.OBJECT_ID)
+    private String basketKeyId;
     private Long userId;
     private String session;
     private Long storeId;

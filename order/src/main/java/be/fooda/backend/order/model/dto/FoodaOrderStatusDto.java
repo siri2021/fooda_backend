@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "ORDER_STATUS")
 public class FoodaOrderStatusDto extends FoodaAbstractDto {
     @Id
-    private Long statusId;
+    private Long orderStatusId;
     private String title;
     @OneToOne
     private FoodaOrderStatusDto parent;

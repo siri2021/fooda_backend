@@ -3,6 +3,7 @@ package be.fooda.backend.user.model.dto;
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import be.fooda.backend.commons.service.validator.PhoneNumber;
 import be.fooda.backend.commons.service.validator.UniqueLogin;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "USER")
 public class FoodaUserDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

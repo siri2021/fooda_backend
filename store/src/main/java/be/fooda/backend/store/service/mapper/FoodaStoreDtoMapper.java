@@ -90,6 +90,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
 
     private List<FoodaStoreWorkingHoursItemReq> workHours(final FoodaStoreDto dto) {
         return dto.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursItemReq.builder()
+                .workingDate(hours.getWorkingDay())
                 .closeTime(hours.getCloseTime())
                 .openTime(hours.getOpenTime())
                 .build()).collect(Collectors.toList());
@@ -103,6 +104,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     @Override
     public FoodaStoreRes dtoToResponse(FoodaStoreDto dto) {
         return FoodaStoreRes.builder()
+                .workingHours(workingHoursDtoToRes(dto))
                 .about(dto.getAbout())
                 .auth(auth(dto))
                 .deliveryCosts(deliveryCostsAsRes(dto))
@@ -111,6 +113,18 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .images(images(dto))
                 .paymentMethods(paymentMethodsAsRes(dto))
                 .build();
+    }
+
+    private List<FoodaStoreWorkingHoursItemRes> workingHoursDtoToRes(FoodaStoreDto dto) {
+        return dto.getWorkingHours()
+                .stream()
+                .map(hours->FoodaStoreWorkingHoursItemRes
+                        .builder()
+                        .workingDate(hours.getWorkingDay())
+                        .openTime(hours.getOpenTime())
+                        .closeTime(hours.getCloseTime())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private FoodaStoreLogoRes logoAsRes(FoodaStoreDto dto) {
@@ -187,6 +201,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
 
     private List<FoodaStoreWorkingHoursDto> workingHoursReqToDto(FoodaStoreReq req) {
         return req.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursDto.builder()
+                .workingDay(hours.getWorkingDate())
                 .openTime(hours.getOpenTime())
                 .closeTime(hours.getCloseTime())
                 .build()).collect(Collectors.toList());
@@ -273,6 +288,8 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     private List<FoodaStoreWorkingHoursDto> workingHoursAsDto(final FoodaStoreRes res){
 
         return res.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursDto.builder()
+
+                .workingDay(hours.getWorkingDate())
                 .openTime(hours.getOpenTime())
                 .closeTime(hours.getCloseTime())
                 .build()).collect(Collectors.toList());
@@ -318,30 +335,8 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     }
 }
 
-   /*.address(addressDtoToReq(dto))
-                .contact(contactDtoToReq(dto))
-                .storeId(dto.getStoreId(dto))
-                .auth(authDtoToReq(dto))
-                .siteUrl(dto.getSiteUrl(dto))
-                .videos()
-                .images()
-    }
 
-    private List<FoodaStoreAuthItemReq> authDtoToReq(FoodaStoreDto dto) {
-        return null;
-    }
 
-    private FoodaStoreContactReq contactDtoToReq(FoodaStoreDto dto) {
-        return FoodaStoreContactReq.builder()
-                .firstName(dto.getName())
-               // .familyName(dto.)// no familyname attrtibute on dto only name ??????
-                .phoneNumber(dto)
-                .build();
-    }
-
-    private FoodaStoreAddressReq addressDtoToReq(FoodaStoreDto dto) {
-        return null;
-    }*/
 
 
 

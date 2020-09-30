@@ -1,11 +1,14 @@
 package be.fooda.backend.commons.model.template.store.request;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+
+import java.math.BigDecimal;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 public class FoodaStoreDeliveryCostsItemReq {
-    private Double amount;
-    private Double minPrice;
-    private Double maxPrice;
+    private BigDecimal amount;
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
 }

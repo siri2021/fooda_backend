@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -12,6 +13,6 @@ import java.time.LocalDate;
 
 public class FoodaStorePaymentMethodsItemRes {
     private String title;
-    private Double minOrderAmount;
+    private BigDecimal minOrderAmount;
     private LocalDate expiry;
 }
