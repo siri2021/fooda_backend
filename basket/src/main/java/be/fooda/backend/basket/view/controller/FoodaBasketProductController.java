@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("basket/product/") // http://www.fooda.be/basket/product/
+@RequestMapping("basket/product/")
 @RequiredArgsConstructor
 public class FoodaBasketProductController {
 
@@ -23,7 +23,7 @@ public class FoodaBasketProductController {
 
     @GetMapping("apiBasketGetProductById")
     public ResponseEntity<FoodaBasketProductRes> apiBasketGetProductById(@RequestParam final String basketProductId) {
-        return basketProductService.getBasketProductById(basketProductId) // FoodaBasketProductRes
+        return basketProductService.getBasketProductById(basketProductId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
