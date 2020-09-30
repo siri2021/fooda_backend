@@ -4,6 +4,7 @@ import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -16,7 +17,7 @@ public class FoodaStoreDeliveryCostDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeDeliveryCostId;
-    private Double minPrice;
-    private Double maxPrice;
-    private Double amount;
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
+    private BigDecimal amount;
 }

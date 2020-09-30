@@ -17,6 +17,6 @@ public class FoodaStorePaymentMethodDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long methodId;
-    private Double minOrderAmount;
+    private BigDecimal minOrderAmount;
     private LocalDate expiryDate;
 }
