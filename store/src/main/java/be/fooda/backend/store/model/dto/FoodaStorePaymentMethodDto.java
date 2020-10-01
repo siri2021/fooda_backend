@@ -3,7 +3,10 @@ package be.fooda.backend.store.model.dto;
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
@@ -12,7 +15,6 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "STORE_TYPE")
 public class FoodaStorePaymentMethodDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

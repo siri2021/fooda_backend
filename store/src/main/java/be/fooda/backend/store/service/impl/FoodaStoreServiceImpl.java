@@ -1,11 +1,5 @@
 package be.fooda.backend.store.service.impl;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
@@ -13,14 +7,29 @@ import be.fooda.backend.commons.service.mapper.FoodaStoreHttpMapper;
 import be.fooda.backend.store.dao.FoodaStoreRepository;
 import be.fooda.backend.store.service.FoodaStoreService;
 import be.fooda.backend.store.service.mapper.FoodaStoreDtoMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+@Service
 public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, FoodaStoreRes> {
 
-	private final FoodaStoreRepository storeRepo;
-	private final FoodaStoreDtoMapper storeDtoMapper;
-	private final FoodaStoreHttpMapper storeHttpMapper;
+	@Autowired
+	private FoodaStoreRepository storeRepo;
+
+	@Qualifier("foodaStoreDtoMapper")
+	@Autowired
+	private FoodaStoreDtoMapper storeDtoMapper;
+
+	@Autowired
+	private FoodaStoreHttpMapper storeHttpMapper;
 
 	@Override
 	public Optional<FoodaStoreRes> getStoreById(final Long storeId) {

@@ -12,11 +12,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "STORE_WORKING_HOURS")
 public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeWorkingHoursId;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime openTime;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime closeTime;
 }
