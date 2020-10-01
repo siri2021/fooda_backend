@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FoodaConvertApp {
+public class FoodaConverterApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(FoodaConvertApp.class, args);
+        SpringApplication.run(FoodaConverterApp.class, args);
     }
 }

@@ -1,13 +1,13 @@
-package be.fooda.analysis;
+package be.fooda.backend.translation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendAnalysisApplication {
+public class FoodaTranslationApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendAnalysisApplication.class, args);
+		SpringApplication.run(FoodaTranslationApp.class, args);
 	}
 
 }

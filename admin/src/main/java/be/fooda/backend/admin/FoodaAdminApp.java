@@ -1,17 +1,15 @@
-package be.fooda.backend.gateway.server;
+package be.fooda.backend.admin;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableZuulProxy
-public class FoodaGatewayServerApp {
-
+@EnableAdminServer
+public class FoodaAdminApp {
 	public static void main(String[] args) {
-		SpringApplication.run(FoodaGatewayServerApp.class, args);
-	}
-
+	      SpringApplication.run(FoodaAdminApp.class, args);
+      }
 }

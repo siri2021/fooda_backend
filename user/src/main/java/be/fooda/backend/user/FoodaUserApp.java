@@ -1,11 +1,13 @@
-package be.fooda.backend.payment;
+package be.fooda.backend.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendPaymentApp {
+public class FoodaUserApp {
+
 	public static void main(String[] args) {
-		SpringApplication.run(BackendPaymentApp.class, args);
+		SpringApplication.run(FoodaUserApp.class, args);
 	}
+
 }

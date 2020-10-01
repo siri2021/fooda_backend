@@ -1,13 +1,13 @@
-package be.fooda.backend.ranking;
+package be.fooda.backend.delivery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendRankingApplication {
+public class FoodaDeliveryApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendRankingApplication.class, args);
+		SpringApplication.run(FoodaDeliveryApp.class, args);
 	}
 
 }

@@ -1,11 +1,13 @@
-package be.fooda.backend.review;
+package be.fooda.analysis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendReviewApplication {
+public class FoodaAnalysisApp {
+
 	public static void main(String[] args) {
-		SpringApplication.run(BackendReviewApplication.class, args);
+		SpringApplication.run(FoodaAnalysisApp.class, args);
 	}
+
 }

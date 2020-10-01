@@ -1,13 +1,11 @@
-package be.fooda.backend.delivery;
+package be.fooda.backend.payment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FoodaDeliveryServerApplication {
-
+public class FoodaPaymentApp {
 	public static void main(String[] args) {
-		SpringApplication.run(FoodaDeliveryServerApplication.class, args);
+		SpringApplication.run(FoodaPaymentApp.class, args);
 	}
-
 }
