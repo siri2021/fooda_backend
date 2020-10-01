@@ -7,20 +7,28 @@ import be.fooda.backend.basket.service.mapper.FoodaBasketDeliveryDtoMapper;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketDeliveryReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketDeliveryRes;
 import be.fooda.backend.commons.service.mapper.FoodaBasketDeliveryHttpMapper;
-import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Service
 public class FoodaBasketDeliveryServiceImpl implements FoodaBasketDeliveryService<FoodaBasketDeliveryReq, FoodaBasketDeliveryRes> {
 
-    private final FoodaBasketDeliveryRepository basketDeliveryRepo;
-    private final FoodaBasketDeliveryDtoMapper basketDeliveryDtoMapper;
-    private final FoodaBasketDeliveryHttpMapper basketDeliveryHttpMapper;
+    @Autowired
+    private FoodaBasketDeliveryRepository basketDeliveryRepo;
+
+    @Qualifier("deliveryDtoMapper")
+    @Autowired
+    private FoodaBasketDeliveryDtoMapper basketDeliveryDtoMapper;
+
+    @Autowired
+    private FoodaBasketDeliveryHttpMapper basketDeliveryHttpMapper;
 
     @Override
     public Optional<FoodaBasketDeliveryRes> getBasketDeliveryById(String basketDeliveryId) {

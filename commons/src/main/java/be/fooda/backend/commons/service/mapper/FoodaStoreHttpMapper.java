@@ -1,12 +1,13 @@
 package be.fooda.backend.commons.service.mapper;
 
-import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
-import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import be.fooda.backend.commons.model.template.store.request.*;
 import be.fooda.backend.commons.model.template.store.response.*;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, FoodaStoreRes> {
     @Override
     public FoodaStoreReq responseToRequest(FoodaStoreRes res) {

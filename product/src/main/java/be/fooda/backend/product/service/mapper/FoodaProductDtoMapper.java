@@ -1,20 +1,19 @@
 package be.fooda.backend.product.service.mapper;
 
-import be.fooda.backend.commons.model.template.product.request.*;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductImagesItemRes;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductPricesItemRes;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductStoreRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.product.model.dto.*;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Component
 public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, FoodaProductReq, FoodaProductRes> {
 
     @Override

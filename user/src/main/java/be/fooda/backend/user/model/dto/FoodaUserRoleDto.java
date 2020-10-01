@@ -1,5 +1,6 @@
 package be.fooda.backend.user.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder(toBuilder = true)
 @Entity
 public class FoodaUserRoleDto {

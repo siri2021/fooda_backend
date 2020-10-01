@@ -5,9 +5,11 @@ import be.fooda.backend.basket.model.dto.FoodaBasketOrderDto;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketOrderReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketOrderRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class FoodaBasketOrderDtoMapper implements FoodaDtoMapper<FoodaBasketOrderDto, FoodaBasketOrderReq, FoodaBasketOrderRes> {
 
     @Override

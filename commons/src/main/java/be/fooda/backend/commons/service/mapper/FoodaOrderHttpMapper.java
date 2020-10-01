@@ -3,9 +3,11 @@ package be.fooda.backend.commons.service.mapper;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderProductReq;
 import be.fooda.backend.commons.model.template.order.request.FoodaOrderReq;
 import be.fooda.backend.commons.model.template.order.response.*;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+@Component
 public class FoodaOrderHttpMapper implements FoodaHttpMapper<FoodaOrderReq, FoodaOrderRes> {
     @Override
     public FoodaOrderReq responseToRequest(FoodaOrderRes foodaOrderRes) {

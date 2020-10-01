@@ -1,11 +1,9 @@
 package be.fooda.backend.contact.model.dto;
 
 import be.fooda.backend.commons.service.validator.PhoneNumber;
-import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "CONTACT")
 public class FoodaContactDto {
     @Id
     private Integer contactId;

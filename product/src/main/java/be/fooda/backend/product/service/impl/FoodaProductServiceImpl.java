@@ -1,36 +1,43 @@
 package be.fooda.backend.product.service.impl;
 
+import be.fooda.backend.commons.model.template.product.request.FoodaProductReq;
+import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
+import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import be.fooda.backend.commons.service.mapper.FoodaHttpMapper;
+import be.fooda.backend.product.dao.FoodaProductRepository;
+import be.fooda.backend.product.model.dto.FoodaProductDto;
+import be.fooda.backend.product.model.dto.FoodaProductKeyDto;
+import be.fooda.backend.product.service.FoodaProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.springframework.http.ResponseEntity;
-
-import be.fooda.backend.commons.model.template.product.request.FoodaProductReq;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
-import be.fooda.backend.commons.service.mapper.FoodaProductHttpMapper;
-import be.fooda.backend.product.dao.FoodaProductRepository;
-import be.fooda.backend.product.model.dto.FoodaProductKeyDto;
-import be.fooda.backend.product.service.FoodaProductService;
-import be.fooda.backend.product.service.mapper.FoodaProductDtoMapper;
-
+@Service
 public class FoodaProductServiceImpl implements FoodaProductService<FoodaProductReq, FoodaProductRes> {
 
-    private final FoodaProductRepository productRepo;
-    private final FoodaProductDtoMapper productDtoMapper;
-    private final FoodaProductHttpMapper productHttpMapper;
+    @Autowired
+    private FoodaProductRepository productRepo;
+
+    @Autowired
+    private FoodaDtoMapper<FoodaProductDto, FoodaProductReq, FoodaProductRes> dtoMapper;
+
+    @Autowired
+    private FoodaHttpMapper<FoodaProductReq, FoodaProductRes> httpMapper;
 
     @Override
     public Optional<FoodaProductRes> getProductByKey(Long productKey) {
-        return productRepo.findById(productKey).map(productDtoMapper::dtoToResponse);
+        return productRepo.findById(productKey).map(dtoMapper::dtoToResponse);
     }
 
     @Override
     public Optional<FoodaProductRes> getProductByKey(Long productId, Long storeId) {
         return productRepo.findByKey(FoodaProductKeyDto.builder().productId(productId).storeId(storeId).build())
-                .map(productDtoMapper::dtoToResponse);
+                .map(dtoMapper::dtoToResponse);
     }
 
     @Override
@@ -113,9 +120,9 @@ public class FoodaProductServiceImpl implements FoodaProductService<FoodaProduct
 
     @Override
     public Optional<FoodaProductRes> addProduct(FoodaProductReq req) {
-        return Optional.of(productDtoMapper.dtoToResponse( 
+        return Optional.of(dtoMapper.dtoToResponse(
                     productRepo.save(
-                        productDtoMapper.requestToDto(req))));
+                        dtoMapper.requestToDto(req))));
     }
 
     @Override

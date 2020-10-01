@@ -2,12 +2,12 @@ package be.fooda.backend.commons.service.mapper;
 
 import be.fooda.backend.commons.model.template.product.request.*;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Component
 public class FoodaProductHttpMapper implements FoodaHttpMapper<FoodaProductReq, FoodaProductRes> {
 
     @Override

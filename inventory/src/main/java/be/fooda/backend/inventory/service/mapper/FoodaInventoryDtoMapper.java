@@ -7,7 +7,9 @@ import be.fooda.backend.commons.model.template.inventory.response.FoodaInventory
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.inventory.model.dto.FoodaInventoryDto;
 import be.fooda.backend.inventory.model.dto.FoodaInventoryProductKeyDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FoodaInventoryDtoMapper implements FoodaDtoMapper<FoodaInventoryDto, FoodaInventoryReq, FoodaInventoryRes> {
     @Override
     public FoodaInventoryDto requestToDto(FoodaInventoryReq foodaInventoryReq) {

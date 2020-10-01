@@ -1,8 +1,5 @@
 package be.fooda.backend.contact.model.dto;
 
-import lombok.*;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -10,7 +7,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "ADDRESS_CITY")
 public class FoodaAddressCityDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -7,20 +7,28 @@ import be.fooda.backend.inventory.dao.FoodaInventoryRepository;
 import be.fooda.backend.inventory.model.dto.FoodaInventoryDto;
 import be.fooda.backend.inventory.service.FoodaInventoryService;
 import be.fooda.backend.inventory.service.mapper.FoodaInventoryDtoMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Service
 public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInventoryReq, FoodaInventoryRes> {
 
-    private final FoodaInventoryRepository inventoryRepository;
-    private final FoodaInventoryDtoMapper inventoryDtoMapper;
-    private final FoodaInventoryHttpMapper inventoryHttpMapper;
+    @Autowired
+    private FoodaInventoryRepository inventoryRepository;
+
+    @Qualifier("foodaInventoryDtoMapper")
+    @Autowired
+    private FoodaInventoryDtoMapper inventoryDtoMapper;
+
+    @Autowired
+    private FoodaInventoryHttpMapper inventoryHttpMapper;
 
     @Override
     public Optional<FoodaInventoryRes> getInventoryById(Long inventoryId) {

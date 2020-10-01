@@ -5,7 +5,9 @@ import be.fooda.backend.basket.model.dto.FoodaBasketPaymentDto;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketPaymentReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketPaymentRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FoodaBasketPaymentDtoMapper implements FoodaDtoMapper<FoodaBasketPaymentDto, FoodaBasketPaymentReq, FoodaBasketPaymentRes> {
 
     @Override
