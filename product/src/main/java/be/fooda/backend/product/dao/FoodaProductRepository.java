@@ -2,15 +2,14 @@ package be.fooda.backend.product.dao;
 
 import be.fooda.backend.product.model.dto.FoodaProductDto;
 import be.fooda.backend.product.model.dto.FoodaProductKeyDto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
 @Repository
-public interface FoodaProductRepository extends CrudRepository<FoodaProductDto, Long> {
+public interface FoodaProductRepository extends JpaRepository<FoodaProductDto, Long> {
 
     Optional<FoodaProductDto> findByKey(final FoodaProductKeyDto key);
 

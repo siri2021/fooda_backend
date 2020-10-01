@@ -1,5 +1,6 @@
 package be.fooda.backend.product.service.mapper;
 
+import be.fooda.backend.commons.model.template.product.request.*;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductImagesItemRes;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductPricesItemRes;
 import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;

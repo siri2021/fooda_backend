@@ -9,6 +9,7 @@ import be.fooda.backend.product.model.dto.FoodaProductDto;
 import be.fooda.backend.product.model.dto.FoodaProductKeyDto;
 import be.fooda.backend.product.service.FoodaProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,6 +24,7 @@ public class FoodaProductServiceImpl implements FoodaProductService<FoodaProduct
     @Autowired
     private FoodaProductRepository productRepo;
 
+    @Qualifier("foodaProductDtoMapper")
     @Autowired
     private FoodaDtoMapper<FoodaProductDto, FoodaProductReq, FoodaProductRes> dtoMapper;
 
