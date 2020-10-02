@@ -3,7 +3,7 @@ package be.fooda.backend.basket.view.controller;
 import be.fooda.backend.basket.service.FoodaBasketPaymentService;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketPaymentReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketPaymentRes;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("basket/payment/")
-@RequiredArgsConstructor
 public class FoodaBasketPaymentController {
 
-    private final FoodaBasketPaymentService<FoodaBasketPaymentReq, FoodaBasketPaymentRes> basketPaymentService;
+    @Autowired
+    private FoodaBasketPaymentService<FoodaBasketPaymentReq, FoodaBasketPaymentRes> basketPaymentService;
 
     @GetMapping("apiBasketGetPaymentById")
     public ResponseEntity<FoodaBasketPaymentRes> apiBasketGetPaymentById(@RequestParam final String deliveryId) {

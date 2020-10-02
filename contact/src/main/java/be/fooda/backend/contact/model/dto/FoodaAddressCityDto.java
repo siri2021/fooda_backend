@@ -1,6 +1,8 @@
 package be.fooda.backend.contact.model.dto;
 
 import javax.validation.constraints.NotNull;
+import lombok.*;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

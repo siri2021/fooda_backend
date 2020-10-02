@@ -4,6 +4,7 @@ import be.fooda.backend.basket.service.FoodaBasketProductService;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketProductReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketProductRes;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("basket/product/")
-@RequiredArgsConstructor
 public class FoodaBasketProductController {
 
-    private final FoodaBasketProductService<FoodaBasketProductReq, FoodaBasketProductRes> basketProductService;
+    @Autowired
+    private FoodaBasketProductService<FoodaBasketProductReq, FoodaBasketProductRes> basketProductService;
 
     @GetMapping("apiBasketGetProductById")
     public ResponseEntity<FoodaBasketProductRes> apiBasketGetProductById(@RequestParam final String basketProductId) {

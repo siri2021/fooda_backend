@@ -5,6 +5,7 @@ import be.fooda.backend.basket.model.dto.FoodaBasketProductDto;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketProductReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketProductRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component

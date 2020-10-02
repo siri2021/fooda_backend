@@ -2,8 +2,9 @@ package be.fooda.backend.contact.model.dto;
 
 import be.fooda.backend.commons.service.validator.PhoneNumber;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.*;
+import javax.persistence.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 

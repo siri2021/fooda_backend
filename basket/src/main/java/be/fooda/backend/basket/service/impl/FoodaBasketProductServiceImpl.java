@@ -9,7 +9,6 @@ import be.fooda.backend.commons.model.template.basket.response.FoodaBasketProduc
 import be.fooda.backend.commons.service.mapper.FoodaBasketProductHttpMapper;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,9 @@ public class FoodaBasketProductServiceImpl implements FoodaBasketProductService<
     private FoodaBasketProductRepository basketProductRepo;
 
     @Autowired
-    @Qualifier("productDtoMapper")
     private FoodaBasketProductDtoMapper basketProductDtoMapper;
 
     @Autowired
-    @Qualifier("productHttpMapper")
     private FoodaBasketProductHttpMapper basketProductHttpMapper;
 
     @Override

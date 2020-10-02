@@ -10,6 +10,7 @@ import be.fooda.backend.commons.service.mapper.FoodaBasketPaymentHttpMapper;
 import be.fooda.backend.commons.service.mapper.FoodaBasketProductHttpMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class MapperConfig {
@@ -20,6 +21,7 @@ public class MapperConfig {
     }
 
     @Bean
+    @Primary
     public FoodaBasketProductDtoMapper productDtoMapper() {
         return new FoodaBasketProductDtoMapper();
     }
@@ -30,6 +32,7 @@ public class MapperConfig {
     }
 
     @Bean
+    @Primary
     public FoodaBasketDeliveryDtoMapper deliveryDtoMapper() {
         return new FoodaBasketDeliveryDtoMapper();
     }
@@ -40,6 +43,7 @@ public class MapperConfig {
     }
 
     @Bean
+    @Primary
     public FoodaBasketPaymentDtoMapper paymentDtoMapper() {
         return new FoodaBasketPaymentDtoMapper();
     }
@@ -50,6 +54,7 @@ public class MapperConfig {
     }
 
     @Bean
+    @Primary
     public FoodaBasketOrderDtoMapper orderDtoMapper() {
         return new FoodaBasketOrderDtoMapper();
     }
