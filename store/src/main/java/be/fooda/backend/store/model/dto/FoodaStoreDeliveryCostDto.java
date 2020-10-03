@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor)
 @Builder
 @Entity
 public class FoodaStoreDeliveryCostDto extends FoodaAbstractDto {
