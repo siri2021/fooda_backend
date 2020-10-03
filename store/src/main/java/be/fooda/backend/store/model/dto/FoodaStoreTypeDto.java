@@ -9,14 +9,18 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "STORE_TYPE")
 public class FoodaStoreTypeDto extends FoodaAbstractDto {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+  
     @NotNull
     private String title;
+    
+    @OneToMany
+    private List<FoodaStoreDto> stores;
 }
