@@ -21,6 +21,6 @@ public class FoodaStoreTypeDto extends FoodaAbstractDto {
     @NotNull
     private String title;
     
-    @OneToMany
+    @OneToMany(mappedBy = "type")
     private List<FoodaStoreDto> stores;
 }
