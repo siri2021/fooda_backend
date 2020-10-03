@@ -10,39 +10,55 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "STORE")
 public class FoodaStoreDto extends FoodaAbstractDto {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeId;
+   
     @NotNull
     private String name;
+  
     private String slogan;
+  
     private Long bgImageId;
+   
     private Long bgVideoId;
+  
     private Long addressId;
+   
     private Long contactId;
+   
     @OneToOne
     private FoodaStoreTypeDto type;
-    @OneToOne
-    private FoodaStoreDto parent;
+    
+    private Long parentId;
+   
     @NotNull
     private String siteUrl;
+  
     @NotNull
     private String storeUrl;
+  
     private Long logoImageId;
+ 
     private String about;
-    @OneToMany
+  
+    @OneToMany(mappedBy = "store")
     private List<FoodaStorePaymentMethodDto> paymentMethods;
-    @OneToMany
+  
+    @OneToMany(mappedBy = "store")
     private List<FoodaStoreDeliveryCostDto> deliveryCosts;
-    @OneToMany
+  
+    @OneToMany(mappedBy = "store")
     private List<FoodaStoreDeliveryLocationDto> deliveryLocations;
-    @OneToMany
+  
+    @OneToMany(mappedBy = "store")
     private List<FoodaStoreWorkingHoursDto> workingHours;
-    @OneToOne
+  
+    @OneToOne(mappedBy = "store")
     private FoodaStoreAuthDto auth;
 }
