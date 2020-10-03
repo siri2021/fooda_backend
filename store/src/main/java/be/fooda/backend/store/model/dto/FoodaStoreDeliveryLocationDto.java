@@ -10,16 +10,24 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "STORE_DELIVERY_LOCATION")
 public class FoodaStoreDeliveryLocationDto extends FoodaAbstractDto {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeDeliveryLocationId;
 
     private Long municipalityId;
+  
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime deliveryTime;
+   
+    @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal deliveryCost;
+    
+    @ManyToOne
+    @JoinColumn
+    private FoodaStoreDto store;
 }
