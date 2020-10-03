@@ -68,7 +68,7 @@ public class FoodaStoreDto extends FoodaAbstractDto {
              @Override
              public FoodaStoreAuthDto auth(final FoodaStoreAuthDto auth){
                  auth.setStore(super.build())
-                 this.auth(auth);
+                 super.auth(auth);
              }
         ); 
     }
