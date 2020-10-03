@@ -5,20 +5,27 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "STORE_WORKING_HOURS")
 public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeWorkingHoursId;
-    private LocalDate workingDay;
+   
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime openTime;
+    
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime closeTime;
+    
+    @ManyToOne
+    @JoinColumns
+    private FoodaStoreDto store;
 }
