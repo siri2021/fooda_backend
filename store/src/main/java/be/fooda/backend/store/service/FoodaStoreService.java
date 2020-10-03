@@ -11,29 +11,29 @@ import java.util.Set;
 
 public interface FoodaStoreService<REQ, RES> {
 
-    Optional<RES> getStoreById(final Long storeId);
+    Optional<RES> getById(final Long storeId);
 
-    Optional<RES> getStoreByExample(final REQ example);
+    Optional<RES> getByExample(final REQ example);
 
-    List<RES> getAllStores();
+    List<RES> getAll();
 
-    List<RES> getStoreByName(final String name);
+    List<RES> getByName(final String name);
 
-    List<RES> getStoreByAddressId(Set<Long> idSet);
+    List<RES> getByAddressId(Set<Long> idSet);
 
-    List<RES> getStoreByTypeId(Long storeTypeId);
+    List<RES> getByTypeId(Long storeTypeId);
 
-    List<RES> getStoreByParentId(Long storeParentId);
+    List<RES> getByParentId(Long storeParentId);
 
-    List<RES> getStoreByAbout(final String about);
+    List<RES> getByAbout(final String about);
 
-    Optional<RES> getStoreByAuth(final String key, final String secret);
+    Optional<RES> getByAuth(final String key, final String secret);
 
-    List<RES> getStoreByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes);
+    List<RES> getByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes);
 
-    List<RES> getStoreByWorkingHours(final LocalDateTime opens, final LocalDateTime closes);
+    List<RES> getByWorkingHours(final LocalDateTime opens, final LocalDateTime closes);
 
-    List<RES> getStoreByDeliveryLocation(final Long municipalityId);
+    List<RES> getByDeliveryLocation(final Long municipalityId);
 
     List<RES> getStoreByDeliveryTime(final Integer timeAsMinutes);
 
