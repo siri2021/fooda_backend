@@ -12,12 +12,22 @@ import java.math.BigDecimal;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "STORE_DELIVERY_COST")
 public class FoodaStoreDeliveryCostDto extends FoodaAbstractDto {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeDeliveryCostId;
+    
+    @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal minPrice;
+    
+    @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal maxPrice;
+    
+    @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal amount;
+    
+    @ManyToOne
+    @JoinColumn
+    private FoodaStoreDto store;
 }
