@@ -32,7 +32,8 @@ public class FoodaStoreDto extends FoodaAbstractDto {
    
     private Long contactId;
    
-    @OneToOne
+    @ManyToOne
+    @JoinColumn
     private FoodaStoreTypeDto type;
     
     private Long parentId;
