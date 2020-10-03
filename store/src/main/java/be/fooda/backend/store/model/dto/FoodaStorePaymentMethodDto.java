@@ -13,11 +13,19 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "STORE_TYPE")
 public class FoodaStorePaymentMethodDto extends FoodaAbstractDto {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long methodId;
+    private Long storePaymentMethodId;
+    
+    private Long paymentMethodId;
+    
     private BigDecimal minOrderAmount;
+    
     private LocalDate expiryDate;
+    
+    @ManyToOne
+    @JoinColumns
+    private FoodaStoreDto store;
 }
