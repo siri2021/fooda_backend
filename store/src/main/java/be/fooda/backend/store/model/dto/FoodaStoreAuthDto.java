@@ -13,15 +13,21 @@ import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "STORE_AUTH")
 public class FoodaStoreAuthDto extends FoodaAbstractDto {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeAuthId;
+    
     @NotNull
     private String key;
+    
     @NotNull
     private String secret;
+    
+    @ManyToOne
+    @JoinColumns
+    private FoodaStoreDto store;
+    
     private LocalDate expiryDate;
-
 }
