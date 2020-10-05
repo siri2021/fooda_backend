@@ -1,37 +1,30 @@
 package be.fooda.backend.inventory.service;
 
-import be.fooda.backend.commons.model.template.inventory.response.FoodaInventoryRes;
-
 import java.util.List;
 import java.util.Optional;
 
 public interface FoodaInventoryService <REQ, RES>{
 
-    Optional<RES> getInventoryById(final Long inventoryId);
+    Optional<RES> getById(final Long inventoryId);
 
-    Optional<RES> getInventoryByExample(final REQ inventoryReq);
+    Optional<RES> getByExample(final REQ req);
 
-    List<RES> getInventoryByProductKey(final Long productKeyId);
+    List<RES> getByProductKeyAndStore(final Long productId, final Long storeId);
 
-    List<RES> getInventoryByProductKey(final Long productId, final Long storeId);
+    List<RES> getAll();
 
-    List<RES> getAllInventories();
+    Optional<RES> add(final REQ req);
 
-    Optional<RES> addInventory(final REQ req);
+    Optional<RES> editById(final Long inventoryId, final REQ req);
 
-    Optional<RES> editInventoryById(final Long inventoryId, final REQ inventoryREQ);
+    Optional<RES> editByExample(final REQ req);
 
-    Optional<RES> editInventoryByExample(final REQ inventoryReq);
+    Optional<RES> removeById(final Long inventoryId);
 
-    Optional<RES> removeInventoryById(final Long inventoryId);
+    Optional<RES> removeByExample(final REQ req);
 
-    Optional<RES> removeInventoryByExample(final REQ inventoryReq);
+    Boolean existsById(final Long inventoryId);
 
-    Boolean doesInventoryExistById(final Long inventoryId);
-
-    Boolean doesInventoryExistByExample(final REQ inventoryReq);
-
-
-
+    Boolean existsByExample(final REQ req);
 
 }

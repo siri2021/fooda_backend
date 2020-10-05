@@ -1,14 +1,12 @@
 package be.fooda.backend.product.service.mapper;
 
 import be.fooda.backend.commons.model.template.product.request.*;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductImagesItemRes;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductPricesItemRes;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductStoreRes;
+import be.fooda.backend.commons.model.template.product.response.*;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.product.model.dto.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -20,25 +18,23 @@ public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, Fo
     @Override
     public FoodaProductReq dtoToRequest(final FoodaProductDto dto) {
         return FoodaProductReq.builder()
-                .categories(categories(dto))
-                .description(dto.getDescription())
-                .images(imagesAsReq(dto))
-                .isFeatured(false)
+                .productId(dto.getProductId())
                 .name(dto.getName())
-                .orderLimit(dto.getLimit())
-                .prices(pricesAsReq(dto))
-                .productId(dto.getKey().getProductId())
-                .store(productStore(dto))
-                .tags(tags(dto))
-                .taxes(taxes(dto))
                 .type(productType(dto))
+                .store(productStore(dto))
+                .description(dto.getDescription())
+                .isFeatured(false)
+                .orderLimit(dto.getLimit())
+                .categories(categories(dto))
+                .tags(tags(dto))
+                .images(imagesAsReq(dto))
+                .prices(pricesAsReq(dto))
+                .taxes(taxes(dto))
                 .build();
     }
 
     private List<String> categories(final FoodaProductDto dto) {
-        return dto.getCategories().stream()
-                .map(FoodaProductCategoryDto::getTitle)
-                .collect(Collectors.toList());
+        return dto.getCategories().stream().map(FoodaProductCategoryDto::getTitle).collect(Collectors.toList());
     }
 
     private List<FoodaProductImagesItemReq> imagesAsReq(final FoodaProductDto dto) {
@@ -46,109 +42,114 @@ public class FoodaProductDtoMapper implements FoodaDtoMapper<FoodaProductDto, Fo
     }
 
     private List<FoodaProductImagesItemRes> imagesAsRes(final FoodaProductDto dto) {
-        FoodaProductImagesItemRes resImage = new FoodaProductImagesItemRes();
-        resImage.setMediaId(dto.getImageId());
-        return Collections.singletonList(resImage);
+        return Arrays.asList(FoodaProductImagesItemRes.builder().mediaId(dto.getImageId()).isDefault(true)
+                .type(typeAsRes(dto)).build());
     }
 
     private List<FoodaProductPricesItemReq> pricesAsReq(final FoodaProductDto dto) {
-        return Collections.singletonList(FoodaProductPricesItemReq.builder().priceId(dto.getPrice().getProductPriceId()).amount(dto.getPrice().getAmount()).build());
+        return Collections.singletonList(FoodaProductPricesItemReq.builder().priceId(dto.getPrice().getProductPriceId())
+                .amount(dto.getPrice().getAmount()).build());
     }
 
     private List<FoodaProductPricesItemRes> pricesAsRes(final FoodaProductDto dto) {
-        FoodaProductPricesItemRes resPrice = new FoodaProductPricesItemRes();
-        resPrice.setPriceId(dto.getPrice().getProductPriceId());
-        resPrice.setAmount(dto.getPrice().getAmount());
-        resPrice.setCurrency("EUR");
-        resPrice.setExpiry(dto.getPrice().getExpiry());
-        resPrice.setIsDefault(true);
-        resPrice.setTitle(dto.getPrice().getTitle());
-        return Collections.singletonList(resPrice);
+        return Arrays.asList(FoodaProductPricesItemRes.builder().priceId(dto.getPrice().getProductPriceId())
+                .title(dto.getType().getTitle()).isDefault(true).expiry(dto.getPrice().getExpiry()).currency("EUR")
+                .amount(dto.getPrice().getAmount()).build());
     }
 
     private List<String> tags(final FoodaProductDto dto) {
-        return dto.getTags().stream()
-                .map(FoodaProductTagDto::getValue)
-                .collect(Collectors.toList());
+        return dto.getTags().stream().map(FoodaProductTagDto::getValue).collect(Collectors.toList());
     }
 
     private List<FoodaProductTaxesItemReq> taxes(final FoodaProductDto dto) {
-        return Collections.singletonList(FoodaProductTaxesItemReq.builder().taxId(dto.getTax().getTaxId()).title(dto.getTax().getTitle()).build());
+        return Collections.singletonList(FoodaProductTaxesItemReq.builder().taxId(dto.getTax().getTaxId())
+                .title(dto.getTax().getTitle()).build());
     }
 
     private FoodaProductTypeReq productType(final FoodaProductDto dto) {
         return FoodaProductTypeReq.builder()
-                .typeId(dto.getType().getTypeId())
+                .typeId(dto.getType().getProductTypeId())
                 .title(dto.getType().getTitle())
                 .build();
     }
 
     private FoodaProductStoreReq productStore(final FoodaProductDto dto) {
-        return FoodaProductStoreReq.builder()
-                .storeId(dto.getKey().getStoreId())
-                .name(dto.getName())
-                .storeId(dto.getKey().getStoreId())
-                .build();
+        return FoodaProductStoreReq.builder().storeId(dto.getStoreId()).name(dto.getName()).build();
     }
 
     @Override
     public FoodaProductRes dtoToResponse(final FoodaProductDto dto) {
-        final FoodaProductRes res = new FoodaProductRes();
-        res.setCategories(categories(dto));
-        res.setDescription(dto.getDescription());
-        res.setImages(imagesAsRes(dto));
-        res.setIsFeatured(dto.getIsFeatured());
-        res.setName(dto.getName());
-        res.setOrderLimit(dto.getLimit());
-        res.setPrices(pricesAsRes(dto));
-        res.setProductId(dto.getKey().getProductId());
-        res.setStockQuantity(0);
-        res.setStore(store(dto));
-        return res;
+        return FoodaProductRes.builder().categories(categories(dto)).description(dto.getDescription())
+                .images(imagesAsRes(dto)).isFeatured(dto.getIsFeatured()).name(dto.getName()).orderLimit(dto.getLimit())
+                .prices(pricesAsRes(dto)).productId(dto.getProductId()).stockQuantity(0).store(store(dto))
+                .tags(tags(dto)).taxes(taxesAsRes(dto)).type(typeAsRes(dto)).build();
     }
 
-    private FoodaProductStoreRes store(FoodaProductDto dto) {
-        FoodaProductStoreRes resStore = new FoodaProductStoreRes();
-        resStore.setStoreId(dto.getKey().getStoreId());
-        return resStore;
+    private FoodaProductTypeRes typeAsRes(final FoodaProductDto dto) {
+        return FoodaProductTypeRes.builder().name(dto.getName()).title(dto.getType().getTitle())
+                .typeId(dto.getType().getProductTypeId()).build();
+    }
+
+    private List<FoodaProductTaxesItemRes> taxesAsRes(final FoodaProductDto dto) {
+        return Arrays.asList(FoodaProductTaxesItemRes.builder().isDefault(false).title(dto.getType().getTitle())
+                .taxId(dto.getTax().getTaxId()).build());
+    }
+
+    private FoodaProductStoreRes store(final FoodaProductDto dto) {
+        return FoodaProductStoreRes.builder().name(dto.getName()).storeId(dto.getStoreId()).build();
     }
 
     @Override
-    public FoodaProductDto requestToDto(final FoodaProductReq foodaProductReq) {
-        return FoodaProductDto.builder()
-                .categories(categories(foodaProductReq))
-                .description(foodaProductReq.getDescription())
-                .isFeatured(false)
-                .key(productKey(foodaProductReq))
-                .limit(foodaProductReq.getOrderLimit())
-                .name(foodaProductReq.getName())
-                .price(price(foodaProductReq).orElse(FoodaProductPriceDto.builder().build()))
+    public FoodaProductDto requestToDto(final FoodaProductReq req) {
+        return FoodaProductDto.builder().categories(categories(req)).description(req.getDescription())
+                .isFeatured(req.getIsFeatured()).productId(req.getProductId()).storeId(req.getStore().getStoreId())
+                .limit(req.getOrderLimit()).name(req.getName())
+                .price(price(req).orElse(FoodaProductPriceDto.builder().build())).build();
+    }
+
+    @Override
+    public FoodaProductDto responseToDto(final FoodaProductRes res) {
+        return FoodaProductDto.builder().categories(categoriesAsDto(res)).description(res.getDescription())
+                .ingredients(ingredientsAsDto(res)).isFeatured(res.getIsFeatured()).storeId(res.getStore().getStoreId())
+                .productId(res.getProductId()).limit(res.getOrderLimit()).name(res.getName()).price(priceAsDto(res))
+                .tags(tagAsDto(res)).tax(taxAsDto(res)).type(typeAsDto(res)).build();
+    }
+
+    private FoodaProductTypeDto typeAsDto(final FoodaProductRes res) {
+        return FoodaProductTypeDto.builder().title(res.getType().getTitle()).productTypeId(res.getType().getTypeId())
                 .build();
     }
 
-    @Override
-    public FoodaProductDto responseToDto(final FoodaProductRes foodaProductRes) {
-        return null;
+    private FoodaProductTaxDto taxAsDto(final FoodaProductRes res) {
+        return FoodaProductTaxDto.builder().productId(res.getProductId()).title(res.getType().getTitle()).build();
     }
 
-    private FoodaProductKeyDto productKey(final FoodaProductReq req) {
-        return FoodaProductKeyDto.builder().storeId(req.getStore().getStoreId()).productId(req.getProductId()).build();
+    private List<FoodaProductTagDto> tagAsDto(final FoodaProductRes res) {
+        return Arrays.asList(FoodaProductTagDto.builder().build());
+    }
+
+    private FoodaProductPriceDto priceAsDto(final FoodaProductRes res) {
+        return FoodaProductPriceDto.builder().title(res.getType().getTitle()).productId(res.getProductId()).build();
+    }
+
+    private List<FoodaProductIngredientDto> ingredientsAsDto(final FoodaProductRes res) {
+        return Arrays
+                .asList(FoodaProductIngredientDto.builder().name(res.getName()).build());
+    }
+
+    private List<FoodaProductCategoryDto> categoriesAsDto(final FoodaProductRes res) {
+        return Arrays.asList(
+                FoodaProductCategoryDto.builder().productCategoryId(res.getProductId()).title(res.getType().getTitle()).build());
     }
 
     private List<FoodaProductCategoryDto> categories(final FoodaProductReq req) {
-        return req.getCategories().stream().map(r -> FoodaProductCategoryDto.builder().title(r).build()).collect(Collectors.toList());
+        return Arrays.asList(FoodaProductCategoryDto.builder().title(req.getType().getTitle()).build());
     }
 
     private Optional<FoodaProductPriceDto> price(final FoodaProductReq req) {
-        return req.getPrices()
-                .stream()
-                .filter(FoodaProductPricesItemReq::getIsDefault)
-                .map(pReq -> FoodaProductPriceDto.builder()
-                        .amount(pReq.getAmount())
-                        .expiry(pReq.getExpiry())
-                        .productPriceId(pReq.getPriceId())
-                        .productKey(FoodaProductKeyDto.builder().productId(req.getProductId()).build())
-                        .title(pReq.getTitle()).build())
+        return req.getPrices().stream().filter(FoodaProductPricesItemReq::getIsDefault)
+                .map(pReq -> FoodaProductPriceDto.builder().amount(pReq.getAmount()).expiry(pReq.getExpiry())
+                        .productPriceId(pReq.getPriceId()).title(pReq.getTitle()).build())
                 .findFirst();
     }
 }

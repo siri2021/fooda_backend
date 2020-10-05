@@ -18,12 +18,9 @@ public class FoodaStoreController {
     @Autowired
     private FoodaStoreService<FoodaStoreReq, FoodaStoreRes> storeService;
 
-    @GetMapping("/apiStoreGetById")
-    public ResponseEntity<FoodaStoreRes> apiStoreGetById(@RequestParam final Long storeId){
-        return storeService.getStoreById(storeId)
-        .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("hello")
+    public String hello(){
+        return "Hello from Store Module.. ";
     }
-
 
 }

@@ -136,6 +136,7 @@ be\fooda\backend\commons\model\woocommerce\product\categories\request\WooCommerc
 be\fooda\backend\commons\model\template\basket\response\FoodaBasketDeliveryRes.class
 be\fooda\backend\commons\model\template\media\request\FoodaMediaStoreReq.class
 be\fooda\backend\commons\model\woocommerce\product\categories\request\Image$ImageBuilder.class
+be\fooda\backend\commons\model\template\product\response\FoodaProductTaxesItemRes$FoodaProductTaxesItemResBuilder.class
 be\fooda\backend\commons\model\template\order\response\FoodaOrderStoreRes$FoodaOrderStoreResBuilder.class
 be\fooda\backend\commons\model\woocommerce\product\attributes\response\SelfItem.class
 be\fooda\backend\commons\model\template\basket\request\FoodaBasketProductReq.class
@@ -160,6 +161,7 @@ be\fooda\backend\commons\model\template\store\request\FoodaStoreImagesItemReq.cl
 be\fooda\backend\commons\model\woocommerce\product\request\ImagesItem$ImagesItemBuilder.class
 be\fooda\backend\commons\model\template\inventory\request\FoodaInventoryReq$FoodaInventoryReqBuilder.class
 be\fooda\backend\commons\model\template\contact\request\FoodaAddressReq.class
+be\fooda\backend\commons\model\template\product\response\FoodaProductStoreRes$FoodaProductStoreResBuilder.class
 be\fooda\backend\commons\model\template\store\response\FoodaStoreAuthItemRes$FoodaStoreAuthItemResBuilder.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreTypeReq.class
 be\fooda\backend\commons\model\woocommerce\product\categories\response\Links.class
@@ -169,12 +171,15 @@ be\fooda\backend\commons\model\template\contact\response\FoodaAddressRes.class
 be\fooda\backend\commons\model\template\order\response\FoodaOrderDeliveryRes$FoodaOrderDeliveryResBuilder.class
 be\fooda\backend\commons\model\template\basket\response\FoodaBasketStoreRes.class
 be\fooda\backend\commons\model\template\product\request\FoodaProductTaxesItemReq.class
+be\fooda\backend\commons\config\HttpMapperConfig.class
 be\fooda\backend\commons\model\template\inventory\response\FoodaInventoryRes$FoodaInventoryResBuilder.class
+be\fooda\backend\commons\model\template\product\response\FoodaProductImagesItemRes$FoodaProductImagesItemResBuilder.class
 be\fooda\backend\commons\model\template\store\response\FoodaStoreContactRes$FoodaStoreContactResBuilder.class
 be\fooda\backend\commons\model\template\order\response\FoodaOrderRes.class
 be\fooda\backend\commons\service\mapper\FoodaStoreHttpMapper.class
 be\fooda\backend\commons\model\woocommerce\product\variations\response\AttributesItem.class
 be\fooda\backend\commons\model\template\basket\request\FoodaBasketOrderReq$FoodaBasketOrderReqBuilder.class
+be\fooda\backend\commons\model\template\product\response\FoodaProductPricesItemRes$FoodaProductPricesItemResBuilder.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreContactReq$FoodaStoreContactReqBuilder.class
 be\fooda\backend\commons\model\template\store\request\FoodaStoreAuthItemReq$FoodaStoreAuthItemReqBuilder.class
 be\fooda\backend\commons\model\woocommerce\product\attributes\response\WooCommerceProductAttributeResponse.class
@@ -221,6 +226,7 @@ be\fooda\backend\commons\model\woocommerce\product\variations\response\Collectio
 be\fooda\backend\commons\model\template\inventory\response\FoodaInventoryRes.class
 be\fooda\backend\commons\model\template\order\response\FoodaOrderStatusRes.class
 be\fooda\backend\commons\model\woocommerce\product\response\WooCommerceProductResponse.class
+be\fooda\backend\commons\model\template\product\response\FoodaProductTypeRes$FoodaProductTypeResBuilder.class
 be\fooda\backend\commons\service\mapper\FoodaBasketProductHttpMapper.class
 be\fooda\backend\commons\model\template\inventory\request\FoodaInventoryProductReq$FoodaInventoryProductReqBuilder.class
 be\fooda\backend\commons\service\validator\PhoneNumber.class
@@ -238,6 +244,7 @@ be\fooda\backend\commons\model\woocommerce\product\variations\request\Attributes
 be\fooda\backend\commons\model\template\store\response\FoodaStoreRes.class
 be\fooda\backend\commons\model\template\order\response\FoodaOrderContactRes$FoodaOrderContactResBuilder.class
 be\fooda\backend\commons\model\template\media\request\FoodaMediaProductReq.class
+be\fooda\backend\commons\model\template\product\response\FoodaProductRes$FoodaProductResBuilder.class
 be\fooda\backend\commons\model\template\order\request\FoodaOrderProductReq.class
 be\fooda\backend\commons\model\woocommerce\product\request\WooCommerceProductRequest.class
 be\fooda\backend\commons\model\woocommerce\product\categories\response\WooCommerceProductCategoryResponse.class

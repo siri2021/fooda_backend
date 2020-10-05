@@ -8,7 +8,6 @@ import be.fooda.backend.inventory.model.dto.FoodaInventoryDto;
 import be.fooda.backend.inventory.service.FoodaInventoryService;
 import be.fooda.backend.inventory.service.mapper.FoodaInventoryDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,6 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     @Autowired
     private FoodaInventoryRepository inventoryRepository;
 
-    @Qualifier("foodaInventoryDtoMapper")
     @Autowired
     private FoodaInventoryDtoMapper inventoryDtoMapper;
 
@@ -31,19 +29,19 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     private FoodaInventoryHttpMapper inventoryHttpMapper;
 
     @Override
-    public Optional<FoodaInventoryRes> getInventoryById(Long inventoryId) {
+    public Optional<FoodaInventoryRes> getById(Long inventoryId) {
         return inventoryRepository.findById(inventoryId)
-                                  .map(inventoryDtoMapper :: dtoToResponse);
+                                  .map(inventoryDtoMapper::dtoToResponse);
     }
 
     @Override
-    public Optional<FoodaInventoryRes> getInventoryByExample(FoodaInventoryReq inventoryReq) {
-        return inventoryRepository.findByExample(inventoryReq)
+    public Optional<FoodaInventoryRes> getByExample(FoodaInventoryReq req) {
+        return inventoryRepository.findOne(Example.of(inventoryDtoMapper.requestToDto(req)))
                                   .map(inventoryDtoMapper:: dtoToResponse) ;
     }
 
     @Override
-    public List<FoodaInventoryRes> getInventoryByProductKey(Long productKeyId) {
+    public List<FoodaInventoryRes> getByStoreId(Long productKeyId) {
         return inventoryRepository.findAllByProductKey_ProductKeyId(productKeyId)
                 .stream()
                 .map(inventoryDtoMapper :: dtoToResponse)
@@ -51,7 +49,7 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     }
 
     @Override
-    public List<FoodaInventoryRes> getInventoryByProductKey(Long productId, Long storeId) {
+    public List<FoodaInventoryRes> getByProductKeyAndStore(Long productId, Long storeId) {
         return inventoryRepository.findAllByProductKey_ProductIdAndProductKey_StoreId(productId, storeId)
                 .stream()
                 .map(inventoryDtoMapper :: dtoToResponse)
@@ -59,7 +57,7 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     }
 
     @Override
-    public List<FoodaInventoryRes> getAllInventories() {
+    public List<FoodaInventoryRes> getAll() {
         List<FoodaInventoryDto> results = new ArrayList<>();
         inventoryRepository.findAll().forEach(results :: add);
         return results.stream()
@@ -68,17 +66,17 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     }
 
     @Override
-    public Optional<FoodaInventoryRes> addInventory(FoodaInventoryReq foodaInventoryReq) {
+    public Optional<FoodaInventoryRes> add(FoodaInventoryReq req) {
         return Optional.of(inventoryDtoMapper.dtoToResponse(
-                inventoryRepository.save(inventoryDtoMapper.requestToDto(foodaInventoryReq))
+                inventoryRepository.save(inventoryDtoMapper.requestToDto(req))
         ));
     }
 
     @Override
-    public Optional<FoodaInventoryRes> editInventoryById(Long inventoryId, FoodaInventoryReq inventoryREQ) {
-        return getInventoryById(inventoryId)
+    public Optional<FoodaInventoryRes> editById(Long inventoryId, FoodaInventoryReq req) {
+        return getById(inventoryId)
                 .map(res -> inventoryHttpMapper
-                        .requestToResponse(inventoryREQ)
+                        .requestToResponse(req)
                         .toBuilder()
                         .inventoryId(inventoryId)
                         .build())
@@ -88,17 +86,17 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     }
 
     @Override
-    public Optional<FoodaInventoryRes> editInventoryByExample(FoodaInventoryReq inventoryReq) {
-        return getInventoryByExample(inventoryReq).map(
+    public Optional<FoodaInventoryRes> editByExample(FoodaInventoryReq req) {
+        return getByExample(req).map(
                 res -> inventoryDtoMapper.dtoToResponse(
                         inventoryRepository.save(inventoryDtoMapper.responseToDto(res))));
     }
 
     @Override
-    public Optional<FoodaInventoryRes> removeInventoryById(Long inventoryId) {
-        final Optional<FoodaInventoryRes> foundInventory = getInventoryById(inventoryId);
+    public Optional<FoodaInventoryRes> removeById(Long inventoryId) {
+        final Optional<FoodaInventoryRes> foundInventory = getById(inventoryId);
         foundInventory.ifPresent(res -> inventoryRepository.deleteById(inventoryId));
-        final Optional<FoodaInventoryRes> oInventoryAfterDelete = getInventoryById(inventoryId);
+        final Optional<FoodaInventoryRes> oInventoryAfterDelete = getById(inventoryId);
         if (oInventoryAfterDelete.isEmpty()) {
             return foundInventory;
         } else {
@@ -107,10 +105,10 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     }
 
     @Override
-    public Optional<FoodaInventoryRes> removeInventoryByExample(FoodaInventoryReq inventoryReq) {
-        final Optional<FoodaInventoryRes> foundInventory = getInventoryByExample(inventoryReq);
-        foundInventory.ifPresent(res -> inventoryRepository.delete(inventoryDtoMapper.requestToDto(inventoryReq)));
-        final Optional<FoodaInventoryRes> oInventoryAfterDelete = getInventoryByExample(inventoryReq);
+    public Optional<FoodaInventoryRes> removeByExample(FoodaInventoryReq req) {
+        final Optional<FoodaInventoryRes> foundInventory = getByExample(req);
+        foundInventory.ifPresent(res -> inventoryRepository.delete(inventoryDtoMapper.requestToDto(req)));
+        final Optional<FoodaInventoryRes> oInventoryAfterDelete = getByExample(req);
         if (oInventoryAfterDelete.isEmpty()) {
             return foundInventory;
         } else {
@@ -119,12 +117,12 @@ public class FoodaInventoryServiceImpl implements FoodaInventoryService<FoodaInv
     }
 
     @Override
-    public Boolean doesInventoryExistById(Long inventoryId) {
+    public Boolean existsById(Long inventoryId) {
         return inventoryRepository.existsById(inventoryId);
     }
 
     @Override
-    public Boolean doesInventoryExistByExample(FoodaInventoryReq inventoryReq) {
-        return inventoryRepository.exists(Example.of(inventoryDtoMapper.requestToDto(inventoryReq)));
+    public Boolean existsByExample(FoodaInventoryReq req) {
+        return inventoryRepository.exists(Example.of(inventoryDtoMapper.requestToDto(req)));
     }
 }

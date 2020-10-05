@@ -1,10 +1,12 @@
 package be.fooda.backend.store.service.impl;
 
-
 import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
+import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import be.fooda.backend.commons.service.mapper.FoodaHttpMapper;
 import be.fooda.backend.commons.service.mapper.FoodaStoreHttpMapper;
 import be.fooda.backend.store.dao.FoodaStoreRepository;
+import be.fooda.backend.store.model.dto.FoodaStoreDto;
 import be.fooda.backend.store.service.FoodaStoreService;
 import be.fooda.backend.store.service.mapper.FoodaStoreDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,14 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 	@Autowired
 	private FoodaStoreRepository storeRepo;
 
-	@Qualifier("foodaStoreDtoMapper")
+	@Qualifier("FoodaStoreDtoMapper")
 	@Autowired
-	private FoodaStoreDtoMapper storeDtoMapper;
+	private FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> storeDtoMapper;
 
+	@Qualifier("FoodaStoreHttpMapper")
 	@Autowired
-	private FoodaStoreHttpMapper storeHttpMapper;
-
+	private FoodaHttpMapper<FoodaStoreReq, FoodaStoreRes> storeHttpMapper;	
+	
 	@Override
 	public Optional<FoodaStoreRes> getStoreById(final Long storeId) {
 		// TODO Auto-generated method stub

@@ -1,4 +1,4 @@
-package be.fooda.backend.product.configs;
+package be.fooda.backend.product.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

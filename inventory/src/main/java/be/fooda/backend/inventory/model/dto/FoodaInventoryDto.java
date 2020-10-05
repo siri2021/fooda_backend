@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,11 +18,16 @@ public class FoodaInventoryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long inventoryId;
-    @NotNull
-    private FoodaInventoryProductKeyDto productKey;
+    
+    private Long productId;
+    
+    private Long storeId;
+
     @NotNull
     private String sku;
+
     private String batchCode;
+    
     @Min(value = 1, message = "Stock quantity must be higher than 0")
     private Integer stockQuantity;
 }
