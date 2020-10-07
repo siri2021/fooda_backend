@@ -62,14 +62,5 @@ public class FoodaStoreDto extends FoodaAbstractDto {
   
     @OneToOne(mappedBy = "store")
     private FoodaStoreAuthDto auth;
-   
-    public static FoodaStoreDtoBuilder(){
-        return new FoodaStoreDtoBuilder(
-             @Override
-             public FoodaStoreAuthDto auth(final FoodaStoreAuthDto auth){
-                 auth.setStore(super.build())
-                 super.auth(auth);
-             }
-        ); 
-    }
+
 }

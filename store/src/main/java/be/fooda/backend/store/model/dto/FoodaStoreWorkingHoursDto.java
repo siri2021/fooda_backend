@@ -5,7 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -14,10 +15,12 @@ import java.time.LocalTime;
 @Builder(toBuilder = true)
 @Entity
 public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeWorkingHoursId;
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDate workingDate;
    
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime openTime;
@@ -26,6 +29,6 @@ public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
     private LocalDateTime closeTime;
     
     @ManyToOne
-    @JoinColumns
+    @JoinColumn
     private FoodaStoreDto store;
 }

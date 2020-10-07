@@ -26,6 +26,6 @@ public class FoodaStorePaymentMethodDto extends FoodaAbstractDto {
     private LocalDate expiryDate;
     
     @ManyToOne
-    @JoinColumns
+    @JoinColumn
     private FoodaStoreDto store;
 }

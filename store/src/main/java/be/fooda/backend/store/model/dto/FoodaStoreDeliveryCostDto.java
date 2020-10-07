@@ -2,14 +2,13 @@ package be.fooda.backend.store.model.dto;
 
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.*;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor)
+@AllArgsConstructor
 @Builder
 @Entity
 public class FoodaStoreDeliveryCostDto extends FoodaAbstractDto {

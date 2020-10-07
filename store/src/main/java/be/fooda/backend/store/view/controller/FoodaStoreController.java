@@ -27,57 +27,57 @@ public class FoodaStoreController {
 
     @GetMapping("apiStoreGetByStoreId")
     public ResponseEntity<FoodaStoreRes> apiStoreGetByStoreId(@RequestParam final Long storeId){
-        return storeService.getStoreById(storeId)
+        return storeService.getById(storeId)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @GetMapping("apiStoreGetByStoreExample")
     public ResponseEntity<FoodaStoreRes> apiStoreGetByStoreExample(@RequestParam final FoodaStoreReq storeExample){
-        return storeService.getStoreByExample(storeExample)
+        return storeService.getByExample(storeExample)
                 .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @GetMapping("apiGetAllStores")
     public ResponseEntity<List<FoodaStoreRes>> apiGetAllStores(){
-        return new ResponseEntity<>(storeService.getAllStores(), HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getAll(), HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByName")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByName(@RequestParam final String name){
-    return new ResponseEntity<>(storeService.getStoreByName(name) , HttpStatus.FOUND);
+    return new ResponseEntity<>(storeService.getByName(name) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByAddress")
     public  ResponseEntity<List<FoodaStoreRes>> apiGetStoreByAddress(@RequestParam final Set<Long> idSet){
-        return new ResponseEntity<>(storeService.getStoreByAddressId(idSet) , HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getByAddressId(idSet) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByTypeId")
-    public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByTypeId(@RequestParam final Long typeId){
-        return new ResponseEntity<>(storeService.getStoreByTypeId(typeId) , HttpStatus.FOUND);
+    public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByType(@RequestParam final String title){
+        return new ResponseEntity<>(storeService.getByType(title) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByParentId")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByParentId(@RequestParam final Long parentId){
-        return new ResponseEntity<>(storeService.getStoreByTypeId(parentId) , HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getByParent(parentId) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByAbout")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByTypeId(@RequestParam final String about ){
-        return new ResponseEntity<>(storeService.getStoreByAbout(about) , HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getByAbout(about) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByAuth")
-    public ResponseEntity<FoodaStoreRes> apiGetStoreByAuth(@RequestParam final String key,@RequestParam final String secret){
-        return storeService.getStoreByAuth(key,secret)
+    public ResponseEntity<FoodaStoreRes> apiGetStoreByAuth(@RequestParam final String key,@RequestParam final String secret , @RequestParam final Long storeId){
+        return storeService.getByAuth(key,secret,storeId)
                 .map(res -> new ResponseEntity<>( res, HttpStatus.FOUND))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @GetMapping("apiGetStoreByWorkingHours")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByWorkingHours(@RequestParam final LocalDate date,@RequestParam final LocalDateTime opens, @RequestParam final LocalDateTime closes){
-        return new ResponseEntity<>(storeService.getStoreByWorkingHours(date, opens, closes) , HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getByWorkingHours(date, opens, closes) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByWorkingHours")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByWorkingHours(@RequestParam final LocalDateTime opens, @RequestParam final LocalDateTime closes){
-        return new ResponseEntity<>(storeService.getStoreByWorkingHours(opens, closes) , HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getByWorkingHours(opens, closes) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByDeliveryLocation")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByDeliveryLoc(@RequestParam final Long municipalityId ){
-        return new ResponseEntity<>(storeService.getStoreByDeliveryLocation(municipalityId) , HttpStatus.FOUND);
+        return new ResponseEntity<>(storeService.getByDeliveryLocation(municipalityId) , HttpStatus.FOUND);
     }
     @GetMapping("apiGetStoreByDeliveryTime")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByDeliveryTime(@RequestParam final Integer timeAsMinutes ){

@@ -21,13 +21,13 @@ public interface FoodaStoreService<REQ, RES> {
 
     List<RES> getByAddressId(Set<Long> idSet);
 
-    List<RES> getByTypeId(Long storeTypeId);
+    List<RES> getByType(String title);
 
-    List<RES> getByParentId(Long storeParentId);
+    List<RES> getByParent(Long storeParentId);
 
     List<RES> getByAbout(final String about);
 
-    Optional<RES> getByAuth(final String key, final String secret);
+    Optional<RES> getByAuth(final String key, final String secret, final Long storeId);
 
     List<RES> getByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes);
 
@@ -58,5 +58,6 @@ public interface FoodaStoreService<REQ, RES> {
     Boolean doesStoreExistById(final Long storeId);
 
     Boolean doesStoreExistByExample(final FoodaStoreReq req);
+
 
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Builder
 @Entity
 public class FoodaStoreAuthDto extends FoodaAbstractDto {
@@ -26,7 +26,7 @@ public class FoodaStoreAuthDto extends FoodaAbstractDto {
     private String secret;
     
     @ManyToOne
-    @JoinColumns
+    @JoinColumn
     private FoodaStoreDto store;
     
     private LocalDate expiryDate;

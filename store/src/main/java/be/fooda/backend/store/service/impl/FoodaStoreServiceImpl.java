@@ -14,6 +14,7 @@ import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreDeliveryCostsItemRes;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import be.fooda.backend.commons.service.mapper.FoodaStoreHttpMapper;
+import be.fooda.backend.store.dao.FoodaAuthRepository;
 import be.fooda.backend.store.dao.FoodaStoreRepository;
 import be.fooda.backend.store.model.dto.*;
 import be.fooda.backend.store.service.FoodaStoreService;
@@ -28,19 +29,24 @@ import org.springframework.data.domain.Example;
 public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, FoodaStoreRes> {
 	@Autowired
 	private final FoodaStoreRepository storeRepo;
+
+	@Autowired
+	private FoodaAuthRepository authRepo;
+
 	@Autowired
 	private final FoodaStoreDtoMapper storeDtoMapper;
+
 	@Autowired
 	private final FoodaStoreHttpMapper storeHttpMapper;
 
 	@Override
-	public Optional<FoodaStoreRes> getStoreById(final Long storeId) {
+	public Optional<FoodaStoreRes> getById(final Long storeId) {
 		return storeRepo.findById(storeId)
 				.map(storeDtoMapper::dtoToResponse);
 	}
 
 	@Override
-	public Optional<FoodaStoreRes> getStoreByExample(final FoodaStoreReq example) {
+	public Optional<FoodaStoreRes> getByExample(final FoodaStoreReq example) {
 
 		return storeRepo
 				.findOne(Example.of(storeDtoMapper.requestToDto(example)))
@@ -48,7 +54,7 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 	}
 
 	@Override
-	public List<FoodaStoreRes> getStoreByName(final String name) {
+	public List<FoodaStoreRes> getByName(final String name) {
 		return storeRepo.findAllByName(name)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse)
@@ -57,7 +63,7 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 	}
 
 	@Override
-	public List<FoodaStoreRes> getStoreByAddressId(final Set<Long> idSet) {
+	public List<FoodaStoreRes> getByAddressId(final Set<Long> idSet) {
 		return storeRepo.findByAddressId(idSet)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse)
@@ -68,14 +74,14 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
 
 	@Override
-	public List<FoodaStoreRes> getStoreByTypeId(final Long storeTypeId) {
-		return storeRepo.findByTypeId(storeTypeId).stream()
+	public List<FoodaStoreRes> getByType(final String title) {
+		return storeRepo.findByType(title).stream()
 				.map(storeDtoMapper::dtoToResponse)
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public List<FoodaStoreRes> getStoreByParentId(final Long storeParentId) {
+	public List<FoodaStoreRes> getByParent(final Long storeParentId) {
 		return storeRepo.findByParentId(storeParentId)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse)
@@ -84,7 +90,7 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 	}
 
 	@Override
-	public List<FoodaStoreRes> getStoreByAbout(final String about) {
+	public List<FoodaStoreRes> getByAbout(final String about) {
 		return storeRepo.findByAbout(about)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse).collect(Collectors.toList());
@@ -92,27 +98,28 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 	}
 
 	@Override
-	public Optional<FoodaStoreRes> getStoreByAuth(final String key, final String secret) {
-		return storeRepo.findByAuth(key,secret)
+	public Optional<FoodaStoreRes> getByAuth(final String key, final String secret , final Long storeId) {
+
+		return authRepo.findByAuth(key,secret,storeId)
 				.map(storeDtoMapper::dtoToResponse);
 
 	}
 
 	@Override
-	public List<FoodaStoreRes> getStoreByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes) {
+	public List<FoodaStoreRes> getByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes) {
 		return storeRepo.findByWorkingHours(date,opens,closes)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<FoodaStoreRes> getStoreByWorkingHours(final LocalDateTime opens, final LocalDateTime closes) {
+	public List<FoodaStoreRes> getByWorkingHours(final LocalDateTime opens, final LocalDateTime closes) {
 		return storeRepo.findByWorkingHours(opens,closes)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse).collect(Collectors.toList());
 	}
 	@Override
-	public List<FoodaStoreRes> getStoreByDeliveryLocation(final Long municipalityId) {
+	public List<FoodaStoreRes> getByDeliveryLocation(final Long municipalityId) {
 		return storeRepo.findByDeliveryLocation(municipalityId)
 				.stream()
 				.map(storeDtoMapper::dtoToResponse)
@@ -170,7 +177,7 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
 	@Override
 	public Optional<FoodaStoreRes> editStoreById(final Long storeId, final FoodaStoreReq storeReq) {
-		return getStoreById(storeId)
+		return getById(storeId)
 				.map(res-> storeHttpMapper.requestToResponse(storeReq)
 						.toBuilder()
 						.storeId(storeId)
@@ -193,9 +200,9 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
 	@Override
 	public Optional<FoodaStoreRes> removeStoreById(final Long storeId) {
-		final Optional<FoodaStoreRes> foundStore = getStoreById(storeId);
+		final Optional<FoodaStoreRes> foundStore = getById(storeId);
 		foundStore.ifPresent(res -> storeRepo.deleteById(storeId));
-		final Optional<FoodaStoreRes> storeAfterDelete = getStoreById(storeId);
+		final Optional<FoodaStoreRes> storeAfterDelete = getById(storeId);
 		if (storeAfterDelete.isEmpty()) {
 			return foundStore;
 		} else {
@@ -205,7 +212,7 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
 		@Override
 		public Optional<FoodaStoreRes> removeStoreByExample(final FoodaStoreReq storeReq) {
-			return getStoreByExample(storeReq).map(
+			return getByExample(storeReq).map(
 					res -> storeDtoMapper.dtoToResponse(
 							storeRepo.save(storeDtoMapper.responseToDto(res))));
 		}
@@ -221,7 +228,7 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 		}
 
 		@Override
-		public List<FoodaStoreRes> getAllStores() {
+		public List<FoodaStoreRes> getAll() {
 
 			return storeRepo.findAll()
 					.stream()

@@ -90,7 +90,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
 
     private List<FoodaStoreWorkingHoursItemReq> workHours(final FoodaStoreDto dto) {
         return dto.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursItemReq.builder()
-                .workingDate(hours.getWorkingDay())
+                .workingDate(hours.getWorkingDate())
                 .closeTime(hours.getCloseTime())
                 .openTime(hours.getOpenTime())
                 .build()).collect(Collectors.toList());
@@ -120,7 +120,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .stream()
                 .map(hours->FoodaStoreWorkingHoursItemRes
                         .builder()
-                        .workingDate(hours.getWorkingDay())
+                        .workingDate(hours.getWorkingDate())
                         .openTime(hours.getOpenTime())
                         .closeTime(hours.getCloseTime())
                         .build())
@@ -201,9 +201,9 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
 
     private List<FoodaStoreWorkingHoursDto> workingHoursReqToDto(FoodaStoreReq req) {
         return req.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursDto.builder()
-                .workingDay(hours.getWorkingDate())
                 .openTime(hours.getOpenTime())
                 .closeTime(hours.getCloseTime())
+                .workingDate(hours.getWorkingDate())
                 .build()).collect(Collectors.toList());
     }
 
@@ -220,16 +220,15 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     }
 
     private Long logoReqToDto(FoodaStoreReq req) {
-        //need to make changes long in dto and string in req
-        //return req.getLogo().getUrl();
+
         return null;
     }
 
     private List<FoodaStoreDeliveryLocationDto> deliveryLocationsReqToDto(FoodaStoreReq req) {
-        return req.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto.builder()
-                .deliveryCost(locs.getDeliveryCost())
+        return req.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto
+                .builder()
                 .deliveryTime(locs.getDeliveryTime())
-                /* .municipalityId(locs.getMunicipality()) long and string conflict here*/
+
                 .build()).collect(Collectors.toList());
 
     }
@@ -288,8 +287,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     private List<FoodaStoreWorkingHoursDto> workingHoursAsDto(final FoodaStoreRes res){
 
         return res.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursDto.builder()
-
-                .workingDay(hours.getWorkingDate())
+        .workingDate(hours.getWorkingDate())
                 .openTime(hours.getOpenTime())
                 .closeTime(hours.getCloseTime())
                 .build()).collect(Collectors.toList());
@@ -312,7 +310,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
         return res.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto.builder()
                 .deliveryCost(locs.getDeliveryCost())
                 .deliveryTime(locs.getDeliveryTime())
-                /* .municipalityId(locs.getMunicipality()) lond and string conflict here*/
                 .build()).collect(Collectors.toList());
     }
 
