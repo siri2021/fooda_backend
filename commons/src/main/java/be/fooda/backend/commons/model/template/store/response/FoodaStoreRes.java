@@ -4,7 +4,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Data
 @Builder(toBuilder = true)

@@ -4,14 +4,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+
 @Data
 @Builder
 public class FoodaStoreDeliveryLocationsItemRes {
     private String country;
-    private Double deliveryCost;
+    private BigDecimal deliveryCost;
     private String city;
     private String municipality;
     private LocalDateTime deliveryTime;

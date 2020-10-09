@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@NoArgsConstructor
+
 @Data
 @Builder
 public class FoodaStoreDeliveryCostsItemRes {

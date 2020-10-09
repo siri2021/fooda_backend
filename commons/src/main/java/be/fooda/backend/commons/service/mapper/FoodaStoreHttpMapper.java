@@ -118,7 +118,7 @@ public class FoodaStoreHttpMapper implements FoodaHttpMapper<FoodaStoreReq, Food
     }
 
     private List<FoodaStoreVideosItemReq> videos(FoodaStoreRes res) {
-        FoodaStoreRes res1 = new FoodaStoreRes();
+
         res.setAbout("safabuhjfba");
         return res.getVideos().stream()
                 .map(videos -> FoodaStoreVideosItemReq.builder()

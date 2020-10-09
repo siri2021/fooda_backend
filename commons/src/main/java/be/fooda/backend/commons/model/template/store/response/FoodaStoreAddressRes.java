@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Data
 @Builder(toBuilder = true)
 public class FoodaStoreAddressRes {

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+
 @Data
 @Builder
 public class FoodaStoreWorkingHoursItemRes {
