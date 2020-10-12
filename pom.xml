@@ -142,31 +142,50 @@
         </pluginManagement>
     </build>
 
-    <modules>
-        <module>discovery</module>
-        <module>gateway</module>
-        <module>security</module>
-        <module>config</module>
-        <module>flow</module>
-        <module>admin</module>
-        <module>log</module>
-        <module>commons</module>
-        <module>matching</module>
-        <module>delivery</module>
-        <module>converter</module>
-        <module>user</module>
-        <module>payment</module>
-        <module>translation</module>
-        <module>basket</module>
-        <module>order</module>
-        <module>inventory</module>
-        <module>product</module>
-        <module>media</module>
-        <module>review</module>
-        <module>store</module>
-        <module>ranking</module>
-        <module>analysis</module>
-        <module>contact</module>
-    </modules>
+    <profiles>
+        <profile>
+            <id>quick</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>store</module>
+                <module>product</module>
+                <module>basket</module>
+                <module>matching</module>
+                <module>delivery</module>
+                <module>contact</module>
+                <module>user</module>
+                <module>payment</module>
+                <module>order</module>
+                <module>inventory</module>
+                <module>media</module>
+                <module>review</module>
+                <module>ranking</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>commons</id>
+            <modules>
+                <module>commons</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>core</id>
+            <modules>
+                <module>discovery</module>
+                <module>gateway</module>
+                <module>security</module>
+                <module>config</module>
+                <module>flow</module>
+                <module>admin</module>
+                <module>log</module>
+                <module>converter</module>
+                <module>translation</module>
+                <module>analysis</module>
+            </modules>
+        </profile>
+    </profiles>
+
 
 </project>

@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface FoodaUserRepository extends CrudRepository<FoodaUserDto, Long> {
-    @Query("SELECT u FROM USER u WHERE u.login = :login")
+    @Query("SELECT u FROM FoodaUserRepository u WHERE u.login = :login")
     Optional<FoodaUserDto> findByLogin(@Param("login") String login);
 }

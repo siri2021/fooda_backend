@@ -1,11 +1,8 @@
 package be.fooda.backend.basket.service;
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface FoodaBasketPaymentService<REQ, RES> {
 
     Optional<RES> getBasketPaymentById(final String basketPaymentId);

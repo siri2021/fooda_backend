@@ -14,15 +14,21 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "PRODUCT_PRICE")
 public class FoodaProductPriceDto extends FoodaAbstractDto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productPriceId;
-    private FoodaProductKeyDto productKey;
+
+    @NotNull
+    private Long productId;
+
     @NotNull
     private String title;
+
     @NotNull
     private BigDecimal amount;
+
+    @Column(columnDefinition = "DATE")
     private LocalDate expiry;
 }

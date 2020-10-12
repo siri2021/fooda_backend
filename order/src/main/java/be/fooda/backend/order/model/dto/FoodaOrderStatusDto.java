@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ORDER_STATUS")
 public class FoodaOrderStatusDto extends FoodaAbstractDto {
     @Id
     private Long orderStatusId;

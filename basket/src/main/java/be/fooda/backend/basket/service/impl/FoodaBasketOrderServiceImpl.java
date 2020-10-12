@@ -7,20 +7,26 @@ import be.fooda.backend.basket.service.mapper.FoodaBasketOrderDtoMapper;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketOrderReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketOrderRes;
 import be.fooda.backend.commons.service.mapper.FoodaBasketOrderHttpMapper;
-import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Service
 public class FoodaBasketOrderServiceImpl implements FoodaBasketOrderService<FoodaBasketOrderReq, FoodaBasketOrderRes> {
 
-    private final FoodaBasketOrderRepository basketOrderRepo;
-    private final FoodaBasketOrderDtoMapper basketOrderDtoMapper;
-    private final FoodaBasketOrderHttpMapper basketOrderHttpMapper;
+    @Autowired
+    private FoodaBasketOrderRepository basketOrderRepo;
+
+    @Autowired
+    private FoodaBasketOrderDtoMapper basketOrderDtoMapper;
+
+    @Autowired
+    private FoodaBasketOrderHttpMapper basketOrderHttpMapper;
 
     @Override
     public Optional<FoodaBasketOrderRes> getBasketOrderById(String basketOrderId) {

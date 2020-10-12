@@ -12,12 +12,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ORDER_PRODUCT")
 public class FoodaOrderProductDto extends FoodaAbstractDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderProductId;
-    private FoodaOrderProductKeyDto productKey;
+    private Long productId;
+    private Long orderId;
     private Integer quantity;
     private BigDecimal price;
 }

@@ -3,7 +3,10 @@ package be.fooda.backend.store.model.dto;
 import be.fooda.backend.commons.model.template.FoodaAbstractDto;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 

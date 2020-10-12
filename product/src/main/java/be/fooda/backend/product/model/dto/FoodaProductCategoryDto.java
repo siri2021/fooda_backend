@@ -12,12 +12,16 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "PRODUCT_CATEGORY")
 public class FoodaProductCategoryDto extends FoodaAbstractDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long productCategoryId;
+        
     @NotNull
     private String title;
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "productId")
+    private FoodaProductDto product;
 }
