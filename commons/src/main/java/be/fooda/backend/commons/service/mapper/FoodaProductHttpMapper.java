@@ -1,13 +1,13 @@
 package be.fooda.backend.commons.service.mapper;
 
 import be.fooda.backend.commons.model.template.product.request.*;
-import be.fooda.backend.commons.model.template.product.response.FoodaProductRes;
-import lombok.RequiredArgsConstructor;
+import be.fooda.backend.commons.model.template.product.response.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Component
 public class FoodaProductHttpMapper implements FoodaHttpMapper<FoodaProductReq, FoodaProductRes> {
 
     @Override
@@ -74,14 +74,78 @@ public class FoodaProductHttpMapper implements FoodaHttpMapper<FoodaProductReq, 
                         .expiry(pri.getExpiry())
                         .isDefault(pri.getIsDefault())
                         .priceId(pri.getPriceId())
+                        .title(res.getType().getTitle())
                         .build())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public FoodaProductRes requestToResponse(final FoodaProductReq foodaProductReq) {
-        final FoodaProductRes res = new FoodaProductRes();
-        // TODO setters ..
-        return res;
+    public FoodaProductRes requestToResponse(final FoodaProductReq req) {
+        return FoodaProductRes.builder()
+                .taxes(taxAsRes(req))
+                .type(typeAsRes(req))
+                .tags(req.getTags())
+                .store(storeAsRes(req))
+                .stockQuantity(req.getStockQuantity())
+                .productId(req.getProductId())
+                .prices(priceAsRes(req))
+                .orderLimit(req.getOrderLimit())
+                .name(req.getName())
+                .isFeatured(req.getIsFeatured())
+                .images(imageAsRes(req))
+                .description(req.getDescription())
+                .categories(req.getCategories())
+                .build();
+    }
+
+    private FoodaProductTypeRes typeAsRes(FoodaProductReq req) {
+        return FoodaProductTypeRes.builder()
+                .typeId(req.getType().getTypeId())
+                .title(req.getType().getTitle())
+                .name(req.getName())
+                .build();
+    }
+
+    private List<FoodaProductTaxesItemRes> taxAsRes(FoodaProductReq req) {
+        return req.getTaxes().stream()
+                .map(tax->FoodaProductTaxesItemRes.builder()
+                        .taxId(tax.getTaxId())
+                        .title(tax.getTitle())
+                        .percentage(tax.getPercentage())
+                        .isDefault(tax.getIsDefault())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private FoodaProductStoreRes storeAsRes(FoodaProductReq req) {
+        return FoodaProductStoreRes.builder()
+                .storeId(req.getStore().getStoreId())
+                .name(req.getName())
+                .logo(req.getStore().getLogo())
+                .build();
+    }
+
+    private List<FoodaProductPricesItemRes> priceAsRes(FoodaProductReq req) {
+        return req.getPrices().stream()
+                .map(price->FoodaProductPricesItemRes.builder()
+                        .amount(price.getAmount())
+                        .currency(price.getCurrency())
+                        .expiry(price.getExpiry())
+                        .priceId(price.getPriceId())
+                        .isDefault(price.getIsDefault())
+                        .title(price.getTitle())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private List<FoodaProductImagesItemRes> imageAsRes(FoodaProductReq req) {
+        return req.getImages().stream()
+                .map(image->FoodaProductImagesItemRes.builder()
+                        .isDefault(image.getIsDefault())
+                        .mediaId(image.getMediaId())
+                        .url(image.getUrl())
+                        .type(typeAsRes(req))
+                        .build())
+                .collect(Collectors.toList());
     }
 }

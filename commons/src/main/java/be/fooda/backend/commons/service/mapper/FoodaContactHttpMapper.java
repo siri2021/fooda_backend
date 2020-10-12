@@ -2,7 +2,9 @@ package be.fooda.backend.commons.service.mapper;
 
 import be.fooda.backend.commons.model.template.contact.request.FoodaContactReq;
 import be.fooda.backend.commons.model.template.contact.response.FoodaContactRes;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FoodaContactHttpMapper implements FoodaHttpMapper<FoodaContactReq, FoodaContactRes> {
 
     @Override

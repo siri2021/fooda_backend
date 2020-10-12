@@ -7,20 +7,26 @@ import be.fooda.backend.basket.service.mapper.FoodaBasketProductDtoMapper;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketProductReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketProductRes;
 import be.fooda.backend.commons.service.mapper.FoodaBasketProductHttpMapper;
-import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@Service
 public class FoodaBasketProductServiceImpl implements FoodaBasketProductService<FoodaBasketProductReq, FoodaBasketProductRes> {
 
-    private final FoodaBasketProductRepository basketProductRepo;
-    private final FoodaBasketProductDtoMapper basketProductDtoMapper;
-    private final FoodaBasketProductHttpMapper basketProductHttpMapper;
+    @Autowired
+    private FoodaBasketProductRepository basketProductRepo;
+
+    @Autowired
+    private FoodaBasketProductDtoMapper basketProductDtoMapper;
+
+    @Autowired
+    private FoodaBasketProductHttpMapper basketProductHttpMapper;
 
     @Override
     public Optional<FoodaBasketProductRes> getBasketProductById(String basketProductId) {

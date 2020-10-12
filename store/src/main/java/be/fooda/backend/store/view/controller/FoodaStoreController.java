@@ -3,8 +3,7 @@ package be.fooda.backend.store.view.controller;
 import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import be.fooda.backend.store.service.FoodaStoreService;
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,17 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/store")
-@RequiredArgsConstructor
 public class FoodaStoreController {
 
-    private final FoodaStoreService<FoodaStoreReq, FoodaStoreRes> storeService;
+    @Autowired
+    private FoodaStoreService<FoodaStoreReq, FoodaStoreRes> storeService;
 
-    @GetMapping("apiStoreGetByStoreId")
-    public ResponseEntity<FoodaStoreRes> apiStoreGetByStoreId(@RequestParam final Long storeId){
-        return storeService.getStoreById(storeId)
-        .map(res -> new ResponseEntity<>(res, HttpStatus.FOUND))
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("hello")
+    public String hello(){
+        return "Hello from Store Module.. ";
     }
-
 
 }

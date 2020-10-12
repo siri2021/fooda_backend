@@ -58,7 +58,6 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\tags\response\CollectionItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\response\FoodaBasketOrderRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\matching\response\FoodaMatchItemRes.java
-C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\request\FoodaOrderKeyReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\woocommerce\product\tags\response\SelfItem.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\product\response\FoodaProductPricesItemRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaBasketDeliveryHttpMapper.java
@@ -70,6 +69,7 @@ C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\comm
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\basket\response\FoodaBasketStoreRes.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\user\request\FoodaUserReq.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaDtoMapper.java
+C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\config\HttpMapperConfig.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaObjectMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\service\mapper\FoodaBasketOrderHttpMapper.java
 C:\Users\yilma\.github\fooda-backend\commons\src\main\java\be\fooda\backend\commons\model\template\order\response\FoodaOrderStatusRes.java

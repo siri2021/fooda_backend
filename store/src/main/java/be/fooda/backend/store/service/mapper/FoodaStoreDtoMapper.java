@@ -1,23 +1,21 @@
 package be.fooda.backend.store.service.mapper;
 
-import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
-import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
-import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
-import be.fooda.backend.store.model.dto.*;
 import be.fooda.backend.commons.model.template.store.request.*;
 import be.fooda.backend.commons.model.template.store.response.*;
-import lombok.RequiredArgsConstructor;
+import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import be.fooda.backend.store.model.dto.*;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import be.fooda.backend.store.model.dto.FoodaStoreDeliveryLocationDto;
-import be.fooda.backend.store.model.dto.FoodaStoreDto;
 
 
-
-
+@Component
+@Qualifier("FoodaStoreDtoMapper")
 public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> {
-
 
     @Override
     public FoodaStoreReq dtoToRequest(FoodaStoreDto dto) {
@@ -36,13 +34,11 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     }
 
 
-
     private List<FoodaStorePaymentMethodsItemReq> paymentMethodsAsReq(FoodaStoreDto dto) {
         return dto.getPaymentMethods().stream().map(payments -> FoodaStorePaymentMethodsItemReq.builder()
                 .minOrderAmount(payments.getMinOrderAmount())
                 .build()).collect(Collectors.toList());
     }
-
 
 
     private FoodaStoreTypeReq type(FoodaStoreDto dto) {
@@ -96,10 +92,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     }
 
 
-
-
-
-
     @Override
     public FoodaStoreRes dtoToResponse(FoodaStoreDto dto) {
         return FoodaStoreRes.builder()
@@ -124,6 +116,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .build()).collect(Collectors.toList());
 
     }
+
     private List<FoodaStoreAuthItemRes> auth(FoodaStoreDto dto) {
 
         return Arrays.asList(FoodaStoreAuthItemRes.builder().expiry(dto.getAuth()
@@ -136,10 +129,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 FoodaStoreImagesItemRes.builder().storeImageId(dto.getLogoImageId()).build());
 
     }
-
-
-
-
 
 
     @Override
@@ -164,6 +153,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     private Long bgVideoId(FoodaStoreReq req) {
         return null;
     }
+
     /*therse 2 methods above n below r not needed i guess, but not sure*/
     private Long bgImageId(FoodaStoreReq req) {
         return null;
@@ -211,7 +201,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
     }
 
     private List<FoodaStoreDeliveryLocationDto> deliveryLocationsReqToDto(FoodaStoreReq req) {
-        return req.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto.builder()
+        return req.getDeliveryLocations().stream().map(locs -> FoodaStoreDeliveryLocationDto.builder()
                 .deliveryCost(locs.getDeliveryCost())
                 .deliveryTime(locs.getDeliveryTime())
                 /* .municipalityId(locs.getMunicipality()) long and string conflict here*/
@@ -225,10 +215,9 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .secret(auth.getSecret())
                 .expiryDate(auth.getExpiry())
                 .key(auth.getKey())
-                .build()).findFirst().get() ;
+                .build()).findFirst().get();
 
     }
-
 
 
     @Override
@@ -260,7 +249,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .title(res.getType().getTitle()).build();
     }
 
-    private FoodaStoreAuthDto authAsDto(final FoodaStoreRes res){
+    private FoodaStoreAuthDto authAsDto(final FoodaStoreRes res) {
 
         return res.getAuth().stream().map(auth -> FoodaStoreAuthDto
                 .builder()
@@ -270,7 +259,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .build()).findFirst().get();
     }
 
-    private List<FoodaStoreWorkingHoursDto> workingHoursAsDto(final FoodaStoreRes res){
+    private List<FoodaStoreWorkingHoursDto> workingHoursAsDto(final FoodaStoreRes res) {
 
         return res.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursDto.builder()
                 .openTime(hours.getOpenTime())
@@ -292,7 +281,7 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
 
     private List<FoodaStoreDeliveryLocationDto> deliveryLocations(FoodaStoreRes res) {
 
-        return res.getDeliveryLocations().stream().map(locs-> FoodaStoreDeliveryLocationDto.builder()
+        return res.getDeliveryLocations().stream().map(locs -> FoodaStoreDeliveryLocationDto.builder()
                 .deliveryCost(locs.getDeliveryCost())
                 .deliveryTime(locs.getDeliveryTime())
                 /* .municipalityId(locs.getMunicipality()) lond and string conflict here*/

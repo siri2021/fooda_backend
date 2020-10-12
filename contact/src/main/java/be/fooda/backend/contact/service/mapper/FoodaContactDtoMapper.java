@@ -4,9 +4,9 @@ import be.fooda.backend.commons.model.template.contact.request.FoodaContactReq;
 import be.fooda.backend.commons.model.template.contact.response.FoodaContactRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.contact.model.dto.FoodaContactDto;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+@Component
 public class FoodaContactDtoMapper implements FoodaDtoMapper<FoodaContactDto, FoodaContactReq, FoodaContactRes> {
 
     @Override

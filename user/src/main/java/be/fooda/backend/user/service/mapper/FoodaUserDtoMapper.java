@@ -6,10 +6,12 @@ import be.fooda.backend.commons.model.template.user.response.FoodaUserRoleRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.user.model.dto.FoodaUserDto;
 import be.fooda.backend.user.model.dto.FoodaUserRoleDto;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class FoodaUserDtoMapper implements FoodaDtoMapper<FoodaUserDto, FoodaUserReq, FoodaUserRes> {
     @Override
     public FoodaUserDto requestToDto(FoodaUserReq req) {

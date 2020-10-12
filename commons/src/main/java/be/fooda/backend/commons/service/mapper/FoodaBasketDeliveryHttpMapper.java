@@ -2,7 +2,9 @@ package be.fooda.backend.commons.service.mapper;
 
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketDeliveryReq;
 import be.fooda.backend.commons.model.template.basket.response.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FoodaBasketDeliveryHttpMapper implements FoodaHttpMapper<FoodaBasketDeliveryReq, FoodaBasketDeliveryRes> {
     @Override
     public FoodaBasketDeliveryReq responseToRequest(FoodaBasketDeliveryRes res) {

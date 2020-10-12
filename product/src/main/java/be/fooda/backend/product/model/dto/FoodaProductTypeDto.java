@@ -12,11 +12,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "PRODUCT_TYPE")
 public class FoodaProductTypeDto extends FoodaAbstractDto {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long typeId;
+    private Long productTypeId;
+   
     @NotNull
     private String title;
 }

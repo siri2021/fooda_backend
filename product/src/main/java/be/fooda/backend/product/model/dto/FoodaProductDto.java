@@ -13,27 +13,52 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "PRODUCT")
 public class FoodaProductDto extends FoodaAbstractDto {
-    @EmbeddedId
-    private FoodaProductKeyDto key;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long productId;
+
+    private Long externalProductId;
+
+    private Long storeId;
+
     @NotNull
     private String name;
+
     private String description;
+
     private Integer limit;
+
     @NotNull
     @OneToOne
     private FoodaProductPriceDto price;
+
     private Boolean isFeatured;
+
     @OneToOne
     private FoodaProductTypeDto type;
+
     @OneToOne
     private FoodaProductTaxDto tax;
+
     private Long imageId;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FoodaProductCategoryDto> categories;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FoodaProductTagDto> tags;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FoodaProductIngredientDto> ingredients;
+
+   public static FoodaProductDtoBuilder build(){
+       return new FoodaProductDtoBuilder(
+           @Override
+           public FoodaProductDtoBuilder price(final FoodaProductPriceDto price){
+                price.setProduct
+           }
+       );
+   }
 }

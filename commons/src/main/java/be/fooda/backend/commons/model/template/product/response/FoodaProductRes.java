@@ -5,7 +5,10 @@ import java.util.List;
 
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
+@Builder(toBuilder = true)
 public class FoodaProductRes {
+    private Long productId;
     private Boolean isFeatured;
     private List<FoodaProductImagesItemRes> images;
     private String description;
@@ -14,7 +17,6 @@ public class FoodaProductRes {
     private Integer stockQuantity;
     private FoodaProductTypeRes type;
     private List<String> tags;
-    private Long productId;
     private String name;
     private List<String> categories;
     private Integer orderLimit;

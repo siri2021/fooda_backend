@@ -7,10 +7,11 @@ import be.fooda.backend.contact.model.dto.FoodaAddressCityDto;
 import be.fooda.backend.contact.model.dto.FoodaAddressDto;
 import be.fooda.backend.contact.model.dto.FoodaAddressMunicipalityDto;
 import be.fooda.backend.contact.model.dto.FoodaAddressRegionDto;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+@Component
 public class FoodaAddressDtoMapper implements FoodaDtoMapper<FoodaAddressDto, FoodaAddressReq, FoodaAddressRes> {
+
     @Override
     public FoodaAddressReq dtoToRequest(final FoodaAddressDto dto) {
         return FoodaAddressReq.builder()

@@ -1,16 +1,14 @@
 package be.fooda.backend.contact.model.dto;
 
-import lombok.*;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import lombok.*;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "ADDRESS_CITY")
 public class FoodaAddressCityDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

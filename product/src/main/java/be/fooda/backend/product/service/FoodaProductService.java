@@ -8,49 +8,55 @@ import java.util.Set;
 
 public interface FoodaProductService<REQ, RES> {
 
-    Optional<RES> getProductByKey(final Long productKey);
+    Optional<RES> getById(final Long productId);
 
-    Optional<RES> getProductByKey(final Long productId, final Long storeId);
+    Optional<RES> getById(final Long externalProductId, final Long storeId);
 
-    Optional<RES> getProductByExample(final REQ productReq);
+    Optional<RES> getByExample(final REQ req);
 
-    List<RES> getAllProducts();
+    List<RES> getAll();
 
-    List<RES> getProductsByName(final String name);
+    List<RES> getByName(final String name);
 
-    List<RES> getProductsByDescription(final String description);
+    List<RES> getByDescription(final String description);
 
-    List<RES> getProductsByFeatured();
+    List<RES> getByFeatured();
 
-    List<RES> getProductsByTypeId(final Long productTypeId);
+    List<RES> getByTypeId(final Long productTypeId);
 
-    List<RES> getProductsByPriceRange(final BigDecimal minPrice, final BigDecimal maxPrice);
+    List<RES> getByPriceRange(final BigDecimal minPrice, final BigDecimal maxPrice);
 
-    List<RES> getProductsByPriceId(final Long productPriceId);
+    List<RES> getByPriceId(final Long productPriceId);
 
-    List<RES> getProductsByPriceId(final Long productPriceId, final LocalDate expiryDate);
+    List<RES> getByExpiryDate(final Long productPriceId, final LocalDate expiryDate);
 
-    List<RES> getProductsByStoreId(final Long storeId);
+    List<RES> getByStoreId(final Long storeId);
 
-    List<RES> getProductsByCategoryId(final Long categoryId);
+    List<RES> getByCategoryId(final Long categoryId);
 
-    List<RES> getProductsByCategories(Set<Long> categories);
+    List<RES> getByCategories(final Set<Long> categories);
 
-    List<RES> getProductsByTags(final Set<String> tags);
+    List<RES> getByTags(final Set<String> tags);
 
-    Optional<RES> addProduct(final REQ req);
+    Optional<RES> add(final REQ req);
 
-    Optional<RES> editProductByKey(final Long productId, final Long storeId);
+    Optional<RES> editById(final Long productId, final REQ req);
 
-    Optional<RES> editProductByExample(final REQ productReq);
+    Optional<RES> editById(final Long externalProductId, final Long storeId, final REQ req);
 
-    Optional<RES> removeProductByKey(final Long productId, final Long storeId);
+    Optional<RES> editByExample(final REQ req);
 
-    Optional<RES> removeProductByExample(final REQ productReq);
+    Optional<RES> removeById(final Long productId);
 
-    Boolean doesProductExistsById(final Long productKey);
+    Optional<RES> removeById(final Long externalProductId, final Long storeId);
 
-    Boolean doesProductExists(final Long productId, final Long storeId);
+    Optional<RES> removeByStoreId(final Long storeId);
 
-    Boolean doesProductExistsByExample(final REQ productReq);
+    Optional<RES> removeByExample(final REQ req);
+
+    Boolean existsById(final Long productId);
+
+    Boolean existsById(final Long externalProductId, final Long storeId);
+
+    Boolean existsByExample(final REQ req);
 }

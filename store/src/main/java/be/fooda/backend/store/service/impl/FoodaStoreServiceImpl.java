@@ -1,5 +1,18 @@
 package be.fooda.backend.store.service.impl;
 
+import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
+import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
+import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
+import be.fooda.backend.commons.service.mapper.FoodaHttpMapper;
+import be.fooda.backend.commons.service.mapper.FoodaStoreHttpMapper;
+import be.fooda.backend.store.dao.FoodaStoreRepository;
+import be.fooda.backend.store.model.dto.FoodaStoreDto;
+import be.fooda.backend.store.service.FoodaStoreService;
+import be.fooda.backend.store.service.mapper.FoodaStoreDtoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,21 +20,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
-import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
-import be.fooda.backend.commons.service.mapper.FoodaStoreHttpMapper;
-import be.fooda.backend.store.dao.FoodaStoreRepository;
-import be.fooda.backend.store.service.FoodaStoreService;
-import be.fooda.backend.store.service.mapper.FoodaStoreDtoMapper;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
+@Service
 public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, FoodaStoreRes> {
 
-	private final FoodaStoreRepository storeRepo;
-	private final FoodaStoreDtoMapper storeDtoMapper;
-	private final FoodaStoreHttpMapper storeHttpMapper;
+	@Autowired
+	private FoodaStoreRepository storeRepo;
 
+	@Qualifier("FoodaStoreDtoMapper")
+	@Autowired
+	private FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> storeDtoMapper;
+
+	@Qualifier("FoodaStoreHttpMapper")
+	@Autowired
+	private FoodaHttpMapper<FoodaStoreReq, FoodaStoreRes> storeHttpMapper;	
+	
 	@Override
 	public Optional<FoodaStoreRes> getStoreById(final Long storeId) {
 		// TODO Auto-generated method stub

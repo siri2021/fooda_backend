@@ -1,11 +1,13 @@
 
 package be.fooda.backend.commons.service.mapper;
 
-        import be.fooda.backend.commons.model.template.inventory.request.FoodaInventoryProductReq;
-        import be.fooda.backend.commons.model.template.inventory.request.FoodaInventoryReq;
-        import be.fooda.backend.commons.model.template.inventory.response.FoodaInventoryProductRes;
-        import be.fooda.backend.commons.model.template.inventory.response.FoodaInventoryRes;
+import be.fooda.backend.commons.model.template.inventory.request.FoodaInventoryProductReq;
+import be.fooda.backend.commons.model.template.inventory.request.FoodaInventoryReq;
+import be.fooda.backend.commons.model.template.inventory.response.FoodaInventoryProductRes;
+import be.fooda.backend.commons.model.template.inventory.response.FoodaInventoryRes;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FoodaInventoryHttpMapper implements FoodaHttpMapper<FoodaInventoryReq, FoodaInventoryRes> {
     @Override
     public FoodaInventoryReq responseToRequest(FoodaInventoryRes foodaInventoryRes) {

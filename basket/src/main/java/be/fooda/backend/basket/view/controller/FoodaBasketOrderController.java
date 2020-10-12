@@ -3,7 +3,7 @@ package be.fooda.backend.basket.view.controller;
 import be.fooda.backend.basket.service.FoodaBasketOrderService;
 import be.fooda.backend.commons.model.template.basket.request.FoodaBasketOrderReq;
 import be.fooda.backend.commons.model.template.basket.response.FoodaBasketOrderRes;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("basket/order/")
-@RequiredArgsConstructor
 public class FoodaBasketOrderController {
 
-    private final FoodaBasketOrderService<FoodaBasketOrderReq, FoodaBasketOrderRes> basketOrderService;
+    @Autowired
+    private FoodaBasketOrderService<FoodaBasketOrderReq, FoodaBasketOrderRes> basketOrderService;
 
     @GetMapping("apiBasketGetOrderById")
     public ResponseEntity<FoodaBasketOrderRes> apiBasketGetOrderById(@RequestParam final String deliveryId) {
