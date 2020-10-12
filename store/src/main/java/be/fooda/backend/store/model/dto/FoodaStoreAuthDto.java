@@ -14,20 +14,19 @@ import java.time.LocalDate;
 @Builder
 @Entity
 public class FoodaStoreAuthDto extends FoodaAbstractDto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long storeAuthId;
-    
+
     @NotNull
     private String key;
-    
+
     @NotNull
     private String secret;
-    
-    @ManyToOne
-    @JoinColumn
+
+    @OneToOne
     private FoodaStoreDto store;
-    
+
     private LocalDate expiryDate;
 }
