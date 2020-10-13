@@ -8,7 +8,7 @@ import be.fooda.backend.store.dao.FoodaAuthRepository;
 import be.fooda.backend.store.dao.FoodaStoreRepository;
 import be.fooda.backend.store.model.dto.FoodaStoreDto;
 import be.fooda.backend.store.service.FoodaStoreService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +22,12 @@ import java.util.stream.Collectors;
 
 
 @Service
+@RequiredArgsConstructor
 public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, FoodaStoreRes> {
 
-    @Autowired
     private FoodaStoreRepository storeRepo;
-
-    @Autowired
     private FoodaAuthRepository authRepo;
-
-    @Autowired
     private FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> storeDtoMapper;
-
-    @Autowired
     private FoodaHttpMapper<FoodaStoreReq, FoodaStoreRes> storeHttpMapper;
 
     @Override
@@ -44,7 +38,6 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
     @Override
     public Optional<FoodaStoreRes> getByExample(final FoodaStoreReq example) {
-
         return storeRepo
                 .findOne(Example.of(storeDtoMapper.requestToDto(example)))
                 .map(storeDtoMapper::dtoToResponse);

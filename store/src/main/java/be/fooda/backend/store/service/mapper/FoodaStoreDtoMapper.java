@@ -4,7 +4,7 @@ import be.fooda.backend.commons.model.template.store.request.*;
 import be.fooda.backend.commons.model.template.store.response.*;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.store.model.dto.*;
-import org.mapstruct.Qualifier;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
