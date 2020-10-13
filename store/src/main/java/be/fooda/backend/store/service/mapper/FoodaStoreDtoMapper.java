@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @Component
-@Qualifier("FoodaStoreDtoMapper")
+//@Qualifier("FoodaStoreDtoMapper")
 public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> {
 
 
