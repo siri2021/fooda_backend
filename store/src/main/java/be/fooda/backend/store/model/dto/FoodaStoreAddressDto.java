@@ -1,23 +1,25 @@
 package be.fooda.backend.store.model.dto;
 
-import be.fooda.backend.commons.model.template.FoodaAbstractDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @Entity
-public class FoodaStoreAddressDto extends FoodaAbstractDto {
+public class FoodaStoreAddressDto {
 
     @Id
     @GeneratedValue
-    private Long storeAddressId;
+    private Long id;
 
     private Long addressId;
 
@@ -26,4 +28,7 @@ public class FoodaStoreAddressDto extends FoodaAbstractDto {
     private String municipality;
 
     private String city;
+
+    @OneToOne
+    private FoodaStoreDto store;
 }

@@ -1,23 +1,24 @@
 package be.fooda.backend.store.model.dto;
 
-import be.fooda.backend.commons.model.template.FoodaAbstractDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class FoodaStoreAuthDto extends FoodaAbstractDto {
+public class FoodaStoreAuthDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long storeAuthId;
+    private Long id;
 
     @NotNull
     private String key;
@@ -25,8 +26,8 @@ public class FoodaStoreAuthDto extends FoodaAbstractDto {
     @NotNull
     private String secret;
 
+    private LocalDate expiryDate;
+
     @OneToOne
     private FoodaStoreDto store;
-
-    private LocalDate expiryDate;
 }

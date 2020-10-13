@@ -1,25 +1,27 @@
 package be.fooda.backend.store.model.dto;
 
-import be.fooda.backend.commons.model.template.FoodaAbstractDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class FoodaStoreDeliveryCostDto extends FoodaAbstractDto {
-    
+public class FoodaStoreDeliveryCostDto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long storeDeliveryCostId;
-    
+    private Long id;
+
     @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal minPrice;
-    
+
     @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal maxPrice;
     

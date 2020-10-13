@@ -7,11 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface FoodaAuthRepository extends JpaRepository<FoodaStoreAuthDto, Long> {
 
-    @Query("SELECT s FROM FoodaStoreAuthDto WHERE s.key = :key AND s.secret = :secret AND s.store.storeId = :storeId ")
+    @Query("SELECT sauth FROM FoodaStoreAuthDto sauth WHERE sauth.key = :key AND sauth.secret = :secret AND sauth.store.id = :storeId")
     Optional<FoodaStoreDto> findByAuth(@Param("key") final String key, @Param("secret") final String secret, @Param("storeId") final Long storeId);
+
+    @Query("SELECT sauth FROM FoodaStoreAuthDto sauth WHERE sauth.store.id = :storeId")
+    List<FoodaStoreAuthDto> findByStoreId(@Param("storeId") final Long storeId);
 }

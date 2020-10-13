@@ -1,27 +1,28 @@
 package be.fooda.backend.store.model.dto;
 
-import be.fooda.backend.commons.model.template.FoodaAbstractDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @Entity
-public class FoodaStoreWorkingHoursDto extends FoodaAbstractDto {
+public class FoodaStoreWorkingHoursDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long storeWorkingHoursId;
+    private Long id;
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDate workingDate;
-   
+
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime openTime;
     
