@@ -20,9 +20,8 @@ public interface FoodaStoreRepository extends JpaRepository<FoodaStoreDto, Long>
     @Query("SELECT s FROM FoodaStoreDto s WHERE s.name LIKE :name")
     List<FoodaStoreDto> findAllByName(@Param("name") String name);
 
-    @Query("SELECT s FROM FoodaStoreDto s WHERE s.addressId IN :addresses")
-    List<FoodaStoreDto> findByAddressId(@Param("addresses") final
-                                        Collection<Long> address);
+    @Query("SELECT s FROM FoodaStoreDto s WHERE s.address.addressId IN :addresses")
+    List<FoodaStoreDto> findByAddressId(@Param("addresses") final Collection<Long> address);
 
     List<FoodaStoreDto> findByType(final FoodaStoreTypeDto type);
 
@@ -33,25 +32,28 @@ public interface FoodaStoreRepository extends JpaRepository<FoodaStoreDto, Long>
 
     List<FoodaStoreDto> findByAbout(final String about);
 
-    @Query("SELECT s from FoodaStoreWorkingHoursDto f where ")
+    @Query("SELECT swh FROM FoodaStoreWorkingHoursDto swh WHERE swh.workingDate = :date AND swh.openTime = :opens AND closeTime =:closes")
     Optional<FoodaStoreDto> findByWorkingHours(final LocalDate date, final LocalDateTime opens, final LocalDateTime closes);
 
-    @Query()
+    @Query("SELECT swh FROM FoodaStoreWorkingHoursDto swh WHERE swh.openTime = :opens AND swh.closeTime =:closes")
     Optional<FoodaStoreDto> findByWorkingHours(final LocalDateTime opens, final LocalDateTime closes);
 
+    @Query("SELECT sdl FROM FoodaStoreDeliveryLocationDto sdl WHERE sdl.municipalityId = :municipalityId")
     List<FoodaStoreDto> findByDeliveryLocation(final Long municipalityId);
 
+    @Query("SELECT sdl FROM FoodaStoreDeliveryLocationDto sdl WHERE sdl.deliveryTime = :timeAsMinutes")
     List<FoodaStoreDto> findByDeliveryTime(final Integer timeAsMinutes);
 
-    @Query()
+    @Query("SELECT sdc FROM FoodaStoreDeliveryCostDto sdc WHERE sdc.minPrice = : minPrice AND sdc.maxPrice =: maxPrice")
     List<FoodaStoreDto> findByDeliveryCost(final BigDecimal minPrice, final BigDecimal maxPrice);
 
-    @Query()
+    @Query("SELECT sdc FROM FoodaStoreDeliveryCostDto sdc WHERE sdc.minPrice = : minPrice AND sdc.maxPrice =: maxPrice AND sdc.amount = :amount")
     List<FoodaStoreDto> findByDeliveryCost(final BigDecimal minPrice, final BigDecimal maxPrice, final BigDecimal amount);
 
-    @Query()
+    @Query("SELECT spm FROM FoodaStorePaymentMethodDto spm WHERE spm.paymentMethodId= :paymentMethodId AND spm.minOrder = : minOrderAmount ")
     List<FoodaStoreDto> findByPaymentMethodId(final Long paymentMethodId, final BigDecimal minOrderAmount);
 
+    @Query("SELECT spm FROM FoodaStorePaymentMethodDto spm WHERE spm.paymentMethodId= :paymentMethodId ")
     List<FoodaStoreDto> findByPaymentMethodId(final Long paymentMethodId);
 
 

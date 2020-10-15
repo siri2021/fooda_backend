@@ -7,6 +7,7 @@ import be.fooda.backend.store.model.dto.*;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper
 public class FoodaStoreDtoGetSetMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> {
@@ -24,18 +25,35 @@ public class FoodaStoreDtoGetSetMapper implements FoodaDtoMapper<FoodaStoreDto, 
         dto.setLogoImage(logoImageAsDto(req));
         dto.setPaymentMethods(paymentMethodsAsDto(req));
         dto.setWorkingHours(workingHoursAsDto(req));
-
-        //TODO add simple data types setter here ..
+        dto.setName(req.getName());
+        dto.setAbout(req.getAbout());
 
         return dto;
     }
 
-    private List<FoodaStoreWorkingHoursDto> workingHoursAsDto(FoodaStoreReq req) {
-        return null;
+
+    private List<FoodaStoreWorkingHoursDto> workingHoursAsDto(FoodaStoreReq req)
+    {
+        return req.getWorkingHours()
+                .stream()
+                .map( workHours -> {
+                    FoodaStoreWorkingHoursDto hours=new FoodaStoreWorkingHoursDto();
+                    hours.setWorkingDate(workHours.getWorkingDate());
+                    hours.setOpenTime(workHours.getOpenTime());
+                    hours.setCloseTime(workHours.getCloseTime());
+                    return  hours;
+                }).collect(Collectors.toList());
+
     }
 
     private List<FoodaStorePaymentMethodDto> paymentMethodsAsDto(FoodaStoreReq req) {
-        return null;
+        return req.getPaymentMethods().stream().map(payments -> {
+            FoodaStorePaymentMethodDto pays= new FoodaStorePaymentMethodDto();
+            pays.setMinOrderAmount(payments.getMinOrderAmount());
+            pays.setExpiryDate(payments.getExpiry());
+        return pays;
+        }).collect(Collectors.toList());
+
     }
 
     private FoodaStoreMediaDto logoImageAsDto(FoodaStoreReq req) {
@@ -47,15 +65,28 @@ public class FoodaStoreDtoGetSetMapper implements FoodaDtoMapper<FoodaStoreDto, 
     }
 
     private FoodaStoreContactDto contactAsDto(FoodaStoreReq req) {
-        return null;
+        FoodaStoreContactDto contactDto=new FoodaStoreContactDto();
+
+        contactDto.setFirstName(req.getContact().getFirstName());
+        contactDto.setLastName(req.getContact().getFamilyName());
+        contactDto.setEmail(req.getContact().getEmail());
+        contactDto.setPhone(req.getContact().getPhoneNumber());
+        return contactDto;
+
     }
 
     private FoodaStoreMediaDto bgVideoAsDto(FoodaStoreReq req) {
-        return null;
+
+    FoodaStoreMediaDto videoDto= new FoodaStoreMediaDto();
+   // videoDto.set(req.getVideos());
+
+        return videoDto;
     }
 
     private FoodaStoreMediaDto bgImageAsDto(FoodaStoreReq req) {
-        return null;
+        FoodaStoreMediaDto imageDto = new FoodaStoreMediaDto();
+        //imageDto.set(req.getImages());
+        return imageDto;
     }
 
     private FoodaStoreAuthDto authAsDto(FoodaStoreReq req) {
@@ -68,14 +99,69 @@ public class FoodaStoreDtoGetSetMapper implements FoodaDtoMapper<FoodaStoreDto, 
 
     private FoodaStoreAddressDto addressAsDto(FoodaStoreReq req) {
         FoodaStoreAddressDto addressDto = new FoodaStoreAddressDto();
-        addressDto.setAddressId(null); //  TODO please add addressId postcode to commons module in request and response..
-        addressDto.setPostcode(null); // TODO please add postcode to commons module in request and response..
-        // ...
+        addressDto.setAddressId(req.getAddress().getAddressId());
+        addressDto.setPostcode(req.getAddress().getPostcode());
+        addressDto.setMunicipality(req.getAddress().getMunicipality());
+        addressDto.setCity(req.getAddress().getCity());
         return addressDto;
     }
 
     @Override
     public FoodaStoreDto responseToDto(FoodaStoreRes res) {
+    FoodaStoreDto dto= new FoodaStoreDto();
+        dto.setAddress(addressResAsDto(res));
+        dto.addDeliveryCost(deliveryCostResAsDto(res));
+        dto.setAuth(authRsAsDto(res));
+        dto.setBgImage(bgImageResAsDto(res));
+        dto.setBgVideo(bgVideoResAsDto(res));
+        dto.setContact(contactResAsDto(res));
+        dto.setDeliveryLocations(deliveryLocationsResAsDto(res));
+        dto.setLogoImage(logoImageResAsDto(res));
+        dto.setPaymentMethods(paymentMethodsResAsDto(res));
+        dto.setWorkingHours(workingHoursResAsDto(res));
+        dto.setName(res.getName());
+        dto.setAbout(res.getAbout());
+
+        return dto;
+    }
+
+    private List<FoodaStoreWorkingHoursDto> workingHoursResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private List<FoodaStorePaymentMethodDto> paymentMethodsResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreMediaDto logoImageResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private List<FoodaStoreDeliveryLocationDto> deliveryLocationsResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreContactDto contactResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreMediaDto bgVideoResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreMediaDto bgImageResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreAuthDto authRsAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreDeliveryCostDto deliveryCostResAsDto(FoodaStoreRes res) {
+        return null;
+    }
+
+    private FoodaStoreAddressDto addressResAsDto(FoodaStoreRes res) {
         return null;
     }
 
