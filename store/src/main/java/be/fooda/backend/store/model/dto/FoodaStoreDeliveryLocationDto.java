@@ -20,11 +20,16 @@ public class FoodaStoreDeliveryLocationDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long municipalityId;
+    private Long municipalityId; // zele
 
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime deliveryTime;
-   
+    private Double deliveryTime;
+
+    @Column(columnDefinition = "DECIMAL(8,2)")
+    private BigDecimal minOrderPrice;
+
+    @Column(columnDefinition = "DECIMAL(8,2)")
+    private BigDecimal maxOrderPrice;
+
     @Column(columnDefinition = "DECIMAL(8,2)")
     private BigDecimal deliveryCost;
     

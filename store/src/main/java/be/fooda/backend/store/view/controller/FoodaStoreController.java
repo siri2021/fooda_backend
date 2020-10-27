@@ -74,13 +74,13 @@ public class FoodaStoreController {
 
     @GetMapping("apiGetStoreByWorkingHours")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByWorkingHours(@RequestParam final LocalDate date, @RequestParam final LocalDateTime opens, @RequestParam final LocalDateTime closes) {
-        return new ResponseEntity<>(storeService.getByWorkingHours(date, opens, closes), HttpStatus.FOUND);
+        if(date == null )
+            return new ResponseEntity<>(storeService.getByWorkingHours( opens, closes), HttpStatus.FOUND);
+        else
+            return new ResponseEntity<>(storeService.getByWorkingHours(date, opens, closes), HttpStatus.FOUND);
     }
 
-    @GetMapping("apiGetStoreByWorkingHours")
-    public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByWorkingHours(@RequestParam final LocalDateTime opens, @RequestParam final LocalDateTime closes) {
-        return new ResponseEntity<>(storeService.getByWorkingHours(opens, closes), HttpStatus.FOUND);
-    }
+
 
     @GetMapping("apiGetStoreByDeliveryLocation")
     public ResponseEntity<List<FoodaStoreRes>> apiGetStoreByDeliveryLoc(@RequestParam final Long municipalityId) {
@@ -153,6 +153,27 @@ public class FoodaStoreController {
                 .map(res -> new ResponseEntity<>(res, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    /*
+
+private final Fooda[ModuleName]Repository moduleNameRepo;
+private final Fooda[ModuleNameChild01]Repository moduleNameChild01Repo;
+
+@GetMapping(“/getAll”)
+public List<Fooda[ModuleName]Res> api[Module]GetAll(Object obj){
+
+    final Fooda[ModuleName]Dto parent = moduleNameRepo.save(obj);
+
+    order.getChild().setParent(obj);
+    moduleNameChild01Repo.save(obj.getChild01());
+
+}
+
+
+
+
+
+     */
 
 
 }

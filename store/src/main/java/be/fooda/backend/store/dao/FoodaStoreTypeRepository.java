@@ -11,8 +11,11 @@ import java.util.List;
 
 @Repository
 public interface FoodaStoreTypeRepository extends JpaRepository<FoodaStoreTypeDto , Long> {
-    List<FoodaStoreDto> findByType(final FoodaStoreTypeDto type);
+   @Query("SELECT s FROM FoodaStoreDto s WHERE s.type.id = :storeTypeId")
+    List<FoodaStoreDto> findByType(@Param("storeTypeId") final Long storeTypeId);
 
-    @Query("SELECT s FROM FoodaStoreDto s WHERE s.type.title = :title")
-    List<FoodaStoreDto> findByType(@Param("title") final String title);
+    @Query("SELECT s FROM FoodaStoreDto s WHERE s.type.title = :storeTypeTitle")
+    List<FoodaStoreDto> findByType(@Param("storeTypeTitle") final String storeTypeTitle);
+
+
 }

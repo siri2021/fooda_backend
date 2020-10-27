@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
 public class FoodaStorePaymentMethodDto {
 

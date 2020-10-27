@@ -98,24 +98,6 @@ public class FoodaStoreDto {
     }
 
     @OneToMany(mappedBy = "store")
-    private List<FoodaStoreDeliveryCostDto> deliveryCosts;
-
-    public void addDeliveryCost(FoodaStoreDeliveryCostDto deliveryCost) {
-        deliveryCost.setStore(this);
-        this.deliveryCosts.add(deliveryCost);
-    }
-
-    public void removeDeliveryCost(FoodaStoreDeliveryCostDto deliveryCost) {
-        deliveryCost.setStore(null);
-        this.deliveryCosts.remove(deliveryCost);
-    }
-
-    public void setDeliveryCosts(List<FoodaStoreDeliveryCostDto> deliveryCosts) {
-        deliveryCosts.forEach(delCost -> delCost.setStore(this));
-        this.deliveryCosts = deliveryCosts;
-    }
-
-    @OneToMany(mappedBy = "store")
     private List<FoodaStoreDeliveryLocationDto> deliveryLocations;
 
     public void addDeliveryLocation(FoodaStoreDeliveryLocationDto deliveryLocation) {

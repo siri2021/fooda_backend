@@ -1,0 +1,75 @@
+{
+  "about": "the best restaurant in town",
+  "address": {
+    "addressId": 111,
+    "city": "Brussels",
+    "country": "Belgium",
+    "doorNo": "33",
+    "municipality": "Evere",
+    "number": "1",
+    "postcode": "1140",
+    "region": "BrusselsCapital",
+    "street": "HenryDunant"
+  },
+  "auth": [
+    {
+      "expiry": "2021-10-28",
+      "key": "qwerty",
+      "secret": "azerty"
+    }
+  ],
+  "contact": {
+    "call": "yes",
+    "contactId": 222,
+    "email": "siridiya@gmail.com",
+    "familyName": "Kulkarni",
+    "firstName": "Sirisha",
+    "phoneNumber": "+32465145464"
+  },
+  "deliveryLocations": [
+    {
+      "deliveryCost": 1,
+      "deliveryTime": 30,
+      "maxOrderPrice": 50,
+      "minOrderPrice": 10,
+      "municipalityId": 1140
+    }
+  ],
+  "images": [
+    {
+      "title": "VEG",
+      "url": "vegmeal.be"
+    }
+  ],
+  "logo": {
+    "url": "vegan.be"
+  },
+  "name": "Cartel Burger",
+  "paymentMethods": [
+    {
+      "expiry": "2021-12-01",
+      "minOrderAmount": 10,
+      "title": "VegBurger"
+    }
+  ],
+  "siteUrl": "veg.be",
+  "slogan": "veg is healthy",
+  "storeId": 11,
+  "storeUrl": "http://www.fooda.be/cartel",
+  "type": {
+    "title": "woocommerce"
+  },
+  "videos": [
+    {
+      "title": "intro",
+      "url": "http://www.fooda.be/media/cartel"
+    }
+  ],
+  "workingHours": [
+    {
+      "closeTime": "2020-10-28T14:45:53.161Z",
+      "openTime": "2020-10-28T14:45:53.161Z",
+      "workingDate": "2020-10-28"
+    }
+  ]
+}

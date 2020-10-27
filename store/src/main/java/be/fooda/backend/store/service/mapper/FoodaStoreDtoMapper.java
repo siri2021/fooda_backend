@@ -5,15 +5,15 @@ import be.fooda.backend.commons.model.template.store.response.*;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.store.model.dto.*;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Primary
 @Component
-//@Qualifier("FoodaStoreDtoMapper")
 public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> {
 
 
@@ -28,7 +28,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .type(type(dto))
                 .about(dto.getAbout())
                 .deliveryLocations(deliveryLocationsAsReq(dto))
-                .deliveryCosts(deliveryCostsAsReq(dto))
                 .paymentMethods(paymentMethodsAsReq(dto))
                 .build();
     }
@@ -66,24 +65,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .build()).collect(Collectors.toList());
     }
 
-    private List<FoodaStoreDeliveryCostsItemReq> deliveryCostsAsReq(final FoodaStoreDto dto) {
-        return dto.getDeliveryCosts().
-                stream()
-                .map(costs -> FoodaStoreDeliveryCostsItemReq.builder()
-                        .amount(costs.getAmount())
-                        .maxPrice(costs.getMaxPrice())
-                        .minPrice(costs.getMinPrice())
-                        .build()).collect(Collectors.toList());
-    }
-
-    private List<FoodaStoreDeliveryCostsItemRes> deliveryCostsAsRes(final FoodaStoreDto dto) {
-        return dto.getDeliveryCosts().stream().map(costs -> FoodaStoreDeliveryCostsItemRes.builder()
-                .amount(costs.getAmount())
-                .minPrice(costs.getMinPrice())
-                .maxPrice(costs.getMaxPrice())
-                .build()).collect(Collectors.toList());
-    }
-
     private List<FoodaStoreWorkingHoursItemReq> workHours(final FoodaStoreDto dto) {
         return dto.getWorkingHours().stream().map(hours -> FoodaStoreWorkingHoursItemReq.builder()
                 .workingDate(hours.getWorkingDate())
@@ -99,7 +80,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .workingHours(workingHoursDtoToRes(dto))
                 .about(dto.getAbout())
                 .auth(auth(dto))
-                .deliveryCosts(deliveryCostsAsRes(dto))
                 .deliveryLocations(deliveryLocationsAsRes(dto))
                 .logo(logoAsRes(dto))
                 .images(images(dto))
@@ -155,7 +135,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .bgVideo(FoodaStoreMediaDto.builder()
                         .url(req.getVideos().get(0).getUrl())
                         .build())
-                .deliveryCosts(deliveryCostsReqToDto(req))
                 .deliveryLocations(deliveryLocationsReqToDto(req))
                 .logoImage(FoodaStoreMediaDto.builder()
                         .url(req.getLogo().getUrl())
@@ -170,14 +149,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .build();
     }
 
-
-    private List<FoodaStoreDeliveryCostDto> deliveryCostsReqToDto(FoodaStoreReq req) {
-        return req.getDeliveryCosts().stream()
-                .map(costs -> FoodaStoreDeliveryCostDto.builder()
-                        .amount(costs.getAmount())
-                        .maxPrice(costs.getMaxPrice())
-                        .minPrice(costs.getMinPrice()).build()).collect(Collectors.toList());
-    }
 
     private FoodaStoreAuthDto authReqToDto(FoodaStoreReq req) {
         return req.getAuth().stream().map(auth -> FoodaStoreAuthDto.builder()
@@ -228,7 +199,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                         .url(res.getVideos().get(0).getUrl())
                         .mediaId(res.getVideos().get(0).getMediaId())
                         .build())
-                .deliveryCosts(deliveryCosts(res))
                 .deliveryLocations(deliveryLocations(res))
                 .logoImage(FoodaStoreMediaDto.builder()
                         .url(res.getLogo().getUrl())
@@ -292,15 +262,6 @@ public class FoodaStoreDtoMapper implements FoodaDtoMapper<FoodaStoreDto, FoodaS
                 .deliveryCost(locs.getDeliveryCost())
                 .deliveryTime(locs.getDeliveryTime())
                 .build()).collect(Collectors.toList());
-    }
-
-    private List<FoodaStoreDeliveryCostDto> deliveryCosts(FoodaStoreRes res) {
-        return res.getDeliveryCosts().stream()
-                .map(costs -> FoodaStoreDeliveryCostDto.builder()
-                        .amount(costs.getAmount())
-                        .maxPrice(costs.getMaxPrice())
-                        .minPrice(costs.getMinPrice()).build()).collect(Collectors.toList());
-
     }
 
 }

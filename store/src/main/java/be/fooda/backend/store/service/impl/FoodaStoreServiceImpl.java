@@ -6,9 +6,11 @@ import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.commons.service.mapper.FoodaHttpMapper;
 import be.fooda.backend.store.dao.FoodaAuthRepository;
 import be.fooda.backend.store.dao.FoodaStoreRepository;
+import be.fooda.backend.store.model.dto.FoodaStoreAuthDto;
 import be.fooda.backend.store.model.dto.FoodaStoreDto;
 import be.fooda.backend.store.service.FoodaStoreService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +24,18 @@ import java.util.stream.Collectors;
 
 
 @Service
-@RequiredArgsConstructor
 public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, FoodaStoreRes> {
 
+    @Autowired
     private FoodaStoreRepository storeRepo;
+
+    @Autowired
     private FoodaAuthRepository authRepo;
+
+    @Autowired
     private FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> storeDtoMapper;
+
+    @Autowired
     private FoodaHttpMapper<FoodaStoreReq, FoodaStoreRes> storeHttpMapper;
 
     @Override
@@ -85,9 +93,10 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
     @Override
     public Optional<FoodaStoreRes> getByAuth(final String key, final String secret, final Long storeId) {
-        return authRepo.findByAuth(key, secret, storeId)
-                .map(storeDtoMapper::dtoToResponse);
-
+        Optional<FoodaStoreAuthDto> oAuthByStore = authRepo.findByAuth(key, secret, storeId);
+        return oAuthByStore.isPresent() ?
+                Optional.of(storeDtoMapper.dtoToResponse(storeRepo.getOne(storeId))) :
+                Optional.empty();
     }
 
     @Override

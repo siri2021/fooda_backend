@@ -8,19 +8,27 @@ import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.store.dao.FoodaStoreDeliveryLocationRepository;
 import be.fooda.backend.store.model.dto.FoodaStoreDto;
 import be.fooda.backend.store.service.FoodaStoreDeliveryLocationsService;
+import be.fooda.backend.store.service.mapper.FoodaStoreDeliveryLocationsMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class FoodaStoreDeliveryLocationsServiceImpl implements FoodaStoreDeliveryLocationsService<FoodaStoreDeliveryLocationsItemReq, FoodaStoreDeliveryLocationsItemRes> {
-    FoodaStoreDeliveryLocationRepository deliveryLocationsRepo;
-    private FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> storeDtoMapper;
+
+    @Autowired
+    private FoodaStoreDeliveryLocationRepository deliveryLocationsRepo;
+
+    @Autowired
+    private FoodaStoreDeliveryLocationsMapper storeDeliveryLocationsDtoMapper;
 
     @Override
     public List<FoodaStoreDeliveryLocationsItemRes> getByDeliveryLocation(Long municipalityId) {
         return deliveryLocationsRepo.findByDeliveryLocation(municipalityId)
                 .stream()
-                .map(storeDtoMapper::dtoToResponse)
+                .map(storeDeliveryLocationsDtoMapper::dtoToResponse)
                 .collect(Collectors.toList());
     }
 
@@ -28,6 +36,6 @@ public class FoodaStoreDeliveryLocationsServiceImpl implements FoodaStoreDeliver
     public List<FoodaStoreDeliveryLocationsItemRes> getStoreByDeliveryTime(Integer timeAsMinutes) {
         return deliveryLocationsRepo.findByDeliveryTime(timeAsMinutes)
                 .stream()
-                .map(storeDtoMapper::dtoToResponse).collect(Collectors.toList());
+                .map(storeDeliveryLocationsDtoMapper::dtoToResponse).collect(Collectors.toList());
     }
 }
