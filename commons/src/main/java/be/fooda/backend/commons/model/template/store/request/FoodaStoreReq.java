@@ -1,13 +1,17 @@
 package be.fooda.backend.commons.model.template.store.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder(toBuilder = true)
 public class FoodaStoreReq {
+
     private Long storeId;
     private List<FoodaStoreImagesItemReq> images;
     private FoodaStoreAddressReq address;
@@ -17,7 +21,6 @@ public class FoodaStoreReq {
     private FoodaStoreTypeReq type;
     private String storeUrl;
     private List<FoodaStorePaymentMethodsItemReq> paymentMethods;
-    private List<FoodaStoreDeliveryCostsItemReq> deliveryCosts;
     private String siteUrl;
     private List<FoodaStoreWorkingHoursItemReq> workingHours;
     private FoodaStoreContactReq contact;

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class FoodaStoreWorkingHoursItemRes {
     private LocalDateTime openTime;
     private LocalDateTime closeTime;

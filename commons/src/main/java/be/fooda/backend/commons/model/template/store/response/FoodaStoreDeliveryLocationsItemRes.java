@@ -11,12 +11,16 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true)
+@NoArgsConstructor
 @AllArgsConstructor
 public class FoodaStoreDeliveryLocationsItemRes {
-    private String country;
-    private BigDecimal deliveryCost;
+    private Long municipalityId;
     private String city;
-    private String municipality;
-    private LocalDateTime deliveryTime;
     private String region;
+    private String country;
+    private Double deliveryTime;
+    private BigDecimal minOrderPrice;
+    private BigDecimal maxOrderPrice;
+    private BigDecimal deliveryCost;
+
 }

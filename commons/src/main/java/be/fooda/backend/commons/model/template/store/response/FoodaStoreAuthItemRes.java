@@ -10,8 +10,10 @@ import java.time.LocalDate;
 
 @Data
 @Builder(toBuilder = true)
+@NoArgsConstructor
 @AllArgsConstructor
 public class FoodaStoreAuthItemRes {
+
     private String secret;
     private LocalDate expiry;
     private String key;
