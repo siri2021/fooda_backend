@@ -4,12 +4,9 @@ import be.fooda.backend.commons.model.template.store.request.FoodaStoreReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreRes;
 import be.fooda.backend.commons.service.mapper.FoodaDtoMapper;
 import be.fooda.backend.commons.service.mapper.FoodaHttpMapper;
-import be.fooda.backend.store.dao.FoodaAuthRepository;
-import be.fooda.backend.store.dao.FoodaStoreRepository;
-import be.fooda.backend.store.model.dto.FoodaStoreAuthDto;
-import be.fooda.backend.store.model.dto.FoodaStoreDto;
+import be.fooda.backend.store.dao.*;
+import be.fooda.backend.store.model.dto.*;
 import be.fooda.backend.store.service.FoodaStoreService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -30,7 +27,25 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
     private FoodaStoreRepository storeRepo;
 
     @Autowired
-    private FoodaAuthRepository authRepo;
+    private FoodaStoreAuthRepository authRepo;
+
+    @Autowired
+    private FoodaStoreAddressRepository addressRepo;
+
+    @Autowired
+    private FoodaStoreMediaRepository mediaRepo;
+
+    @Autowired
+    private FoodaStoreContactRepository contactRepo;
+
+    @Autowired
+    private FoodaStoreDeliveryLocationRepository locationRepo;
+
+    @Autowired
+    private FoodaStorePaymentMethodRepository paymentRepo;
+
+    @Autowired
+    private FoodaStoreWorkingHoursRepository hoursRepo;
 
     @Autowired
     private FoodaDtoMapper<FoodaStoreDto, FoodaStoreReq, FoodaStoreRes> storeDtoMapper;
@@ -161,9 +176,53 @@ public class FoodaStoreServiceImpl implements FoodaStoreService<FoodaStoreReq, F
 
     @Override
     public FoodaStoreRes addStore(final FoodaStoreReq storeReq) {
-        return storeDtoMapper.dtoToResponse(
-                storeRepo.save(
-                        storeDtoMapper.requestToDto(storeReq)));
+
+        FoodaStoreDto store = storeDtoMapper.requestToDto(storeReq);
+        final FoodaStoreDto savedStore = storeRepo.save(store);
+
+        final FoodaStoreAddressDto address = store.getAddress();
+        address.setStore(savedStore);
+        addressRepo.save(address);
+
+        final FoodaStoreAuthDto auth = store.getAuth();
+        auth.setStore(savedStore);
+        authRepo.save(auth);
+
+        final FoodaStoreMediaDto bgImage = store.getBgImage();
+        bgImage.setStore(savedStore);
+        mediaRepo.save(bgImage);
+
+        final FoodaStoreMediaDto bgVideo = store.getBgVideo();
+        bgVideo.setStore(savedStore);
+        mediaRepo.save(bgVideo);
+
+        final FoodaStoreContactDto contact = store.getContact();
+        contact.setStore(savedStore);
+        contactRepo.save(contact);
+
+        final List<FoodaStoreDeliveryLocationDto> deliveryLocations = store.getDeliveryLocations();
+        deliveryLocations.forEach(location -> {
+            location.setStore(savedStore);
+            locationRepo.save(location);
+        });
+
+        final FoodaStoreMediaDto logoImage = store.getLogoImage();
+        logoImage.setStore(savedStore);
+        mediaRepo.save(logoImage);
+
+        final List<FoodaStorePaymentMethodDto> paymentMethods = store.getPaymentMethods();
+        paymentMethods.forEach(payment -> {
+            payment.setStore(savedStore);
+            paymentRepo.save(payment);
+        });
+
+        final List<FoodaStoreWorkingHoursDto> workingHours = store.getWorkingHours();
+        workingHours.forEach(hours -> {
+            hours.setStore(savedStore);
+            hoursRepo.save(hours);
+        });
+
+        return storeDtoMapper.dtoToResponse(savedStore);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package be.fooda.backend.store.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -28,8 +25,8 @@ public class FoodaStoreWorkingHoursDto {
     
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime closeTime;
-    
-    @ManyToOne
-    @JoinColumn
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     private FoodaStoreDto store;
 }

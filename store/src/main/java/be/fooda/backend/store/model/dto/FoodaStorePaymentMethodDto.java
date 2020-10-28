@@ -22,8 +22,8 @@ public class FoodaStorePaymentMethodDto {
     private BigDecimal minOrderAmount;
 
     private LocalDate expiryDate;
-    
-    @ManyToOne
-    @JoinColumn
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     private FoodaStoreDto store;
 }

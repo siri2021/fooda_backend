@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface FoodaAuthRepository extends JpaRepository<FoodaStoreAuthDto, Long> {
+public interface FoodaStoreAuthRepository extends JpaRepository<FoodaStoreAuthDto, Long> {
 
     @Query("SELECT sauth FROM FoodaStoreAuthDto sauth WHERE sauth.key = :key AND sauth.secret = :secret AND sauth.store.id = :storeId")
     Optional<FoodaStoreAuthDto> findByAuth(@Param("key") final String key, @Param("secret") final String secret, @Param("storeId") final Long storeId);

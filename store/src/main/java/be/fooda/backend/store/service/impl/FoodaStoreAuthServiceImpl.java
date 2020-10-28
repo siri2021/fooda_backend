@@ -2,7 +2,7 @@ package be.fooda.backend.store.service.impl;
 
 import be.fooda.backend.commons.model.template.store.request.FoodaStoreAuthItemReq;
 import be.fooda.backend.commons.model.template.store.response.FoodaStoreAuthItemRes;
-import be.fooda.backend.store.dao.FoodaAuthRepository;
+import be.fooda.backend.store.dao.FoodaStoreAuthRepository;
 import be.fooda.backend.store.service.FoodaStoreAuthService;
 import be.fooda.backend.store.service.mapper.FoodaStoreAuthDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class FoodaStoreAuthServiceImpl implements FoodaStoreAuthService<FoodaStoreAuthItemReq, FoodaStoreAuthItemRes> {
 
     @Autowired
-    private FoodaAuthRepository authRepo;
+    private FoodaStoreAuthRepository authRepo;
 
     @Autowired
     private FoodaStoreAuthDtoMapper storeAuthDtoMapper;

@@ -1,9 +1,6 @@
 package be.fooda.backend.store.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,6 +25,7 @@ public class FoodaStoreAuthDto {
 
     private LocalDate expiryDate;
 
-    @OneToOne
+    @EqualsAndHashCode.Exclude
+    @OneToOne(fetch = FetchType.LAZY)
     private FoodaStoreDto store;
 }

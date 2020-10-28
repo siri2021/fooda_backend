@@ -1,7 +1,6 @@
 package be.fooda.backend.store.dao;
 
 import be.fooda.backend.store.model.dto.FoodaStoreDto;
-import be.fooda.backend.store.model.dto.FoodaStoreTypeDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,10 +22,7 @@ public interface FoodaStoreRepository extends JpaRepository<FoodaStoreDto, Long>
     @Query("SELECT s FROM FoodaStoreDto s WHERE s.address.addressId IN :addresses")
     List<FoodaStoreDto> findByAddressId(@Param("addresses") final Collection<Long> address);
 
-    List<FoodaStoreDto> findByType(final FoodaStoreTypeDto type);
-
-    @Query("SELECT s FROM FoodaStoreDto s WHERE s.type.title = :title")
-    List<FoodaStoreDto> findByType(@Param("title") final String title);
+    List<FoodaStoreDto> findByType(final String type);
 
     List<FoodaStoreDto> findByParentId(final Long parent);
 
