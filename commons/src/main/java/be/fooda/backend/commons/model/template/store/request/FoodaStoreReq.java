@@ -12,7 +12,6 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class FoodaStoreReq {
 
-    private Long storeId;
     private List<FoodaStoreImagesItemReq> images;
     private FoodaStoreAddressReq address;
     private List<FoodaStoreAuthItemReq> auth;

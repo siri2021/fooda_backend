@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Builder(toBuilder = true)
 public class FoodaStorePaymentMethodsItemReq {
 
+    private Long paymentMethodId;
     private String title;
     private BigDecimal minOrderAmount;
     private LocalDate expiry;
