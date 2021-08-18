@@ -1,0 +1,143 @@
+{
+  "about": "Best place for pizzas",
+  "acceptedPaymentMethods": [
+    {
+      "expiryDate": "2025-12-31",
+      "minOrderAmount": 20,
+      "paymentMethod": "VISA"
+    },
+    {
+      "expiryDate": "2022-10-20",
+      "minOrderAmount": 20,
+      "paymentMethod": "CCOD"
+    },
+    {
+      "expiryDate": "2025-12-31",
+      "minOrderAmount": 20,
+      "paymentMethod": "OCC_BANCONTACT"
+    }
+  ],
+  "address": {
+    "city": "Zele",
+    "externalAddressId": 1,
+    "municipality": "Zele",
+    "postcode": "1942"
+  },
+  "auth": {
+    "authKey": "245niu5#5",
+    "expiryDate": "2022-10-20",
+    "secret": "df#156@1lkk",
+    "siteUrl": "https://www.takeaway.com/be-en/menu/pizza-heat-zele",
+    "storeUrl": "https://www.pizzaheatzele.be"
+  },
+  "contact": {
+    "email": "yilmaz@mail.be",
+    "externalContactId": 0,
+    "firstName": "Yilmaz",
+    "lastName": "Mustafa",
+    "phone": "+32476213010"
+  },
+  "deliveryLocations": [
+    {
+      "deliveryCost": 3.0,
+      "deliveryTime": 40,
+      "maxOrderPrice": 100,
+      "minOrderPrice": 20,
+      "postcode": "9200"
+    },
+    {
+      "deliveryCost": 2.0,
+      "deliveryTime": 30,
+      "maxOrderPrice": 100,
+      "minOrderPrice": 20,
+      "postcode": "9250"
+    },
+    {
+      "deliveryCost": 3.50,
+      "deliveryTime": 45,
+      "maxOrderPrice": 100,
+      "minOrderPrice": 20,
+      "postcode": "9260"
+    }
+  ],
+  "images": [
+    {
+      "externalMediaId": 17,
+      "type": "LOGO",
+      "url": "https://static.takeaway.com/images/restaurants/be/QP5NQPO/logo_465x320.png"
+    }
+  ],
+  "isActive": true,
+  "logoImage": {
+    "externalMediaId": 3,
+    "url": "https://static.takeaway.com/images/restaurants/be/QP5NQPO/logo_465x320.png"
+  },
+  "menuItems": [
+    {
+      "categories": [
+        "Pizza small",
+        "Pizza Large",
+        "Pastas"
+      ],
+      "cuisine": "Italian",
+      "dietary": "Non veg",
+      "externalProductId": 1,
+      "imageUrl": "https://static.takeaway.com/images/generic/categories/1_pizza/pizza_americanpizza.png",
+      "menuOrder": 0,
+      "price": 13,
+      "productName": "Pizza Margarita"
+    },
+    {
+      "categories": [
+        "Pastas"
+      ],
+      "cuisine": "Italian",
+      "dietary": "Non veg",
+      "externalProductId": 2,
+      "imageUrl": "https://static.takeaway.com/images/generic/categories/1_pasta/pasta_bolognese.png",
+      "menuOrder": 0,
+      "price": 11,
+      "productName": "Spaghetti Bolognaise"
+    }
+  ],
+  "parentId": 0,
+  "slogan": "yummy pizzas",
+  "storeName": "Pizza Heat",
+  "type": "simple",
+  "user": {
+    "externalUserId": 0,
+    "username": "+32465145464"
+  },
+  "workingHours": [
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-22"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "15:00",
+      "workingDate": "2021-01-23"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "13:00",
+      "workingDate": "2021-01-24"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-25"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-26"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-27"
+    }
+  ]
+}

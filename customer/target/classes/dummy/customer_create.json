@@ -1,0 +1,57 @@
+{
+  "firstName": "Dounia",
+  "familyName": "Rhebergen",
+  "user": {
+    "externalUserId": 702873,
+    "username": "+32467716556"
+  },
+  "settings": {
+    "language": "EN-US",
+    "currency": "EUR",
+    "sendStatistics": true
+  },
+  "addresses": [
+    {
+      "externalAddressId": 680248,
+      "postcode": "P4648",
+      "municipality": "West Alexandrakerk",
+      "isDefault": false
+    },
+    {
+      "externalAddressId": 722262,
+      "postcode": "P5069",
+      "municipality": "West Berentsenkerk",
+      "isDefault": true
+    }
+  ],
+  "contacts": [
+    {
+      "externalContactId": 293245,
+      "phone": "+32467712206",
+      "email": "ethama.ma@live.nl",
+      "canCall": true,
+      "isDefault": false
+    },
+    {
+      "externalContactId": 188861,
+      "phone": "+32467715270",
+      "email": "paulien.tibboel@gmail.com",
+      "canCall": true,
+      "isDefault": true
+    }
+  ],
+  "paymentOptions": [
+    {
+      "externalPaymentId": 869744,
+      "method": "Credit card on delivery",
+      "isDefault": false
+    },
+    {
+      "externalPaymentId": 279232,
+      "method": "Cash on delivery",
+      "isDefault": true
+    }
+  ],
+  "dateOfBirth": "1970-01-13",
+  "note": "Wisely and slow; they stumble that run fast."
+}

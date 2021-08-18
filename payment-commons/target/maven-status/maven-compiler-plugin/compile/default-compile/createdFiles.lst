@@ -1,0 +1,17 @@
+be\fooda\backend\commons\model\payment\create\FoodaPaymentStoreCreate.class
+be\fooda\backend\commons\model\payment\create\FoodaPaymentUserCreate.class
+be\fooda\backend\commons\model\payment\update\FoodaPaymentItemUpdate.class
+be\fooda\backend\commons\model\payment\create\FoodaPaymentCreate.class
+be\fooda\backend\commons\model\payment\update\FoodaPaymentUpdate.class
+be\fooda\backend\commons\model\payment\create\FoodaPaymentItemCreate.class
+be\fooda\backend\commons\model\payment\read\FoodaPaymentExample.class
+be\fooda\backend\commons\model\payment\create\FoodaPaymentOrderCreate.class
+be\fooda\backend\commons\model\payment\update\FoodaPaymentOrderUpdate.class
+be\fooda\backend\commons\model\payment\update\FoodaPaymentStoreUpdate.class
+be\fooda\backend\commons\model\payment\read\FoodaPaymentStoreExample.class
+be\fooda\backend\commons\model\payment\FoodaPaymentMethod.class
+be\fooda\backend\commons\model\payment\read\FoodaPaymentOrderExample.class
+be\fooda\backend\commons\model\payment\update\FoodaPaymentUserUpdate.class
+be\fooda\backend\commons\model\payment\read\FoodaPaymentUserExample.class
+be\fooda\backend\commons\model\payment\read\FoodaPaymentItemExample.class
+be\fooda\backend\commons\model\payment\FoodaPaymentStatus.class

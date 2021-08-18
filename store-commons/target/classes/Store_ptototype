@@ -1,0 +1,76 @@
+{
+  "about": "string",
+  "acceptedPaymentMethods": [
+    {
+      "expiryDate": "yyyy-MM-dd",
+      "minOrderAmount": 0,
+      "paymentMethod": "COD"
+    }
+  ],
+  "address": {
+    "city": "string",
+    "externalAddressId": 0,
+    "municipality": "string",
+    "postcode": "string"
+  },
+  "auth": {
+    "authKey": "string",
+    "expiryDate": "yyyy-MM-dd",
+    "secret": "string",
+    "siteUrl": "string",
+    "storeUrl": "string"
+  },
+  "contact": {
+    "email": "string",
+    "externalContactId": 0,
+    "firstName": "string",
+    "lastName": "string",
+    "phone": "string"
+  },
+  "deliveryLocations": [
+    {
+      "deliveryCost": 0,
+      "deliveryTime": "HH:mm",
+      "maxOrderPrice": 0,
+      "minOrderPrice": 0,
+      "postcode": "string"
+    }
+  ],
+  "images": [
+    {
+      "externalMediaId": 0,
+      "type": "BACKGROUND_IMAGE",
+      "url": "string"
+    }
+  ],
+  "isActive": true,
+  "menuItems": [
+    {
+      "categories": [
+        "string"
+      ],
+      "cuisine": "string",
+      "dietary": "string",
+      "externalProductId": 0,
+      "imageUrl": "string",
+      "menuOrder": 0,
+      "price": 0,
+      "productName": "string"
+    }
+  ],
+  "parentId": 0,
+  "slogan": "string",
+  "storeName": "string",
+  "type": "string",
+  "user": {
+    "externalUserId": 0,
+    "username": "string"
+  },
+  "workingHours": [
+    {
+      "closeTime": "HH:mm",
+      "openTime": "HH:mm",
+      "workingDate": "yyyy-MM-dd"
+    }
+  ]
+}

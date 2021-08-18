@@ -1,0 +1,10 @@
+be\fooda\backend\commons\model\user\update\FoodaUserUpdate.class
+be\fooda\backend\commons\model\bridge\twilio\response\FoodaTwilioUserRes$FoodaTwilioUserResBuilder.class
+be\fooda\backend\commons\model\user\read\FoodaUserExample.class
+be\fooda\backend\commons\model\user\FoodaRole.class
+be\fooda\backend\commons\model\bridge\twilio\request\FoodaTwilioUserReq$FoodaTwilioUserReqBuilder.class
+be\fooda\backend\commons\model\user\create\FoodaUserCreate.class
+be\fooda\backend\commons\model\user\delete\FoodaUserDelete.class
+be\fooda\backend\commons\model\bridge\twilio\response\FoodaTwilioUserRes.class
+be\fooda\backend\commons\model\bridge\twilio\request\FoodaTwilioUserReq.class
+be\fooda\backend\commons\model\user\response\FoodaUserResponse.class

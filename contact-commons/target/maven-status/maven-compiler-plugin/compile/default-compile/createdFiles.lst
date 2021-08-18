@@ -1,0 +1,6 @@
+be\fooda\backend\commons\model\contact\update\FoodaContactUpdate.class
+be\fooda\backend\commons\model\contact\create\FoodaContactCreate.class
+be\fooda\backend\commons\model\contact\read\FoodaContactUserExample.class
+be\fooda\backend\commons\model\contact\update\FoodaContactUserUpdate.class
+be\fooda\backend\commons\model\contact\create\FoodaContactUserCreate.class
+be\fooda\backend\commons\model\contact\read\FoodaContactExample.class

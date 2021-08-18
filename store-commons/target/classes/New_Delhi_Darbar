@@ -1,0 +1,91 @@
+{
+  "about": "Indian Biryani",
+  "acceptedPaymentMethods": [
+    {
+      "expiryDate": "2025-12-31",
+      "minOrderAmount": 20,
+      "paymentMethod": "VISA"
+    },
+    {
+      "expiryDate": "2022-10-20",
+      "minOrderAmount": 20,
+      "paymentMethod": "CCOD"
+    },
+    {
+      "expiryDate": "2025-12-31",
+      "minOrderAmount": 20,
+      "paymentMethod": "OCC_BANCONTACT"
+    }
+  ],
+  "address": {
+    "city": "Brussels",
+    "externalAddressId": 10,
+    "municipality": "Evere",
+    "postcode": "1040"
+  },
+  "auth": {
+    "authKey": "g2tyh321122f",
+    "expiryDate": "2024-12-01",
+    "secret": "KL4632KL@KJ",
+    "siteUrl": "https://www.takeaway.com/be-en/menu/new-delhi-traiteur",
+    "storeUrl": "https://www.new-delhi-traiteur.be"
+  },
+
+
+  "contact": {
+    "email": "sirisha@gmail.com",
+    "externalContactId": 20,
+    "firstName": "Sirisha",
+    "lastName": "Kulkarni",
+    "phone": "0465145464"
+  },
+  "deliveryLocations": [
+    {
+      "deliveryCost": 4,
+      "deliveryTime": "45",
+      "maxOrderPrice": 200,
+      "minOrderPrice": 25,
+      "postcode": "1140"
+    }
+  ],
+  "images": [
+    {
+      "externalMediaId": 0,
+      "type": "BACKGROUND_IMAGE",
+      "url": "https://static.takeaway.com/images/generic/heroes/71/71_indian_58.jpg"
+    }
+  ],
+  "isActive": true,
+
+  "menuItems": [
+    {
+      "categories": [
+        "Tandoori",
+        "Biryani",
+        "Naan"
+      ],
+      "cuisine": "Indian",
+      "dietary": "veg&nonveg",
+      "externalProductId": 13,
+      "imageUrl": "https://static.takeaway.com/images/generic/categories/vegetarian/asian_1274963620.png",
+      "menuOrder": 0,
+      "price": 15,
+      "productName": "chicken Biryani"
+    }
+  ],
+  "parentId": 0,
+  "slogan": "Tasty indian",
+  "storeName": "New Delhi Traiteur",
+  "type": "Indian Authentic",
+  "user": {
+    "externalUserId": 33,
+    "username": "+32489980124"
+  },
+  "workingHours": [
+    {
+      "closeTime": "10:00",
+      "openTime": "11:30",
+      "workingDate": "2021-01-20"
+    }
+  ]
+}

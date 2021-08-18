@@ -1,0 +1,149 @@
+{
+  "about": "Best place for japanese cuisine",
+  "acceptedPaymentMethods": [
+    {
+      "expiryDate": "2025-01-31",
+      "minOrderAmount": 20,
+      "paymentMethod": "VISA"
+    },
+    {
+      "expiryDate": "2022-10-20",
+      "minOrderAmount": 20,
+      "paymentMethod": "CCOD"
+    },
+    {
+      "expiryDate": "2025-12-31",
+      "minOrderAmount": 25,
+      "paymentMethod": "OCC_BANCONTACT"
+    },
+    {
+      "expiryDate": "2022-12-31",
+      "minOrderAmount": 20,
+      "paymentMethod": "OCC_MASTERCARD"
+    },
+    {
+      "expiryDate": "2021-11-30",
+      "minOrderAmount": 20,
+      "paymentMethod": "COD"
+    }
+  ],
+  "address": {
+    "city": "Dendermonde",
+    "externalAddressId": 2,
+    "municipality": "Dendermonde",
+    "postcode": "9200 "
+  },
+  "auth": {
+    "authKey": "4hg4#5f5@k",
+    "expiryDate": "2023-10-30",
+    "secret": "pk#@467",
+    "siteUrl": "https://www.takeaway.com/be-en/menu/nori-sushi",
+    "storeUrl": "https://www.norisushi-dendermonde.be"
+  },
+
+  "contact": {
+    "email": "shushan@gmail.com",
+    "externalContactId": 2,
+    "firstName": "Shushan",
+    "lastName": "Behren",
+    "phone": "+32456869674"
+  },
+  "deliveryLocations": [
+    {
+      "deliveryCost": 1.0,
+      "deliveryTime": 20,
+      "maxOrderPrice": 75,
+      "minOrderPrice": 30,
+      "postcode": "9210"
+    },
+    {
+      "deliveryCost": 2.0,
+      "deliveryTime": 30,
+      "maxOrderPrice": 100,
+      "minOrderPrice": 20,
+      "postcode": "9250"
+    },
+    {
+      "deliveryCost": 3.50,
+      "deliveryTime": 45,
+      "maxOrderPrice": 100,
+      "minOrderPrice": 20,
+      "postcode": "9260"
+    }
+  ],
+
+  "images": [
+    {
+      "externalMediaId": 11,
+      "type": "BACKGROUND_IMAGE",
+      "url": "https://static.takeaway.com/images/generic/heroes/271/271_italian_pizza_55.jpg"
+    }
+  ],
+  "isActive": true,
+
+  "menuItems": [
+    {
+      "categories": [
+        "Nigri",
+        "Sashmi",
+        "Shushi"
+      ],
+      "cuisine": "Jpanese",
+      "dietary": "sea food",
+      "externalProductId": 3,
+      "imageUrl": "https://static.takeaway.com/images/generic/categories/sushi/nigiri_1274858151.png",
+      "menuOrder": 0,
+      "price": 13,
+      "productName": "Nigri Maguro"
+    },
+    {
+      "categories": [
+        "Nigri",
+        "Sashmi",
+        "Shushi"
+      ],
+      "cuisine": "Japanese",
+      "dietary": "Non veg",
+      "externalProductId": 3,
+      "imageUrl": "https://static.takeaway.com/images/generic/categories/misc/sashimi_1274857846.png",
+      "menuOrder": 0,
+      "price": 10,
+      "productName": "Shashimi Maguro"
+    }
+  ],
+  "parentId": 0,
+  "slogan": "yummy japanese cuisine",
+  "storeName": "Nori Sushi",
+  "type": "Authentic",
+  "user": {
+    "externalUserId": 2,
+    "username": "+32489398877"
+  },
+  "workingHours": [
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-18"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-19"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "17:00",
+      "workingDate": "2021-01-20"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "16:00",
+      "workingDate": "2021-01-21"
+    },
+    {
+      "closeTime": "22:00",
+      "openTime": "16:00",
+      "workingDate": "2021-01-22"
+    }
+  ]
+}

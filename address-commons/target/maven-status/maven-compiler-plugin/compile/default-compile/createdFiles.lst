@@ -1,0 +1,9 @@
+be\fooda\backend\commons\model\address\read\FoodaAddressUserExample.class
+be\fooda\backend\commons\model\address\update\FoodaAddressCoordinatesUpdate.class
+be\fooda\backend\commons\model\address\create\FoodaAddressCreate.class
+be\fooda\backend\commons\model\address\update\FoodaAddressUpdate.class
+be\fooda\backend\commons\model\address\read\FoodaAddressCoordinatesExample.class
+be\fooda\backend\commons\model\address\update\FoodaAddressUserUpdate.class
+be\fooda\backend\commons\model\address\create\FoodaAddressUserCreate.class
+be\fooda\backend\commons\model\address\read\FoodaAddressExample.class
+be\fooda\backend\commons\model\address\create\FoodaAddressCoordinatesCreate.class

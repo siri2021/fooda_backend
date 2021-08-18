@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "fooda.customer.dummy",
+      "type": "java.lang.String",
+      "description": "Description for fooda.customer.dummy."
+    },
+    {
+      "name": "fooda.customer.dummy.generator",
+      "type": "java.lang.String",
+      "description": "Description for fooda.customer.dummy.generator."
+    },
+    {
+      "name": "fooda.customer.dummy.size",
+      "type": "java.lang.String",
+      "description": "Description for fooda.customer.dummy.size."
+    }
+  ]
+}
